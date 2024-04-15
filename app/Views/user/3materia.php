@@ -12,7 +12,7 @@
             </a>
             <div class="card-body ">
               <a href="<?php echo base_url().'bibliografia/'.$carrera['idMateria'];?>" class="btn btn-light col-12 m-1 ">BIBLIOGRAFIA</a>
-              <a href="<?php echo base_url().'examenes/'.$carrera['idMateria'].'/'.$carrera['idMateria'];?>" class="btn btn-light col-12 m-1">DAR EXAMEN DE LA MATERIA</a>
+              <a href="<?php echo base_url().'examenes/'.$carrera['idCarrera'].'/'.$carrera['idMateria'].'/'.$carrera['nombreMateria'];?>" class="btn btn-light col-12 m-1">DAR EXAMEN DE LA MATERIA</a>
             </div>
           </div>
           <?php $n=$n+1 ;?>
@@ -22,4 +22,3 @@
     </div>
 </section>
 
-    

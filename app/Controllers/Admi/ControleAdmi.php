@@ -319,8 +319,10 @@ class ControleAdmi extends BaseController
       
 //----------------------------------------------------------------AREA DE REFORZAMIENTO----------------------------------------------------------------
        //SELECT DE LAS MATERIAS EXISTENTES 
-       public function bitacorareforzar($idCarrera,$idMateria)
+       public function bitacorareforzar($idCarrera,$idMateria,$nombreMateria)
        {
+    
+
         //bitacora de creacion de temas preguntas y banco de preguntas
         if ($idMateria==0) {
           //SELECT DE TODOS LOS TEMAS EXISTENTES 
@@ -338,6 +340,7 @@ class ControleAdmi extends BaseController
         $data=[
           'temas' => $temas,
           'idMateria' => $idMateria,
+          'nombreMateria'=>$nombreMateria,
         ];
 
            return view('header/1header').

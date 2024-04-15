@@ -11,7 +11,7 @@
             </a>
             <div class="card-body ">
               <a href="<?php echo base_url().'materias/'.$carrera['idCarrera'];?>" class="btn btn-light col-12 m-1 ">MATERIAS DEL CURSO</a>
-              <a href="<?php echo base_url().'examenes/'.$carrera['idCarrera'];?>/0" class="btn btn-light col-12 m-1">RESOLVER UN EXAMEN ALEATORIO</a>
+              <a href="" class="btn btn-light col-12 m-1">RESOLVER UN EXAMEN ALEATORIO</a>
             </div>
         </div>
           <?php $n=$n+1 ;?>

@@ -24,13 +24,15 @@ use CodeIgniter\Router\RouteCollection;
     $routes->get('/bibliografia/(:num)', 'Usuario\ControleUser::bibliografia/$1');
 
     //3)EXAMEN
-    $routes->get('/examenes/(:num)/(:num)', 'Usuario\ControleUser::examenes/$1/$2');
+    $routes->get('/examenes/(:num)/(:num)/(:segment)', 'Usuario\ControleUser::examenes/$1/$2/$3');
+
     $routes->get('/resolverExamen/(:num)/(:any)', 'Usuario\ControleUser::resolverExamen/$1/$2');
     $routes->get('/finalizacion/examen', 'Usuario\ControleUser::finalizacion');
     $routes->post('/examenResultado', 'Usuario\ControleUser::examenResultado');//aqui muestra la calificacion del examen 
     $routes->post('/revisarExamen', 'Usuario\ControleUser::revisarExamen');//aqui muestra el examen y las respuestas dadas :D
 
-
+//4) BANCO DE PREGUNTAS 
+$routes->get('/resolverPregunta/(:num)', 'Usuario\ControleUser::resolverPregunta/$1');
 
 
 
@@ -62,7 +64,7 @@ $routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
 
     //ADMINISTRADOR TEMAS PREGUNTAS Y BANCO DE PREGUNTAS 
         //BITACORA DE TEMAS PREGUNTAS Y BANCO DE PREGUNTAS  
-        $routes->get('/reforzarAdmi/(:num)/(:num)', 'Admi\ControleAdmi::bitacorareforzar/$1/$2');
+        $routes->get('/reforzarAdmi/(:num)/(:num)/(:segment)', 'Admi\ControleAdmi::bitacorareforzar/$1/$2/$3');
         //CRUD TEMAS 
         $routes->get('/cargarTemas', 'Admi\ControleAdmi::cargarTemas');
         $routes->post('/crearTema', 'Admi\ControleAdmi::crearTema');

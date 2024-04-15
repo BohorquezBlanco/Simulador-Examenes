@@ -3,6 +3,7 @@
 namespace App\Controllers\Usuario;
 use App\Controllers\BaseController;
 
+use App\Models\PreguntaModel;
 use App\Models\CarreraModel;
 use App\Models\MateriaModel;
 use App\Models\ExamenModel;
@@ -153,53 +154,47 @@ class ControleUser extends BaseController
     }
 
 
-    //SELECT DE UN EXAMEN ALEATORIO EN BASE A 10 PREGUNTAS
-    public function resolverExamen($idCarrera,$codigo)
+
+
+    //MOSTRAR EL RESULTADO DE UN EXAMEN ALEATORIO
+    public function examenes($idCarrera,$idMateria,$nombre)
     {
-      //carrera
-      $carreraModel= new CarreraModel();
-      $carreras=$carreraModel->findAll();
+                // Crear una instancia del modelo de pregunta
+                $preguntaModel = new PreguntaModel();
 
-      $nombreCarrera = $carreraModel->where('idCarrera', $idCarrera)->first();
-      $nombreCarrera=$nombreCarrera['nombreCarrera'];
+       
+                // Ejecutar la consulta utilizando el Query Builder de CodeIgniter
+                $preguntas = $preguntaModel
+                ->select('pregunta.idPregunta, pregunta.enunciado, pregunta.formula, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema')
+                ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta', 'left')
+                ->where('pregunta.fecha_elimina', null)
+                ->where('(materia_pregunta.idMateria IS NULL OR materia_pregunta.idMateria != ' . $idMateria . ')')
+                ->get()
+                ->getResultArray();
 
-      $materiaModel= new MateriaModel();
-      $materias = $materiaModel->where('idcarrera', $idCarrera)->findAll();
-  
-      
-        //preguntas que tiene el examen 
-        $examenModel= new examenModel();
-        $examenPregunta = $examenModel
-        ->select('examen.puntaje, materia.nombreMateria, materia.descripcionMateria, examen.idExamen, examen.idMateria, examen.gestionExamen, examen.añoExamen, examen.opcionExamen, examen.codigoExamen, pregunta.enunciado, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.formula, pregunta.idPregunta, pregunta.respuesta, tema.nombreTema')
-        ->join('pregunta_examen', 'examen.idExamen = pregunta_examen.idExamen')
-        ->join('pregunta', 'pregunta_examen.idPregunta = pregunta.idPregunta')
-        ->join('tema', 'pregunta.idTema = tema.idTema')
-        ->join('materia', 'examen.idMateria = materia.idMateria')
-        ->where('examen.codigoExamen', $codigo)
-      
-        ->findAll();
 
-                //preguntas que tiene el examen 
-                $examenModel= new examenModel();
-                $materias = $examenModel
-                ->select('examen.puntaje, materia.nombreMateria, materia.descripcionMateria, examen.idExamen, examen.idMateria, examen.gestionExamen, examen.añoExamen, examen.opcionExamen, examen.codigoExamen, pregunta.enunciado, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.formula, pregunta.idPregunta, pregunta.respuesta, tema.nombreTema')
-                ->join('pregunta_examen', 'examen.idExamen = pregunta_examen.idExamen')
-                ->join('pregunta', 'pregunta_examen.idPregunta = pregunta.idPregunta')
-                ->join('tema', 'pregunta.idTema = tema.idTema')
-                ->join('materia', 'examen.idMateria = materia.idMateria')
-                ->where('examen.codigoExamen', $codigo)
-                ->groupBy('examen.idMateria')
-                ->findAll();
-                
-        
-  
-      $data=['nombreCarrera'=>$nombreCarrera,'examenes'=>$examenPregunta,'materias'=>$materias, 'idCarrera'=>$idCarrera,'carreras'=>$carreras];
-  
-      return view('header/1header').
-      view('barraNavegacion/barra2',$data).
-      view('adm/5examen');
-      
+        $data=['nombre'=>$nombre,'idMateria'=>$idMateria,'preguntas'=>$preguntas];
+        return view('header/1header').
+        view('barraNavegacion/barra2').
+        view('user/4Examenes',$data);  
     }
+
+    //resolucion de una pregunta del banco de preguntas
+    public function resolverPregunta($idPregunta)
+    {
+
+        // Cargar el modelo de pregunta
+        $preguntaModel = new PreguntaModel();
+        // Realizar la consulta para obtener las preguntas con el ID específico (por ejemplo, 2)
+        $preguntas = $preguntaModel->where('idPregunta', $idPregunta)->findAll();
+
+        $data=['preguntas'=>$preguntas];
+        return view('header/1header').
+        view('barraNavegacion/barra2').
+        view('user/5ExamenPregunta',$data).
+        view('footer/1footer');  
+    }
+
 
 
     //MOSTRAR EL RESULTADO DE UN EXAMEN ALEATORIO

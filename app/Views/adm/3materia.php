@@ -53,7 +53,7 @@
 
                 <div class="card-body ">
                   <a href="<?php echo base_url().'bibliografiaAdm/'.$materia['idMateria']?>" class="btn btn-light col-12 m-1 ">MATERIAL DE ESTUDIO</a>
-                  <a href="<?php echo base_url().'reforzarAdmi/'.$idCarrera.'/'.$materia['idMateria'];?>" class="btn btn-light col-12 m-1">EXAMENES Y BANCO DE PREGUNTAS</a>
+                  <a href="<?php echo base_url().'reforzarAdmi/'.$idCarrera.'/'.$materia['idMateria'].'/'.$titulo['nombreCarrera'] ;?>" class="btn btn-light col-12 m-1">EXAMENES Y BANCO DE PREGUNTAS</a>
                   
                   <!-- MODAL MODIFICAR-->
                   <button type="button" class="btn btn-success col-12 mb-1" data-bs-toggle="modal" data-bs-target="#modificar<?php echo $n;?>">EDITAR</button>

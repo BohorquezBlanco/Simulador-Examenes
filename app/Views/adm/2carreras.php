@@ -50,7 +50,7 @@
                 </a>
                 <div class="card-body ">
                   <a href="<?php echo base_url().'materiasAdmi/'.$carrera['idCarrera'];?>" class="btn btn-light col-12 m-1 ">MATERIAS DEL CURSO</a>
-                  <a href="<?php echo base_url().'reforzarAdmi/'.$carrera['idCarrera'];?>/0" class="btn btn-light col-12 m-1">EXAMENES Y BANCO DE PREGUNTAS</a>
+                  <a href="" class="btn btn-light col-12 m-1">RESOLVER UN EXAMEN ALEATORIO</a>
         
                   <!-- MODAL MODIFICAR-->
                   <button type="button" class="btn btn-success col-12 mb-1" data-bs-toggle="modal" data-bs-target="#modificar<?php echo $n;?>">EDITAR</button>

@@ -25,7 +25,7 @@
 
 <div class="container-xxl">
   <div class="row">
-    <h1 class="text-center m-2"><?php echo $idMateria ;?></h1>
+    <h1 class="text-center m-2"><?php echo $nombreMateria;?></h1>
       <div class="col-6 border mb-4 me-3">
         <h4 class="text-center m-2">CREACION DE TEMAS</h4>
           <form id="temaForm" class="row">
