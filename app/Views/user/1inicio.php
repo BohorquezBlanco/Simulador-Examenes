@@ -57,4 +57,4 @@
 
         
       </div>
-      <?php echo $this->include('plantilla/header'); ?>
+      <?php echo $this->include('plantilla/footer'); ?>
