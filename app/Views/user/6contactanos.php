@@ -1,6 +1,4 @@
-<?php echo $this->extend('plantilla/layout');?>
-
-<?php echo $this->section('contenido');?>
+<?php echo $this->include('plantilla/header'); ?>
 
 <section id="contact" class="sec-contact align-items-center">
     <div class="container d-flex flex-column">
@@ -39,11 +37,4 @@
     </section>
 </div>
 
-<?php echo $this->endSection();?>
-
-<!--<?php echo $this->section('scripts'); ?>
-<script>
-    alert("Hola Natt")
-
-</script>
-<?php echo $this->endSection();?>-->
+<?php echo $this->include('plantilla/footer'); ?>

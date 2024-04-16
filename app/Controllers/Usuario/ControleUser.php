@@ -20,10 +20,7 @@ class ControleUser extends BaseController
             $carreraModel= new CarreraModel();
             $carreras=$carreraModel->findAll();
             $data=['carreras'=>$carreras];
-            return view('header/1header').
-                    view('barraNavegacion/barra1').
-                    view('user/1inicio').
-                    view('footer/1footer');        
+            return view('user/1inicio');      
         }
         else  {
             if($idseccion == 2)

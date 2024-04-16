@@ -1,4 +1,5 @@
-    <div class="wrapper">
+<?php echo $this->include('plantilla/header'); ?>
+   <div class="wrapper">
                 <section id="home" class="sec-main">
                     <h1 class="main-heading">Practica para el examen de ingreso.</h1>
                   </section>  
@@ -51,3 +52,4 @@
 
         
       </div>
+      <?php echo $this->include('plantilla/footer'); ?>

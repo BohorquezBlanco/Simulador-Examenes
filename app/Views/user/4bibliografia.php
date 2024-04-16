@@ -1,3 +1,4 @@
+<?php echo $this->include('plantilla/header'); ?>
 <style>
   .imagen 
 {
@@ -39,3 +40,4 @@
     </div>
 </section>
 
+<?php echo $this->include('plantilla/footer'); ?>

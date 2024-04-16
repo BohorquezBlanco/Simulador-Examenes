@@ -1,3 +1,4 @@
+<?php echo $this->include('plantilla/header'); ?>
 <section id="folio" class="sec-folio">
     <div class="container">
       <h1 class="mb-3"><?php echo $titulo['nombreCarrera'] ;?></h1>
@@ -21,4 +22,4 @@
       </div>
     </div>
 </section>
-
+<?php echo $this->include('plantilla/footer'); ?>
