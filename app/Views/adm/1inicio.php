@@ -1,3 +1,5 @@
+<?php echo $this->extend('plantilla/layout');?>
+<?php echo $this->section('contenido');?>
     <div class="wrapper">
                 <section id="home" class="sec-main">
                     <h1 class="main-heading">Practica para el examen de ingreso.</h1>
@@ -47,7 +49,5 @@
                       </div>
                     </div>
                   </section>
-
-
-        
       </div>
+      <?php echo $this->endSection();?>
