@@ -8,13 +8,8 @@
                       <hr />
                       <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                          <p>
-                            "Con nuestro sistema, tendrás la capacidad de resolver los exámenes de ingreso a la UMSS, así como también acceder a exámenes pasados.
-                             Esto te permitirá mejorar tu rendimiento y prepararte de manera efectiva para el examen de ingreso.
-                              Además, <a href="<?php echo base_url();?>cursos">podrás explorar los cursos que ofrecemos."</a>.
-                        </div>
-                        <div class="col-sm-6 col-sm-offset-3">
-                          <img src="https://www.educaciontrespuntocero.com/wp-content/uploads/2018/06/examenes-1-978x652.jpg" alt="" class="img-fluid" >
+                          <p>Usted podrá resolver los examenes de ingreso a la UMSS con nuestro sistema podra resolver los examenes pasados como tambien ver el porque de las respuestas, el cual ayudara a mejorar su rendimiento en el examen de ingreso
+                           puedes <a href="#">Probar</a> o tambien puedes <a href="#">ver los cursos que ofrecemos</a>.
                         </div>
                       </div>
                     </div>
@@ -29,7 +24,7 @@
                         <div class="col-sm-4">
                           <i class="fa fa-4x fa-paint-brush"></i>
                 
-                          <h2 class="h3">Banco de examenes pasados</h2>
+                          <h2 class="h3">Acceso a banco de examenes pasados</h2>
                 
                           <p>Usted podra acceder a examenes pasados para enriquecer su conocimiento.</p>
                         </div>
@@ -37,7 +32,7 @@
                         <div class="col-sm-4">
                           <i class="fa fa-4x fa-code"></i>
                 
-                          <h2 class="h3">Todo esta resuelto!!!</h2>
+                          <h2 class="h3">No se porque es esa respuesta!</h2>
                 
                           <p>Usted podrá ver paso a paso como se resuelven los ejercicios de los examenes pasados</p>
                         </div>
