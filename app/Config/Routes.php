@@ -25,20 +25,13 @@ use CodeIgniter\Router\RouteCollection;
 
     //3)EXAMEN
     $routes->get('/examenes/(:num)/(:num)/(:segment)', 'Usuario\ControleUser::examenes/$1/$2/$3');
+    $routes->get('/resolverPregunta/(:num)/(:num)/(:num)', 'Usuario\ControleUser::resolverPregunta/$1/$2/$3');
+    $routes->get('/ResolverExamen/(:num)/(:num)/(:num)', 'Usuario\ControleUser::ResolverExamen/$1/$2/$3');
+    $routes->post('/ExamenPersonalizado', 'Usuario\ControleUser::ExamenPersonalizado');
+    $routes->get('/resolverExamenCarrera/(:num)', 'Usuario\ControleUser::resolverExamenCarrera/$1');
 
-    $routes->get('/resolverExamen/(:num)/(:any)', 'Usuario\ControleUser::resolverExamen/$1/$2');
-    $routes->get('/finalizacion/examen', 'Usuario\ControleUser::finalizacion');
-    $routes->post('/examenResultado', 'Usuario\ControleUser::examenResultado');//aqui muestra la calificacion del examen 
-    $routes->post('/revisarExamen', 'Usuario\ControleUser::revisarExamen');//aqui muestra el examen y las respuestas dadas :D
-
-//4) BANCO DE PREGUNTAS 
-$routes->get('/resolverPregunta/(:num)', 'Usuario\ControleUser::resolverPregunta/$1');
-
-
-
-
-//###############################-ADMINISTRADOR RUTAS-#################################
-$routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
+    //###############################-ADMINISTRADOR RUTAS-#################################
+    $routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
 
     //ADMINISTRADOR CARRERA 
         //SELECT  
@@ -79,16 +72,16 @@ $routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
         $routes->post('/insertBancoPregunta', 'Admi\ControleAdmi::insertBancoPregunta');
 
 
-    //ADMINISTRADOR BIBLIOGRAFIA
-    //BIBLIOGRAFIA
-    $routes->get('/bibliografiaAdm/(:num)', 'Admi\ControleAdmi::bibliografia/$1');
+        //ADMINISTRADOR BIBLIOGRAFIA
+        //BIBLIOGRAFIA
+        $routes->get('/bibliografiaAdm/(:num)', 'Admi\ControleAdmi::bibliografia/$1');
 
-    //INSERT
-    $routes->post('/crearLibro', 'Admi\ControleAdmi::crearLibro');
-    //DELETE LOGICO 
-    $routes->post('/eliminarLibro', 'Admi\ControleAdmi::eliminarLibro');
-    //UPDATE 
-    $routes->post('/editarLibro', 'Admi\ControleAdmi::editarLibro');
+        //INSERT
+        $routes->post('/crearLibro', 'Admi\ControleAdmi::crearLibro');
+        //DELETE LOGICO 
+        $routes->post('/eliminarLibro', 'Admi\ControleAdmi::eliminarLibro');
+        //UPDATE 
+        $routes->post('/editarLibro', 'Admi\ControleAdmi::editarLibro');
 
-    $routes->post('/guardarLibro', 'Admi\ControleAdmi::guardarLibro');
+        $routes->post('/guardarLibro', 'Admi\ControleAdmi::guardarLibro');
     

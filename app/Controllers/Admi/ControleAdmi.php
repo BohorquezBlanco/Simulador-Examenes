@@ -423,7 +423,7 @@ class ControleAdmi extends BaseController
        
         // Ejecutar la consulta utilizando el Query Builder de CodeIgniter
         $preguntas = $preguntaModel
-            ->select('pregunta.idPregunta, pregunta.enunciado, pregunta.formula, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, tema.nombreTema')
+            ->select('pregunta.resolucionPdf,pregunta.idPregunta, pregunta.enunciado, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, tema.nombreTema')
             ->join('tema', 'pregunta.idTema = tema.idTema')
             ->join('materia_pregunta ', 'pregunta.idPregunta = materia_pregunta.idPregunta','left')
             ->where('pregunta.fecha_elimina', null) // Agregar esta condición
@@ -440,7 +440,7 @@ class ControleAdmi extends BaseController
            // Obtener los datos del formulario
            $data = [
                'enunciado' => $this->request->getPost('enunciado'),
-               'formula' => $this->request->getPost('formula'),
+               'resolucionPdf' => $this->request->getPost('resolucionPdf'),
                'imagenPregunta' => $this->request->getPost('imagenPregunta'),
                'a' => $this->request->getPost('a'),
                'b' => $this->request->getPost('b'),
@@ -473,7 +473,7 @@ class ControleAdmi extends BaseController
            // Obtener los datos del formulario
            $data = [
                'enunciado' => $this->request->getPost('enunciado'),
-               'formula' => $this->request->getPost('formula'),
+               'resolucionPdf' => $this->request->getPost('resolucionPdf'),
                'imagenPregunta' => $this->request->getPost('imagenPregunta'),
                'a' => $this->request->getPost('a'),
                'b' => $this->request->getPost('b'),
@@ -516,7 +516,7 @@ class ControleAdmi extends BaseController
         $preguntaModel = new PreguntaModel();
         // Ejecutar la consulta utilizando el Query Builder de CodeIgniter
         $preguntas = $preguntaModel
-            ->select('tema.nombreTema,pregunta.idTema,materia_pregunta.idMateria,pregunta.idPregunta, pregunta.enunciado, pregunta.formula, pregunta.imagenPregunta, pregunta.a, pregunta.b,pregunta.c,pregunta.d,pregunta.e,pregunta.respuesta,pregunta.exPas,pregunta.dificultad')
+            ->select('tema.nombreTema,pregunta.idTema,materia_pregunta.idMateria,pregunta.idPregunta, pregunta.enunciado, pregunta.resolucionPdf, pregunta.imagenPregunta, pregunta.a, pregunta.b,pregunta.c,pregunta.d,pregunta.e,pregunta.respuesta,pregunta.exPas,pregunta.dificultad')
             ->join('materia_pregunta', 'pregunta.idPregunta=materia_pregunta.idPregunta')
             ->join('tema', 'pregunta.idTema=tema.idTema')
             ->where('materia_pregunta.idMateria', $idMateria) // Agregar esta condición

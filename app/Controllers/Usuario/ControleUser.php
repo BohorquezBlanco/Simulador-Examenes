@@ -8,6 +8,7 @@ use App\Models\CarreraModel;
 use App\Models\MateriaModel;
 use App\Models\ExamenModel;
 use App\Models\LibroModel;
+use App\Models\TemaModel;
 
 class ControleUser extends BaseController
 {
@@ -153,134 +154,193 @@ class ControleUser extends BaseController
 
     }
 
-
-
-
-    //MOSTRAR EL RESULTADO DE UN EXAMEN ALEATORIO
+    //MOSTRAR EL BANCO DE EXAMENES Y LOS 2 TIPOS DE EXAMENES QUE PUEDE REALIZAR
     public function examenes($idCarrera,$idMateria,$nombre)
     {
-                // Crear una instancia del modelo de pregunta
-                $preguntaModel = new PreguntaModel();
+        $temaModel = new TemaModel();
+        $temas = $temaModel
+            ->select('tema.nombreTema, tema.idTema')
+            ->join('pregunta', 'tema.idTema = pregunta.idTema')
+            ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+            ->where('materia_pregunta.idMateria', $idMateria)
+            ->where('pregunta.fecha_elimina IS NULL')
+            ->groupBy('tema.idTema') // Agrupar por idTema
+            ->findAll();
 
-       
-                // Ejecutar la consulta utilizando el Query Builder de CodeIgniter
-                $preguntas = $preguntaModel
-                ->select('pregunta.idPregunta, pregunta.enunciado, pregunta.formula, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema')
-                ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta', 'left')
-                ->where('pregunta.fecha_elimina', null)
-                ->where('(materia_pregunta.idMateria IS NULL OR materia_pregunta.idMateria != ' . $idMateria . ')')
-                ->get()
-                ->getResultArray();
+            // Crear una instancia del modelo de pregunta
+             $preguntaModel = new PreguntaModel();
+              // Ejecutar la consulta utilizando el Query Builder de CodeIgniter
+             $preguntas = $preguntaModel
+             ->select('pregunta.idPregunta, pregunta.enunciado, pregunta.resolucionPdf, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, materia_pregunta.idMateria, pregunta.fecha_elimina')
+              ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+              ->where('pregunta.fecha_elimina IS NULL')
+              ->where('materia_pregunta.idMateria', $idMateria)
+              ->findAll();
 
-
-        $data=['nombre'=>$nombre,'idMateria'=>$idMateria,'preguntas'=>$preguntas];
+        $data=['nombre'=>$nombre,'idMateria'=>$idMateria,'preguntas'=>$preguntas,'idCarrera'=>$idCarrera,'temas'=>$temas];
         return view('header/1header').
-        view('barraNavegacion/barra2').
-        view('user/4Examenes',$data);  
+        view('barraNavegacion/barra1').
+        view('user/5bitacoraReforzar',$data). 
+        view('footer/1footer');  
+
     }
 
+
     //resolucion de una pregunta del banco de preguntas
-    public function resolverPregunta($idPregunta)
+    public function resolverPregunta($idPregunta,$idCarrera,$idMateria)
     {
+        $tiempo='SL';
+        $cantidad=1;
 
-        // Cargar el modelo de pregunta
-        $preguntaModel = new PreguntaModel();
-        // Realizar la consulta para obtener las preguntas con el ID específico (por ejemplo, 2)
-        $preguntas = $preguntaModel->where('idPregunta', $idPregunta)->findAll();
+        $materiaModel= new MateriaModel();
+        $materias= $materiaModel->where('idCarrera', $idCarrera)->findAll();
 
-        $data=['preguntas'=>$preguntas];
+        $datosMaterias = $materiaModel->select('materia.*, carrera.nombreCarrera')
+            ->join('carrera', 'materia.idCarrera = carrera.idCarrera', 'left')
+            ->where('materia.idMateria', $idMateria)
+            ->first();
+
+
+            $preguntaModel = new PreguntaModel();
+            $preguntas = $preguntaModel
+            ->select('materia.nombreMateria,pregunta.resolucionPdf,pregunta.idPregunta, pregunta.enunciado, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, materia_pregunta.idMateria, pregunta.fecha_elimina')
+            ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+            ->join('materia', 'materia_pregunta.idMateria = materia.idMateria')
+            ->where('pregunta.fecha_elimina IS NULL')
+            ->where('materia_pregunta.idPregunta', $idPregunta)
+          
+            ->limit(1)
+            ->find();
+
+        $data=['preguntas'=>$preguntas,'materias'=>$materias,'datosMaterias'=>$datosMaterias,'tiempo'=>$tiempo,'cantidad'=>$cantidad];
         return view('header/1header').
         view('barraNavegacion/barra2').
-        view('user/5ExamenPregunta',$data).
+        view('user/6Examen',$data).
         view('footer/1footer');  
     }
 
+    public function resolverExamen($idMateria,$idCarrera,$Tipo)
+    {
+        $tiempo='SL';
+        $cantidad=10;
+        $materiaModel= new MateriaModel();
+        $materias= $materiaModel->where('idCarrera', $idCarrera)->findAll();
 
+        $materiaModel = new MateriaModel();
+        $datosMaterias = $materiaModel->select('materia.*, carrera.nombreCarrera')
+            ->join('carrera', 'materia.idCarrera = carrera.idCarrera', 'left')
+            ->where('materia.idMateria', $idMateria)
+            ->first();
+
+         if ($Tipo==0) {
+            // Cargar el modelo de pregunta
+            $preguntaModel = new PreguntaModel();
+            $preguntas = $preguntaModel
+            ->select('materia.nombreMateria,pregunta.resolucionPdf,pregunta.idPregunta, pregunta.enunciado, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, materia_pregunta.idMateria, pregunta.fecha_elimina')
+            ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+            ->join('materia', 'materia_pregunta.idMateria = materia.idMateria')
+            ->where('pregunta.fecha_elimina IS NULL')
+            ->where('materia_pregunta.idMateria', $idMateria)
+            ->orderBy('RAND()')
+            ->limit(10)
+            ->find();
+            
+              $data=['preguntas'=>$preguntas,'materias'=>$materias,'datosMaterias'=>$datosMaterias,'tiempo'=>$tiempo,'cantidad'=>$cantidad];
+              return view('header/1header').
+              view('barraNavegacion/barra1').
+              view('user/6Examen',$data).
+              view('footer/1footer');  
+         }
+         else{
+
+            echo "ERROR DE DATOS ENVIADOS >:l";
+            
+         }
+   
+    }
+
+    public function resolverExamenCarrera($idCarrera)
+    {
+        $tiempo='SL';
+        $cantidad=10;
+        $materiaModel= new MateriaModel();
+        $materias= $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+            $carreraModel = new CarreraModel();
+            $datosMaterias = $carreraModel->select('carrera.*')
+            ->where('carrera.idCarrera', $idCarrera)
+            ->first();
+
+            $materiaModel = new MateriaModel();
+            $preguntas = $materiaModel
+                ->select('materia.idMateria,materia.nombreMateria, pregunta_principal.idPregunta,pregunta_principal.respuesta, pregunta_principal.resolucionPdf, pregunta_principal.a, pregunta_principal.b, pregunta_principal.c, pregunta_principal.d, pregunta_principal.e,pregunta_principal.enunciado,pregunta_principal.imagenPregunta, pregunta_principal.fecha_elimina')
+                ->join('('
+                    . 'SELECT mp.idMateria, mp.idPregunta, ROW_NUMBER() OVER (PARTITION BY mp.idMateria ORDER BY RAND()) AS row_num '
+                    . 'FROM materia_pregunta mp'
+                    . ') AS subconsulta', 'subconsulta.idMateria = materia.idMateria')
+                ->join('pregunta pregunta_principal', 'subconsulta.idPregunta = pregunta_principal.idPregunta')
+                ->where('subconsulta.row_num <=', 10)
+                ->where('materia.idCarrera', $idCarrera)
+                ->orderBy('materia.idMateria, pregunta_principal.idPregunta')
+                ->find();
+            
+      
+              $data=['preguntas'=>$preguntas,'materias'=>$materias,'datosMaterias'=>$datosMaterias,'tiempo'=>$tiempo,'cantidad'=>$cantidad];
+              return view('header/1header').
+              view('barraNavegacion/barra1').
+              view('user/6Examen',$data).
+              view('footer/1footer');  
+    }
 
     //MOSTRAR EL RESULTADO DE UN EXAMEN ALEATORIO
     public function examenResultado()
     {
-        $codigoExamen= $this->request->getPost('codigoExamen');
-
-        $idCarrera= $this->request->getPost('idCarrera');
+        
         $nombreCarrera= $this->request->getPost('nombreCarrera');
 
-
         $respuestas = $this->request->getPost('respuestas');
-        $puntajes= $this->request->getPost('puntaje');
-        $delimitador= $this->request->getPost('delimitador');
+
         $nombreMateria=$this->request->getPost('materia');
 
-        $calificacion = []; // Inicializa un array vacío
-        $seleccion = []; // Inicializa un array vacío
-        $resultados= [];
-
-        $cont=0;
-        $Total=0;
-        $Materias='';
-        $Puntaje='';
-        for ($p = 0; $p < count($puntajes); $p++) 
-        {
- 
-            //delimitaremos por secciones dadas "Aqui obtenemos 
-            for ($d = 0; $d < $delimitador[$p]; $d++) 
-            {
+     
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['respuestasSeleccionadas'])) {
+            // Recupera las respuestas seleccionadas del formulario
+            $respuestasSeleccionadas = $_POST['respuestasSeleccionadas'];
             
-                $num= strval($cont);
-
-                $seleccionado = $this->request->getPost('seleccionado'.$num);
-
-                    if ($respuestas[$cont]==$seleccionado) 
-                    {
-
-
-                    $puntos=$puntajes[$p]/$delimitador[$p];
-
-                    $Total=$Total+$puntos;
-                    $Materias=$nombreMateria[$p];
-                    $Puntaje=$puntajes[$p];
-
-                    // Agregar un valor al final del arreglo
-                    array_push($seleccion, $seleccionado);
-                   
-                    array_push($resultados, 'Bien');
-                   
-                    }
-                    else {
-                        $Materias=$nombreMateria[$p];
-                        $Puntaje=$puntajes[$p];
-                        // Agregar un valor al final del arreglo
-                        array_push($seleccion, $seleccionado);
-                        array_push($resultados, 'Mal');
-
-                    }
-
-                    
-                $cont=$cont+1;
+            // Inicializa variables para contar respuestas correctas e incorrectas
+            $respuestasCorrectas = 0;
+            $respuestasIncorrectas = 0;
+        
+            // Calcula el puntaje
+            $puntaje = 0;
+            foreach ($respuestasSeleccionadas as $indice => $respuestaSeleccionada) {
+                // Verifica si la respuesta seleccionada es igual a la respuesta correcta
+                if ($respuestaSeleccionada === $respuestas[$indice]) {
+                    $respuestasCorrectas++; // Incrementa el contador de respuestas correctas
+                    $puntaje++; // Incrementa el puntaje si la respuesta es correcta
+                } else {
+                    $respuestasIncorrectas++; // Incrementa el contador de respuestas incorrectas
+                }
             }
-
-       
-
-            $calificaciones = [
-                'Materia' => $Materias,
-                'Total' => $Total,
-                'Puntaje' => $Puntaje,
-                // Otras claves y valores según sea necesario
-            ];
-
-            $calificacion[] = $calificaciones;
-
-            $Total=0;
+            
+            // Calcula el puntaje total
+            $totalPreguntas = count($respuestas);
+            $puntajeTotal = ($puntaje / $totalPreguntas) * 100;
+        
+            // Imprime el puntaje total, respuestas correctas e incorrectas
+            echo "Puntaje total: " . $puntajeTotal . "%<br>";
+            echo "Respuestas correctas: " . $respuestasCorrectas . "<br>";
+            echo "Respuestas incorrectas: " . $respuestasIncorrectas . "<br>";
+        } else {
+            echo "No se han recibido respuestas seleccionadas.";
         }
-
-
         
 
-        $data=['resultados'=>$resultados,'seleccion'=>$seleccion,'calificacion'=>$calificacion,'respuestas'=>$respuestas,'codigoExamen'=>$codigoExamen,'idCarrera'=>$idCarrera,'nombreCarrera'=>$nombreCarrera];
+        //$data=['resultados'=>$resultados,'seleccion'=>$seleccion,'calificacion'=>$calificacion,'respuestas'=>$respuestas,'codigoExamen'=>$codigoExamen,'idCarrera'=>$idCarrera,'nombreCarrera'=>$nombreCarrera];
       
-        return view('header/1header').
-        view('barraNavegacion/barra2',$data).
-        view('user/examenResultado');
+        //return view('header/1header').
+        //view('barraNavegacion/barra2').
+        //view('user/examenResultado');
         
       
     }
@@ -341,6 +401,83 @@ class ControleUser extends BaseController
       
     }
 
+    public function examenPersonalizado() 
+    {
+        $idCarrera= $this->request->getPost('idCarrera');
+        $idMateria= $this->request->getPost('idMateria');
+        $temasIncluidos=$this->request->getPost('idTema');
+        $tiempo=$this->request->getPost('tiempo');
+        $cantidad = intval($this->request->getPost('cantidad'));
+        
+        if ($tiempo<=0) {
+            $tiempo=1;
+        }
+        if ($cantidad<=0) {
+            $cantidad=1;
+        }
+        
+        if (!empty($temasIncluidos)) {
+           
+            $materiaModel= new MateriaModel();
+            $materias= $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+            $materiaModel = new MateriaModel();
+            $datosMaterias = $materiaModel->select('materia.*, carrera.nombreCarrera')
+                ->join('carrera', 'materia.idCarrera = carrera.idCarrera', 'left')
+                ->where('materia.idMateria', $idMateria)
+                ->first();
+
+    
+                $preguntaModel = new PreguntaModel();
+                $preguntas = $preguntaModel
+                ->select('materia.nombreMateria,pregunta.resolucionPdf,pregunta.idPregunta, pregunta.enunciado, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, materia_pregunta.idMateria, pregunta.fecha_elimina')
+                ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+                ->join('materia', 'materia_pregunta.idMateria = materia.idMateria')
+                ->whereIn('pregunta.idTema', $temasIncluidos)
+                ->where('pregunta.fecha_elimina IS NULL')
+                ->where('materia_pregunta.idMateria', $idMateria)
+                ->orderBy('RAND()')
+                ->limit($cantidad)
+                ->find();
+
+                $data=['preguntas'=>$preguntas,'materias'=>$materias,'datosMaterias'=>$datosMaterias,'tiempo'=>$tiempo,'cantidad'=>$cantidad];
+
+                return view('header/1header').
+                view('barraNavegacion/barra1').
+                view('user/6Examen',$data).
+                view('footer/1footer');  
+        } else {
+            $materiaModel= new MateriaModel();
+            $materias= $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+            $materiaModel = new MateriaModel();
+            $datosMaterias = $materiaModel->select('materia.*, carrera.nombreCarrera')
+                ->join('carrera', 'materia.idCarrera = carrera.idCarrera', 'left')
+                ->where('materia.idMateria', $idMateria)
+                ->first();
+
+    
+                $preguntaModel = new PreguntaModel();
+                $preguntas = $preguntaModel
+                ->select('materia.nombreMateria,pregunta.resolucionPdf,pregunta.idPregunta, pregunta.enunciado, pregunta.imagenPregunta, pregunta.a, pregunta.b, pregunta.c, pregunta.d, pregunta.e, pregunta.respuesta, pregunta.exPas, pregunta.dificultad, pregunta.idTema, materia_pregunta.idMateria, pregunta.fecha_elimina')
+                ->join('materia_pregunta', 'pregunta.idPregunta = materia_pregunta.idPregunta')
+                ->join('materia', 'materia_pregunta.idMateria = materia.idMateria')
+                ->where('pregunta.fecha_elimina IS NULL')
+                ->where('materia_pregunta.idMateria', $idMateria)
+                ->orderBy('RAND()')
+                ->limit($cantidad)
+                ->find();
+
+                $data=['preguntas'=>$preguntas,'materias'=>$materias,'datosMaterias'=>$datosMaterias,'tiempo'=>$tiempo,'cantidad'=>$cantidad];
+
+                return view('header/1header').
+                view('barraNavegacion/barra1').
+                view('user/6Examen',$data).
+                view('footer/1footer');  
+        }
+
+    }
+
     //MOSTRAR LA BIBLIOGRAFIA EXISTENTE DE LA MATERIA 
     public function bibliografia($idMateria) {
         $materiaModel = new MateriaModel();
@@ -361,9 +498,7 @@ class ControleUser extends BaseController
                 view('footer/1footer');
     }
 
-    //MOSTRAR EL BANCO DE PREGUNTAS 
-    public function bancoPreguntas() {
-    }
+
 
 
 

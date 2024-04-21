@@ -15,7 +15,7 @@ class PreguntaModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idPregunta','enunciado', 'a','b','c','d','e','respuesta','formula', 'idTema','exPas','imagenPregunta','dificultad','fecha_elimina'];
+    protected $allowedFields = ['idPregunta','enunciado', 'a','b','c','d','e','respuesta','resolucionPdf', 'idTema','exPas','imagenPregunta','dificultad','fecha_elimina'];
 
     // Dates
     protected $useTimestamps = true;

@@ -117,8 +117,8 @@
                           </div>
                           <div class="col-6">
                             <div class="mb-3">
-                              <label for="">Formula:</label>
-                              <input  id="formula" type="text" class="form-control" placeholder="Si tiene formula agregarla aqui">
+                              <label for="">Pdf Solucion:</label>
+                              <input  id="resolucionPdf" type="text" class="form-control" placeholder="Pdf solución">
                             </div>
                           </div>
                           <div class="col-6">
@@ -436,7 +436,7 @@ $(document).ready(function() {
                       <input type="hidden" class="idMateria" value="<?php echo $idMateria;?>">
                         <input type="hidden" class="idPregunta" value="${pregunta.idPregunta}">
                         <input type="hidden" class="enunciado" value="${pregunta.enunciado}">
-                        <input type="hidden" class="formula" value="${pregunta.formula}">
+                        <input type="hidden" class="resolucionPdf" value="${pregunta.resolucionPdf}">
                         <input type="hidden" class="imagenPregunta" value="${pregunta.imagenPregunta}">
                         <input type="hidden" class="a" value="${pregunta.a}">
                         <input type="hidden" class="b" value="${pregunta.b}">
@@ -490,6 +490,21 @@ $(document).ready(function() {
             }
         });
     });
+    
+        // Función para filtrar las preguntas existentes
+        $('#searchPreguntas').on('input', function() {
+      var searchText = $(this).val().trim().toLowerCase();  
+      $('#bancoPreguntas .list-group-item').each(function() {
+            var temaText = $(this).find('.pregunta-container .col-8 p').text().trim().toLowerCase();
+    
+            if (temaText.includes(searchText)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+
 
     
     
@@ -653,7 +668,7 @@ $(document).ready(function() {
     // Evento para crear una nueva PREGUNTA
     $('#crearPreguntabtn').click(function() {
         var enunciado = $('#enunciado').val();
-        var formula = $('#formula').val();
+        var resolucionPdf = $('#resolucionPdf').val();
         var imagenPregunta = $('#imagenPregunta').val();
         var a = $('#a').val();
         var b = $('#b').val();
@@ -668,7 +683,7 @@ $(document).ready(function() {
         // Mostrar los valores que se van a enviar
         console.log('Datos del tema a enviar:', {
             enunciado: enunciado,
-            formula: formula,
+            resolucionPdf: resolucionPdf,
             imagenPregunta: imagenPregunta,
             a: a,
             b: b,
@@ -683,7 +698,7 @@ $(document).ready(function() {
 
         var temaData = {
             enunciado: enunciado,
-            formula: formula,
+            resolucionPdf: resolucionPdf,
             imagenPregunta: imagenPregunta,
             a: a,
             b: b,
@@ -703,7 +718,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log('Pregunta insertada correctamente:', response);
                 // Limpiar los campos del formulario después de insertar la pregunta
-                $('#enunciado, #formula, #imagenPregunta, #a, #b, #c, #d, #e, #respuesta, #exPas, #dificultad').val('');
+                $('#enunciado, #resolucionPdf, #imagenPregunta, #a, #b, #c, #d, #e, #respuesta, #exPas, #dificultad').val('');
                 cargarPreguntas(); // Recargar la lista de preguntas
             },
             error: function(xhr, status, error) {
@@ -717,7 +732,7 @@ $(document).ready(function() {
         var preguntaContainer = $(this).closest('.pregunta-container'); //agarrar la clase pregunta container
         var idPregunta = preguntaContainer.find('.idPregunta').val();
         var enunciado = preguntaContainer.find('.enunciado').val();
-        var formula = preguntaContainer.find('.formula').val();
+        var resolucionPdf = preguntaContainer.find('.resolucionPdf').val();
         var imagenPregunta = preguntaContainer.find('.imagenPregunta').val();
         var a = preguntaContainer.find('.a').val();
         var b =  preguntaContainer.find('.b').val();
@@ -744,8 +759,8 @@ $(document).ready(function() {
                           </div>
                           <div class="col-6">
                             <div class="mb-3">
-                              <label for="">Formula:</label>
-                              <input value="${formula}" id="formulaEditar" type="text" class="form-control" placeholder="Si tiene formula agregarla aqui">
+                              <label for="">resolucionPdf:</label>
+                              <input value="${resolucionPdf}" id="resolucionPdfEditar" type="text" class="form-control" placeholder="Si tiene formula agregarla aqui">
                             </div>
                           </div>
                           <div class="col-6">
@@ -835,7 +850,7 @@ $(document).ready(function() {
 
         var idPreguntaEditar = $('#idPreguntaEditar').val();
         var enunciadoEditar = $('#enunciadoEditar').val();
-        var formulaEditar = $('#formulaEditar').val();
+        var resolucionPdfEditar = $('#resolucionPdfEditar').val();
         var imagenPreguntaEditar = $('#imagenPreguntaEditar').val();
         var aEditar = $('#aEditar').val();
         var bEditar =  $('#bEditar').val();
@@ -850,7 +865,7 @@ $(document).ready(function() {
         var temaData = {
             idPregunta: idPreguntaEditar,
             enunciado: enunciadoEditar,
-            formula: formulaEditar,
+            resolucionPdfa: resolucionPdfEditar,
             imagenPregunta: imagenPreguntaEditar,
             a: aEditar,
             b: bEditar,
@@ -886,7 +901,7 @@ $(document).ready(function() {
         var preguntaContainer = $(this).closest('.pregunta-container'); //agarrar la clase pregunta container
         var idPregunta = preguntaContainer.find('.idPregunta').val();
         var enunciado = preguntaContainer.find('.enunciado').val();
-        var formula = preguntaContainer.find('.formula').val();
+        var resolucionPdf = preguntaContainer.find('.resolucionPdf').val();
         var imagenPregunta = preguntaContainer.find('.imagenPregunta').val();
       //Idea de agregar temas a un div para usar solo 1 modal
       $('#contenedorEditDelete').empty();
@@ -896,7 +911,7 @@ $(document).ready(function() {
                       <input type="hidden" id="idPreguntaEliminar" value="${idPregunta}">
                         <div class="col-12 mb-4">
                           <p class="col-12">Enunciado: ${enunciado}</p>
-                          <p class="col-12">Formula: ${formula}</p>
+                          <p class="col-12">resolucionPdf: ${resolucionPdf}</p>
                           <p class="col-12">Grafico: ${imagenPregunta}</p>
                         </div>
 
@@ -968,7 +983,7 @@ $(document).ready(function() {
                       <input type="hidden" class="idMateria" value="${pregunta.idMateria}">
                         <input type="hidden" class="idPregunta" value="${pregunta.idPregunta}">
                         <input type="hidden" class="enunciado" value="${pregunta.enunciado}">
-                        <input type="hidden" class="formula" value="${pregunta.formula}">
+                        <input type="hidden" class="resolucionPdf" value="${pregunta.resolucionPdf}">
                         <input type="hidden" class="imagenPregunta" value="${pregunta.imagenPregunta}">
                         <input type="hidden" class="a" value="${pregunta.a}">
                         <input type="hidden" class="b" value="${pregunta.b}">
@@ -997,7 +1012,7 @@ $(document).ready(function() {
         var preguntaContainer = $(this).closest('.pregunta-container'); //agarrar la clase pregunta container
         var idPregunta = preguntaContainer.find('.idPregunta').val();
         var enunciado = preguntaContainer.find('.enunciado').val();
-        var formula = preguntaContainer.find('.formula').val();
+        var resolucionPdf = preguntaContainer.find('.resolucionPdf').val();
         var imagenPregunta = preguntaContainer.find('.imagenPregunta').val();
         var a = preguntaContainer.find('.a').val();
         var b =  preguntaContainer.find('.b').val();
@@ -1024,8 +1039,8 @@ $(document).ready(function() {
                           </div>
                           <div class="col-6">
                             <div class="mb-3">
-                              <label for="">Formula:</label>
-                              <input value="${formula}" id="formulaEditar" type="text" class="form-control" placeholder="Si tiene formula agregarla aqui">
+                              <label for="">resolucionPdf:</label>
+                              <input value="${resolucionPdf}" id="resolucionPdfEditar" type="text" class="form-control" placeholder="Si tiene formula agregarla aqui">
                             </div>
                           </div>
                           <div class="col-6">
