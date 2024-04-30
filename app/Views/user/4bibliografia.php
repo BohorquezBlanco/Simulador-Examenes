@@ -22,7 +22,7 @@
           <div class="d-flex flex-column align-center pa-2 item" style="width: 16.6667%;">
             <div class="d-flex justify-center align-center overflow-hidden mb-0 pb-2">
               <a href="<?php echo $libro['urlLibro']?>" target="_self" class="d-flex v-card v-card--flat v-card--link v-sheet theme--light rounded-0">
-                <img class="center-block imagen" id="img" src="<?php echo $libro['imagenLibro'] ;?>" alt="By Håkon Sataøen"/>
+                <img class="center-block img-fluid" src="<?php echo $libro['imagenLibro'] ;?>" alt="By AnisSoft" style="height: 200px; object-fit: cover;">
               </a>
             </div>
             <div class="d-flex justify-center align-center overflow-hidden mb-0 pb-2">

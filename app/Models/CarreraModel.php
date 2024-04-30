@@ -15,7 +15,7 @@ class CarreraModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idCarrera','nombreCarrera', 'descripcionCarrera','imagenCarrera','fecha_elimina','fecha_modifica','fecha_modifica'];
+    protected $allowedFields = ['idCarrera','nombreCarrera', 'descripcionCarrera','imagenCarrera','idU'];
 
     // Dates
     protected $useTimestamps = true;

@@ -15,7 +15,7 @@ class LibroModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idLibro','nombreLibro','descripcionLibro','imagenLibro','urlLibro'];
+    protected $allowedFields = ['idLibro','nombreLibro','descripcionLibro','imagenLibro','pdfLibro'];
 
     // Dates
     protected $useTimestamps = true;

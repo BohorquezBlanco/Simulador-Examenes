@@ -8,11 +8,11 @@
         <div class="col-md-3 border m-1">
               <h5 class="card-title text-center p-2"><?php echo $carrera['nombreMateria'] ;?></h5>
               <a  href="<?php echo base_url().'materias/'.$carrera['idMateria'];?>">
-            <img class="center-block" src="<?php echo $carrera['imagenMateria'] ;?>" alt="By Håkon Sataøen" />
+            <img class="center-block img-fluid" src="<?php echo $carrera['imagenMateria'] ;?>" alt="By AnisSoft" style="height: 200px; object-fit: cover;">
             </a>
             <div class="card-body ">
               <a href="<?php echo base_url().'bibliografia/'.$carrera['idMateria'];?>" class="btn btn-light col-12 m-1 ">BIBLIOGRAFIA</a>
-              <a href="<?php echo base_url().'examenes/'.$carrera['idCarrera'].'/'.$carrera['idMateria'].'/'.$carrera['nombreMateria'];?>" class="btn btn-light col-12 m-1">DAR EXAMEN DE LA MATERIA</a>
+              <a href="<?php echo base_url().'examenes/'.$carrera['idMateria'].'/'.$carrera['idMateria'];?>" class="btn btn-light col-12 m-1">DAR EXAMEN DE LA MATERIA</a>
             </div>
           </div>
           <?php $n=$n+1 ;?>
@@ -22,3 +22,4 @@
     </div>
 </section>
 
+    

@@ -14,7 +14,7 @@
                               Además, <a href="<?php echo base_url();?>cursos">podrás explorar los cursos que ofrecemos."</a>.
                         </div>
                         <div class="col-sm-6 col-sm-offset-3">
-                          <img src="https://www.educaciontrespuntocero.com/wp-content/uploads/2018/06/examenes-1-978x652.jpg" alt="" class="img-fluid" >
+                          <img class="img-fluid" src="https://www.educaciontrespuntocero.com/wp-content/uploads/2018/06/examenes-1-978x652.jpg" alt="By AnisSoft" style="height: 200px; object-fit: cover;">
                         </div>
                       </div>
                     </div>
