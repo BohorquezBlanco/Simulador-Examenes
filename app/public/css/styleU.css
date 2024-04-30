@@ -1,0 +1,380 @@
+html {
+  height: 100vh;
+}
+/*Modo verano*/
+:root {
+  --color-fondo: rgb(255, 255, 255);
+  --color-menu: rgb(255, 255, 255);
+
+  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
+
+  --img-beneficios: url('../public/img/fondo.png'); 
+
+  --color-texto-menu: rgb(0, 0, 0);
+
+  --color-icon: rgb(89, 189, 89);
+
+  --color-menu-hover: rgb(210, 255, 216);
+  --color-menu-hover-texto: rgb(0, 0, 0);
+
+  --color-linea: rgb(156, 156, 156);
+
+  --color-icon-boton: rgb(255, 131, 55);
+
+  --color-fondo-boton: rgb(255, 172, 121);
+
+  --color-scroll: rgb(192, 192, 192);
+  --color-scroll-hover: rgb(134, 134, 134);
+
+  --color-eliminar: rgb(228, 125, 125);
+  --color-modificar: rgb(63, 192, 63);
+
+  --color-borde-card: rgb(0, 0, 0);
+
+  --color-texto: rgb(129, 128, 128);
+
+  --color-fondo-card: rgb(228, 228, 228);
+}
+/*Modo otoño*/
+.modo-autumn {
+  --color-fondo: rgb(0, 0, 0);
+  --color-menu: rgb(0, 0, 0);
+
+  --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
+
+  --color-texto-menu: rgb(255, 255, 255);
+
+  --color-icon: rgb(212, 91, 18);
+
+  --color-menu-hover: rgb(87, 33, 0);
+  --color-menu-hover-texto: rgb(255, 255, 255);
+
+  --color-linea: rgb(255, 255, 255);
+
+  --color-icon-boton: rgb(108, 194, 87);
+
+  --color-fondo-boton: rgb(17, 65, 5);
+
+  --color-scroll: rgb(68, 69, 74);
+  --color-scroll-hover: rgb(85, 85, 85);
+
+  --color-eliminar: rgb(145, 19, 14);
+  --color-modificar: rgb(17, 65, 5);
+
+  --color-borde-card: rgb(255, 255, 255);
+
+  --color-texto: rgb(180, 180, 180);
+
+  --color-fondo-card: rgb(41, 41, 41);
+}
+
+h1, h2{
+  text-transform: uppercase;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/*Body*/
+body {
+  height: 100vh;
+  width: 100wh;
+  background-color: var(--color-fondo);
+}
+/*Menu icono*/
+.menuA {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-icon);
+  color: var(--color-texto-menu);
+  right: 15px;
+  top: 15px;
+  z-index: 100;
+}
+/*peque*/
+.menu-peque {
+  width: 70px;
+  height: 100%;
+  padding: 20px 15px;
+  background-color: var(--color-menu);
+}
+/*Menu arriba*/
+.menu {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: none;
+  width: 100%;
+  height: 70px;
+  z-index: 1;
+}
+/*Menu boton otoño*/
+.menu .modo-otoño button {
+  position: fixed;
+  display: flex;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  top: 5px;
+  right: 40px;
+  cursor: pointer;
+}
+.menu .modo-otoño button:hover {
+  background-color: var(--color-fondo-boton);
+}
+.menu #mode{
+  position: fixed;
+  font-size: 25px;
+  color: var(--color-texto-menu);
+}
+/*Menu usuario*/
+.menu .inicio-usuario button {
+  position: fixed;
+  display: flex;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.menu .inicio-usuario button:hover {
+  background-color: var(--color-fondo);
+}
+.menu #usuario{
+  position: fixed;
+  font-size: 25px;
+  color: var(--color-texto-menu);
+}
+/*Logo anissoft*/
+.nombreE img {
+  top: 0%;
+  max-width: 50px;
+  margin-right: 10px;
+  /*Contenedor practica con nosotros*/
+}
+.contenedorP {
+  position: absolute;
+  top: 0%;
+  background-image: var(--imagen-fondo);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 380px;
+  padding: 80px;
+  color: black;
+  text-align: center;
+}
+.contenedorP h1 {
+  color: var(--color-texto-menu);
+}
+/*contenedor razones de porque practicar con nosotros*/
+.contenedorT {
+  display: flex;
+  position: absolute;
+  top: 380px;
+  background-color: var(--color-fondo);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 400px;
+  color: black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.contenedorT p{
+  width: 50%;
+  height: 300px;
+  padding: 100px;
+  color: var(--color-texto-menu);
+}
+.contenedorT p a{
+  text-decoration: none ;
+  color: var(--color-icon-boton);
+}
+.contenedorT .imgT{
+  height: 350px;
+  padding: 10px;
+  width: 35%;
+}
+.contenedorT img{
+  height: 100%;
+  width: 80%;
+}
+/*Contenedor beneficios*/
+.textoB{
+  position: absolute;
+  top: 780px;
+  width: 100%;
+  height: 35px;
+  color: var(--color-texto-menu);
+  margin-bottom: 15px;
+ text-align: center;
+}
+.contenedorB {
+  position: relative;
+  top: 815px;
+  background-color: var(--color-fondo);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contenedor {
+  position: relative;
+  display: none;
+}
+.contenedor img {
+  max-width: 100%;
+  height: auto;
+  background-image: var(--img-beneficios);
+}
+.contenedor h2 {
+  position: absolute;
+  top: 20px; /* Ajusta la posición vertical según sea necesario */
+  left: 50%; /* Ajusta la posición horizontal según sea necesario */
+  color: var(--color-texto-menu);
+  padding: 10px;
+  z-index: 999;
+  text-align: center;
+}
+.contenedor p {
+  position: absolute;
+  top: 120px; /* Ajusta la posición vertical según sea necesario */
+  left: 50%; /* Ajusta la posición horizontal según sea necesario */
+  color: var(--color-texto-menu);
+  padding: 10px;
+  z-index: 999;
+  text-align: center;
+}
+.contenedorB button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+}
+button.ant {
+  left: 10px;
+}
+button.sig {
+  right: 10px;
+}
+/*Contenedor que hacemos*/
+.textoW{
+  position: absolute;
+  top: 1220px;
+  width: 100%;
+  height: 35px;
+  color: var(--color-texto-menu);
+  text-align: center;
+  align-items: center;
+}
+.contenedorW {
+  position: absolute;
+  top: 1250px;
+  background-color: var(--color-fondo);
+  background-size: cover;
+  width: 100%;
+  height: 320px;
+  padding-bottom: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.card {
+  width: 250px; 
+  margin: 20px;
+  background-color: var(--color-fondo-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.card h3 {
+  color: var(--color-texto-menu);
+  margin-bottom: 10px;
+  height: 50px;
+}
+.card p{
+  height: 100px;
+  color: var(--color-texto-menu);
+}
+hr{
+  margin-bottom: 10px;
+}
+.card button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: var(--color-icon);
+  color: var(--color-texto-menu);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/*Contenedor contactanos*/
+.textoC{
+  position: absolute;
+  top: 1570px;
+  width: 100%;
+  height: 35px;
+  color: var(--color-texto-menu);
+  margin-bottom: 15px;
+ text-align: center;
+}
+.imgC{
+  position: absolute;
+  border: 2px solid chocolate;
+  top: 1605px;
+  height: 480px;
+}
+.imgC img{
+  position: absolute;
+  height: 480px;
+  width: auto;
+}
+.tablaC {
+  position: absolute;
+  width: 100%;
+  border-collapse: collapse;
+  top: 2085px;
+}
+th, td {
+  border: none;
+  padding: 8px;
+  text-align: center;
+  color: var(--color-texto-menu);
+}
+th {
+  font-weight: bold;
+}

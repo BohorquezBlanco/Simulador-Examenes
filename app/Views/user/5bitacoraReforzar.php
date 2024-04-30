@@ -123,7 +123,7 @@
               <td colspan="2"><?php echo $pregunta['enunciado'];?></td>
               <td><img src="<?php echo $pregunta['imagenPregunta'];?>" alt="" class="img-fluid"></td>
               <td><div class="btn-group" role="group" aria-label="Grupo de botones">
-                  <a target="_blank" href="<?php echo base_url().'resolverPregunta/'.$pregunta['idPregunta'].'/'.$idMateria.'/'.$idCarrera;?>" class="btn btn-primary">Resolver</a>
+                  <a target="_blank" href="<?php echo base_url().'resolverPregunta/'.$pregunta['idPregunta'].'/'.$idCarrera.'/'.$idMateria;?>" class="btn btn-primary">Resolver</a>
                   <a target="_blank" href="<?php echo $pregunta['resolucionPdf'];?>" class="btn btn-secondary">Resolución</a>
                   </div>
               </td>

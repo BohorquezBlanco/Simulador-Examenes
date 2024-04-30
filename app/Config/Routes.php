@@ -85,3 +85,11 @@ use CodeIgniter\Router\RouteCollection;
 
         $routes->post('/guardarLibro', 'Admi\ControleAdmi::guardarLibro');
     
+        
+
+        //borrar rutade prueva: 
+        $routes->get('/Filtrado', 'Admi\ControleAdmi::Filtrado');
+
+        //AJAX PARA SELECCIONAR MATERIAS TEMAS CARRERAS
+        $routes->post('/materiasExistentes', 'Admi\ControleAdmi::materiasExistentes');
+      

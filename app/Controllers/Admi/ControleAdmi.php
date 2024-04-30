@@ -467,13 +467,13 @@ class ControleAdmi extends BaseController
            // Devolver la respuesta JSON
            return $this->response->setJSON($response);
        }
-       public function editarPregunta()
+      public function editarPregunta()
        {
         $idPregunta=$this->request->getPost('idPregunta');
            // Obtener los datos del formulario
            $data = [
                'enunciado' => $this->request->getPost('enunciado'),
-               'resolucionPdf' => $this->request->getPost('resolucionPdf'),
+               'resolucionPdf' => $this->request->getPost('resolucionPdfa'),
                'imagenPregunta' => $this->request->getPost('imagenPregunta'),
                'a' => $this->request->getPost('a'),
                'b' => $this->request->getPost('b'),
@@ -554,4 +554,42 @@ class ControleAdmi extends BaseController
               echo 'La relación se eliminó correctamente.';
           }
        }
+
+
+       //EJEMPLO DE FILTRADO
+       public function Filtrado()
+       {
+        $carreraModel= new CarreraModel();
+        $carreras=$carreraModel->findAll();
+
+        $data=['carreras'=>$carreras];
+
+        return view('header/1header').
+        view('barraNavegacion/barra2').
+        view('Filtrado',$data).
+        view('footer/1footer');
+       }
+
+
+       
+       public function materiasExistentes()
+       {
+        $idCarrera =  $this->request->getPost('carreraIdAjax'); // obtenemos el ID DE LA CARRERA
+        $materiaModel= new MateriaModel();
+        $materias = $materiaModel->where('idcarrera', $idCarrera)->findAll();
+
+        // Convertir las materias a formato JSON
+        $response = json_encode($materias);
+
+        // Establecer las cabeceras de respuesta para indicar que se envía JSON
+        header('Content-Type: application/json');
+        
+        // Devolver la respuesta JSON
+        return $this->response->setJSON($response);
+       }
+       
+
+
+
+
 }

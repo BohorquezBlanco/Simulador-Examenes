@@ -109,13 +109,13 @@
                   </div>
                   <div class="modal-body">
                   <form id="carreraForm" class="row">
-                          <div class="col-6">
+                          <div class="col-12">
                             <div class="mb-3">
                             <label for="">Enunciado:</label>
                               <input  id="enunciado" type="text" class="form-control" placeholder="Enunciado de la preguntas">
                             </div>
                           </div>
-                          <div class="col-6">
+                          <div class="col-12">
                             <div class="mb-3">
                               <label for="">Pdf Solucion:</label>
                               <input  id="resolucionPdf" type="text" class="form-control" placeholder="Pdf solución">
@@ -492,7 +492,7 @@ $(document).ready(function() {
     });
     
         // Función para filtrar las preguntas existentes
-        $('#searchPreguntas').on('input', function() {
+    $('#searchPreguntas').on('input', function() {
       var searchText = $(this).val().trim().toLowerCase();  
       $('#bancoPreguntas .list-group-item').each(function() {
             var temaText = $(this).find('.pregunta-container .col-8 p').text().trim().toLowerCase();
@@ -504,10 +504,7 @@ $(document).ready(function() {
             }
         });
     });
-
-
-    
-    
+        
 //##########################################-----INICIO DE CRUD DE TEMAS-----#################################################################################3
     // Evento para crear un nuevo tema
     $('#crearTemabtn').click(function() {
@@ -803,11 +800,11 @@ $(document).ready(function() {
                             <label for="">Correcta:</label>
                             <select id="respuestaEditar" name="respuesta"  class="form-select form-select-sm" aria-label="Small select example">
                               <option  value="${respuesta}" selected>${respuesta}</option>
-                              <option  value="${a}">a)</option>
-                              <option  value="${b}">b)</option>
-                              <option value="${c}">c)</option>
-                              <option  value="${d}">d)</option>
-                              <option value="${e}">e)</option>
+                              <option  value="a">a)</option>
+                              <option  value="b">b)</option>
+                              <option value="c">c)</option>
+                              <option  value="d">d)</option>
+                              <option value="e">e)</option>
                             </select>
                           </div>
                           <div class="col-6  mb-1">
@@ -1083,11 +1080,11 @@ $(document).ready(function() {
                             <label for="">Correcta:</label>
                             <select id="respuestaEditar" name="respuesta"  class="form-select form-select-sm" aria-label="Small select example">
                               <option  value="${respuesta}" selected>${respuesta}</option>
-                              <option  value="${a}">a)</option>
-                              <option  value="${b}">b)</option>
-                              <option value="${c}">c)</option>
-                              <option  value="${d}">d)</option>
-                              <option value="${e}">e)</option>
+                              <option  value="a">a)</option>
+                              <option  value="b">b)</option>
+                              <option value="c">c)</option>
+                              <option  value="d">d)</option>
+                              <option value="e">e)</option>
                             </select>
                           </div>
                           <div class="col-6  mb-1">
