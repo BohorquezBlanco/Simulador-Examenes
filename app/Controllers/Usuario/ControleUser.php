@@ -54,7 +54,7 @@ class ControleUser extends BaseController
          $user = $usuariomodel->getUserBy('correo', $correo);
          if (!$user) {
              // Si el usuario no existe, mostrar mensaje de error y redirigir de vuelta
-             return redirect()->back()->with('msg', 'El correo ingresado no está registrado en el sistema');
+             return redirect()->back()->with('msg', 'El correo ingresado no está registrado');
          }
          // Verificar la contraseña
          if ($password !== $user->password) {
