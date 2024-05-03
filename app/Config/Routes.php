@@ -11,11 +11,6 @@ $routes->get('/', 'Usuario\ControleUser::index');
 
 $routes->get('/iniciarSesion', 'Usuario\ControleUser::iniciarsesion');
 $routes->post('/login', 'Usuario\ControleUser::login');
-
-$routes->post('/login', 'Usuario\ControleUser::login4');
-//hola ocasionare errores xd  
-
-$routes->post('/login', 'Usuario\ControleUser::login3');
 $routes->get('/logout', 'Usuario\ControleUser::logout');
 
 
