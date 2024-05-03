@@ -11,6 +11,7 @@ $routes->get('/', 'Usuario\ControleUser::index');
 
 $routes->get('/iniciarSesion', 'Usuario\ControleUser::iniciarsesion');
 $routes->post('/login', 'Usuario\ControleUser::login');
+//Hola Sam
 //hola naty :D 
 $routes->get('/logout', 'Usuario\ControleUser::logout');
 
