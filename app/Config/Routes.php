@@ -39,6 +39,7 @@ $routes->post('/revisarExamen', 'Usuario\ControleUser::revisarExamen'); //aqui m
 
 //###############################-ADMINISTRADOR RUTAS-#################################
 $routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
+$routes->get('/comida', 'Admi\ControleAdmi::comida');
 
 //ADMINISTRADOR UNIVINST
 $routes->post('/crearUni', 'Admi\ControleAdmi::crearUni');

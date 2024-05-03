@@ -35,7 +35,34 @@ class ControleAdmi extends BaseController
 
   //----------------------------------------------------------------INICIO DEL SISTEMA----------------------------------------------------------------
 
-  public function index(): string
+  public function index()
+  {
+    $uniModel = new UniModel();
+    $unis = $uniModel->findAll();
+
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->findAll();
+
+    $materiaModel = new MateriaModel();
+    $materias = $materiaModel->findAll();
+  
+    $libroModel = new libroModel();
+    $libros = $libroModel->findAll();
+
+    $preguntaModel = new preguntaModel();
+    $preguntas = $preguntaModel->findAll();
+
+    $temarioModel = new TemarioModel();
+    $temarios = $temarioModel->findAll();
+
+    $usuarioModel = new UsuarioModel();
+    $users = $usuarioModel->findAll();
+
+    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'libros' => $libros, 'preguntas' => $preguntas, 'users'=>$users];
+
+    return view('adm/1inicioAdmi', $data);
+  }
+  public function comida()
   {
     $uniModel = new UniModel();
     $unis = $uniModel->findAll();

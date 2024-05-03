@@ -100,7 +100,6 @@
     <section id="univInst" class="seccion">
       <h2 class="center">UNIVERSIDADES E INSTITUTOS</h2>
       <div class="card-container">
-        <?php $n = 0; ?>
         <?php foreach ($unis as $uni) : ?>
           <div class="card" draggable="true" id="<?php echo $uni['idU']; ?>" data="<?php echo base_url('eliminarUni'); ?>" aria-hidden="<?php echo base_url('editarUni'); ?>">
             <img src="<?php echo $uni['imagenU']; ?>" alt="By AnisSoft" title="<?php echo $uni['nombreU']; ?>" draggable="false" />
@@ -108,7 +107,6 @@
               <h3 draggable="false" class="card-title"><?php echo $uni['nombreU']; ?></h3>
             </div>
           </div>
-          <?php $n = $n + 1; ?>
         <?php endforeach; ?>
         <button class="abrirModal" type="button" data-target="añadirU">
           <ion-icon name="add-circle-outline"></ion-icon>
@@ -408,25 +406,6 @@
       $("a[onclick=\"mostrarSeccion('" + seccion + "')\"]").addClass("active");
     }
   </script>
-<script>
-$(function() {
-    $(".card").sortable({
-        connectWith: ".card", // Permite conectar diferentes listas de tarjetas
-        start: function(event, ui) {
-            $(ui.item).data('original-value', $(ui.item).html()); // Guarda el valor original del elemento al comenzar el arrastre
-        },
-        receive: function(event, ui) {
-            var element = $(ui.item);
-            var groupName = $(this).attr('id'); // Obtiene el nombre del grupo al que se ha añadido la tarjeta
-            element.attr('name', groupName); // Asigna el nombre del grupo como atributo 'name' de la tarjeta
-            if (groupName === 'grupo1') { // Si la tarjeta se añade al grupo 'grupo1'
-                var originalValue = element.data('original-value');
-                element.html(originalValue); // Restaura el valor original del elemento
-            }
-        }
-    }).disableSelection(); // Deshabilita la selección de texto mientras se arrastra
-});
-</script>
 
   <!--Botar-->
   <script>
