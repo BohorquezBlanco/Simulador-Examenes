@@ -62,33 +62,7 @@ class ControleAdmi extends BaseController
 
     return view('adm/1inicioAdmi', $data);
   }
-  public function comida()
-  {
-    $uniModel = new UniModel();
-    $unis = $uniModel->findAll();
 
-    $carreraModel = new CarreraModel();
-    $carreras = $carreraModel->findAll();
-
-    $materiaModel = new MateriaModel();
-    $materias = $materiaModel->findAll();
-  
-    $libroModel = new libroModel();
-    $libros = $libroModel->findAll();
-
-    $preguntaModel = new preguntaModel();
-    $preguntas = $preguntaModel->findAll();
-
-    $temarioModel = new TemarioModel();
-    $temarios = $temarioModel->findAll();
-
-    $usuarioModel = new UsuarioModel();
-    $users = $usuarioModel->findAll();
-
-    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'libros' => $libros, 'preguntas' => $preguntas, 'users'=>$users];
-
-    return view('adm/1inicioAdmi', $data);
-  }
   //----------------------------------------------------------------Univ o Inst----------------------------------------------------------------
   //INSERT DE Univ o inst 
   public function crearUni()
@@ -472,4 +446,133 @@ class ControleAdmi extends BaseController
     $session->destroy(); // Destruye la sesión actual
     return redirect()->to(base_url()); // Redirige a la página de inicio de sesión
   }
+
+
+  public function comida()
+  {
+
+    $usuarioModel = new UsuarioModel();
+    $users = $usuarioModel->findAll();
+
+    $data = [ 'users'=>$users];
+
+    return view('adm/2inicioAdmi', $data);
+  }
+  #################--SELECT--#####################
+  public function univercidadAjax()
+  {
+    $uniModel = new UniModel();
+    $unis = $uniModel->findAll();
+    return json_encode($unis);
+
+  }
+ #################--DELETE--#####################
+  public function eliminarUni2()
+  {
+    $idU = $this->request->getPost('idU');
+ 
+    $uniModel = new UniModel();
+    $uniModel->delete($idU);
+
+  }
+
+  public function crearUni2()
+  {
+
+    $data = [
+      'nombreU' => $this->request->getPost('nombreU'),
+      'descripcionU' => $this->request->getPost('descripcionU'),
+      'imagenU' => $this->request->getPost('imagenU'),
+    ];
+
+    //instanciar
+    $uniModel = new UniModel();
+    $uniModel->insert($data);
+  }
+
+  public function editarUni2()
+  {
+    $idU = $this->request->getPost('idU');
+
+    $data = [
+      'nombreU' => $this->request->getPost('nombreU'),
+      'descripcionU' => $this->request->getPost('descripcionU'),
+      'imagenU' => $this->request->getPost('imagenU'),
+    ];
+
+    //instanciar
+    $uniModel = new UniModel();
+    $uniModel->update($idU, $data);
+  }
+
+  public function carreraAjax()
+  {
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($carreras);
+  }
+
+
+
+ //INSERT DE LAS CARRERAS 
+ public function crearCarr2()
+ {
+   $data = [
+     'idU' => $this->request->getPost('idU'),
+     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
+     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
+     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
+   ];
+
+   //instanciar
+   $carreraModel = new CarreraModel();
+   $carreraModel->insert($data);
+   return redirect()->to('inicioAdmi');
+ }
+
+ //UPDATE CARRERA
+ public function editarCarr2()
+ {
+   $idCarrera = $this->request->getPost('idCarrera');
+
+   $data = [
+     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
+     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
+     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
+   ];
+
+   //instanciar
+   $carreraModel = new CarreraModel();
+   $carreraModel->update($idCarrera, $data);
+   return redirect()->to('inicioAdmi');
+ }
+
+ //DELETE DE LAS CARRERAS EXISTENTES
+ public function eliminarCarr2()
+ {
+   $idCarrera = $this->request->getPost('id');
+
+   $carreraModel = new CarreraModel();
+   $carreraModel->delete($idCarrera);
+
+   return redirect()->to('inicioAdmi');
+ }
+
+
+
+
+
+
+
+  public function materiaAjax()
+  {
+    $materiaModel = new MateriaModel();
+    $materias = $materiaModel->findAll();
+    return json_encode($materia);
+  }
+
+
+  
 }

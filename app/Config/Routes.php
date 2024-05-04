@@ -81,3 +81,18 @@ $routes->post('/eliminarExamen', 'Admi\ControleAdmi::eliminarExamen');
 
 //ADMINISTRADOR CERRAR SESIÓN
 $routes->post('/logout', 'Admi\ControleAdmi::logout');
+$routes->get('/comida', 'Admi\ControleAdmi::comida');
+
+
+$routes->get('/univercidadAjax', 'Admi\ControleAdmi::univercidadAjax');
+$routes->post('/eliminarUni2', 'Admi\ControleAdmi::eliminarUni2');
+$routes->post('/editarUni2', 'Admi\ControleAdmi::editarUni2');
+$routes->post('/crearUni2', 'Admi\ControleAdmi::crearUni2');
+
+$routes->get('/carreraAjax', 'Admi\ControleAdmi::carreraAjax');
+$routes->post('/eliminarCarr2', 'Admi\ControleAdmi::eliminarCarr2');
+$routes->post('/editarCarr2', 'Admi\ControleAdmi::editarCarr2');
+$routes->post('/crearCarr2', 'Admi\ControleAdmi::crearCarr2');
+
+
+
