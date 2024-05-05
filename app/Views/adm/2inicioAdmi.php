@@ -115,6 +115,20 @@
       <h2 class="center">UNIVERSIDADES E INSTITUTOS</h2>
         <div class="card-container" id="selectUniAjax">   
         </div>
+
+      <div id="modificar" class="cambiar" title="Modificar">
+        <h4>Modificar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
+        </svg>
+      </div>
+
+      <div id="eliminar" class="botar" title="Eliminar">
+        <h4>Eliminar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
+        </svg>
+      </div>
     </section>
     
     <!--CARRERAS-->
@@ -122,6 +136,20 @@
       <h2 class="center">CARRERAS</h2>
         <div class="card-container" id="selectCarrAjax">   
         </div>
+        
+      <div id="modificarC" class="cambiar" title="Modificar">
+        <h4>Modificar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
+        </svg>
+      </div>
+
+      <div id="eliminarC" class="botar" title="Eliminar">
+        <h4>Eliminar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
+        </svg>
+      </div>
     </section>
    
     <!--MATERIAS-->
@@ -129,6 +157,21 @@
       <h2 class="center">MATERIAS</h2>
         <div class="card-container" id="selectMatAjax">   
         </div>
+
+        
+      <div id="modificarM" class="cambiar" title="Modificar">
+        <h4>Modificar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
+        </svg>
+      </div>
+
+      <div id="eliminarM" class="botar" title="Eliminar">
+        <h4>Eliminar</h4>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+          <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
+        </svg>
+      </div>
     </section>
 
     <!--LIBROS-->
@@ -136,19 +179,7 @@
 
     </section>   
 
-    <div id="modificar" class="cambiar" title="Modificar">
-      <h4>Modificar</h4>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-        <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
-      </svg>
-    </div>
 
-    <div id="eliminar" class="botar" title="Eliminar">
-      <h4>Eliminar</h4>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-        <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
-      </svg>
-    </div>
 
   </main>
   <!--contenido-->
@@ -438,6 +469,7 @@ function selecCarrera() {
       $.each(response, function(index, carrera) {
         //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
         var carreraData = {
+        idU: carrera.idU,
         idCarrera: carrera.idCarrera,
         nombreCarrera: carrera.nombreCarrera,
         descripcionCarrera: carrera.descripcionCarrera, 
@@ -468,10 +500,10 @@ function selecCarrera() {
         event.originalEvent.dataTransfer.setData('text/plain', idCarrera);
       });
       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#modificar').on('dragover', function(event) {
+      $('#modificarC').on('dragover', function(event) {
         event.preventDefault();
       });
-      $('#modificar').on('drop', function(event) {
+      $('#modificarC').on('drop', function(event) {
         event.preventDefault();
   
         var idCarrera = event.originalEvent.dataTransfer.getData('text/plain');
@@ -508,11 +540,11 @@ function selecCarrera() {
 
       });
       //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#eliminar').on('dragover', function(event) {
+      $('#eliminarC').on('dragover', function(event) {
         event.preventDefault();
       });
 
-      $('#eliminar').on('drop', function(event) {
+      $('#eliminarC').on('drop', function(event) {
         event.preventDefault();
         var idCarrera = event.originalEvent.dataTransfer.getData('text/plain');
 
@@ -547,36 +579,352 @@ function selecCarrera() {
   });
 }
 
+  //---------------------------------UPDATE CARRERA-------------------------------------------------
+  $('#contenidoModal').on('click', '#editarCarrera', function() {
+      event.preventDefault(); // Evitar el envío del formulario por defecto
+
+      // Serializar todos los campos del formulario en un arreglo de objetos
+      var formDataArray = $('#modificar').serializeArray();
+
+      // Convertir el arreglo en un objeto JavaScript
+      var carreraData = {};
+      formDataArray.forEach(function(item) {
+          carreraData[item.name] = item.value;
+      });
+
+      console.log(carreraData);
+
+      // Realizar la solicitud AJAX para editar la universidad
+      $.ajax({
+          url: '<?php echo base_url('editarCarrera2'); ?>',
+          type: 'POST',
+          data: carreraData, // Serializar el objeto a JSON
+          success: function(response) {
+              console.log('Carrera editada con éxito:', response);
+              // Realizar alguna acción adicional si es necesario
+              selecCarrera();
+              $('#modalBase').hide(); // Ocultar el modal
+          },
+          error: function(error) {
+              console.error('Error al editar la carrera:', error);
+          }
+      });
+  });
+
+
+  //---------------------------------INSERT CARRERA-------------------------------------------------
+  $('#selectCarrAjax').on('click', '#insertCarrera', function() {
+  
+    $('#contenidoModal').empty();
+    var carreraHTML = 
+          `
+            <form  id="crear">
+              <div class="celda">
+                <label class="form-label">Carrera</label>
+                <input name="nombreCarrera" id="nombreCarrera" type="text" class="form-control" placeholder="Nombre de la Carrera">
+              </div>
+              <div class="celda">
+                <label class="form-label">Descripción de la carrera</label>
+                <textarea class="form-control" rows="3" name="descripcionCarrera" id="descripcionCarrera" placeholder="Descripción de la Carrera"></textarea>
+              </div>
+              <div class="celda">
+                <label class="form-label">Imagen de la carrera</label>
+                <textarea class="form-control" rows="3" name="imagenCarrera" id="imagenCarrera" placeholder="Imagen de la carrera"></textarea>
+              </div>
+              <div class="añadir">
+                <button id="agregarCarrera" type="button" class="btn-modificar">Añadir nueva Carrera</button>
+              </div>
+            </form>
+          `;
+        $('#contenidoModal').append(carreraHTML);
+        $('#modalBase').show(); // Mostrar el modal
+
+});
+
+
+$('#contenidoModal').on('click', '#agregarCarrera', function() {
+    event.preventDefault(); // Evitar el envío del formulario por defecto
+
+    // Serializar el formulario para obtener todos los valores de los inputs
+    var formData = $('#crear').serialize();
+
+    // Realizar la solicitud AJAX para agregar la nueva universidad
+    $.ajax({
+        url: '<?php echo base_url('crearCarrera2'); ?>',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            console.log('Carrera agregada con éxito:', response);
+            // Realizar alguna acción adicional si es necesario
+            selecCarrera();
+            $('#modalBase').hide(); // Ocultar el modal
+        },
+        error: function(error) {
+            console.error('Error al agregar la carrera:', error);
+        }
+    });
+});
+
+  //---------------------------------DELETE CARRERA-------------------------------------------------
+$('#contenidoModal').on('click', '#eliminarCarrera', function() {
+  event.preventDefault(); // Evitar el envío del formulario por defecto
+  var carreraData = $(this).closest('.botones').data('carrera');
+  console.log(carreraData);
+
+            // Realizar la solicitud AJAX para eliminar la universidad
+            $.ajax({
+                url: '<?php echo base_url('eliminarCarrera2'); ?>',
+                type: 'POST',
+                data: carreraData, // Serializar el objeto a JSON
+                success: function(response) {
+                    console.log('Carrera eliminada con éxito:', response);
+                    // Realizar alguna acción adicional si es necesario
+                    selecCarrera();
+                    $('#modalBase').hide(); // Ocultar el modal
+                },
+                error: function(error) {
+                    console.error('Error al eliminar la Carrera:', error);
+                }
+            });
+});
+
+
+//###################################################-MATERIA-#########################################################  
+    //---------------------------------SELECT MATERIA-------------------------------------------------
+    function selecMateria() {
+    $('#selectMatAjax').empty();//BORRA TODO EL CONTENEDOR 
+    $.ajax({
+      type: 'GET',
+      url: '<?php echo base_url('materiaAjax');?>',
+      dataType: 'json',
+      success: function(response) {
+      // Iterar sobre cada universidad y agregarlo al contenedor
+      $.each(response, function(index, materia) {
+        //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
+        var materiaData = {
+        idMateria: materia.idMateria,
+        nombreMateria: materia.nombreMateria,
+        descripcionMateria: materia.descripcionMateria, 
+        imagenMateria: materia.imagenMateria
+        };
+
+        var MateriaHTML = 
+          `
+          <div class="card draggable" id="materia-${materia.idMateria}" draggable="true" data-materia='${JSON.stringify(materiaData)}'>
+            <img src="${materia.imagenMateria}" alt="By AnisSoft" title="${materia.nombreMateria}" draggable="false" />
+            <div class="card-body">
+              <h3 class="card-title">${materia.nombreMateria}</h3>
+            </div>
+          </div>
+          `;
+        $('#selectMatAjax').append(MateriaHTML);
+      });
+      //agregar el boton de crear universidad 
+      // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
+      $('#selectMatAjax').append(`
+        <button id="insertMateria" class="abrirModal" type="button" data-target="modalBase">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </button>  
+      `);
+
+      // Agregar funcionalidad de arrastrar y soltar
+      $('.draggable').on('dragstart', function(event) {
+        var idMateria = $(this).attr('id');
+        event.originalEvent.dataTransfer.setData('text/plain', idMateria);
+      });
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
+      $('#modificarM').on('dragover', function(event) {
+        event.preventDefault();
+      });
+      $('#modificarM').on('drop', function(event) {
+        event.preventDefault();
+  
+        var idMateria = event.originalEvent.dataTransfer.getData('text/plain');
+
+        // Obtener el objeto de datos de la universidad asociado a la tarjeta con el id almacenado en idUniversidad
+        var materiaData = $('#' + idMateria).data('materia');
+
+        $('#contenidoModal').empty();
+
+        //--ESCRIBIR MODAL :D
+        var contenidoModal = 
+            `
+            <form id="modificar" data-materia='${JSON.stringify(materiaData)}'>
+              <div class="celda">
+                <label class="form-label">Nombre de la materia</label>
+                <input name="idMateria" id="idMateria" type="hidden" class="form-control" placeholder="Nombre de la materia" value="${materiaData.idMateria}">
+                <input name="nombreMateria" id="nombreMateria" type="text" class="form-control" placeholder="Nombre de la materia" value="${materiaData.nombreMateria}">
+              </div>
+              <div class="celda">
+                <label class="form-label">Descripción de la materia</label>
+                <textarea class="form-control" rows="3" name="descripcionMateria" id="descripcionMateria" placeholder="Descripción de la materia">${materiaData.descripcionMateria}</textarea>
+              </div>
+              <div class="celda">
+                <label class="form-label">Imagen de la materia</label>
+                <textarea class="form-control" rows="3" name="imagenMateria" id="imagenMateria" placeholder="Imagen de la materia">${materiaData.imagenMateria}</textarea>
+              </div>
+              <div class="añadir">
+                <button id="editarMateria" type="button" class="btn-modificar">Modificar</button>
+              </div>
+            </form>
+            `;
+          $('#contenidoModal').append(contenidoModal);
+          $('#modalBase').show(); // Mostrar el modal
+
+      });
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
+      $('#eliminarM').on('dragover', function(event) {
+        event.preventDefault();
+      });
+
+      $('#eliminarM').on('drop', function(event) {
+        event.preventDefault();
+        var idMateria = event.originalEvent.dataTransfer.getData('text/plain');
+
+        // Obtener el objeto de datos de la materia asociado a la tarjeta con el id almacenado en idMateria
+        var materiaData = $('#' + idMateria).data('materia');
+
+        $('#contenidoModal').empty();
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
+        var contenidoModal = 
+            `
+            <form id="eliminar">
+                <div class="celda">
+                    <label class="form-label">¿Está seguro que desea eliminar ${materiaData.nombreMateria}?</label>
+                </div>
+                <div class="botones" data-materia='${JSON.stringify(materiaData)}'>
+                    <input type="hidden" name="idMateria" value="${idMateria}">
+                    <img src="${materiaData.imagenMateria}" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
+                    <button id="eliminarMateria" type="button" class="btn-eliminar">Eliminar</button>
+                </div>
+            </form>
+            `;
+          $('#contenidoModal').append(contenidoModal);
+          $('#modalBase').show(); // Mostrar el modal
+
+      });
+    },
+    error: function(xhr, status, error) {
+      console.error('Error al cargar las materias:', error);
+    }   
+     
+  });
+}
+
+  //---------------------------------UPDATE MATERIA-------------------------------------------------
+  $('#contenidoModal').on('click', '#editarMateria', function() {
+      event.preventDefault(); // Evitar el envío del formulario por defecto
+
+      // Serializar todos los campos del formulario en un arreglo de objetos
+      var formDataArray = $('#modificar').serializeArray();
+
+      // Convertir el arreglo en un objeto JavaScript
+      var materiaData = {};
+      formDataArray.forEach(function(item) {
+          materiaData[item.name] = item.value;
+      });
+
+      console.log(materiaData);
+
+      // Realizar la solicitud AJAX para editar la universidad
+      $.ajax({
+          url: '<?php echo base_url('editarMateria2'); ?>',
+          type: 'POST',
+          data: materiaData, // Serializar el objeto a JSON
+          success: function(response) {
+              console.log('Materia editada con éxito:', response);
+              // Realizar alguna acción adicional si es necesario
+              selecMateria();
+              $('#modalBase').hide(); // Ocultar el modal
+          },
+          error: function(error) {
+              console.error('Error al editar la materia:', error);
+          }
+      });
+  });
+
+
+  //---------------------------------INSERT MATERIA-------------------------------------------------
+  $('#selectMatAjax').on('click', '#insertMateria', function() {
+  
+    $('#contenidoModal').empty();
+    var materiaHTML = 
+          `
+            <form  id="crear">
+              <div class="celda">
+                <label class="form-label">Materia</label>
+                <input name="nombreMateria" id="nombreMateria" type="text" class="form-control" placeholder="Nombre de la Materia">
+              </div>
+              <div class="celda">
+                <label class="form-label">Descripción de la Materia</label>
+                <textarea class="form-control" rows="3" name="descripcionMateria" id="descripcionMateria" placeholder="Descripción de la Materia"></textarea>
+              </div>
+              <div class="celda">
+                <label class="form-label">Imagen de la materia</label>
+                <textarea class="form-control" rows="3" name="imagenMateria" id="imagenMateria" placeholder="Imagen de la materia"></textarea>
+              </div>
+              <div class="añadir">
+                <button id="agregarMateria" type="button" class="btn-modificar">Añadir nueva Materia</button>
+              </div>
+            </form>
+          `;
+        $('#contenidoModal').append(materiaHTML);
+        $('#modalBase').show(); // Mostrar el modal
+
+});
+
+
+$('#contenidoModal').on('click', '#agregarMateria', function() {
+    event.preventDefault(); // Evitar el envío del formulario por defecto
+
+    // Serializar el formulario para obtener todos los valores de los inputs
+    var formData = $('#crear').serialize();
+
+    // Realizar la solicitud AJAX para agregar la nueva universidad
+    $.ajax({
+        url: '<?php echo base_url('crearMateria2'); ?>',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            console.log('Materia agregada con éxito:', response);
+            // Realizar alguna acción adicional si es necesario
+            selecMateria();
+            $('#modalBase').hide(); // Ocultar el modal
+        },
+        error: function(error) {
+            console.error('Error al agregar la materia:', error);
+        }
+    });
+});
+
+  //---------------------------------DELETE UNIVERCITY-------------------------------------------------
+$('#contenidoModal').on('click', '#eliminarMateria', function() {
+  event.preventDefault(); // Evitar el envío del formulario por defecto
+  var materiaData = $(this).closest('.botones').data('materia');
+  console.log(materiaData);
+
+            // Realizar la solicitud AJAX para eliminar la universidad
+            $.ajax({
+                url: '<?php echo base_url('eliminarMateria2'); ?>',
+                type: 'POST',
+                data: materiaData, // Serializar el objeto a JSON
+                success: function(response) {
+                    console.log('Materia eliminada con éxito:', response);
+                    // Realizar alguna acción adicional si es necesario
+                    selecMateria();
+                    $('#modalBase').hide(); // Ocultar el modal
+                },
+                error: function(error) {
+                    console.error('Error al eliminar la Materia:', error);
+                }
+            });
+});
 
 
 //OTRAS FUNCIONES NECESARIAS 
 
-// Asociar eventos de arrastrar y soltar fuera de las funciones esto con el fin de que funcione para todos tanto para carreras, como para materias , y univercidades.
-$(document).ready(function() {
-    // Evento para arrastrar
-    $('.draggable').on('dragstart', function(event) {
-        var idElemento = $(this).attr('id');
-        event.originalEvent.dataTransfer.setData('text/plain', idElemento);
-    });
 
-    // Evento para soltar en el contenedor de modificar
-    $('#modificar').on('dragover', function(event) {
-        event.preventDefault();
-    });
-
-    $('#modificar').on('drop', function(event) {
-        event.preventDefault();
-        var idElemento = event.originalEvent.dataTransfer.getData('text/plain');
-        var tipoElemento = obtenerTipoElemento(idElemento);
-
-        // Lógica para manejar el evento de soltar según el tipo de elemento
-        if (tipoElemento === 'universidad') {
-           console.log("soy universidad");
-        } else if (tipoElemento === 'carrera') {
-          console.log("soy carrera");
-        }
-    });
-});
 
   </script>
 

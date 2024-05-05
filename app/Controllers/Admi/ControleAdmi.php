@@ -517,10 +517,10 @@ class ControleAdmi extends BaseController
 
 
  //INSERT DE LAS CARRERAS 
- public function crearCarr2()
+ public function crearCarrera2()
  {
    $data = [
-     'idU' => $this->request->getPost('idU'),
+     'idU' => 1,
      'nombreCarrera' => $this->request->getPost('nombreCarrera'),
      'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
      'imagenCarrera' => $this->request->getPost('imagenCarrera'),
@@ -529,11 +529,11 @@ class ControleAdmi extends BaseController
    //instanciar
    $carreraModel = new CarreraModel();
    $carreraModel->insert($data);
-   return redirect()->to('inicioAdmi');
+
  }
 
  //UPDATE CARRERA
- public function editarCarr2()
+ public function editarCarrera2()
  {
    $idCarrera = $this->request->getPost('idCarrera');
 
@@ -546,33 +546,73 @@ class ControleAdmi extends BaseController
    //instanciar
    $carreraModel = new CarreraModel();
    $carreraModel->update($idCarrera, $data);
-   return redirect()->to('inicioAdmi');
+
  }
 
  //DELETE DE LAS CARRERAS EXISTENTES
- public function eliminarCarr2()
+ public function eliminarCarrera2()
  {
-   $idCarrera = $this->request->getPost('id');
+   $idCarrera = $this->request->getPost('idCarrera');
 
    $carreraModel = new CarreraModel();
    $carreraModel->delete($idCarrera);
 
-   return redirect()->to('inicioAdmi');
  }
-
-
-
-
-
 
 
   public function materiaAjax()
   {
     $materiaModel = new MateriaModel();
     $materias = $materiaModel->findAll();
-    return json_encode($materia);
+    return json_encode($materias);
   }
 
+ //INSERT DE LAS MATERIAS
+ public function crearMateria2()
+ {
 
+   $idCarrera = 1;
+
+   $data = [
+     'nombreMateria' => $this->request->getPost('nombreMateria'),
+     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
+     'imagenMateria' => $this->request->getPost('imagenMateria'),
+     'idCarrera' => $idCarrera,
+   ];
+
+   //instanciar
+   $materiaModel = new materiaModel();
+   $materiaModel->insert($data);
+
+ }
+
+ //DELETE DE LAS MATERIAS EXISTENTES
+ public function eliminarMateria2()
+ {
+   $idMateria = $this->request->getPost('idMateria');
+
+   // Instanciar el modelo
+   $materiaModel = new MateriaModel();
+
+   // Eliminar lógicamente el registro con el ID especificado
+   $materiaModel->delete($idMateria);
+ }
+
+ //UPDATE MATERIA
+ public function editarMateria2()
+ {
+   $idMateria = $this->request->getPost('idMateria');
+
+   $data = [
+     'nombreMateria' => $this->request->getPost('nombreMateria'),
+     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
+     'imagenMateria' => $this->request->getPost('imagenMateria'),
+   ];
+
+   //instanciar
+   $materiaModel = new materiaModel();
+   $materiaModel->update($idMateria, $data);
+
+ }
   
 }
