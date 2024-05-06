@@ -2,11 +2,13 @@
 //#######################################-UNIVERSIDAD-###################################################  
     //---------------------------------SELECT UNIVERCITY-------------------------------------------------
     function selecUniversidad() {
+      desvincularDragover()
         $('#selectUniAjax').empty();//BORRA TODO EL CONTENEDOR 
         $('.universidadSelect').empty();//BORRA TODO EL CONTENEDOR 
+
         $.ajax({
-          type: 'GET',
-          url: baseUrl + 'univercidadAjax',
+          type: 'POST',
+          url: baseUrl + 'uniAjax',
           dataType: 'json',
           success: function(response) {
           // Iterar sobre cada universidad y agregarlo al contenedor
@@ -32,10 +34,10 @@
             //llenar el filtro
             var filtroUniversidad =               
             ` <option value="${unis.idU}">${unis.nombreU}</option>`;
-            $('.universidadSelect').append(filtroUniversidad);
+            $('.universidadSelect').append(filtroUniversidad);   
           });
 
-            
+
           //agregar el boton de crear universidad 
           // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
           $('#selectUniAjax').append(`
@@ -50,10 +52,10 @@
             event.originalEvent.dataTransfer.setData('text/plain', idUniversidad);
           });
           //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
-          $('#modificar').on('dragover', function(event) {
+          $('#modificarU').on('dragover', function(event) {
             event.preventDefault();
           });
-          $('#modificar').on('drop', function(event) {
+          $('#modificarU').on('drop', function(event) {
             event.preventDefault();
       
             var idUniversidad = event.originalEvent.dataTransfer.getData('text/plain');
@@ -66,6 +68,12 @@
             //--ESCRIBIR MODAL :D
             var contenidoModal = 
                 `
+                <div class="head">
+                  <h3>Editar Universidad/instituto</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                 <form id="modificar" data-universidad='${JSON.stringify(universidadData)}'>
                   <div class="celda">
                     <label class="form-label">Nombre de la universidad/instituto</label>
@@ -85,16 +93,25 @@
                   </div>
                 </form>
                 `;
-              $('#contenidoModal').append(contenidoModal);
-              $('#modalBase').show(); // Mostrar el modal
-    
+                  // Agregar el contenido modal al elemento correspondiente en el DOM
+                  $('#contenidoModal').append(contenidoModal);
+
+                  // Agregar un controlador de eventos al botón de cerrar
+                  $('.cerrar').on('click', function() {
+                      // Ocultar el modal al hacer clic en el botón de cerrar
+                      $('#modalBase').hide();
+                  });
+
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').show();
+
           });
           //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-          $('#eliminar').on('dragover', function(event) {
+          $('#eliminarU').on('dragover', function(event) {
             event.preventDefault();
           });
     
-          $('#eliminar').on('drop', function(event) {
+          $('#eliminarU').on('drop', function(event) {
             event.preventDefault();
             var idUniversidad = event.originalEvent.dataTransfer.getData('text/plain');
     
@@ -106,6 +123,12 @@
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
             var contenidoModal = 
                 `
+                <div class="head">
+                  <h3>Eliminar Universidad/instituto</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                 <form id="eliminar">
                     <div class="celda">
                         <label class="form-label">¿Está seguro que desea eliminar ${universidadData.nombreU}?</label>
@@ -119,11 +142,17 @@
                 </form>
                 `;
               $('#contenidoModal').append(contenidoModal);
+              
+                  // Agregar un controlador de eventos al botón de cerrar
+                  $('.cerrar').on('click', function() {
+                    // Ocultar el modal al hacer clic en el botón de cerrar
+                    $('#modalBase').hide();
+                });
               $('#modalBase').show(); // Mostrar el modal
     
           });
         },
-        error: function(xhr, status, error) {
+        error: function( error) {
           console.error('Error al cargar las universidades:', error);
         }   
          
@@ -169,6 +198,12 @@
         $('#contenidoModal').empty();
         var universidadHTML = 
               `
+              <div class="head">
+                <h3>Añadir Universidad/instituto</h3>
+                <button class="cerrar">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </button>
+              </div>
                 <form  id="crear">
                   <div class="celda">
                     <label class="form-label">Nombre de la universidad/instituto</label>
@@ -188,6 +223,11 @@
                 </form>
               `;
             $('#contenidoModal').append(universidadHTML);
+                              // Agregar un controlador de eventos al botón de cerrar
+                              $('.cerrar').on('click', function() {
+                                // Ocultar el modal al hacer clic en el botón de cerrar
+                                $('#modalBase').hide();
+                            });
             $('#modalBase').show(); // Mostrar el modal
     
     });

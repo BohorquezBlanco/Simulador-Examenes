@@ -520,8 +520,10 @@ class ControleAdmi extends BaseController
  //INSERT DE LAS CARRERAS 
  public function crearCarrera2()
  {
+  $idU = $this->request->getPost('idU');
+
    $data = [
-     'idU' => 1,
+     'idU' => $idU,
      'nombreCarrera' => $this->request->getPost('nombreCarrera'),
      'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
      'imagenCarrera' => $this->request->getPost('imagenCarrera'),
@@ -575,7 +577,8 @@ class ControleAdmi extends BaseController
  public function crearMateria2()
  {
 
-   $idCarrera = 1;
+  $idCarrera = $this->request->getPost('idCarrera');
+
 
    $data = [
      'nombreMateria' => $this->request->getPost('nombreMateria'),

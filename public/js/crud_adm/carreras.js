@@ -4,6 +4,7 @@ var globalUniData=1; // Definir la variable global
     //###################################################-CARRERA-#########################################################  
         //---------------------------------SELECT CARRERA-------------------------------------------------
         function selecCarrera() {
+          desvincularDragover()
           $('#selectCarrAjax').empty();//BORRA TODO EL CONTENEDOR 
           $('.carreraSelect').empty();//BORRA TODO EL CONTENEDOR 
 
@@ -16,6 +17,10 @@ var globalUniData=1; // Definir la variable global
             url: baseUrl + 'carreraAjax',
             dataType: 'json',
             success: function(response) {
+            //encabezado del select       
+    
+            $('.carreraSelect').append( `<option value="1">Carrera:</option>`);
+        
             // Iterar sobre cada universidad y agregarlo al contenedor
             $.each(response, function(index, carrera) {
               //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
@@ -39,7 +44,7 @@ var globalUniData=1; // Definir la variable global
               
             //llenar el filtro
             var filtroCarrera =               
-            ` <option value="$1">Elegir Carrera</option> <option value="${carrera.idCarrera}">${carrera.nombreCarrera}</option>`;
+            `<option value="${carrera.idCarrera}">${carrera.nombreCarrera}</option>`;
             $('.carreraSelect').append(filtroCarrera);
             });
             //agregar el boton de crear universidad 
@@ -74,6 +79,12 @@ var globalUniData=1; // Definir la variable global
               //--ESCRIBIR MODAL :D
               var contenidoModal = 
                   `
+                  <div class="head">
+                  <h3>Editar Carrera</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                   <form id="modificar" data-carrera='${JSON.stringify(carreraData)}'>
                     <div class="celda">
                       <label class="form-label">Nombre de la carrera</label>
@@ -94,6 +105,12 @@ var globalUniData=1; // Definir la variable global
                   </form>
                   `;
                 $('#contenidoModal').append(contenidoModal);
+                                  // Agregar un controlador de eventos al botón de cerrar
+                                  $('.cerrar').on('click', function() {
+                                    // Ocultar el modal al hacer clic en el botón de cerrar
+                                    $('#modalBase').hide();
+                                });
+              
                 $('#modalBase').show(); // Mostrar el modal
       
             });
@@ -114,6 +131,12 @@ var globalUniData=1; // Definir la variable global
               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
               var contenidoModal = 
                   `
+                  <div class="head">
+                  <h3>Eliminar Carrera</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                   <form id="eliminar">
                       <div class="celda">
                           <label class="form-label">¿Está seguro que desea eliminar ${carreraData.nombreCarrera}?</label>
@@ -126,6 +149,12 @@ var globalUniData=1; // Definir la variable global
                   </form>
                   `;
                 $('#contenidoModal').append(contenidoModal);
+                                  // Agregar un controlador de eventos al botón de cerrar
+                                  $('.cerrar').on('click', function() {
+                                    // Ocultar el modal al hacer clic en el botón de cerrar
+                                    $('#modalBase').hide();
+                                });
+              
                 $('#modalBase').show(); // Mostrar el modal
       
             });
@@ -176,6 +205,12 @@ var globalUniData=1; // Definir la variable global
           $('#contenidoModal').empty();
           var carreraHTML = 
                 `
+                <div class="head">
+                <h3>Agregar Carrera</h3>
+                <button class="cerrar">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </button>
+              </div>
                   <form  id="crear">
                     <div class="celda">
                       <label class="form-label">Carrera</label>
@@ -195,6 +230,12 @@ var globalUniData=1; // Definir la variable global
                   </form>
                 `;
               $('#contenidoModal').append(carreraHTML);
+                                // Agregar un controlador de eventos al botón de cerrar
+                                $('.cerrar').on('click', function() {
+                                  // Ocultar el modal al hacer clic en el botón de cerrar
+                                  $('#modalBase').hide();
+                              });
+            
               $('#modalBase').show(); // Mostrar el modal
       
       });
@@ -203,8 +244,11 @@ var globalUniData=1; // Definir la variable global
       $('#contenidoModal').on('click', '#agregarCarrera', function() {
           event.preventDefault(); // Evitar el envío del formulario por defecto
       
-          // Serializar el formulario para obtener todos los valores de los inputs
-          var formData = $('#crear').serialize();
+            // Serializar el formulario para obtener todos los valores de los inputs
+            var idU = globalUniData;
+            var formData = $('#crear').serialize();
+            // Agregar idU como un parámetro adicional a los datos serializados
+            formData += '&idU=' + encodeURIComponent(idU);
       
           // Realizar la solicitud AJAX para agregar la nueva universidad
           $.ajax({

@@ -4,8 +4,8 @@ var globalCarrData=1; // Definir la variable global
     //###################################################-MATERIA-#########################################################  
         //---------------------------------SELECT MATERIA-------------------------------------------------
         function selecMateria() {
+          desvincularDragover();
           $('#selectMatAjax').empty();//BORRA TODO EL CONTENEDOR 
-
           var uniData = {
             idCarrera: globalCarrData, // Crear un objeto con lo necesario
           }; 
@@ -20,6 +20,7 @@ var globalCarrData=1; // Definir la variable global
             $.each(response, function(index, materia) {
               //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
               var materiaData = {
+              idCarrera: materia.idCarrera, 
               idMateria: materia.idMateria,
               nombreMateria: materia.nombreMateria,
               descripcionMateria: materia.descripcionMateria, 
@@ -44,7 +45,8 @@ var globalCarrData=1; // Definir la variable global
                 <ion-icon name="add-circle-outline"></ion-icon>
               </button>  
             `);
-      
+
+
             // Agregar funcionalidad de arrastrar y soltar
             $('.draggable').on('dragstart', function(event) {
               var idMateria = $(this).attr('id');
@@ -67,6 +69,12 @@ var globalCarrData=1; // Definir la variable global
               //--ESCRIBIR MODAL :D
               var contenidoModal = 
                   `
+                  <div class="head">
+                  <h3>Editar Materia</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                   <form id="modificar" data-materia='${JSON.stringify(materiaData)}'>
                     <div class="celda">
                       <label class="form-label">Nombre de la materia</label>
@@ -87,10 +95,18 @@ var globalCarrData=1; // Definir la variable global
                   </form>
                   `;
                 $('#contenidoModal').append(contenidoModal);
+                // Agregar un controlador de eventos al botón de cerrar
+                $('.cerrar').on('click', function() {
+                  // Ocultar el modal al hacer clic en el botón de cerrar
+                  $('#modalBase').hide();
+              });
                 $('#modalBase').show(); // Mostrar el modal
       
             });
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
+            // Desvincular los eventos 'dragover' y 'drop' del elemento '#modificar'
+    desvincularDragover()
+
             $('#eliminarM').on('dragover', function(event) {
               event.preventDefault();
             });
@@ -107,6 +123,12 @@ var globalCarrData=1; // Definir la variable global
               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
               var contenidoModal = 
                   `
+                  <div class="head">
+                  <h3>Eliminar Materia</h3>
+                  <button class="cerrar">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                  </button>
+                </div>
                   <form id="eliminar">
                       <div class="celda">
                           <label class="form-label">¿Está seguro que desea eliminar ${materiaData.nombreMateria}?</label>
@@ -119,6 +141,12 @@ var globalCarrData=1; // Definir la variable global
                   </form>
                   `;
                 $('#contenidoModal').append(contenidoModal);
+  
+                // Agregar un controlador de eventos al botón de cerrar
+                $('.cerrar').on('click', function() {
+                  // Ocultar el modal al hacer clic en el botón de cerrar
+                  $('#modalBase').hide();
+              });
                 $('#modalBase').show(); // Mostrar el modal
       
             });
@@ -169,6 +197,12 @@ var globalCarrData=1; // Definir la variable global
           $('#contenidoModal').empty();
           var materiaHTML = 
                 `
+                <div class="head">
+                <h3>Agregar Materia</h3>
+                <button class="cerrar">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </button>
+              </div>
                   <form  id="crear">
                     <div class="celda">
                       <label class="form-label">Materia</label>
@@ -188,6 +222,11 @@ var globalCarrData=1; // Definir la variable global
                   </form>
                 `;
               $('#contenidoModal').append(materiaHTML);
+                              // Agregar un controlador de eventos al botón de cerrar
+                              $('.cerrar').on('click', function() {
+                                // Ocultar el modal al hacer clic en el botón de cerrar
+                                $('#modalBase').hide();
+                            });
               $('#modalBase').show(); // Mostrar el modal
       
       });
@@ -197,8 +236,13 @@ var globalCarrData=1; // Definir la variable global
           event.preventDefault(); // Evitar el envío del formulario por defecto
       
           // Serializar el formulario para obtener todos los valores de los inputs
-          var formData = $('#crear').serialize();
-      
+
+                  // Serializar el formulario para obtener todos los valores de los inputs
+                  var idCarrera = globalCarrData;
+                  var formData = $('#crear').serialize();
+                  // Agregar idU como un parámetro adicional a los datos serializados
+                  formData += '&idCarrera=' + encodeURIComponent(idCarrera);
+            
           // Realizar la solicitud AJAX para agregar la nueva universidad
           $.ajax({
               url: baseUrl + 'crearMateria2',
@@ -243,7 +287,8 @@ var globalCarrData=1; // Definir la variable global
 $('.carreraSelect').change(function() {
   var idCarrera = $(this).val();
   globalCarrData = idCarrera; // Asignar uniData a la variable global
-  console.log("Hola"+globalCarrData);
+  console.log(globalCarrData);
 
   selecMateria()
 });
+
