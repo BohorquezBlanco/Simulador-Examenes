@@ -89,12 +89,12 @@ $routes->post('/eliminarUni2', 'Admi\ControleAdmi::eliminarUni2');
 $routes->post('/editarUni2', 'Admi\ControleAdmi::editarUni2');
 $routes->post('/crearUni2', 'Admi\ControleAdmi::crearUni2');
 
-$routes->get('/carreraAjax', 'Admi\ControleAdmi::carreraAjax');
+$routes->post('/carreraAjax', 'Admi\ControleAdmi::carreraAjax');
 $routes->post('/eliminarCarrera2', 'Admi\ControleAdmi::eliminarCarrera2');
 $routes->post('/editarCarrera2', 'Admi\ControleAdmi::editarCarrera2');
 $routes->post('/crearCarrera2', 'Admi\ControleAdmi::crearCarrera2');
 
-$routes->get('/materiaAjax', 'Admi\ControleAdmi::materiaAjax');
+$routes->post('/materiaAjax', 'Admi\ControleAdmi::materiaAjax');
 $routes->post('/eliminarMateria2', 'Admi\ControleAdmi::eliminarMateria2');
 $routes->post('/editarMateria2', 'Admi\ControleAdmi::editarMateria2');
 $routes->post('/crearMateria2', 'Admi\ControleAdmi::crearMateria2');

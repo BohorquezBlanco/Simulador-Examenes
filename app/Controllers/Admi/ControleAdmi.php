@@ -507,8 +507,9 @@ class ControleAdmi extends BaseController
 
   public function carreraAjax()
   {
+    $idU = $this->request->getPost('idU');
     $carreraModel = new CarreraModel();
-    $carreras = $carreraModel->findAll();
+    $carreras = $carreraModel->where('idU', $idU)->findAll();
 
     // Devolver los temas como JSON
     return json_encode($carreras);
@@ -562,8 +563,11 @@ class ControleAdmi extends BaseController
 
   public function materiaAjax()
   {
+    $idCarrera = $this->request->getPost('idCarrera');
     $materiaModel = new MateriaModel();
-    $materias = $materiaModel->findAll();
+    $materias = $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+
     return json_encode($materias);
   }
 

@@ -97,7 +97,7 @@
   <main>
     <!--MODAL BASE PARA TODOS-->
     <div class="modal" id="modalBase">
-      <div class="contenido-modal">
+      <div class="contenido-modal" >
         <div class="head">
           <h3>Añadir Universidad/instituto</h3>
           <button class="cerrar">
@@ -105,6 +105,7 @@
           </button>
         </div>
         <div id="contenidoModal">
+            <!--AQUI SE ALMACENARAN LOS DISTINTOS TIPOS DE MODALES-->
         </div>
       </div>
     </div>
@@ -134,7 +135,15 @@
     <!--CARRERAS-->
     <section id="carrera" class="seccion">
       <h2 class="center">CARRERAS</h2>
+        <!--CARRERAS_FILTRO_MATERIAS-->
+        <div class="celda">
+            <select  class="universidadSelect">
+                <option value="1">Universidad 1</option>
+            </select>
+        </div>
+           
         <div class="card-container" id="selectCarrAjax">   
+          <!--AQUI SE AGREGAN CON AJAX LAS CARRERAS EN BASE A LO FILTRADO-->
         </div>
         
       <div id="modificarC" class="cambiar" title="Modificar">
@@ -155,6 +164,18 @@
     <!--MATERIAS-->
     <section id="materia" class="seccion">
       <h2 class="center">MATERIAS</h2>
+        <!--CARRERAS_FILTRO_MATERIAS-->
+        <div class="celda">
+            <select  class="universidadSelect">
+                <option value="1">Universidad 1</option>
+            </select>
+        </div>
+        <div class="celda">
+            <select class="carreraSelect" name="carreraSelect">
+                <option value="1">Carrera 1</option>
+            </select>
+        </div>
+       
         <div class="card-container" id="selectMatAjax">   
         </div>
 
@@ -182,20 +203,28 @@
 
 
   </main>
+  <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
+  <script>
+    var baseUrl = "<?php echo base_url(); ?>";
+  </script>
   <!--contenido-->
+  <script src="<?php echo base_url(); ?>js/script.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-  <script src="<?php echo base_url(); ?>js/script.js"></script>
   <script src="<?php echo base_url(); ?>js/base.js"></script>
-
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/universidad.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
+
+
   <!--<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>-->
 
   <script>
-
 //#################################-AREA DE NAVEGACION DEL USUARIO-#############################################  
     //SECCION POR DEFECTO
       document.addEventListener('DOMContentLoaded', function() {
+        
         $(".seccion").hide();
         $('#univInst').show();
         selecUniversidad();
@@ -223,705 +252,8 @@
       }
 
 
-//#######################################-UNIVERSIDAD-###################################################  
-    //---------------------------------SELECT UNIVERCITY-------------------------------------------------
-  function selecUniversidad() {
-    $('#selectUniAjax').empty();//BORRA TODO EL CONTENEDOR 
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url('univercidadAjax'); ?>',
-      dataType: 'json',
-      success: function(response) {
-      // Iterar sobre cada universidad y agregarlo al contenedor
-      $.each(response, function(index, unis) {
-        //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
-        var universidadData = {
-        idU: unis.idU,
-        nombreU: unis.nombreU,
-        descripcionU: unis.descripcionU,
-        imagenU: unis.imagenU
-        };
-        var universidadHTML = 
-          `
-          <div class="card draggable" id="universidad-${unis.idU}" draggable="true" data-universidad='${JSON.stringify(universidadData)}'>
-            <img src="${unis.imagenU}" alt="By AnisSoft" title="${unis.nombreU}" draggable="false" />
-            <div class="card-body">
-              <h3 class="card-title">${unis.nombreU}</h3>
-            </div>
-          </div>
-          `;
-        $('#selectUniAjax').append(universidadHTML);
-      });
-      //agregar el boton de crear universidad 
-      // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-      $('#selectUniAjax').append(`
-        <button id="insertUni" class="abrirModal" type="button" data-target="modalBase">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>  
-      `);
 
-      // Agregar funcionalidad de arrastrar y soltar
-      $('.draggable').on('dragstart', function(event) {
-        var idUniversidad = $(this).attr('id');
-        event.originalEvent.dataTransfer.setData('text/plain', idUniversidad);
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#modificar').on('dragover', function(event) {
-        event.preventDefault();
-      });
-      $('#modificar').on('drop', function(event) {
-        event.preventDefault();
-  
-        var idUniversidad = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la universidad asociado a la tarjeta con el id almacenado en idUniversidad
-        var universidadData = $('#' + idUniversidad).data('universidad');
-
-        $('#contenidoModal').empty();
-
-        //--ESCRIBIR MODAL :D
-        var contenidoModal = 
-            `
-            <form id="modificar" data-universidad='${JSON.stringify(universidadData)}'>
-              <div class="celda">
-                <label class="form-label">Nombre de la universidad/instituto</label>
-                <input name="idU" id="idU" type="hidden" class="form-control" placeholder="Nombre de la universidad/instituto" value="${universidadData.idU}">
-                <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto" value="${universidadData.nombreU}">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la universidad/instituto</label>
-                <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto">${universidadData.descripcionU}</textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la universidad/instituto</label>
-                <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto">${universidadData.imagenU}</textarea>
-              </div>
-              <div class="añadir">
-                <button id="editarUni" type="button" class="btn-modificar">Modificar</button>
-              </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#eliminar').on('dragover', function(event) {
-        event.preventDefault();
-      });
-
-      $('#eliminar').on('drop', function(event) {
-        event.preventDefault();
-        var idUniversidad = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la universidad asociado a la tarjeta con el id almacenado en idUniversidad
-        var universidadData = $('#' + idUniversidad).data('universidad');
-
-        $('#contenidoModal').empty();
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
-        var contenidoModal = 
-            `
-            <form id="eliminar">
-                <div class="celda">
-                    <label class="form-label">¿Está seguro que desea eliminar ${universidadData.nombreU}?</label>
-                </div>
-                <div class="botones" data-universidad='${JSON.stringify(universidadData)}'>
-                    <input type="hidden" name="idUniversidad2" value="1">
-                    <input type="hidden" name="idUniversidad" value="${idUniversidad}">
-                    <img src="${universidadData.imagenU}" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
-                    <button id="eliminarUniversidad" type="button" class="btn-eliminar">Eliminar</button>
-                </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-    },
-    error: function(xhr, status, error) {
-      console.error('Error al cargar las universidades:', error);
-    }   
-     
-  });
-}
-
-  //---------------------------------UPDATE UNIVERCITY-------------------------------------------------
-  $('#contenidoModal').on('click', '#editarUni', function() {
-      event.preventDefault(); // Evitar el envío del formulario por defecto
-
-      // Serializar todos los campos del formulario en un arreglo de objetos
-      var formDataArray = $('#modificar').serializeArray();
-
-      // Convertir el arreglo en un objeto JavaScript
-      var universidadData = {};
-      formDataArray.forEach(function(item) {
-          universidadData[item.name] = item.value;
-      });
-
-      console.log(universidadData);
-
-      // Realizar la solicitud AJAX para editar la universidad
-      $.ajax({
-          url: '<?php echo base_url('editarUni2'); ?>',
-          type: 'POST',
-          data: universidadData, // Serializar el objeto a JSON
-          success: function(response) {
-              console.log('Universidad editada con éxito:', response);
-              // Realizar alguna acción adicional si es necesario
-              selecUniversidad();
-              $('#modalBase').hide(); // Ocultar el modal
-          },
-          error: function(error) {
-              console.error('Error al editar la universidad:', error);
-          }
-      });
-  });
-
-
-  //---------------------------------INSERT UNIVERCITY-------------------------------------------------
-  $('#selectUniAjax').on('click', '#insertUni', function() {
-  
-    $('#contenidoModal').empty();
-    var universidadHTML = 
-          `
-            <form  id="crear">
-              <div class="celda">
-                <label class="form-label">Nombre de la universidad/instituto</label>
-                <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la universidad/instituto</label>
-                <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto"></textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la universidad/instituto</label>
-                <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto"></textarea>
-              </div>
-              <div class="añadir">
-                <button id="agregarUni" type="button" class="btn-modificar">Añadir nueva</button>
-              </div>
-            </form>
-          `;
-        $('#contenidoModal').append(universidadHTML);
-        $('#modalBase').show(); // Mostrar el modal
-
-});
-
-
-$('#contenidoModal').on('click', '#agregarUni', function() {
-    event.preventDefault(); // Evitar el envío del formulario por defecto
-
-    // Serializar el formulario para obtener todos los valores de los inputs
-    var formData = $('#crear').serialize();
-
-    // Realizar la solicitud AJAX para agregar la nueva universidad
-    $.ajax({
-        url: '<?php echo base_url('crearUni2'); ?>',
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            console.log('Universidad agregada con éxito:', response);
-            // Realizar alguna acción adicional si es necesario
-            selecUniversidad();
-            $('#modalBase').hide(); // Ocultar el modal
-        },
-        error: function(error) {
-            console.error('Error al agregar la universidad:', error);
-        }
-    });
-});
-
-  //---------------------------------DELETE UNIVERCITY-------------------------------------------------
-$('#contenidoModal').on('click', '#eliminarUniversidad', function() {
-  event.preventDefault(); // Evitar el envío del formulario por defecto
-  var universidadData = $(this).closest('.botones').data('universidad');
-  console.log(universidadData);
-
-            // Realizar la solicitud AJAX para eliminar la universidad
-            $.ajax({
-                url: '<?php echo base_url('eliminarUni2'); ?>',
-                type: 'POST',
-                data: universidadData, // Serializar el objeto a JSON
-                success: function(response) {
-                    console.log('Universidad eliminada con éxito:', response);
-                    // Realizar alguna acción adicional si es necesario
-                    selecUniversidad();
-                    $('#modalBase').hide(); // Ocultar el modal
-                },
-                error: function(error) {
-                    console.error('Error al eliminar la universidad:', error);
-                }
-            });
-});
-
-
-//###################################################-CARRERA-#########################################################  
-    //---------------------------------SELECT CARRERA-------------------------------------------------
-function selecCarrera() {
-    $('#selectCarrAjax').empty();//BORRA TODO EL CONTENEDOR 
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url('carreraAjax');?>',
-      dataType: 'json',
-      success: function(response) {
-      // Iterar sobre cada universidad y agregarlo al contenedor
-      $.each(response, function(index, carrera) {
-        //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
-        var carreraData = {
-        idU: carrera.idU,
-        idCarrera: carrera.idCarrera,
-        nombreCarrera: carrera.nombreCarrera,
-        descripcionCarrera: carrera.descripcionCarrera, 
-        imagenCarrera: carrera.imagenCarrera
-        };
-        var carreraHTML = 
-          `
-          <div class="card draggable" id="carrera-${carrera.idCarrera}" draggable="true" data-carrera='${JSON.stringify(carreraData)}'>
-            <img src="${carrera.imagenCarrera}" alt="By AnisSoft" title="${carrera.nombreCarrera}" draggable="false" />
-            <div class="card-body">
-              <h3 class="card-title">${carrera.nombreCarrera}</h3>
-            </div>
-          </div>
-          `;
-        $('#selectCarrAjax').append(carreraHTML);
-      });
-      //agregar el boton de crear universidad 
-      // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-      $('#selectCarrAjax').append(`
-        <button id="insertCarrera" class="abrirModal" type="button" data-target="modalBase">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>  
-      `);
-
-      // Agregar funcionalidad de arrastrar y soltar
-      $('.draggable').on('dragstart', function(event) {
-        var idCarrera = $(this).attr('id');
-        event.originalEvent.dataTransfer.setData('text/plain', idCarrera);
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#modificarC').on('dragover', function(event) {
-        event.preventDefault();
-      });
-      $('#modificarC').on('drop', function(event) {
-        event.preventDefault();
-  
-        var idCarrera = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la universidad asociado a la tarjeta con el id almacenado en idUniversidad
-        var carreraData = $('#' + idCarrera).data('carrera');
-
-        $('#contenidoModal').empty();
-
-        //--ESCRIBIR MODAL :D
-        var contenidoModal = 
-            `
-            <form id="modificar" data-carrera='${JSON.stringify(carreraData)}'>
-              <div class="celda">
-                <label class="form-label">Nombre de la carrera</label>
-                <input name="idCarrera" id="idCarrera" type="hidden" class="form-control" placeholder="Nombre de la carrera/instituto" value="${carreraData.idCarrera}">
-                <input name="nombreCarrera" id="nombreCarrera" type="text" class="form-control" placeholder="Nombre de la carrera/instituto" value="${carreraData.nombreCarrera}">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la carrera</label>
-                <textarea class="form-control" rows="3" name="descripcionCarrera" id="descripcionCarrera" placeholder="Descripción de la carrera/instituto">${carreraData.descripcionCarrera}</textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la carrera</label>
-                <textarea class="form-control" rows="3" name="imagenCarrera" id="imagenCarrera" placeholder="Imagen de la carrera">${carreraData.imagenCarrera}</textarea>
-              </div>
-              <div class="añadir">
-                <button id="editarCarrera" type="button" class="btn-modificar">Modificar</button>
-              </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#eliminarC').on('dragover', function(event) {
-        event.preventDefault();
-      });
-
-      $('#eliminarC').on('drop', function(event) {
-        event.preventDefault();
-        var idCarrera = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la carrera asociado a la tarjeta con el id almacenado en idCarrera
-        var carreraData = $('#' + idCarrera).data('carrera');
-
-        $('#contenidoModal').empty();
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
-        var contenidoModal = 
-            `
-            <form id="eliminar">
-                <div class="celda">
-                    <label class="form-label">¿Está seguro que desea eliminar ${carreraData.nombreCarrera}?</label>
-                </div>
-                <div class="botones" data-carrera='${JSON.stringify(carreraData)}'>
-                    <input type="hidden" name="idCarrera" value="${idCarrera}">
-                    <img src="${carreraData.imagenCarrera}" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
-                    <button id="eliminarCarrera" type="button" class="btn-eliminar">Eliminar</button>
-                </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-    },
-    error: function(xhr, status, error) {
-      console.error('Error al cargar las carreras:', error);
-    }   
-     
-  });
-}
-
-  //---------------------------------UPDATE CARRERA-------------------------------------------------
-  $('#contenidoModal').on('click', '#editarCarrera', function() {
-      event.preventDefault(); // Evitar el envío del formulario por defecto
-
-      // Serializar todos los campos del formulario en un arreglo de objetos
-      var formDataArray = $('#modificar').serializeArray();
-
-      // Convertir el arreglo en un objeto JavaScript
-      var carreraData = {};
-      formDataArray.forEach(function(item) {
-          carreraData[item.name] = item.value;
-      });
-
-      console.log(carreraData);
-
-      // Realizar la solicitud AJAX para editar la universidad
-      $.ajax({
-          url: '<?php echo base_url('editarCarrera2'); ?>',
-          type: 'POST',
-          data: carreraData, // Serializar el objeto a JSON
-          success: function(response) {
-              console.log('Carrera editada con éxito:', response);
-              // Realizar alguna acción adicional si es necesario
-              selecCarrera();
-              $('#modalBase').hide(); // Ocultar el modal
-          },
-          error: function(error) {
-              console.error('Error al editar la carrera:', error);
-          }
-      });
-  });
-
-
-  //---------------------------------INSERT CARRERA-------------------------------------------------
-  $('#selectCarrAjax').on('click', '#insertCarrera', function() {
-  
-    $('#contenidoModal').empty();
-    var carreraHTML = 
-          `
-            <form  id="crear">
-              <div class="celda">
-                <label class="form-label">Carrera</label>
-                <input name="nombreCarrera" id="nombreCarrera" type="text" class="form-control" placeholder="Nombre de la Carrera">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la carrera</label>
-                <textarea class="form-control" rows="3" name="descripcionCarrera" id="descripcionCarrera" placeholder="Descripción de la Carrera"></textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la carrera</label>
-                <textarea class="form-control" rows="3" name="imagenCarrera" id="imagenCarrera" placeholder="Imagen de la carrera"></textarea>
-              </div>
-              <div class="añadir">
-                <button id="agregarCarrera" type="button" class="btn-modificar">Añadir nueva Carrera</button>
-              </div>
-            </form>
-          `;
-        $('#contenidoModal').append(carreraHTML);
-        $('#modalBase').show(); // Mostrar el modal
-
-});
-
-
-$('#contenidoModal').on('click', '#agregarCarrera', function() {
-    event.preventDefault(); // Evitar el envío del formulario por defecto
-
-    // Serializar el formulario para obtener todos los valores de los inputs
-    var formData = $('#crear').serialize();
-
-    // Realizar la solicitud AJAX para agregar la nueva universidad
-    $.ajax({
-        url: '<?php echo base_url('crearCarrera2'); ?>',
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            console.log('Carrera agregada con éxito:', response);
-            // Realizar alguna acción adicional si es necesario
-            selecCarrera();
-            $('#modalBase').hide(); // Ocultar el modal
-        },
-        error: function(error) {
-            console.error('Error al agregar la carrera:', error);
-        }
-    });
-});
-
-  //---------------------------------DELETE CARRERA-------------------------------------------------
-$('#contenidoModal').on('click', '#eliminarCarrera', function() {
-  event.preventDefault(); // Evitar el envío del formulario por defecto
-  var carreraData = $(this).closest('.botones').data('carrera');
-  console.log(carreraData);
-
-            // Realizar la solicitud AJAX para eliminar la universidad
-            $.ajax({
-                url: '<?php echo base_url('eliminarCarrera2'); ?>',
-                type: 'POST',
-                data: carreraData, // Serializar el objeto a JSON
-                success: function(response) {
-                    console.log('Carrera eliminada con éxito:', response);
-                    // Realizar alguna acción adicional si es necesario
-                    selecCarrera();
-                    $('#modalBase').hide(); // Ocultar el modal
-                },
-                error: function(error) {
-                    console.error('Error al eliminar la Carrera:', error);
-                }
-            });
-});
-
-
-//###################################################-MATERIA-#########################################################  
-    //---------------------------------SELECT MATERIA-------------------------------------------------
-    function selecMateria() {
-    $('#selectMatAjax').empty();//BORRA TODO EL CONTENEDOR 
-    $.ajax({
-      type: 'GET',
-      url: '<?php echo base_url('materiaAjax');?>',
-      dataType: 'json',
-      success: function(response) {
-      // Iterar sobre cada universidad y agregarlo al contenedor
-      $.each(response, function(index, materia) {
-        //crear un objeto para pasarlo por data-universidad la cual será utilizada mas adelante.
-        var materiaData = {
-        idMateria: materia.idMateria,
-        nombreMateria: materia.nombreMateria,
-        descripcionMateria: materia.descripcionMateria, 
-        imagenMateria: materia.imagenMateria
-        };
-
-        var MateriaHTML = 
-          `
-          <div class="card draggable" id="materia-${materia.idMateria}" draggable="true" data-materia='${JSON.stringify(materiaData)}'>
-            <img src="${materia.imagenMateria}" alt="By AnisSoft" title="${materia.nombreMateria}" draggable="false" />
-            <div class="card-body">
-              <h3 class="card-title">${materia.nombreMateria}</h3>
-            </div>
-          </div>
-          `;
-        $('#selectMatAjax').append(MateriaHTML);
-      });
-      //agregar el boton de crear universidad 
-      // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-      $('#selectMatAjax').append(`
-        <button id="insertMateria" class="abrirModal" type="button" data-target="modalBase">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </button>  
-      `);
-
-      // Agregar funcionalidad de arrastrar y soltar
-      $('.draggable').on('dragstart', function(event) {
-        var idMateria = $(this).attr('id');
-        event.originalEvent.dataTransfer.setData('text/plain', idMateria);
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A MODIFICAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#modificarM').on('dragover', function(event) {
-        event.preventDefault();
-      });
-      $('#modificarM').on('drop', function(event) {
-        event.preventDefault();
-  
-        var idMateria = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la universidad asociado a la tarjeta con el id almacenado en idUniversidad
-        var materiaData = $('#' + idMateria).data('materia');
-
-        $('#contenidoModal').empty();
-
-        //--ESCRIBIR MODAL :D
-        var contenidoModal = 
-            `
-            <form id="modificar" data-materia='${JSON.stringify(materiaData)}'>
-              <div class="celda">
-                <label class="form-label">Nombre de la materia</label>
-                <input name="idMateria" id="idMateria" type="hidden" class="form-control" placeholder="Nombre de la materia" value="${materiaData.idMateria}">
-                <input name="nombreMateria" id="nombreMateria" type="text" class="form-control" placeholder="Nombre de la materia" value="${materiaData.nombreMateria}">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la materia</label>
-                <textarea class="form-control" rows="3" name="descripcionMateria" id="descripcionMateria" placeholder="Descripción de la materia">${materiaData.descripcionMateria}</textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la materia</label>
-                <textarea class="form-control" rows="3" name="imagenMateria" id="imagenMateria" placeholder="Imagen de la materia">${materiaData.imagenMateria}</textarea>
-              </div>
-              <div class="añadir">
-                <button id="editarMateria" type="button" class="btn-modificar">Modificar</button>
-              </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-      $('#eliminarM').on('dragover', function(event) {
-        event.preventDefault();
-      });
-
-      $('#eliminarM').on('drop', function(event) {
-        event.preventDefault();
-        var idMateria = event.originalEvent.dataTransfer.getData('text/plain');
-
-        // Obtener el objeto de datos de la materia asociado a la tarjeta con el id almacenado en idMateria
-        var materiaData = $('#' + idMateria).data('materia');
-
-        $('#contenidoModal').empty();
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
-        var contenidoModal = 
-            `
-            <form id="eliminar">
-                <div class="celda">
-                    <label class="form-label">¿Está seguro que desea eliminar ${materiaData.nombreMateria}?</label>
-                </div>
-                <div class="botones" data-materia='${JSON.stringify(materiaData)}'>
-                    <input type="hidden" name="idMateria" value="${idMateria}">
-                    <img src="${materiaData.imagenMateria}" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
-                    <button id="eliminarMateria" type="button" class="btn-eliminar">Eliminar</button>
-                </div>
-            </form>
-            `;
-          $('#contenidoModal').append(contenidoModal);
-          $('#modalBase').show(); // Mostrar el modal
-
-      });
-    },
-    error: function(xhr, status, error) {
-      console.error('Error al cargar las materias:', error);
-    }   
-     
-  });
-}
-
-  //---------------------------------UPDATE MATERIA-------------------------------------------------
-  $('#contenidoModal').on('click', '#editarMateria', function() {
-      event.preventDefault(); // Evitar el envío del formulario por defecto
-
-      // Serializar todos los campos del formulario en un arreglo de objetos
-      var formDataArray = $('#modificar').serializeArray();
-
-      // Convertir el arreglo en un objeto JavaScript
-      var materiaData = {};
-      formDataArray.forEach(function(item) {
-          materiaData[item.name] = item.value;
-      });
-
-      console.log(materiaData);
-
-      // Realizar la solicitud AJAX para editar la universidad
-      $.ajax({
-          url: '<?php echo base_url('editarMateria2'); ?>',
-          type: 'POST',
-          data: materiaData, // Serializar el objeto a JSON
-          success: function(response) {
-              console.log('Materia editada con éxito:', response);
-              // Realizar alguna acción adicional si es necesario
-              selecMateria();
-              $('#modalBase').hide(); // Ocultar el modal
-          },
-          error: function(error) {
-              console.error('Error al editar la materia:', error);
-          }
-      });
-  });
-
-
-  //---------------------------------INSERT MATERIA-------------------------------------------------
-  $('#selectMatAjax').on('click', '#insertMateria', function() {
-  
-    $('#contenidoModal').empty();
-    var materiaHTML = 
-          `
-            <form  id="crear">
-              <div class="celda">
-                <label class="form-label">Materia</label>
-                <input name="nombreMateria" id="nombreMateria" type="text" class="form-control" placeholder="Nombre de la Materia">
-              </div>
-              <div class="celda">
-                <label class="form-label">Descripción de la Materia</label>
-                <textarea class="form-control" rows="3" name="descripcionMateria" id="descripcionMateria" placeholder="Descripción de la Materia"></textarea>
-              </div>
-              <div class="celda">
-                <label class="form-label">Imagen de la materia</label>
-                <textarea class="form-control" rows="3" name="imagenMateria" id="imagenMateria" placeholder="Imagen de la materia"></textarea>
-              </div>
-              <div class="añadir">
-                <button id="agregarMateria" type="button" class="btn-modificar">Añadir nueva Materia</button>
-              </div>
-            </form>
-          `;
-        $('#contenidoModal').append(materiaHTML);
-        $('#modalBase').show(); // Mostrar el modal
-
-});
-
-
-$('#contenidoModal').on('click', '#agregarMateria', function() {
-    event.preventDefault(); // Evitar el envío del formulario por defecto
-
-    // Serializar el formulario para obtener todos los valores de los inputs
-    var formData = $('#crear').serialize();
-
-    // Realizar la solicitud AJAX para agregar la nueva universidad
-    $.ajax({
-        url: '<?php echo base_url('crearMateria2'); ?>',
-        type: 'POST',
-        data: formData,
-        success: function(response) {
-            console.log('Materia agregada con éxito:', response);
-            // Realizar alguna acción adicional si es necesario
-            selecMateria();
-            $('#modalBase').hide(); // Ocultar el modal
-        },
-        error: function(error) {
-            console.error('Error al agregar la materia:', error);
-        }
-    });
-});
-
-  //---------------------------------DELETE UNIVERCITY-------------------------------------------------
-$('#contenidoModal').on('click', '#eliminarMateria', function() {
-  event.preventDefault(); // Evitar el envío del formulario por defecto
-  var materiaData = $(this).closest('.botones').data('materia');
-  console.log(materiaData);
-
-            // Realizar la solicitud AJAX para eliminar la universidad
-            $.ajax({
-                url: '<?php echo base_url('eliminarMateria2'); ?>',
-                type: 'POST',
-                data: materiaData, // Serializar el objeto a JSON
-                success: function(response) {
-                    console.log('Materia eliminada con éxito:', response);
-                    // Realizar alguna acción adicional si es necesario
-                    selecMateria();
-                    $('#modalBase').hide(); // Ocultar el modal
-                },
-                error: function(error) {
-                    console.error('Error al eliminar la Materia:', error);
-                }
-            });
-});
-
-
+ 
 //OTRAS FUNCIONES NECESARIAS 
 
 
