@@ -1,0 +1,506 @@
+html {
+  height: 100vh;
+}
+
+/*Modo verano*/
+:root {
+  --color-fondo: rgb(255, 255, 255);
+  --color-menu: rgb(255, 255, 255);
+
+  --imagen-fondo: url('');
+
+  --img-beneficios: url('/public/img/fondo.png');
+
+  --color-texto-menu: rgb(0, 0, 0);
+
+  --color-icon: rgb(89, 189, 89);
+
+  --color-menu-hover: rgb(210, 255, 216);
+  --color-menu-hover-texto: rgb(0, 0, 0);
+
+  --color-linea: rgb(156, 156, 156);
+
+  --color-icon-boton: rgb(255, 131, 55);
+
+  --color-fondo-boton: rgb(255, 172, 121);
+
+  --color-scroll: rgb(192, 192, 192);
+  --color-scroll-hover: rgb(134, 134, 134);
+
+  --color-eliminar: rgb(228, 125, 125);
+  --color-modificar: rgb(63, 192, 63);
+
+  --color-borde-card: rgb(0, 0, 0);
+
+  --color-texto: rgb(129, 128, 128);
+
+  --color-fondo-card: rgb(228, 228, 228);
+}
+
+/*Modo verano*/
+/*Modo otoño*/
+.modo-autumn {
+  --color-fondo: rgb(0, 0, 0);
+  --color-menu: rgb(0, 0, 0);
+
+  --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
+
+  --color-texto-menu: rgb(255, 255, 255);
+
+  --color-icon: rgb(212, 91, 18);
+
+  --color-menu-hover: rgb(87, 33, 0);
+  --color-menu-hover-texto: rgb(255, 255, 255);
+
+  --color-linea: rgb(255, 255, 255);
+
+  --color-icon-boton: rgb(108, 194, 87);
+
+  --color-fondo-boton: rgb(17, 65, 5);
+
+  --color-scroll: rgb(68, 69, 74);
+  --color-scroll-hover: rgb(85, 85, 85);
+
+  --color-eliminar: rgb(145, 19, 14);
+  --color-modificar: rgb(17, 65, 5);
+
+  --color-borde-card: rgb(255, 255, 255);
+
+  --color-texto: rgb(180, 180, 180);
+
+  --color-fondo-card: rgb(41, 41, 41);
+}
+
+/*Modo otoño*/
+/*Letras en mayusculas h1, h2, h3 y h4*/
+h1, h2, h3, h4
+{
+  text-transform: uppercase;
+}
+/*Letras en mayusculas h1, h2, h3 y h4*/
+/*Fonts h1, h2, h3 y h4*/
+h1{
+font-size: 2.7vw;
+}
+h2{
+  font-size: 2.2vw;
+}
+h3{
+  font-size: 1.7vw;
+}
+h4{
+  font-size: 1.2vw;
+}
+p{
+  font-size: 1.2vw;
+}
+/*Fonts h1, h2, h3 y h4*/
+/*Letra, sin margin, ni padding*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+}
+
+/*Letra, sin margin, ni padding*/
+/*Body*/
+body {
+  height: 100vh;
+  width: 100wh;
+  background-color: var(--color-fondo);
+  color: var(--color-texto-menu);
+}
+
+/*Menu icono*/
+.menuA {
+  position: fixed;
+  width: 50px;
+  min-width: 25px;
+  height: 50px;
+  min-height: 25px;
+  font-size: 30px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-icon);
+  color: var(--color-texto-menu);
+  right: 15px;
+  top: 15px;
+  z-index: 100;
+}
+
+/*Menu icono*/
+/*peque*/
+.menu-peque {
+  width: 70px;
+  height: 100%;
+  padding: 20px 15px;
+  background-color: var(--color-menu);
+}
+
+/*peque*/
+/*Menu arriba*/
+.menu {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding: 2%;
+  background-color: none;
+  width: 100%;
+  height: 6em;
+  z-index: 1;
+}
+
+/*Menu arriba*/
+/*boton otoño*/
+/*icono*/
+.menu .modo-otoño a {
+  position: fixed;
+  display: flex;
+  background-color: transparent;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  margin-right: 10px;
+  top: 5px;
+  right: 3.2vw;
+  cursor: pointer;
+}
+
+/*icono*/
+/*Poner sombreado al icono, al pasar el mouse por ello*/
+.menu .modo-otoño a:hover {
+  background-color: var(--color-fondo-boton);
+}
+
+/*Poner sombreado al icono*/
+/*Icono, hojita*/
+.menu #mode {
+  position: fixed;
+  font-size: 3vw;
+  color: var(--color-texto-menu);
+}
+
+/*Icono, hojita*/
+/*Usuario*/
+.menu .inicio-usuario a {
+  position: fixed;
+  display: flex;
+  background-color: transparent;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+/*Usuario*/
+/*Usuario, sombreado, al pasar el mouse por ello*/
+.menu .inicio-usuario a:hover {
+  background-color: var(--color-icon);
+}
+
+/*Menu usuario, sombreado, al pasar el mouse por ello*/
+/*Menu usuario, icono imagen*/
+.menu #usuario {
+  position: fixed;
+  font-size: 3vw;
+  color: var(--color-texto-menu);
+}
+
+/*Menu usuario, icono imagen*/
+/*Logo anissoft*/
+.nombreE img {
+  width: 3.5vw;
+}
+
+/*Logo anissoft*/
+/*Container Practica con nosotros*/
+.contenedorP {
+  position: relative;
+  top: 0%;
+  background-image: var(--imagen-fondo);
+  background-size: cover;
+  background-position: center;
+  padding: 10%;
+  color: var(--color-texto-menu);
+  text-align: center;
+}
+
+/*Container Practica con nosotros*/
+/*contenedor razones de porque practicar con nosotros*/
+.contenedorT {
+  position: relative;
+  display: flex;
+  background-color: var(--color-fondo);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+/*contenedor razones de porque practicar con nosotros*/
+/*contenedor razones de porque practicar con nosotros, parrafo*/
+.contenedorT p {
+  width: 55%;
+  height: 50%;
+  margin-left: 5%;
+}
+
+/*contenedor razones de porque practicar con nosotros, parrafo*/
+/*contenedor razones de porque practicar con nosotros, parrafo, link conectando a practica ahora, que entre a carreras directamente*/
+.contenedorT p a {
+  text-decoration: none;
+  color: var(--color-icon-boton);
+}
+
+/*contenedor razones de porque practicar con nosotros, parrafo, link conectando a practica ahora, que entre a carreras directamente*/
+.contenedorT .imgT {
+  width: 60%;
+}
+
+/*contenedor razones de porque practicar con nosotros, parrafo, link conectando a practica ahora, que entre a carreras directamente*/
+/*contenedor razones de porque practicar con nosotros, imagen*/
+.contenedorT img {
+  width: 50%;
+}
+
+/*contenedor razones de porque practicar con nosotros, imagen*/
+/*Contenedor beneficios*/
+/*Titulo de beneficios*/
+.textoB {
+  position: relative;
+  color: var(--color-texto-menu);
+  padding: 10px;
+  z-index: 999;
+  text-align: center;
+}
+
+/*contenedor beneficios */
+.contenedorB {
+  position: relative;
+  background-color: var(--color-fondo-card);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 1%;
+}
+/*contenedor beneficios */
+
+/*tablaB img*/
+.tablaB img{
+  width: 25vw;
+  height: 20vw;
+}
+/*tablaB img*/
+
+th{
+  font-size: 2vw;
+}
+tr{
+  font-size: 1.7vw;
+}
+
+/*Texto titulo del contenedor que hacemos*/
+.textoW {
+  position: relative;
+  color: var(--color-texto-menu);
+  text-align: center;
+  align-items: center;
+}
+/*Texto titulo del contenedor que hacemos*/
+
+/*Container que hacemos*/
+.contenedorW {
+  position: relative;
+  background-color: var(--color-fondo);
+  width: 100%;
+  text-align: center;
+  padding: 10px; 
+}
+/*Estilos para los contenedores 1 y 2*/
+.contenedor {
+  margin-bottom: 20px; 
+}
+/*Estilos para los contenedores 1 y 2*/
+
+/* Estilos para las imágenes dentro de los contenedores */
+.contenedor img {
+  width: 100%; 
+  height: auto; 
+}
+/* Estilos para las imágenes dentro de los contenedores */
+
+/* Estilos para el texto (h2 y p) dentro de cada contenedor */
+.contenedor h3 {
+  color: var(--color-texto-menu);
+  margin-top: 5px;
+}
+
+.contenedor p {
+  color: var(--color-texto-menu);
+  margin-bottom: 5px;
+}
+/* Estilos para el texto (h2 y p) dentro de cada contenedor */
+
+/* Estilos para los botones de navegación */
+button.ant,
+button.sig {
+  position: absolute;
+  top: 50%; /* Posiciona los botones verticalmente al centro del contenedor */
+  transform: translateY(-50%); /* Ajusta la posición vertical */
+  font-size: 3.5vw; /* Tamaño del icono */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-texto-menu);
+}
+/* Estilos para los botones de navegación */
+
+/*Boton del contenedor beneficios*/
+/*Boton anterior*/
+button.ant {
+  left: 10px;
+}
+
+/*Boton anterior*/
+/*Boton siguiente*/
+button.sig {
+  right: 10px;
+}
+
+/*Boton siguiente*/
+/*Contenedor contactanos*/
+/*Titulo de contenedor contactanos*/
+.textoC {
+  position: relative;
+  height: 35px;
+  color: var(--color-texto-menu);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/*Titulo de contenedor contactanos*/
+/*Contenedor Contactanos*/
+.imgC {
+  overflow: hidden; 
+  width: 100%;
+}
+
+/*Contenedor Contactanos*/
+/*Img del contenedor Contactanos*/
+.imgC img {
+  width: 100%;
+  height: auto; 
+  display: block; 
+}
+
+/*Img del contenedor Contactanos*/
+/*Tabla resumiendo lo nuestro*/
+.tablaC {
+  position: relative;
+  width: 100%;
+  border-collapse: collapse;
+  background-color:var(--imagen-fondo);
+}
+
+/*Tabla resumiendo lo nuestro*/
+/*columnas, celdas*/
+th,
+td {
+  border: none;
+  padding: 8px;
+  text-align: center;
+  color: var(--color-texto-menu);
+}
+
+/*columnas, celdas*/
+/*primera fila en negrita*/
+th {
+  font-weight: bold;
+}
+/*primera fila en negrita*/
+
+
+@media (prefers-color-scheme: dark) {
+  /* Estilos para modo oscuro */
+  body {
+    --color-fondo: rgb(0, 0, 0);
+    --color-menu: rgb(0, 0, 0);
+  
+    --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
+  
+    --color-texto-menu: rgb(255, 255, 255);
+  
+    --color-icon: rgb(212, 91, 18);
+  
+    --color-menu-hover: rgb(87, 33, 0);
+    --color-menu-hover-texto: rgb(255, 255, 255);
+  
+    --color-linea: rgb(255, 255, 255);
+  
+    --color-icon-boton: rgb(108, 194, 87);
+  
+    --color-fondo-boton: rgb(17, 65, 5);
+  
+    --color-scroll: rgb(68, 69, 74);
+    --color-scroll-hover: rgb(85, 85, 85);
+  
+    --color-eliminar: rgb(145, 19, 14);
+    --color-modificar: rgb(17, 65, 5);
+  
+    --color-borde-card: rgb(255, 255, 255);
+  
+    --color-texto: rgb(180, 180, 180);
+  
+    --color-fondo-card: rgb(41, 41, 41);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  /* Estilos para modo claro */
+  body {
+  --color-fondo: rgb(255, 255, 255);
+  --color-menu: rgb(255, 255, 255);
+
+  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
+
+  --img-beneficios: url('/public/img/fondo.png');
+
+  --color-texto-menu: rgb(0, 0, 0);
+
+  --color-icon: rgb(89, 189, 89);
+
+  --color-menu-hover: rgb(210, 255, 216);
+  --color-menu-hover-texto: rgb(0, 0, 0);
+
+  --color-linea: rgb(156, 156, 156);
+
+  --color-icon-boton: rgb(255, 131, 55);
+
+  --color-fondo-boton: rgb(255, 172, 121);
+
+  --color-scroll: rgb(192, 192, 192);
+  --color-scroll-hover: rgb(134, 134, 134);
+
+  --color-eliminar: rgb(228, 125, 125);
+  --color-modificar: rgb(63, 192, 63);
+
+  --color-borde-card: rgb(0, 0, 0);
+
+  --color-texto: rgb(129, 128, 128);
+
+  --color-fondo-card: rgb(228, 228, 228);
+  }
+}

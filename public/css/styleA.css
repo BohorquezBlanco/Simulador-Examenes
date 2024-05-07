@@ -1,0 +1,516 @@
+
+html {
+  height: 100vh;
+}
+:root{
+  --color-fondo: rgb(255, 255, 255);
+  --color-menu: rgb(255,255,255);
+
+  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
+
+  --color-texto-menu: rgb(0,0,0);
+
+  --color-icon: rgb(47, 156, 47);
+
+  --color-menu-hover:rgb(210, 255, 216);
+  --color-menu-hover-texto:rgb(0,0,0);
+
+  --color-linea:rgb(156, 156, 156);
+
+  --color-icon-boton:rgb(255, 131, 55);
+
+  --color-fondo-boton:rgb(255, 172, 121);
+
+  --color-scroll:rgb(192,192,192) ;
+  --color-scroll-hover:rgb(134,134,134) ;
+
+  --color-eliminar: rgb(228, 125, 125) ;
+  --color-modificar: rgb(63, 192, 63);
+
+  --color-borde-card: rgb(0,0,0);
+
+  --color-texto: rgb(129, 128, 128);
+}
+.modo-autumn{
+  --color-fondo: rgb(0, 0, 0);
+  --color-menu: rgb(0,0,0);
+
+  --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
+
+  --color-texto-menu: rgb(255,255,255);
+
+  --color-icon: rgb(212, 91, 18);
+
+  --color-menu-hover:rgb(87, 33, 0);
+  --color-menu-hover-texto:rgb(255,255,255);
+
+  --color-linea:rgb(255,255,255);
+
+  --color-icon-boton:rgb(108, 194, 87);
+
+  --color-fondo-boton:rgb(17, 65, 5);
+
+  --color-scroll:rgb(68,69,74) ;
+  --color-scroll-hover:rgb(85,85,85) ;
+
+  --color-eliminar: rgb(145, 19, 14);
+  --color-modificar: rgb(17, 65, 5);
+
+  --color-borde-card: rgb(255,255,255);
+
+  --color-texto: rgb(180, 180, 180);
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body{
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-fondo);
+}
+
+/*Letras en mayusculas h1, h2, h3 y h4*/
+h1, h2, h3, h4, h5
+{
+  text-transform: uppercase;
+  color: var(--color-texto-menu);
+}
+/*Letras en mayusculas h1, h2, h3 y h4*/
+/*Fonts h1, h2, h3 y h4*/
+h1{
+font-size: 2.7vw;
+}
+h2{
+  font-size: 2.2vw;
+}
+h3{
+  font-size: 1.7vw;
+}
+h4{
+  font-size: 1.2vw;
+}
+p{
+  font-size: 1.2vw;
+}
+/*Fonts h1, h2, h3 y h4*/
+/*Codigo del menu*/
+/*Barra arriba*/
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.7vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: var(--color-menu); /* Adjust as needed */
+  border-bottom: 1px solid var(--color-icon); /* Border under the menu */
+  z-index: 50;
+}
+
+.menu .nombreE {
+  margin-top: 10px ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu img  {
+  top: 5px;
+  width: 1.9vw;
+  height: 2.2vw;
+  margin-right: 10px;
+}
+
+.menu .opciones ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu .opciones li {
+  margin-right: 2%;
+}
+
+.menu .opciones a {
+  text-decoration: none;
+  color: var(--color-texto-menu);
+  font-size: 1.7vw;
+  transition: color 0.3s ease;
+}
+
+.menu .opciones a:hover {
+  color: var(--color-menu-hover);
+}
+
+.menu .usuario {
+  border: 1px solid hotpink;
+  display: flex;
+  align-items: center;
+}
+
+.menu .usuario img {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid lightcoral;
+}
+
+.menu .usuario .info-usuario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-texto-menu);
+}
+
+.menu .usuario .nombre-email {
+  margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.menu .usuario .nombre {
+  font-size: 1.4vw;
+}
+
+.menu .usuario .email {
+  font-size: 1vw;
+}
+
+.nombre-email {
+  display: block;
+}
+
+.nombre, .email {
+  display: block;
+}
+
+/*main*/
+.active{
+  background-color: var(--color-menu-hover);
+  color: var(--color-menu-hover-texto);
+}
+main{
+  margin-top: 2.7vw;
+  padding: 1%;
+  transition: margin-left 0.5s ease;
+}
+
+main .center{
+  text-align: center;
+}
+
+/*Card*/
+.card-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  width: 10vw;
+  height: auto;
+  border: 1px solid var(--color-borde-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: inline-block; /* Mostrar las tarjetas una al lado de la otra */
+  margin: 1%; /* Espacio entre las tarjetas */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.card img {
+  width: auto;
+  height: 10vw;
+}
+.card-body {
+  margin: 1.2%;
+}
+.card-title {
+  margin-top: 0;
+  margin-bottom: 1vw;
+}
+/*Botones*/
+button{
+  cursor: pointer;
+}
+.botones{
+  display: flex;
+}
+.btn-modificar {
+  font-size: 1.2vw;
+  padding: 8px 16px;
+  border: 0.5px solid;
+  border-color: var(--color-modificar);
+  color: var(--color-menu-hover-texto);
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-eliminar {
+  font-size: 1.2vw;
+  padding: 8px 16px;
+  border: 0.5px solid;
+  border-color: var(--color-eliminar);
+  color: var(--color-menu-hover-texto);
+  background-color: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-modificar:hover {
+  background-color: var(--color-modificar);
+}
+.btn-eliminar:hover {
+  background-color: var(--color-eliminar);
+}
+
+/*modal*/
+.modal {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilo para el contenido del modal */
+.contenido-modal {
+  position: fixed;
+  top: 50%; /* Centrado verticalmente */
+  left: 50%; /* Centrado horizontalmente */
+  transform: translate(-50%, -50%);
+  background-color: var(--color-menu);
+
+  border-radius: 8px;
+  width: 30%; /* Ancho del modal */
+  height: auto;
+  z-index: 10000; /* Asegura que esté por encima del fondo oscuro */
+  border-top: 10px solid var(--color-icon); /* Borde superior */
+  border-bottom: 10px solid var(--color-icon); /* Borde inferior */
+  color: var(--color-texto-menu);
+  padding: 5px;
+}
+
+.contenido-modal .head{
+  display: flex;
+  align-items: center;
+}
+.contenido-modal .head .h3{
+  margin-right: auto;
+}
+.contenido-modal .head .cerrar{
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-icon);
+  font-size: 3vw;
+}
+.contenido-modal .form-label{
+  display: block;
+  font-size: 1.2vw;
+  margin-bottom: 0.5vw;
+}
+.contenido-modal .form-control{
+  width: 100%;
+  font-size: 1.2vw;
+  border: 0.5px solid var(--color-texto-menu);
+  border-radius: 5px;
+  margin-bottom: 0.5vw;
+  height: 1.5vw;
+  align-items: end;
+  padding-top: 0;
+  padding-left: 2px;
+  padding-bottom: 0;
+}
+
+.contenido-modal textarea.form-control {
+  height: auto; 
+  line-height: 1.5; 
+}
+
+.contenido-modal .form-control::placeholder,
+.contenido-modal .form-control {
+  vertical-align: bottom;
+}
+select{
+  width: 100%;
+  font-size: 1.2vw;
+  border: 0.5px solid var(--color-texto-menu);
+  border-radius: 5px;
+  margin-bottom: 0.5vw;
+  background-color: transparent;
+  height: 1.6vw;
+}
+.contenido-modal .añadir{
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+.contenido-modal .head .cerrar{
+  background-color: transparent;
+  border: none;
+}
+.head .cerrar ion-icon {
+  font-size: 1.2vws; /* Tamaño del icono en píxeles */
+}
+
+.abrirModal{
+  background-color: transparent;
+  border: none;
+  height: 5vw;
+  width: 5vw;
+}
+.abrirModal ion-icon{
+  width: 100%;
+  height: 100%;
+  color: var(--color-texto-menu);
+}
+.cambiar{
+  position: fixed;
+  bottom: 5px;
+  height: 8vw;
+  left: 5px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.cambiar h4{
+  color: var(--color-texto);
+}
+.cambiar svg{
+  fill: var(--color-texto);
+  width: 8vw;
+}
+.botar {
+  position: fixed;
+  bottom: 5px;
+  right: 5px; 
+  height: 8vw;
+  width: auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.botar h4{
+  color: var(--color-texto);
+}
+.botar svg{
+  fill: var(--color-texto);
+  width: 8vw;
+}
+.dragging {
+  opacity: 0.5; /* Reduce la opacidad mientras se está arrastrando */
+}
+
+/*Responsive alto*/
+@media (max-height:660px){
+  .menu .nombreE{
+    margin-bottom: 12px;
+  }
+  .menu .modo-otoño{
+    margin-top: 5px;
+  }
+}
+/*Responsive ancho*/
+@media (max-width:600px){
+  .menu {
+    position: fixed;
+  }
+  main{
+    margin-left: 0;
+  }
+}
+@keyframes animarsuperior {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Estilos para modo oscuro */
+  body {
+    --color-fondo: rgb(0, 0, 0);
+    --color-menu: rgb(0, 0, 0);
+  
+    --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
+  
+    --color-texto-menu: rgb(255, 255, 255);
+  
+    --color-icon: rgb(212, 91, 18);
+  
+    --color-menu-hover: rgb(87, 33, 0);
+    --color-menu-hover-texto: rgb(255, 255, 255);
+  
+    --color-linea: rgb(255, 255, 255);
+  
+    --color-icon-boton: rgb(108, 194, 87);
+  
+    --color-fondo-boton: rgb(17, 65, 5);
+  
+    --color-scroll: rgb(68, 69, 74);
+    --color-scroll-hover: rgb(85, 85, 85);
+  
+    --color-eliminar: rgb(145, 19, 14);
+    --color-modificar: rgb(17, 65, 5);
+  
+    --color-borde-card: rgb(255, 255, 255);
+  
+    --color-texto: rgb(180, 180, 180);
+  
+    --color-fondo-card: rgb(41, 41, 41);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  /* Estilos para modo claro */
+  body {
+  --color-fondo: rgb(255, 255, 255);
+  --color-menu: rgb(255, 255, 255);
+
+  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
+
+  --img-beneficios: url('/public/img/fondo.png');
+
+  --color-texto-menu: rgb(0, 0, 0);
+
+  --color-icon: rgb(89, 189, 89);
+
+  --color-menu-hover: rgb(210, 255, 216);
+  --color-menu-hover-texto: rgb(0, 0, 0);
+
+  --color-linea: rgb(156, 156, 156);
+
+  --color-icon-boton: rgb(255, 131, 55);
+
+  --color-fondo-boton: rgb(255, 172, 121);
+
+  --color-scroll: rgb(192, 192, 192);
+  --color-scroll-hover: rgb(134, 134, 134);
+
+  --color-eliminar: rgb(228, 125, 125);
+  --color-modificar: rgb(63, 192, 63);
+
+  --color-borde-card: rgb(0, 0, 0);
+
+  --color-texto: rgb(129, 128, 128);
+
+  --color-fondo-card: rgb(228, 228, 228);
+  }
+}

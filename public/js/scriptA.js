@@ -2,7 +2,6 @@ const logo = document.getElementById("logo");
 const menu = document.querySelector(".menu");
 const spans = document.querySelectorAll("span");
 const otoño = document.getElementById("otoño");
-const menuA = document.querySelector(".menuA");
 const main = document.querySelector("main");
 const seccion = document.querySelector("seccion");
 const more = document.getElementById("more");
@@ -12,36 +11,21 @@ const imagen = document.getElementById('botar');
 const basurero = document.getElementById('basurero');
 const basureroB = document.getElementById('basureroB');
 
-
-menuA.addEventListener("click",()=>{
-    menu.classList.toggle("max-menu");
-    if(menu.classList.contains("max-menu")){
-        menuA.children[0].computedStyleMap.display = "none";
-        menuA.children[1].computedStyleMap.display = "block";
-    }else{
-        menuA.children[0].computedStyleMap.display = "block";
-        menuA.children[1].computedStyleMap.display = "none";
-    }
-    if(window.innerWidth<=320){
-        menu.classList.add("menu-peque");
-        main.classList.add("min-main")
-        spans.forEach((span)=>{
-            span.classList.add("oculto");
-        })
-    }
+document.addEventListener('DOMContentLoaded', function() {
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  if (prefersDarkScheme.matches) {
+    // Sistema en modo oscuro
+    document.documentElement.classList.add('modo-autumn');
+  } else {
+    // Sistema en modo claro
+    document.documentElement.classList.remove('modo-autumn');
+  }
 });
 
 otoño.addEventListener("click",()=>{
     let body = document.body;
     body.classList.toggle("modo-autumn");
-});
-
-logo.addEventListener("click",()=>{
-    menu.classList.toggle("menu-peque");
-    main.classList.toggle("min-main");
-    spans.forEach((span)=>{
-        span.classList.toggle("oculto");
-    });
 });
 
 function cambiarTexto() {

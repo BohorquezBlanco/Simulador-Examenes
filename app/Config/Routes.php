@@ -11,11 +11,10 @@ $routes->get('/', 'Usuario\ControleUser::index');
 
 $routes->get('/iniciarSesion', 'Usuario\ControleUser::iniciarsesion');
 $routes->post('/login', 'Usuario\ControleUser::login');
-//Hola Sam
-//hola naty :D 
 $routes->get('/logout', 'Usuario\ControleUser::logout');
 
-
+//contenido de carreras y demas 
+$routes->get('/contenido', 'Usuario\ControleContenido::index');
 
 //###############################-USUARIO RUTAS-#################################
 //2)INICIO DE USUARIO

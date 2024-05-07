@@ -1,11 +1,29 @@
-const logo = document.getElementById("logo");
 const menu = document.querySelector(".menu");
 const spans = document.querySelectorAll("span");
 const otoño = document.getElementById("otoño");
+const inicio = document.getElementById("inicio");
 const menuA = document.querySelector(".menuA");
 let slideIndex = 0;
 const contenedores = document.querySelectorAll('.contenedor');
 
+document.addEventListener('DOMContentLoaded', function() {
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  if (prefersDarkScheme.matches) {
+    // Sistema en modo oscuro
+    document.documentElement.classList.add('modo-autumn');
+  } else {
+    // Sistema en modo claro
+    document.documentElement.classList.remove('modo-autumn');
+  }
+});
+
+
+function toggleTheme() {
+  const body = document.body;
+  body.classList.toggle('root'); // Cambiar al modo verano
+  body.classList.toggle('modo-otoño'); // Cambiar al modo otoño
+}
 
 menuA.addEventListener("click",()=>{
     menu.classList.toggle("max-menu");
@@ -28,14 +46,6 @@ menuA.addEventListener("click",()=>{
 otoño.addEventListener("click",()=>{
     let body = document.body;
     body.classList.toggle("modo-autumn");
-});
-
-logo.addEventListener("click",()=>{
-    menu.classList.toggle("menu-peque");
-    main.classList.toggle("min-main");
-    spans.forEach((span)=>{
-        span.classList.toggle("oculto");
-    });
 });
 
 function mostrarSlide(n) {
