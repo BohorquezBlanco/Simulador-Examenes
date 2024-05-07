@@ -35,7 +35,7 @@ class ControleAdmi extends BaseController
 
   //----------------------------------------------------------------INICIO DEL SISTEMA----------------------------------------------------------------
 
-  public function index(): string
+  public function index()
   {
     $uniModel = new UniModel();
     $unis = $uniModel->findAll();
@@ -62,6 +62,7 @@ class ControleAdmi extends BaseController
 
     return view('adm/1inicioAdmi', $data);
   }
+
   //----------------------------------------------------------------Univ o Inst----------------------------------------------------------------
   //INSERT DE Univ o inst 
   public function crearUni()
@@ -445,4 +446,180 @@ class ControleAdmi extends BaseController
     $session->destroy(); // Destruye la sesión actual
     return redirect()->to(base_url()); // Redirige a la página de inicio de sesión
   }
+
+
+  public function comida()
+  {
+
+    $usuarioModel = new UsuarioModel();
+    $users = $usuarioModel->findAll();
+
+    $data = [ 'users'=>$users];
+
+    return view('adm/2inicioAdmi', $data);
+  }
+  #################--SELECT--#####################
+  public function univercidadAjax()
+  {
+    $uniModel = new UniModel();
+    $unis = $uniModel->findAll();
+    return json_encode($unis);
+
+  }
+ #################--DELETE--#####################
+  public function eliminarUni2()
+  {
+    $idU = $this->request->getPost('idU');
+ 
+    $uniModel = new UniModel();
+    $uniModel->delete($idU);
+
+  }
+
+  public function crearUni2()
+  {
+
+    $data = [
+      'nombreU' => $this->request->getPost('nombreU'),
+      'descripcionU' => $this->request->getPost('descripcionU'),
+      'imagenU' => $this->request->getPost('imagenU'),
+    ];
+
+    //instanciar
+    $uniModel = new UniModel();
+    $uniModel->insert($data);
+  }
+
+  public function editarUni2()
+  {
+    $idU = $this->request->getPost('idU');
+
+    $data = [
+      'nombreU' => $this->request->getPost('nombreU'),
+      'descripcionU' => $this->request->getPost('descripcionU'),
+      'imagenU' => $this->request->getPost('imagenU'),
+    ];
+
+    //instanciar
+    $uniModel = new UniModel();
+    $uniModel->update($idU, $data);
+  }
+
+  public function carreraAjax()
+  {
+    $idU = $this->request->getPost('idU');
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->where('idU', $idU)->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($carreras);
+  }
+
+
+
+ //INSERT DE LAS CARRERAS 
+ public function crearCarrera2()
+ {
+  $idU = $this->request->getPost('idU');
+
+   $data = [
+     'idU' => $idU,
+     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
+     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
+     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
+   ];
+
+   //instanciar
+   $carreraModel = new CarreraModel();
+   $carreraModel->insert($data);
+
+ }
+
+ //UPDATE CARRERA
+ public function editarCarrera2()
+ {
+   $idCarrera = $this->request->getPost('idCarrera');
+
+   $data = [
+     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
+     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
+     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
+   ];
+
+   //instanciar
+   $carreraModel = new CarreraModel();
+   $carreraModel->update($idCarrera, $data);
+
+ }
+
+ //DELETE DE LAS CARRERAS EXISTENTES
+ public function eliminarCarrera2()
+ {
+   $idCarrera = $this->request->getPost('idCarrera');
+
+   $carreraModel = new CarreraModel();
+   $carreraModel->delete($idCarrera);
+
+ }
+
+
+  public function materiaAjax()
+  {
+    $idCarrera = $this->request->getPost('idCarrera');
+    $materiaModel = new MateriaModel();
+    $materias = $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+
+    return json_encode($materias);
+  }
+
+ //INSERT DE LAS MATERIAS
+ public function crearMateria2()
+ {
+
+  $idCarrera = $this->request->getPost('idCarrera');
+
+
+   $data = [
+     'nombreMateria' => $this->request->getPost('nombreMateria'),
+     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
+     'imagenMateria' => $this->request->getPost('imagenMateria'),
+     'idCarrera' => $idCarrera,
+   ];
+
+   //instanciar
+   $materiaModel = new materiaModel();
+   $materiaModel->insert($data);
+
+ }
+
+ //DELETE DE LAS MATERIAS EXISTENTES
+ public function eliminarMateria2()
+ {
+   $idMateria = $this->request->getPost('idMateria');
+
+   // Instanciar el modelo
+   $materiaModel = new MateriaModel();
+
+   // Eliminar lógicamente el registro con el ID especificado
+   $materiaModel->delete($idMateria);
+ }
+
+ //UPDATE MATERIA
+ public function editarMateria2()
+ {
+   $idMateria = $this->request->getPost('idMateria');
+
+   $data = [
+     'nombreMateria' => $this->request->getPost('nombreMateria'),
+     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
+     'imagenMateria' => $this->request->getPost('imagenMateria'),
+   ];
+
+   //instanciar
+   $materiaModel = new materiaModel();
+   $materiaModel->update($idMateria, $data);
+
+ }
+  
 }
