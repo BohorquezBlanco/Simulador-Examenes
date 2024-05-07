@@ -6,19 +6,14 @@ use App\Controllers\BaseController;
 
 use App\Models\MateriaPreguntaModel;
 use App\Models\CarreraModel;
-use App\Models\ExamenModel;
 use App\Models\MateriaModel;
 use App\Models\LibroModel;
 use App\Models\MateriaLibroModel;
-use App\Models\MateriaTemaModel;
 use App\Models\MateriaTemarioModel;
-use App\Models\MateriaVideoModel;
 use App\Models\PreguntaModel;
-use App\Models\TemaModel;
 use App\Models\TemarioModel;
 use App\Models\UniModel;
 use App\Models\UsuarioModel;
-use App\Models\VideoModel;
 use CodeIgniter\HotReloader\HotReloader;
 use CodeIgniter\HTTP\Message;
 use Kint\Zval\Value;
@@ -35,7 +30,7 @@ class ControleAdmi extends BaseController
 
   //----------------------------------------------------------------INICIO DEL SISTEMA----------------------------------------------------------------
 
-  public function index()
+  public function index(): string
   {
     $uniModel = new UniModel();
     $unis = $uniModel->findAll();
@@ -55,14 +50,10 @@ class ControleAdmi extends BaseController
     $temarioModel = new TemarioModel();
     $temarios = $temarioModel->findAll();
 
-    $usuarioModel = new UsuarioModel();
-    $users = $usuarioModel->findAll();
+    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'libros' => $libros, 'preguntas' => $preguntas];
 
-    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'libros' => $libros, 'preguntas' => $preguntas, 'users'=>$users];
-
-    return view('adm/1inicioAdmi', $data);
+    return view('adm/inicioAdmi', $data);
   }
-
   //----------------------------------------------------------------Univ o Inst----------------------------------------------------------------
   //INSERT DE Univ o inst 
   public function crearUni()
@@ -446,8 +437,6 @@ class ControleAdmi extends BaseController
     $session->destroy(); // Destruye la sesión actual
     return redirect()->to(base_url()); // Redirige a la página de inicio de sesión
   }
-
-
   public function comida()
   {
 

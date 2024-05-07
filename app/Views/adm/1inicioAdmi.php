@@ -361,10 +361,6 @@
       $("a[onclick=\"mostrarSeccion('" + seccion + "')\"]").addClass("active");
     }
   </script>
-<<<<<<< HEAD
-=======
-
->>>>>>> 27972522c7fe82a7fdfc09a6a2b4672e1c98caf9
   <!--Botar-->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
