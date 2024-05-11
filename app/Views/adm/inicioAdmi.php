@@ -50,7 +50,7 @@
   <main>
     <!--SECCIONES-->
     <!--MODAL BASE PARA UNIVERSIDADES CARRERAS Y MATERIAS,"se reutilizará el codigo para evitar tener un modal para cada uno"-->
-    <div class="modal" id="modalBase">
+    <div class="modal abrir" id="modalBase">
       <div class="contenido-modal" >
 
         <div id="contenidoModal">
@@ -195,9 +195,7 @@
 
 
     <!--SECCIONES-->
-    <button class="abrirModal" type="button" data-target="modificarr">
-      <ion-icon name="add-circle-outline"></ion-icon>
-    </button>
+
     <!--MODIFICAR-->
     <div class="modal" id="modificarr">
       <div class="contenido-modal">

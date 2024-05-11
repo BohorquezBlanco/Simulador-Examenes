@@ -115,8 +115,8 @@ globalCarrData=1; // Definir la variable global
                                     $('#modalBase').hide();
                                 });
               
-                $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
             });
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
             $('#eliminarC').on('dragover', function(event) {
@@ -159,8 +159,8 @@ globalCarrData=1; // Definir la variable global
                                     $('#modalBase').hide();
                                 });
               
-                $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
             });
           },
           error: function(xhr, status, error) {
@@ -240,8 +240,8 @@ globalCarrData=1; // Definir la variable global
                                   $('#modalBase').hide();
                               });
             
-              $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
       });
       
       

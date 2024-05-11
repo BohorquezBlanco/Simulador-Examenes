@@ -95,7 +95,7 @@ var globalUniData=null; // Definir la variable global
                     <label class="form-label">Imagen de la universidad/instituto</label>
                     <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto">${universidadData.imagenU}</textarea>
                   </div>
-                  <div class="añadir">
+                  <div class="añadir abrirModal">
                     <button id="editarUni" type="button" class="btn-modificar">Modificar</button>
                   </div>
                 </form>
@@ -110,7 +110,7 @@ var globalUniData=null; // Definir la variable global
                   });
 
                   // Mostrar el modal después de que se haya construido completamente
-                  $('#modalBase').show();
+                  $('#modalBase').fadeIn();    
 
           });
           //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
@@ -155,8 +155,8 @@ var globalUniData=null; // Definir la variable global
                     // Ocultar el modal al hacer clic en el botón de cerrar
                     $('#modalBase').hide();
                 });
-              $('#modalBase').show(); // Mostrar el modal
-    
+
+                $('#modalBase').fadeIn();    
           });
         },
         error: function( error) {
@@ -235,7 +235,10 @@ var globalUniData=null; // Definir la variable global
                                 // Ocultar el modal al hacer clic en el botón de cerrar
                                 $('#modalBase').hide();
                             });
-            $('#modalBase').show(); // Mostrar el modal
+
+                            
+                              $('#modalBase').fadeIn();
+                    
     
     });
     

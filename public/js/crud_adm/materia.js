@@ -96,8 +96,8 @@
                   // Ocultar el modal al hacer clic en el botón de cerrar
                   $('#modalBase').hide();
               });
-                $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
             });
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -141,8 +141,8 @@
                   // Ocultar el modal al hacer clic en el botón de cerrar
                   $('#modalBase').hide();
               });
-                $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
             });
           },
           error: function(xhr, status, error) {
@@ -221,8 +221,8 @@
                                 // Ocultar el modal al hacer clic en el botón de cerrar
                                 $('#modalBase').hide();
                             });
-              $('#modalBase').show(); // Mostrar el modal
-      
+                  // Mostrar el modal después de que se haya construido completamente
+                  $('#modalBase').fadeIn();      
       });
       
       

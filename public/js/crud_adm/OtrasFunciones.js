@@ -1,5 +1,5 @@
 
-//PARA ESTO EL ID DEBE LLAMARSE ID Y EL NOMBRE DEBE LLAMARSE NOMBRE, ASI SE PODRA REUTILIZAR LA FUNCION EN OTROS 
+//Toma el primer y segundo valor de un response
 function obtenerPrimerIdYNombre(response,valor1,valor2) {
    if (response.length > 0) {
        // Obtener el primer objeto universidad de la respuesta
@@ -20,4 +20,25 @@ function obtenerPrimerIdYNombre(response,valor1,valor2) {
        console.log("No se encontraron universidades en la respuesta.");
    }
 }
+
+//FUNCION PARA DAR EFECTO DE FUNDIDO EN EL MODAL 
+function fadeIn(selector, duracion) {
+  var opacidad = 0;
+  var elemento = document.querySelector(selector);
+  if (elemento) {
+    elemento.style.display = "block";
+    var intervalo = setInterval(function() {
+      if (opacidad < 1) {
+        opacidad += 0.05;
+        elemento.style.opacity = opacidad;
+      } else {
+        clearInterval(intervalo);
+      }
+    }, duracion / 20);
+  } else {
+    console.error("El elemento con el selector '" + selector + "' no fue encontrado.");
+  }
+}
+
+
 
