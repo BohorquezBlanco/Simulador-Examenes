@@ -1,7 +1,6 @@
 const logo = document.getElementById("logo");
 const menu = document.querySelector(".menu");
 const spans = document.querySelectorAll("span");
-const otoño = document.getElementById("otoño");
 const main = document.querySelector("main");
 const seccion = document.querySelector("seccion");
 const more = document.getElementById("more");
@@ -21,11 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sistema en modo claro
     document.documentElement.classList.remove('modo-autumn');
   }
-});
-
-otoño.addEventListener("click",()=>{
-    let body = document.body;
-    body.classList.toggle("modo-autumn");
 });
 
 function cambiarTexto() {

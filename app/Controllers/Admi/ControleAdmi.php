@@ -36,21 +36,25 @@ class ControleAdmi extends BaseController
     $unis = $uniModel->findAll();
 
     $carreraModel = new CarreraModel();
-    $carreras = $carreraModel->findAll();
+    $carreras = $carreraModel->join('uni', 'uni.idU = carrera.idU')
+                        ->orderBy('carrera.idU')
+                        ->findAll();
 
     $materiaModel = new MateriaModel();
-    $materias = $materiaModel->findAll();
-  
-    $libroModel = new libroModel();
-    $libros = $libroModel->findAll();
+    $materias = $materiaModel->join('carrera', 'carrera.idCarrera = materia.idCarrera')
+                              ->orderBy('materia.idCarrera')
+                              ->findAll();
+
+    $temarioModel = new TemarioModel();
+    $temarios = $temarioModel->join('materia', 'materia.idMateria = temario.idMateria')
+                              ->orderBy('temario.idMateria')
+                              ->findAll();
 
     $preguntaModel = new preguntaModel();
     $preguntas = $preguntaModel->findAll();
 
-    $temarioModel = new TemarioModel();
-    $temarios = $temarioModel->findAll();
 
-    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'libros' => $libros, 'preguntas' => $preguntas];
+    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'preguntas' => $preguntas];
 
     return view('adm/inicioAdmi', $data);
   }
@@ -201,95 +205,22 @@ class ControleAdmi extends BaseController
 
     return redirect()->to('inicioAdmi');
   }
-   //----------------------------------------------------------------LIBROS----------------------------------------------------------------
-
-  //INSERT DE LOS LIBROS
-  public function crearLibro()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-
-    $dataLibro = [
-      'nombreLibro' => $this->request->getPost('nombreLibro'),
-      'descripcionLibro' => $this->request->getPost('descripcionLibro'),
-      'imagenLibro' => $this->request->getPost('imagenLibro'),
-      'pdfLibro' => $this->request->getPost('pdfLibro'),
-    ];
-
-    // Insertar en la tabla Libro
-    $libroModel = new LibroModel();
-    $libroModel->insert($dataLibro);
-
-    $idLibro = $libroModel->insertID();
-
-    // Crear un nuevo objeto del modelo
-    $materiaLibroModel = new MateriaLibroModel();
-    $materiaLibroModel->insertarRelacionMateriaLibro($idMateria, $idLibro);
-
-    return redirect()->to('inicioAdmi');
-  }
-  //DELETE LIBRO
-  public function eliminarLibro()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-    $idLibro = $this->request->getPost('idLibro');
-
-    $materiaLibroModel = new MateriaLibroModel();
-    $materiaLibroModel->eliminarRelacionMateriaLibro($idMateria, $idLibro);
-
-    return redirect()->to('inicioAdmi');
-  }
-
-  //UPDATE LIBRO
-  public function editarLibro()
-  {
-    $idMateria = $this->request->getPost('idLibro');
-    $idLibro = $this->request->getPost('idLibro');
-
-    $data = [
-      'nombreLibro' => $this->request->getPost('nombreLibro'),
-      'descripcionLibro' => $this->request->getPost('descripcionLibro'),
-      'imagenLibro' => $this->request->getPost('imagenLibro'),
-      'pdfLibro' => $this->request->getPost('pdfLibro'),
-    ];
-
-    $materiaLibroModel = new MateriaLibroModel();
-    // Verificar si la relación ya existe
-    if (!$materiaLibroModel->existeRelacion($idMateria, $idLibro)) {
-
-      //instanciar
-      $libroModel = new LibroModel();
-      $libroModel->update($idLibro, $data);
-
-      $materiaLibroModel->insertarRelacionMateriaLibro($idMateria, $idLibro);
-    } else {
-
-      //instanciar
-      $libroModel = new LibroModel();
-      $libroModel->update($idLibro, $data);
-    }
-
-    return redirect()->to('inicioAdmi');
-  }
-
+  
   //----------------------------------------------------------------TEMARIOS---------------------------------------------------------------
 
   //INSERT DE LOS TEMARIOS
   public function crearTemario()
   {
-    $idMateria = $this->request->getPost('idMateria');
-
     $data = [
       'nombreTemario' => $this->request->getPost('nombreTemario'),
-      'descripcionTemario' => $this->request->getPost('descripcionTemario'),
-      'pdfTemario' => $this->request->getPost('pdfTemario'),
+      'contenidoTemario' => $this->request->getPost('contenidoTemario'),
+      'libroTemario' => $this->request->getPost('libroTemario'),
+      'videoTemario' => $this->request->getPost('videoTemario'),
+      'idMateria' => $this->request->getPost('idMateria'),
     ];
 
     $temarioModel = new TemarioModel();
     $temarioModel->insert($data);
-    $idTemario = $temarioModel->insertID();
-
-    $materiaTemarioModel = new MateriaTemarioModel();
-    $materiaTemarioModel->insertarRelacionMateriaTema($idMateria, $idTemario);
 
     return redirect()->to('inicioAdmi');
   }
@@ -298,9 +229,6 @@ class ControleAdmi extends BaseController
   {
     $idMateria = $this->request->getPost('idMateria');
     $idTemario = $this->request->getPost('idTemario');
-
-    $materiaTemarioModel = new MateriaTemarioModel();
-    $materiaTemarioModel->eliminarRelacionMateriaTema($idMateria, $idTemario);
 
     $temarioModel = new TemarioModel();
     $temarioModel->delete($idTemario);
@@ -320,21 +248,10 @@ class ControleAdmi extends BaseController
       'pdfTemario' => $this->request->getPost('pdfTemario'),
     ];
 
-    $materiaTemarioModel = new MateriaTemarioModel();
-    // Verificar si la relación ya existe
-    if (!$materiaTemarioModel->existeRelacion($idMateria, $idTemario)) {
-
       //instanciar
       $temarioModel = new TemarioModel();
       $temarioModel->update($idTemario, $data);
-      $materiaTemarioModel->insertarRelacionMateriaTema($idMateria, $idTemario);
-    } else {
-
-      //instanciar
-      $temarioModel = new TemarioModel();
-      $temarioModel->update($idTemario, $data);
-    }
-
+     
     return redirect()->to('inicioAdmi');
   }
 

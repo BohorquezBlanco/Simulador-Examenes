@@ -3,99 +3,66 @@ html {
   height: 100vh;
 }
 :root{
-  --color-fondo: rgb(255, 255, 255);
-  --color-menu: rgb(255,255,255);
-
-  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
-
-  --color-texto-menu: rgb(0,0,0);
-
-  --color-icon: rgb(47, 156, 47);
-
-  --color-menu-hover:rgb(210, 255, 216);
-  --color-menu-hover-texto:rgb(0,0,0);
-
-  --color-linea:rgb(156, 156, 156);
-
-  --color-icon-boton:rgb(255, 131, 55);
-
-  --color-fondo-boton:rgb(255, 172, 121);
-
-  --color-scroll:rgb(192,192,192) ;
-  --color-scroll-hover:rgb(134,134,134) ;
-
-  --color-eliminar: rgb(228, 125, 125) ;
-  --color-modificar: rgb(63, 192, 63);
-
-  --color-borde-card: rgb(0,0,0);
-
-  --color-texto: rgb(129, 128, 128);
+  --color-1: #0d0f21;
+  --color-2: #041f1e;
+  --color-3: #6f6c81;
+  --color-4: #ffe8d8;
+  --color-5: #e09a73;
+  --color-6: #ab595e;
+  --color-7: #79352f;
+  --color-8: #da2454;
 }
-.modo-autumn{
-  --color-fondo: rgb(0, 0, 0);
-  --color-menu: rgb(0,0,0);
 
-  --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
-
-  --color-texto-menu: rgb(255,255,255);
-
-  --color-icon: rgb(212, 91, 18);
-
-  --color-menu-hover:rgb(87, 33, 0);
-  --color-menu-hover-texto:rgb(255,255,255);
-
-  --color-linea:rgb(255,255,255);
-
-  --color-icon-boton:rgb(108, 194, 87);
-
-  --color-fondo-boton:rgb(17, 65, 5);
-
-  --color-scroll:rgb(68,69,74) ;
-  --color-scroll-hover:rgb(85,85,85) ;
-
-  --color-eliminar: rgb(145, 19, 14);
-  --color-modificar: rgb(17, 65, 5);
-
-  --color-borde-card: rgb(255,255,255);
-
-  --color-texto: rgb(180, 180, 180);
+/*Letras en mayusculas h1, h2, h3 y h4*/
+h1,
+h2,
+h3,
+h4, h5 {
+  text-transform: uppercase;
 }
-*{
+
+/*Fonts h1, h2, h3 y h4*/
+h1 {
+  font-size: 2.7vw;
+}
+
+h2 {
+  font-size: 2.5vw;
+}
+
+h3 {
+  font-size: 2.3vw;
+}
+
+h4 {
+  font-size: 2.1vw;
+}
+
+h5 {
+  font-size: 1.9vw;
+}
+
+p, a {
+  font-size: 1.7vw;
+}
+
+/*Letra, sin margin, ni padding*/
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-}
-body{
-  height: 100vh;
-  width: 100vw;
-  background-color: var(--color-fondo);
+  align-items: center;
 }
 
-/*Letras en mayusculas h1, h2, h3 y h4*/
-h1, h2, h3, h4, h5
-{
-  text-transform: uppercase;
-  color: var(--color-texto-menu);
+/*Body*/
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-4);
+  color: var(--color-1);
+  overflow-x: hidden;
 }
-/*Letras en mayusculas h1, h2, h3 y h4*/
-/*Fonts h1, h2, h3 y h4*/
-h1{
-font-size: 2.7vw;
-}
-h2{
-  font-size: 2.2vw;
-}
-h3{
-  font-size: 1.7vw;
-}
-h4{
-  font-size: 1.2vw;
-}
-p{
-  font-size: 1.2vw;
-}
-/*Fonts h1, h2, h3 y h4*/
 /*Codigo del menu*/
 /*Barra arriba*/
 .menu {
@@ -103,18 +70,18 @@ p{
   top: 0;
   left: 0;
   width: 100%;
-  height: 2.7vw;
+  height: 2.9vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  background-color: var(--color-menu); /* Adjust as needed */
-  border-bottom: 1px solid var(--color-icon); /* Border under the menu */
+  padding: 2px;
+  background-color: var(--color-4); /* Adjust as needed */
+  border-bottom: 1px solid var(--color-1); /* Border under the menu */
   z-index: 50;
 }
 
 .menu .nombreE {
-  margin-top: 10px ;
+  margin-top: 6px ;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -135,22 +102,20 @@ p{
 }
 
 .menu .opciones li {
-  margin-right: 2%;
+  margin-right: 7px;
 }
 
 .menu .opciones a {
   text-decoration: none;
-  color: var(--color-texto-menu);
   font-size: 1.7vw;
   transition: color 0.3s ease;
 }
 
 .menu .opciones a:hover {
-  color: var(--color-menu-hover);
+  color: var(--color-3);
 }
 
 .menu .usuario {
-  border: 1px solid hotpink;
   display: flex;
   align-items: center;
 }
@@ -160,7 +125,6 @@ p{
   height: 2.5vw;
   border-radius: 50%;
   margin-right: 10px;
-  border: 1px solid lightcoral;
 }
 
 .menu .usuario .info-usuario {
@@ -195,8 +159,8 @@ p{
 
 /*main*/
 .active{
-  background-color: var(--color-menu-hover);
-  color: var(--color-menu-hover-texto);
+  background-color: var(--color-7);
+  color: var(--color-4);
 }
 main{
   margin-top: 2.7vw;
@@ -208,37 +172,55 @@ main .center{
   text-align: center;
 }
 
-/*Card*/
+.card {
+  width: 12vw;
+  height: auto;
+  border: 1px solid var(--color-4);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: inline-block; /* Mostrar las tarjetas una al lado de la otra */
+  margin: 1%; /* Espacio entre las tarjetas */
+  margin-right: 20px; /* Espacio entre las tarjetas */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Card Univ*/
 .card-container {
   display: flex;
   flex-wrap: wrap; 
   justify-content: center;
   align-items: center;
 }
-.card {
-  width: 10vw;
-  height: auto;
-  border: 1px solid var(--color-borde-card);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: inline-block; /* Mostrar las tarjetas una al lado de la otra */
-  margin: 1%; /* Espacio entre las tarjetas */
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
+
 .card img {
   width: auto;
   height: 10vw;
+  border-radius: 8px 8px 0 0; /* Ajuste de borde para la imagen */
 }
 .card-body {
-  margin: 1.2%;
+  padding: 10px;
 }
 .card-title {
   margin-top: 0;
   margin-bottom: 1vw;
 }
+/* Estilo para las filas de carreras */
+.university-row {
+  display: flex;
+  flex-wrap: nowrap; /* Evitar que las tarjetas se envuelvan en una sola fila */
+  margin-bottom: 20px; /* Espacio entre las filas de universidades */
+  justify-content: center;
+}
+.university-title{
+  top: 0px;
+  text-decoration: underline;
+  font-size: 1.8vw;
+  color: var(--color-7);
+}
+
 /*Botones*/
 button{
   cursor: pointer;
@@ -250,8 +232,8 @@ button{
   font-size: 1.2vw;
   padding: 8px 16px;
   border: 0.5px solid;
-  border-color: var(--color-modificar);
-  color: var(--color-menu-hover-texto);
+  border-color: var(--color-7);
+  color: var(--color-2);
   background-color: transparent;
   border-radius: 4px;
   cursor: pointer;
@@ -261,18 +243,20 @@ button{
   font-size: 1.2vw;
   padding: 8px 16px;
   border: 0.5px solid;
-  border-color: var(--color-eliminar);
-  color: var(--color-menu-hover-texto);
+  border-color: var(--color-3);
+  color: var(--color-2);
   background-color: transparent;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 .btn-modificar:hover {
-  background-color: var(--color-modificar);
+  background-color: var(--color-6);
+  color: var(--color-4);
 }
 .btn-eliminar:hover {
-  background-color: var(--color-eliminar);
+  background-color: var(--color-2);
+  color: var(--color-4);
 }
 
 /*modal*/
@@ -293,15 +277,14 @@ button{
   top: 50%; /* Centrado verticalmente */
   left: 50%; /* Centrado horizontalmente */
   transform: translate(-50%, -50%);
-  background-color: var(--color-menu);
-
+  background-color: var(--color-5);
   border-radius: 8px;
   width: 30%; /* Ancho del modal */
   height: auto;
   z-index: 10000; /* Asegura que esté por encima del fondo oscuro */
-  border-top: 10px solid var(--color-icon); /* Borde superior */
-  border-bottom: 10px solid var(--color-icon); /* Borde inferior */
-  color: var(--color-texto-menu);
+  border-top: 10px solid var(--color-7); /* Borde superior */
+  border-bottom: 10px solid var(--color-7); /* Borde inferior */
+  color: var(--color-1);
   padding: 5px;
 }
 
@@ -309,7 +292,7 @@ button{
   display: flex;
   align-items: center;
 }
-.contenido-modal .head .h3{
+.contenido-modal .head .h5{
   margin-right: auto;
 }
 .contenido-modal .head .cerrar{
@@ -317,7 +300,7 @@ button{
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-icon);
+  color: var(--color-1);
   font-size: 3vw;
 }
 .contenido-modal .form-label{
@@ -328,7 +311,7 @@ button{
 .contenido-modal .form-control{
   width: 100%;
   font-size: 1.2vw;
-  border: 0.5px solid var(--color-texto-menu);
+  border: 0.5px solid var(--color-1);
   border-radius: 5px;
   margin-bottom: 0.5vw;
   height: 1.5vw;
@@ -350,11 +333,17 @@ button{
 select{
   width: 100%;
   font-size: 1.2vw;
-  border: 0.5px solid var(--color-texto-menu);
+  border: 0.5px solid var(--color-1);
   border-radius: 5px;
   margin-bottom: 0.5vw;
   background-color: transparent;
   height: 1.6vw;
+  background-color: white; /* Fondo blanco para las opciones */
+  color: var(--color-1);
+}
+select option {
+  background-color: white; /* Fondo blanco para las opciones */
+  color: var(--color-1);
 }
 .contenido-modal .añadir{
   margin-top: 5px;
@@ -366,7 +355,7 @@ select{
   border: none;
 }
 .head .cerrar ion-icon {
-  font-size: 1.2vws; /* Tamaño del icono en píxeles */
+  font-size: 1.2vw; /* Tamaño del icono en píxeles */
 }
 
 .abrirModal{
@@ -392,11 +381,11 @@ select{
   align-items: center;
   text-align: center;
 }
-.cambiar h4{
-  color: var(--color-texto);
+.cambiar h5{
+  color: var(--color-7);
 }
 .cambiar svg{
-  fill: var(--color-texto);
+  fill: var(--color-7);
   width: 8vw;
 }
 .botar {
@@ -409,108 +398,94 @@ select{
   align-items: center;
   text-align: center;
 }
-.botar h4{
-  color: var(--color-texto);
+.botar h5{
+  color: var(--color-7);
 }
 .botar svg{
-  fill: var(--color-texto);
+  fill: var(--color-7);
   width: 8vw;
 }
 .dragging {
   opacity: 0.5; /* Reduce la opacidad mientras se está arrastrando */
 }
 
-/*Responsive alto*/
-@media (max-height:660px){
-  .menu .nombreE{
-    margin-bottom: 12px;
-  }
-  .menu .modo-otoño{
-    margin-top: 5px;
-  }
-}
-/*Responsive ancho*/
-@media (max-width:600px){
-  .menu {
-    position: fixed;
-  }
-  main{
-    margin-left: 0;
-  }
-}
-@keyframes animarsuperior {
-  from {top:-300px; opacity:0}
-  to {top:0; opacity:1}
+/*scrollbar*/
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  /* Estilos para modo oscuro */
-  body {
-    --color-fondo: rgb(0, 0, 0);
-    --color-menu: rgb(0, 0, 0);
-  
-    --imagen-fondo: url('https://png.pngtree.com/thumb_back/fw800/background/20231102/pngtree-aromatic-blend-exquisite-composition-of-dried-herbal-tea-spices-fruits-hibiscus-image_13794222.png');
-  
-    --color-texto-menu: rgb(255, 255, 255);
-  
-    --color-icon: rgb(212, 91, 18);
-  
-    --color-menu-hover: rgb(87, 33, 0);
-    --color-menu-hover-texto: rgb(255, 255, 255);
-  
-    --color-linea: rgb(255, 255, 255);
-  
-    --color-icon-boton: rgb(108, 194, 87);
-  
-    --color-fondo-boton: rgb(17, 65, 5);
-  
-    --color-scroll: rgb(68, 69, 74);
-    --color-scroll-hover: rgb(85, 85, 85);
-  
-    --color-eliminar: rgb(145, 19, 14);
-    --color-modificar: rgb(17, 65, 5);
-  
-    --color-borde-card: rgb(255, 255, 255);
-  
-    --color-texto: rgb(180, 180, 180);
-  
-    --color-fondo-card: rgb(41, 41, 41);
-  }
+body::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-@media (prefers-color-scheme: light) {
-  /* Estilos para modo claro */
-  body {
-  --color-fondo: rgb(255, 255, 255);
-  --color-menu: rgb(255, 255, 255);
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-7);
+  border-radius: 20px;
+}
+.center{
+  align-items: center;
+}
+/*Datos de excel*/
+/* Estilos para el contenedor */
+.contenidoT {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin: 2px;
+  height: 2vw;
+  margin-bottom: 2vw;
+}
 
-  --imagen-fondo: url('https://img.freepik.com/fotos-premium/fondo-blanco-rematado-muchos-recursos-graficos-hojas-verdes_131346-1507.jpg');
-
-  --img-beneficios: url('/public/img/fondo.png');
-
-  --color-texto-menu: rgb(0, 0, 0);
-
-  --color-icon: rgb(89, 189, 89);
-
-  --color-menu-hover: rgb(210, 255, 216);
-  --color-menu-hover-texto: rgb(0, 0, 0);
-
-  --color-linea: rgb(156, 156, 156);
-
-  --color-icon-boton: rgb(255, 131, 55);
-
-  --color-fondo-boton: rgb(255, 172, 121);
-
-  --color-scroll: rgb(192, 192, 192);
-  --color-scroll-hover: rgb(134, 134, 134);
-
-  --color-eliminar: rgb(228, 125, 125);
-  --color-modificar: rgb(63, 192, 63);
-
-  --color-borde-card: rgb(0, 0, 0);
-
-  --color-texto: rgb(129, 128, 128);
-
-  --color-fondo-card: rgb(228, 228, 228);
-  }
+/* Estilos para el labelExcel */
+.labelExcel {
+  margin-left: 5%;
+  margin-top: 2px;
+  width: 16%; 
+  height: 2vw;
+  box-sizing: border-box; 
+  font-size: 1.6vw;
+  align-items: end;
+}
+.selectM{
+  height: 2vw;
+}
+/*celdas*/
+.contTable {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  width: 90%;
+}
+th, td {
+  border: 1px solid var(--color-1);
+  padding: 2px;
+  text-align: center;
+  outline: none; /* Evitar el contorno al editar */
+}
+th {
+  background-color: var(--color-7);
+  color: var(--color-4);
+}
+td {
+  border: 1px solid var(--color-1);
+  cursor: pointer; /* Mostrar cursor al pasar sobre las celdas */
+  height: 3vw;
+  font-size: 1.5vw;
+  align-items: start;
+}
+.botonT{
+  margin-top: 5px;
+  width: 95%;
+  text-align: end;
+}
+.enviarT{
+  background-color: var(--color-7);
+  color: var(--color-4);
+  height: 3vw ;
+  width: 11vw;
 }

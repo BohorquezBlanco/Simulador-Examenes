@@ -77,7 +77,7 @@ class ControleUser extends BaseController
         ]);
 
         // Redirigir al usuario a la página de inicio
-        return redirect()->to('/')->with('msg', 'Bienvenido, ' . $user->nombre, $user->correo, $imgUsuario );
+        return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' . $user->nombre, $user->correo, $imgUsuario );
     }
 
 

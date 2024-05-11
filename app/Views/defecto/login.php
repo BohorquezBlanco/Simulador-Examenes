@@ -12,15 +12,15 @@
   <main class="login">
     <form action="<?php echo base_url() . 'login'; ?>" method="POST">
       <h1>Iniciar Sesión</h1>
-
+      <!--Correo-->
       <label for="username">Correo</label>
       <input type="text" name="correo" id="username" placeholder="Ingrese su usuario" required>
-
+      <!--Contraseña-->
       <label for="password">Contraseña</label>
       <input type="password" name="password" id="password" placeholder="Ingrese su contraseña" required>
-
+      <!--Manda a errores de la contraseña-->
       <p><?php echo session('errors.password'); ?></p>
-
+      <!--Ingresa al sistema-->
       <button type="submit">INGRESAR</button>
     </form>
   </main>

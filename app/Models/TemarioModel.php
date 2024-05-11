@@ -15,7 +15,7 @@ class TemarioModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idTemario','nombreTemario', 'descripcionTemario','pdfTemario','videoTemario'];
+    protected $allowedFields = ['idTemario','nombreTemario', 'contenidoTemario','libroTemario','videoTemario', 'idMateria'];
 
     // Dates
     protected $useTimestamps = true;

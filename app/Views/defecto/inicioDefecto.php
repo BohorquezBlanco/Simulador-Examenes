@@ -13,12 +13,6 @@
 <!--BODY-->
 
 <body>
-  <!--Icono de menu arriba-->
-  <div class="menuA">
-    <ion-icon name="menu-outline"></ion-icon>
-    <ion-icon name="close-circle-outline"></ion-icon>
-  </div>
-  <!--Icono de menu arriba-->
   <!--MENÚ-->
   <div class="menu">
     <!--NOMBRE EMPRESA-->
@@ -27,13 +21,6 @@
       <img id="logo" src="<?php echo base_url('img/AnisSoft.png'); ?>">
     </div>
     <!--Logo de la empresa-->
-    <!--Clickear para el modo otoño-->
-    <div class="modo-otoño">
-      <a id="otoño" title="Otoño">
-        <ion-icon id="mode" name="leaf-outline"></ion-icon>
-      </a>
-    </div>
-    <!--Clickear para el modo otoño-->
     <!--Clickear para acceder al login-->
     <div class="inicio-usuario">
       <a href="<?php echo base_url(); ?>iniciarSesion" id="inicio" title="Iniciar sesión">
@@ -43,7 +30,7 @@
     <!--Clickear para acceder al login-->
   </div>
   <!--Contenedor barra arriba "Practica con nosotros"-->
-  <div class="contenedorP">
+  <div class="contenedorP" style="background-image: url('<?php echo base_url('img/fondoPB.png'); ?>');">
     <h1>PRACTICA CON NOSOTROS</h1>
   </div>
   <!--Contenedor barra arriba "Practica con nosotros"-->
@@ -72,9 +59,9 @@
         <th>Simulacro de examen</th>
       </tr>
       <tr>
-        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR87Z5qOF3bmLBvV_P7zsCVbHAUvZuwsyKDfrvlUm1KWQ&s" alt="Examenes pasados"></td>
-        <td><img src="https://miprofevirtual.online/wp-content/uploads/2020/04/resoluci%C3%B3n-tareas-y-ex%C3%A1menes-matem%C3%A1tica-por-whatsapp.jpg" alt="Resolución de examenes"></td>
-        <td><img src="https://www.cazatuplaza.com/blog/wp-content/uploads/2021/03/examen-tpo-test-1.jpg" alt=""></td>
+        <td><img src="<?php echo base_url('img/imgB1.jpeg'); ?>"></td>
+        <td><img src="<?php echo base_url('img/imgB2.jpg'); ?>" alt="Resolución de examenes"></td>
+        <td><img src="<?php echo base_url('img/imgB3.jpg'); ?>" alt=""></td>
       </tr>
       <tr>
         <td>Usted podrá dar examenes pasados.</td>
@@ -90,17 +77,25 @@
   </div>
   <div class="contenedorW">
     <!--Contenedor 1-->
+    <!-- Contenedor 1 -->
     <div class="contenedor 1">
-      <img src="<?php echo base_url('img/fondo.png'); ?>" alt="Diseño de paginas web">
-      <h3>Diseño de paginas web</h3>
-      <p>Diseñamos páginas web a su estilo</p>
+      <div class="texto">
+        <h3>Diseño de páginas web</h3>
+        <p>Diseñamos páginas web a su estilo</p>
+      </div>
+      <div class="imagen">
+        <img src="<?php echo base_url('img/a1.png'); ?>" alt="Diseño de páginas web">
+      </div>
     </div>
-    <!--Contenedor 1-->
-    <!--Contenedor 2-->
-    <div class="contenedor 2">
-      <img src="<?php echo base_url('img/fondo.png'); ?>" alt="Creación de documentos">
-      <h3>Creación de documentos</h3>
-      <p>Creamos documentos de todas las plataformas</p>
+    <!-- Contenedor 2 -->
+    <div class="contenedor 2" style="display: none;">
+      <div class="texto">
+        <h3>Creación de documentos</h3>
+        <p>Creamos documentos de todas las plataformas</p>
+      </div>
+      <div class="imagen">
+        <img src="<?php echo base_url('img/a2.png'); ?>" alt="Creación de documentos">
+      </div>
     </div>
     <!--Contenedor 2-->
     <!--Botones antes y despues -->

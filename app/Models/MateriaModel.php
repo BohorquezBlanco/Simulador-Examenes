@@ -25,9 +25,4 @@ class MateriaModel extends Model
     protected $deletedField  = 'fecha_elimina';
     // En tu controlador o modelo de CodeIgniter
 
-    public function libros()
-    {
-        return $this->belongsToMany('App\Models\LibroModel', 'materia_libro', 'idMateria', 'idLibro');
-    }
-
 }
