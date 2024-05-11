@@ -1,10 +1,6 @@
-   //VARIABLE GLOBAL DONDE AGARRAMOS EL ID SELECT CADA VEZ QUE CARGUE 
-var globalCarrData=1; // Definir la variable global
-
     //###################################################-MATERIA-#########################################################  
         //---------------------------------SELECT MATERIA-------------------------------------------------
-        function selecMateria() {
-          desvincularDragover();
+        function selecMateria(globalCarrData) {
           $('#selectMatAjax').empty();//BORRA TODO EL CONTENEDOR 
           var uniData = {
             idCarrera: globalCarrData, // Crear un objeto con lo necesario
@@ -104,8 +100,6 @@ var globalCarrData=1; // Definir la variable global
       
             });
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--AQUI SE REALIZA EL EVENTO A LA HORA DE ARRASTRAR A ELIMINAR--!!!!!!!!!!!!!!!!!!!!!!!!
-            // Desvincular los eventos 'dragover' y 'drop' del elemento '#modificar'
-    desvincularDragover()
 
             $('#eliminarM').on('dragover', function(event) {
               event.preventDefault();
@@ -181,7 +175,7 @@ var globalCarrData=1; // Definir la variable global
                 success: function(response) {
                     console.log('Materia editada con éxito:', response);
                     // Realizar alguna acción adicional si es necesario
-                    selecMateria();
+                    selecMateria(globalCarrData);
                     $('#modalBase').hide(); // Ocultar el modal
                 },
                 error: function(error) {
@@ -251,7 +245,7 @@ var globalCarrData=1; // Definir la variable global
               success: function(response) {
                   console.log('Materia agregada con éxito:', response);
                   // Realizar alguna acción adicional si es necesario
-                  selecMateria();
+                  selecMateria(globalCarrData);
                   $('#modalBase').hide(); // Ocultar el modal
               },
               error: function(error) {
@@ -274,7 +268,7 @@ var globalCarrData=1; // Definir la variable global
                       success: function(response) {
                           console.log('Materia eliminada con éxito:', response);
                           // Realizar alguna acción adicional si es necesario
-                          selecMateria();
+                          selecMateria(globalCarrData);
                           $('#modalBase').hide(); // Ocultar el modal
                       },
                       error: function(error) {
@@ -289,6 +283,6 @@ $('.carreraSelect').change(function() {
   globalCarrData = idCarrera; // Asignar uniData a la variable global
   console.log(globalCarrData);
 
-  selecMateria()
+  selecMateria(globalCarrData)
 });
 

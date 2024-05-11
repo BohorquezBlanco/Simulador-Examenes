@@ -1,10 +1,7 @@
-//VARIABLE GLOBAL DONDE AGARRAMOS EL ID SELECT CADA VEZ QUE CARGUE 
-var globalUniData=1; // Definir la variable global
-
+globalCarrData=1; // Definir la variable global
     //###################################################-CARRERA-#########################################################  
         //---------------------------------SELECT CARRERA-------------------------------------------------
-        function selecCarrera() {
-          desvincularDragover()
+        function selecCarrera(globalUniData) {
           $('#selectCarrAjax').empty();//BORRA TODO EL CONTENEDOR 
           $('.carreraSelect').empty();//BORRA TODO EL CONTENEDOR 
 
@@ -19,7 +16,6 @@ var globalUniData=1; // Definir la variable global
             success: function(response) {
             //encabezado del select       
     
-            $('.carreraSelect').append( `<option value="1">Carrera:</option>`);
         
             // Iterar sobre cada universidad y agregarlo al contenedor
             $.each(response, function(index, carrera) {
@@ -48,6 +44,14 @@ var globalUniData=1; // Definir la variable global
             $('.carreraSelect').append(filtroCarrera);
             });
             //agregar el boton de crear universidad 
+
+
+          // Asignar los valores a las variables globales
+          var datosUniversidad = obtenerPrimerIdYNombre(response, "idCarrera", "nombreCarrera");
+          globalCarrData = datosUniversidad.primerId;
+          globalCarrNombre = datosUniversidad.primerNombre;
+          selecMateria(globalCarrData);
+
 
 
             // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
@@ -189,7 +193,7 @@ var globalUniData=1; // Definir la variable global
                 success: function(response) {
                     console.log('Carrera editada con éxito:', response);
                     // Realizar alguna acción adicional si es necesario
-                    selecCarrera();
+                    selecCarrera(globalUniData);
                     $('#modalBase').hide(); // Ocultar el modal
                 },
                 error: function(error) {
@@ -258,7 +262,7 @@ var globalUniData=1; // Definir la variable global
               success: function(response) {
                   console.log('Carrera agregada con éxito:', response);
                   // Realizar alguna acción adicional si es necesario
-                  selecCarrera();
+                  selecCarrera(globalUniData);
                   $('#modalBase').hide(); // Ocultar el modal
               },
               error: function(error) {
@@ -267,7 +271,7 @@ var globalUniData=1; // Definir la variable global
           });
       });
       
-        //---------------------------------DELETE CARRERA-------------------------------------------------
+//---------------------------------DELETE CARRERA-------------------------------------------------
       $('#contenidoModal').on('click', '#eliminarCarrera', function() {
         event.preventDefault(); // Evitar el envío del formulario por defecto
         var carreraData = $(this).closest('.botones').data('carrera');
@@ -281,7 +285,7 @@ var globalUniData=1; // Definir la variable global
                       success: function(response) {
                           console.log('Carrera eliminada con éxito:', response);
                           // Realizar alguna acción adicional si es necesario
-                          selecCarrera();
+                          selecCarrera(globalUniData);
                           $('#modalBase').hide(); // Ocultar el modal
                       },
                       error: function(error) {
@@ -295,6 +299,7 @@ var globalUniData=1; // Definir la variable global
 $('.universidadSelect').change(function() {
   var idU = $(this).val();
   globalUniData = idU; // Asignar uniData a la variable global
-  console.log(globalUniData);
-  selecCarrera()
+  selecCarrera(globalUniData);
+  // Seleccionar la opción correspondiente en el segundo filtro
+  $('.universidadSelect').val(idU);
 });

@@ -1,8 +1,8 @@
+var globalUniData=null; // Definir la variable global
 
-//#######################################-UNIVERSIDAD-###################################################  
     //---------------------------------SELECT UNIVERCITY-------------------------------------------------
     function selecUniversidad() {
-      desvincularDragover()
+
         $('#selectUniAjax').empty();//BORRA TODO EL CONTENEDOR 
         $('.universidadSelect').empty();//BORRA TODO EL CONTENEDOR 
 
@@ -30,14 +30,21 @@
               </div>
               `;
             $('#selectUniAjax').append(universidadHTML);
-
             //llenar el filtro
-            var filtroUniversidad =               
-            ` <option value="${unis.idU}">${unis.nombreU}</option>`;
-            $('.universidadSelect').append(filtroUniversidad);   
+            var filtroUniversidad = ` <option value="${unis.idU}">${unis.nombreU}</option>`;
+            $('.universidadSelect').append(filtroUniversidad);  
+
           });
 
 
+          // Asignar los valores a las variables globales
+          datosUniversidad = obtenerPrimerIdYNombre(response, "idU", "nombreU");
+          globalUniData = datosUniversidad.primerId;
+          globalUniNombre = datosUniversidad.primerNombre;
+
+          console.log("El primer id de univer es:", globalUniData);
+          console.log("El primer nombre de uni es:", globalUniNombre);
+          selecCarrera(globalUniData);
           //agregar el boton de crear universidad 
           // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
           $('#selectUniAjax').append(`
@@ -45,7 +52,7 @@
               <ion-icon name="add-circle-outline"></ion-icon>
             </button>  
           `);
-    
+
           // Agregar funcionalidad de arrastrar y soltar
           $('.draggable').on('dragstart', function(event) {
             var idUniversidad = $(this).attr('id');
@@ -69,7 +76,7 @@
             var contenidoModal = 
                 `
                 <div class="head">
-                  <h3>Editar Universidad/instituto</h3>
+                  <h3>Modificar Universidad/instituto</h3>
                   <button class="cerrar">
                     <ion-icon name="close-circle-outline"></ion-icon>
                   </button>
