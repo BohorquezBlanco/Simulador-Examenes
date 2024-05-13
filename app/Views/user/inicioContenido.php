@@ -72,23 +72,7 @@
   </div>
   </section>
   <!--MATERIAS-->
-  <!--LIBROS-->
-  <section id="libro" class="seccion">
-    <h2 class="center">LIBROS</h2>
-    <div class="card-container">
-      <?php $n = 0; ?>
-      <?php foreach ($libros as $libro) : ?>
-        <div class="card<?php $n; ?>" draggable="true" id="<?php echo $libro['idLibro']; ?>" data="<?php echo base_url('eliminarLibro'); ?>" aria-required="<?php echo base_url('editarMaterias'); ?>">
-          <img src="<?php echo $libro['imagenLibro']; ?>" alt="By AnisSoft" title="<?php echo $libro['nombreLibro']; ?>" />
-          <div class="card-body">
-            <p class="card-title"><?php echo $libro['nombreLibro']; ?></p>
-          </div>
-        </div>
-        <?php $n = $n + 1; ?>
-      <?php endforeach; ?>
-    </div>
-  </section>
-  <!--LIBROS-->
+ 
   <!--TEMARIOS, PREGUNTAS-->
   <!--TEMARIOS, PREGUNTAS-->
   <!--VIDEOS-->
