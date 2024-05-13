@@ -1,0 +1,209 @@
+html,
+body {
+  height: 100%;
+}
+
+/*Modo verano*/
+:root {
+  /*colores*/
+  --color-1: #0d0f21;
+  --color-9: #fff; 
+  --color-10: #f0f0f0; 
+}
+
+/*Letras en mayusculas h1, h2, h3 y h4*/
+h1,h2,h3,h4,h5 {
+  text-transform: uppercase;
+}
+h1{
+  font-size: var(--Th1);
+}
+h2{
+  font-size: var(--Th1);
+}
+h3{
+  font-size: var(--Th3);
+}
+h4{
+  font-size: var(--Th4);
+}
+h5{
+  font-size: var(--Th5);
+}
+
+p, a{
+  font-size: var(--txtN);
+}
+
+/*Letra, sin margin, ni padding*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:Arial, Helvetica, sans-serif;
+  align-items: center;
+}
+
+/*Body*/
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-9);
+  color: var(--color-1);
+  overflow-x: hidden;
+}
+
+.loginT {
+  height: 100%;
+  width: 100%;
+  display: flex; 
+  justify-content: space-around;
+  align-items: center;
+}
+
+.section {
+  flex: 1; 
+  padding: 20px;
+}
+
+.form {
+  margin: 0 20px; 
+}
+.nat{
+  text-align: end;
+}
+
+form {
+  background-color: var(--color-10); 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--color-1); 
+}
+form h3{
+  text-align: center;
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-10);
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-1);
+  color: var(--color-9);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-9);
+  color: var(--color-1);
+}
+
+img {
+  width: 50%; /* Ajustar imágenes al ancho del contenedor */
+  height: auto;
+}
+
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+/*Celular*/
+/* Media query para pantallas de celular en orientación vertical */
+@media (max-width: 768px) and (max-width: 767px) {
+  :root{
+    /*tamaños*/
+    --tamano-contenedor: 250px;
+    --tamano-cardB: 110px;
+    --tamano-imagen: 200px;
+
+    /*fuentes*/
+    --Th1: 24px;
+    --Th2: 22.5px;
+    --Th3: 21px;
+    --Th4: 19.5px;
+    --Th5: 18px;
+  
+    --txtN: 14px;
+    }
+}
+
+/*Tablet*/
+/* Media query para tablet en orientación vertical y horizontal */
+@media (min-width: 768px) and (max-width: 1024px) {
+  :root{
+    /*tamaños*/
+    --tamano-contenedor: 300px;
+    --tamano-cardB: 140px;
+    --tamano-imagen: 250px;
+
+    /*fuentes*/
+    --Th1: 30px;
+    --Th2: 28px;
+    --Th3: 26px;
+    --Th4: 24px;
+    --Th5: 22px;
+  
+    --txtN: 20px;
+    }
+}
+
+/*Laptops*/
+/* Media query para laptops */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  :root{
+    /*tamaños*/
+    --tamano-contenedor: 450px;
+    --tamano-cardB: 215px;
+    --tamano-imagen: 400px;
+
+    /*fuentes*/
+    --Th1: 36px;
+    --Th2: 33px;
+    --Th3: 30px;
+    --Th4: 27px;
+    --Th5: 24px;
+  
+    --txtN: 21px;
+    }
+}
+
+/*pc*/
+/* Media query para monitores de escritorio */
+@media (min-width: 1441px) {
+  /**/
+  :root{
+  /*tamaños*/
+  --tamano-contenedor: 600px;
+  --tamano-cardB: 290px;
+  --tamano-imagen: 550px;
+  
+  /*fuentes*/
+  --Th1: 48px;
+  --Th2: 43.5px;
+  --Th3: 39px;
+  --Th4: 34.5px;
+  --Th5: 30px;
+
+  --txtN: 26px;
+  }
+}
