@@ -352,6 +352,8 @@ button{
 .celda {
   flex: 1; /* Ocupa el espacio restante */
   align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 select{
   font-size: var(--txtNA);
@@ -361,7 +363,7 @@ select{
   flex: 1;
   background-color: white; /* Fondo blanco para las opciones */
   color: var(--color-1);
-  width: var(--tamano-select);
+  width: 100%;
 }
 select option {
   background-color: white; /* Fondo blanco para las opciones */

@@ -156,7 +156,7 @@
       <h5 class="center">TEMARIOS</h5>
       <div class="contenido">
         <div class="labelSelect">Seleccione materia</div>
-        <div class="select">
+        <div class="celda">
           <select name="idM">
             <?php foreach ($materias as $materia) : ?>
               <?php
