@@ -10,27 +10,27 @@ use App\Models\LibroModel;
 
 class ControleUser extends BaseController
 {
-     public function index()
-     {
-         $session = session(); // Accede al servicio de sesiones
-         $idseccion = $session->get('tipo');
-         if ($idseccion == 1) {
-             return view('user/inicioUser');
-         } else {
-             if ($idseccion == 2) {
-                 return redirect()->to(base_url() . '/inicioAdmi');
-             } else {
-                 return view('defecto/inicioDefecto');
-             }
-         }
-     }
- 
-     //INICIAR SESION
-     public function iniciarSesion()
-     {
-         return view('defecto/login');
-     }
- 
+    public function index()
+    {
+        $session = session(); // Accede al servicio de sesiones
+        $idseccion = $session->get('tipo');
+        if ($idseccion == 1) {
+            return view('user/inicioUser');
+        } else {
+            if ($idseccion == 2) {
+                return redirect()->to(base_url() . '/inicioAdmi');
+            } else {
+                return view('defecto/inicioDefecto');
+            }
+        }
+    }
+
+    //INICIAR SESION
+    public function iniciarSesion()
+    {
+        return view('defecto/login');
+    }
+
     public function login()
     {
         // Validar campos de entrada
@@ -67,17 +67,22 @@ class ControleUser extends BaseController
 
         // Si el usuario y la contraseña son correctos, obtener la URL de la imagen del usuario
         $imgUsuario = $user->imgUsuario;
+        $idU = $user->idUsuario;
+
+        $contU = $user->password;
 
         // Iniciar sesión
         session()->set([
+            'id_usuario' => $idU,
             'correo' => $user->correo,
             'nombre' => $user->nombre,
-            'img' => $imgUsuario, // Guardar la URL de la imagen del usuario en la sesión
+            'img' => $imgUsuario,
+            'cont' => $contU,
             'is_logged' => true
         ]);
 
         // Redirigir al usuario a la página de inicio
-        return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' . $user->nombre, $user->correo, $imgUsuario );
+        return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' . $user->nombre, $user->correo, $imgUsuario,  $idU, $contU);
     }
 
 
@@ -86,8 +91,8 @@ class ControleUser extends BaseController
     {
         // Eliminar todos los datos de la sesión
         session()->destroy();
-    
+
         // Redirigir al usuario a la página de inicio de sesión o a cualquier otra página deseada
-        return redirect()->to('/')->with('msg', 'Sesión Cerrada Correctamente' );
+        return redirect()->to('/')->with('msg', 'Sesión Cerrada Correctamente');
     }
 }

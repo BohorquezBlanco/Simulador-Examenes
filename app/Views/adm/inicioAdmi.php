@@ -9,14 +9,28 @@
   <link href="<?php echo base_url(); ?>css/styleA.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <!--HEADER-->
 <!--BODY-->
 
 <body>
   <!--MENÚ-->
+  <button class="toggle-btn" onclick="toggleMenu()">☰</button>
+  <div class="menu-responsive">
+    <ul>
+      <a onclick="mostrarSeccion('univInst')" class="active">Universidades</a>
+      <a onclick="mostrarSeccion('carrera')">Carreras</a>
+      <a onclick="mostrarSeccion('materia')">Materias</a>
+      <a onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a>
+      <a onclick="mostrarSeccion('temas')">Temas</a>
+      <a onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a>
+      <a onclick="mostrarSeccion('usuario')">Usuario</a>
+      <a onclick="mostrarSeccion('cerrarS')">Cerrar sesión</a>
+    </ul>
+  </div>
   <div class="menu">
-    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
     <!-- NOMBRE EMPRESA -->
     <div class="nombreE">
       <img id="logo" src="<?php echo base_url('img/AnisSoft.png'); ?>">
@@ -25,12 +39,12 @@
     <nav class="opciones">
       <ul>
         <!-- List Items for Navigation Links -->
-        <li><a href="#" onclick="mostrarSeccion('univInst')" class="active">Universidades</a></li>
-        <li><a href="#" onclick="mostrarSeccion('carrera')">Carreras</a></li>
-        <li><a href="#" onclick="mostrarSeccion('materia')">Materias</a></li>
-        <li><a href="#" onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a></li>
-        <li><a href="#" onclick="mostrarSeccion('tema')">Temas</a></li>
-        <li><a href="#" onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a></li>
+        <li><a onclick="mostrarSeccion('univInst')" class="active">Universidades</a></li>
+        <li><a onclick="mostrarSeccion('carrera')">Carreras</a></li>
+        <li><a onclick="mostrarSeccion('materia')">Materias</a></li>
+        <li><a onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a></li>
+        <li><a onclick="mostrarSeccion('temas')">Temas</a></li>
+        <li><a onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a></li>
       </ul>
     </nav>
     <!-- Información de Usuario -->
@@ -42,6 +56,13 @@
             <span class="nombre"><?php echo session('nombre'); ?></span>
             <hr>
             <span class="email"><?php echo session('correo'); ?></span>
+          </div>
+          <div class="acciones-usuario">
+            <button onclick="mostrarOpciones()" class="boton-usuario"><ion-icon name="caret-down-circle-outline"></ion-icon></button>
+            <div id="opcionesUsuario" class="desplegable">
+              <a onclick="mostrarSeccion('usuario')">Editar usuario</a>
+              <a onclick="mostrarSeccion('cerrarS')">Cerrar sesión</a>
+            </div>
           </div>
         </div>
       <?php endif; ?>
@@ -55,7 +76,7 @@
     <div class="modal abrir" id="modalBase">
       <div class="contenido-modal">
         <div id="contenidoModal">
-            <!--AQUI SE ALMACENARAN LOS DISTINTOS TIPOS DE MODALES-->
+          <!--AQUI SE ALMACENARAN LOS DISTINTOS TIPOS DE MODALES-->
         </div>
       </div>
     </div>
@@ -64,8 +85,8 @@
     <!--UNIVERSIDAD-->
     <section id="univInst" class="seccion">
       <h5 class="center">UNIVERSIDADES E INSTITUTOS</h5>
-      <div class="card-container" id="selectUniAjax">   
-      <!--En este div cargara las universidades por medio de ajax-->
+      <div class="card-container" id="selectUniAjax">
+        <!--En este div cargara las universidades por medio de ajax-->
       </div>
       <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarU">
@@ -84,22 +105,20 @@
     <!--UNIVERSIDAD-->
     <!--CARRERAS-->
     <section id="carrera" class="seccion">
-    <h5 class="center">CARRERAS</h5>
+      <h5 class="center">CARRERAS</h5>
       <!--CARRERAS_FILTRO_MATERIAS-->
       <div class="contenido">
-      <div class="labelSelect">Seleccione Universidad</div>
-      <div class="celda">
-          <select  class="universidadSelect">
-          <option value="1">Universidad:</option>
-        </select>
-      </div>
+        <div class="labelSelect">Seleccione Universidad</div>
+        <div class="celda">
+          <select class="universidadSelect">
+            <option value="1">Universidad:</option>
+          </select>
+        </div>
       </div>
       <!--CARRERAS_FILTRO_MATERIAS-->
-
-      <div class="card-container" id="selectCarrAjax">   
+      <div class="card-container" id="selectCarrAjax">
         <!--AQUI SE MUESTRAN LAS CARRERAS-->
       </div>
-
       <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarC">
         <p>Modificar</p>
@@ -118,12 +137,12 @@
     <!--MATERIAS-->
     <section id="materia" class="seccion">
       <h5 class="center">MATERIAS</h5>
-        <!--CARRERAS_FILTRO_MATERIAS-->
-        <div class="contenido">
+      <!--CARRERAS_FILTRO_MATERIAS-->
+      <div class="contenido">
         <div class="labelSelect">Seleccione Universidad</div>
         <div class="celda">
-          <select  class="universidadSelect">
-             <option value="1">Universidad:</option>
+          <select class="universidadSelect">
+            <option value="1">Universidad:</option>
           </select>
         </div>
         <div class="labelSelect">Seleccione Carrera</div>
@@ -132,10 +151,9 @@
             <option value="1">Carrera:</option>
           </select>
         </div>
-        </div>
-         <div class="card-container" id="selectMatAjax">   
-        </div>
-
+      </div>
+      <div class="card-container" id="selectMatAjax">
+      </div>
       <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarM">
         <p>Modificar</p>
@@ -190,16 +208,72 @@
       </div>
     </section>
     <!--TEMARIOS, LIBROS, VIDEOS-->
+    <!--TEMAS-->
+    <section id="temas" class="seccion">
+      <h5 class="center">TEMAS</h5>
+
+    </section>
+    <!--TEMAS-->
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
       <h5 class="center">PREGUNTAS</h5>
-      <div class="card-container">
-      </div>
+
     </section>
     <!--PREGUNTAS Y EXAMENES-->
+    <!--USUARIO-->
+    <section id="usuario" class="seccion">
+      <?php if (session()->has('is_logged') && session('is_logged')) : ?>
+        <form id="formUsuario" method="POST" enctype="multipart/form-data">
 
+          <h5 class="center">USUARIO</h5>
+          <!-- Contenedor principal -->
+          <div class="perfil-info">
 
-    
+            <!-- Sección de imagen de perfil -->
+            <div class="perfil-imagen">
+              <label for="file-upload" class="changeIU">
+                <img src="<?php echo session('img'); ?>" alt="Imagen de perfil" id="preview-image">
+                <input type="file" id="file-upload" name="imagen" accept="image/*" style="display: none;" onchange="previewImage(event)">
+              </label>
+            </div>
+
+            <!-- Sección de información -->
+            <div class="perfil-datos">
+              <!-- Nombre -->
+              <div class="campo">
+                <i class="fas fa-user"></i>
+                <input type="text" id="nombre" name="nombre" value="<?php echo session('nombre'); ?>" required placeholder="Nombre">
+              </div>
+
+              <!-- Correo Electrónico -->
+              <div class="campo">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="correo" name="correo" value="<?php echo session('correo'); ?>" required placeholder="Correo Electrónico">
+              </div>
+
+              <!-- Contraseña -->
+              <div class="campo">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="contraseñaN" name="contraseñaN" value="" required placeholder="Contraseña nueva">
+              </div>
+
+              <div class="campo">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña para confirmar">
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón de guardar cambios -->
+          <div class="anchoU">
+            <button class="btnUser" type="submit">Guardar</button>
+          </div>
+        </form>
+      <?php endif; ?>
+    </section>
+
+    <!--USUARIO-->
+
   </main>
   <!--contenido-->
   <script src="<?php echo base_url(); ?>js/scriptA.js"></script>
@@ -210,11 +284,13 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
-  <script> var baseUrl = "<?php echo base_url(); ?>";</script>
+  <script>
+    var baseUrl = "<?php echo base_url(); ?>";
+  </script>
   <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/universidad.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/universidad.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/carrera.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/materia.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -226,6 +302,7 @@
         $(this).closest('.modal').fadeOut();
       });
     });
+
     document.addEventListener('DOMContentLoaded', function() {
       // Al cargar la página, ocultar todas las secciones excepto la primera activa
       $(".seccion").hide();
@@ -244,74 +321,54 @@
       $("#" + seccion).show();
 
       // Agregar la clase 'active' al enlace seleccionado
-      $("a[href='#'][onclick*='" + seccion + "']").addClass("active");
+      $("a[onclick*='" + seccion + "']").addClass("active");
+    }
+    //Funcion al hacer click a la img Usuario
+    function previewImage(event) {
+      var input = event.target;
+      var reader = new FileReader();
 
-      // Mostrar u ocultar los elementos 'cambiar' y 'botar' según la sección
-      if (seccion === 'univInst' || seccion === 'carrera' || seccion === 'materia') {
-        $(".cambiar, .botar").show(); // Mostrar en Universidades, Carreras y Materias
-      } else {
-        $(".cambiar, .botar").hide(); // Ocultar en Temarios y Preguntas
+      reader.onload = function() {
+        var imgElement = document.getElementById('preview-image');
+        imgElement.src = reader.result;
+      };
+
+      if (input.files && input.files[0]) {
+        // Si se selecciona un archivo local, cargar la imagen
+        reader.readAsDataURL(input.files[0]);
+      } else if (input.value.startsWith('http') || input.value.startsWith('data:image')) {
+        // Si se ingresa una URL o una cadena de datos de imagen, mostrar la imagen
+        var imgElement = document.getElementById('preview-image');
+        imgElement.src = input.value;
       }
     }
+    //funcion para enviar el form usuario
+    $(document).ready(function() {
+      $('#formUsuario').submit(function(e) {
+        e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const cards = document.querySelectorAll(".card");
-      const dropZone = document.querySelector(".botar");
-      const id = cards.id;
-      const urlP = cards.data;
-      let draggedCard = null;
-      cards.forEach(card => {
-        card.addEventListener("dragstart", event => {
-          draggedCard = card;
-          const id = card.getAttribute('id');
-          const urlP = card.getAttribute('data');
+        // Obtiene los datos del formulario incluyendo la imagen
+        var formData = new FormData(this);
 
-          draggedCard.dataset.draggedId = id;
-          draggedCard.dataset.urlP = urlP;
-
-          card.classList.add("dragging");
+        // Envía la solicitud AJAX
+        $.ajax({
+          type: 'POST',
+          url: 'ruta_del_servidor_donde_procesar_formulario.php', // Reemplaza 'ruta_del_servidor_donde_procesar_formulario.php' con la URL correcta
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            // Maneja la respuesta del servidor
+            alert('Los cambios han sido guardados correctamente.');
+            // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
+          },
+          error: function(err) {
+            alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
+            console.error(err);
+          }
         });
       });
-      dropZone.addEventListener("dragover", event => {
-        event.preventDefault(); // Evita el comportamiento por defecto
-      });
-      dropZone.addEventListener("drop", event => {
-        event.preventDefault();
-        if (draggedCard) {
-          const id = draggedCard.dataset.draggedId;
-          const urlP = draggedCard.dataset.urlP;
-          const eliminarModal = document.getElementById("eliminar");
-          eliminarModal.style.display = "block";
-          const eliminarBtn = document.querySelector(".btn-eliminar");
-          eliminarBtn.addEventListener("click", function(event) {
-            event.preventDefault();
-            eliminarModal.style.display = "none";
-            var temaData = {
-              id: id,
-            };
-            console.log('Datos a enviar:', temaData);
-            $.ajax({
-              type: 'POST',
-              url: urlP,
-              data: temaData,
-              success: function(response) {
-                window.location.reload();
-              }
-            });
-          });
-          const cerrarBtn = document.querySelector(".cerrar");
-          cerrarBtn.addEventListener("click", function() {
-            eliminarModal.style.display = "none";
-          });
-        }
-      });
-      // Evento al finalizar el arrastre
-      document.addEventListener("dragend", () => {
-        cards.forEach(card => card.classList.remove("dragging"));
-        draggedCard = null;
-      });
     });
-
     /*Generar tabla*/
     var tbody = document.querySelector('#miTabla tbody');
     var valoresPorFila = [];
@@ -320,7 +377,6 @@
     for (var i = 0; i < numRows; i++) {
       var row = document.createElement('tr');
       var valoresFilaActual = [];
-
       for (var j = 0; j < numCellsPerRow; j++) {
         var cellNumber = i * numCellsPerRow + j + 1;
         var cell = document.createElement('td');
@@ -338,7 +394,6 @@
       var arregloFilas = [];
       var selectElement = document.getElementsByName("idM")[0];
       var valorSeleccionado = selectElement.value;
-
       for (var i = 0; i < filas.length; i++) {
         var fila = filas[i];
         var arregloCeldas = [];
@@ -359,7 +414,6 @@
       for (var k = 1; k < arregloFilas.length; k++) {
         var filaActual = arregloFilas[k];
         if (filaActual.length > 0) {
-          
           var temaData = {
             nombreTemario: filaActual[0],
             contenidoTemario: filaActual[1],
@@ -367,9 +421,7 @@
             videoTemario: filaActual[3],
             idMateria: valorSeleccionado
           };
-
           console.log('Datos a enviar:', temaData);
-
           $.ajax({
             type: 'POST',
             url: '<?php echo base_url("crearTemario"); ?>',
@@ -381,7 +433,6 @@
         }
       }
     }
-
     // Evento click del botón "Guardar datos"
     document.querySelector('.enviarT').addEventListener('click', mostrarValoresPorFila);
   </script>

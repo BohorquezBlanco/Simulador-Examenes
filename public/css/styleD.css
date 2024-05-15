@@ -277,22 +277,23 @@ body {
 
 /*iconos*/
 .iconC {
-  display: flex; 
-  justify-content: center;
-  align-items: center; 
-  padding: 10px; 
+  display: flex;
+  justify-content: center; 
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 .iconC svg {
-  width: var(--Th1); 
-  height: var(--Th1); 
-  margin-right: 10px; 
+  width: var(--Th2); 
+  height: var(--Th2); 
+  margin-right: 5px;
+  margin-left: 15px;
 }
 .iconC a {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
   text-decoration: none;
-  color: var(--color-1);
-  cursor: pointer;
-  margin-right: var(--Th1);
+  color: black;
 }
 
 
@@ -348,6 +349,9 @@ body::-webkit-scrollbar-thumb {
     --Th5: 18px;
   
     --txtN: 14px;
+    }
+    .iconC .tc{
+      display: none;
     }
 }
 

@@ -53,7 +53,6 @@ class ControleAdmi extends BaseController
     $preguntaModel = new preguntaModel();
     $preguntas = $preguntaModel->findAll();
 
-
     $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'preguntas' => $preguntas];
 
     return view('adm/inicioAdmi', $data);
@@ -239,7 +238,6 @@ class ControleAdmi extends BaseController
   //UPDATE TEMA
   public function editarTemario()
   {
-    $idMateria = $this->request->getPost('idMateria');
     $idTemario = $this->request->getPost('idTemario');
 
     $data = [
@@ -353,16 +351,6 @@ class ControleAdmi extends BaseController
     $session = session();
     $session->destroy(); // Destruye la sesión actual
     return redirect()->to(base_url()); // Redirige a la página de inicio de sesión
-  }
-  public function comida()
-  {
-
-    $usuarioModel = new UsuarioModel();
-    $users = $usuarioModel->findAll();
-
-    $data = [ 'users'=>$users];
-
-    return view('adm/2inicioAdmi', $data);
   }
   #################--SELECT--#####################
   public function universidadAjax()
