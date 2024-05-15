@@ -60,7 +60,9 @@ globalCarrData=1; // Definir la variable global
                 <ion-icon name="add-circle-outline"></ion-icon>
               </button>  
             `);
-      
+
+
+
             // Agregar funcionalidad de arrastrar y soltar
             $('.draggable').on('dragstart', function(event) {
               var idCarrera = $(this).attr('id');

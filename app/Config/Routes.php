@@ -98,5 +98,10 @@ $routes->post('/eliminarMateria2', 'Admi\ControleAdmi::eliminarMateria2');
 $routes->post('/editarMateria2', 'Admi\ControleAdmi::editarMateria2');
 $routes->post('/crearMateria2', 'Admi\ControleAdmi::crearMateria2');
 
+$routes->post('/temarioMateria', 'Admi\ControleAdmi::temarioMateria');
+$routes->post('/eliminarTemario', 'Admi\ControleAdmi::eliminarMateria2');
+$routes->post('/modificarTemario', 'Admi\ControleAdmi::modificarTemario');
+$routes->post('/crearTemario', 'Admi\ControleAdmi::crearTemario');
+
 
 

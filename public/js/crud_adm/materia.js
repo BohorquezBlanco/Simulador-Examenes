@@ -1,7 +1,12 @@
+var globalMateriaData=null; // Definir la variable global
+var globalMatNombre = null;
+
     //###################################################-MATERIA-#########################################################  
         //---------------------------------SELECT MATERIA-------------------------------------------------
         function selecMateria(globalCarrData) {
           $('#selectMatAjax').empty();//BORRA TODO EL CONTENEDOR 
+          $('.materiaSelect').empty();//BORRA TODO EL CONTENEDOR 
+
           var uniData = {
             idCarrera: globalCarrData, // Crear un objeto con lo necesario
           }; 
@@ -33,7 +38,22 @@
                 </div>
                 `;
               $('#selectMatAjax').append(MateriaHTML);
+
+            //llenar el filtro
+            var filtroMateria =               
+            `<option value="${materia.idMateria}">${materia.nombreMateria}</option>`;
+            $('.materiaSelect').append(filtroMateria);
             });
+            
+            var datosCarrera = obtenerPrimerIdYNombre(response, "idMateria", "nombreMateria");
+            globalMateriaData = datosCarrera.primerId;
+            globalMatNombre = datosCarrera.primerNombre;
+            selecTemario(globalMateriaData)
+
+            var optionElement = $('#materiaTemarioMod');
+            optionElement.val(globalMateriaData);
+            optionElement.text(globalMatNombre);
+
             //agregar el boton de crear universidad 
             // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
             $('#selectMatAjax').append(`
@@ -41,7 +61,6 @@
                 <ion-icon name="add-circle-outline"></ion-icon>
               </button>  
             `);
-
 
             // Agregar funcionalidad de arrastrar y soltar
             $('.draggable').on('dragstart', function(event) {
@@ -283,6 +302,6 @@ $('.carreraSelect').change(function() {
   globalCarrData = idCarrera; // Asignar uniData a la variable global
   console.log(globalCarrData);
 
-  selecMateria(globalCarrData)
+  selecMateria(globalCarrData);
 });
 

@@ -17,7 +17,10 @@ function obtenerPrimerIdYNombre(response,valor1,valor2) {
      };
 
    } else {
-       console.log("No se encontraron universidades en la respuesta.");
+    return {
+      primerId: 0,
+      primerNombre: 0
+  };
    }
 }
 

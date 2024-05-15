@@ -28,6 +28,7 @@
         <li><a href="#" onclick="mostrarSeccion('carrera')">Carreras</a></li>
         <li><a href="#" onclick="mostrarSeccion('materia')">Materias</a></li>
         <li><a href="#" onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a></li>
+        <li><a href="#" onclick="mostrarSeccion('temas')">Temas</a></li>
         <li><a href="#" onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a></li>
       </ul>
     </nav>
@@ -149,6 +150,82 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <section id="temarioLibroVideo" class="seccion">
       <h5 class="center">TEMARIOS</h5>
+        <div class="celda">
+          <select  class="universidadSelect">
+            <option value="1">Universidad:</option>
+          </select>
+        </div>
+        <div class="celda">
+          <select class="carreraSelect" name="carreraSelect" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
+            <option value="1">Carrera:</option>
+          </select>
+        </div>
+        <div class="celda">
+          <select class="materiaSelect" name="materiaSelect">
+            <option value="1">Materia:</option>
+          </select>
+        </div>
+        <div class="botonT">
+          <button class="enviarT" id="crearTemario">
+            Agregar nuevo temario
+          </button>
+        </div>
+      <br>
+
+        <div id="divModificarTemario">
+          
+        </div>
+
+<br>
+<br>
+
+<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <div class="contTable">
+        <table >
+          <thead>
+            <tr>
+              <th>Temario</th>
+              <th>Contenido</th>
+              <th>Libro</th>
+              <th>Materia</th>
+              <th>ELiminar</th>
+              <th>Modificar</th>
+            </tr>
+          </thead>
+          <tbody id="temarioMateria">
+            <!-- Agregar temarios existentes de la materia -->
+            <tr>
+              <td>Algebra</td>
+              <td>no se si es necesario</td>
+              <td>asdfsadfsadfsdaf</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
+            <tr>
+              <td>Problemas Matematicos</td>
+              <td>Contenido 1</td>
+              <td>Libro 1</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
+            <tr>
+              <td>Aritmetica</td>
+              <td>Contenido 1</td>
+              <td>Libro 1</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!--TEMARIOS, LIBROS, VIDEOS-->
+    <!--TEMAS-->
+    <section id="temas" class="seccion">
+      <h5 class="center">TEMAS</h5>
       <div class="contenidoT">
         <div class="labelExcel">Seleccione materia</div>
         <div class="selectM">
@@ -184,7 +261,7 @@
         </button>
       </div>
     </section>
-    <!--TEMARIOS, LIBROS, VIDEOS-->
+    <!--TEMAS-->
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
       <h5 class="center">PREGUNTAS</h5>
@@ -196,48 +273,7 @@
 
     <!--SECCIONES-->
 
-    <!--MODIFICAR-->
-    <div class="modal" id="modificarr">
-      <div class="contenido-modal">
-        <div class="head">
-          <h3>Modificar</h3>
-          <button class="cerrar">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </button>
-        </div>
-        <form method="post" id="modificarr">
-          <div class="celda">
-            <label class="form-label">¿Que componente desea modificar?</label>
-            <input name="nombreLibro" type="text" class="form-control" placeholder="Nombre del libro">
-          </div>
-          <div class="añadir">
-            <button type="submit" class="btn-modificar">Añadir nuevo</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!--MODIFICAR-->
 
-    <!--ELIMINAR-->
-    <div class="modal" id="eliminar">
-      <div class="contenido-modal">
-        <div class="head">
-          <h3>Eliminar</h3>
-          <button class="cerrar">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </button>
-        </div>
-        <form id="eliminar">
-          <div class="celda">
-            <label class="form-label">¿Está seguro que desea eliminar el componente?</label>
-          </div>
-          <div class="botones">
-            <button type="submit" class="btn-eliminar">Eliminar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!--ELIMINAR-->
   </main>
   <!--contenido-->
   <script src="<?php echo base_url(); ?>js/scriptA.js"></script>
@@ -249,10 +285,11 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
   <script> var baseUrl = "<?php echo base_url(); ?>";</script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFuncione.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/universidad.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/carreras.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -284,12 +321,7 @@
       // Agregar la clase 'active' al enlace seleccionado
       $("a[href='#'][onclick*='" + seccion + "']").addClass("active");
 
-      // Mostrar u ocultar los elementos 'cambiar' y 'botar' según la sección
-      if (seccion === 'univInst' || seccion === 'carrera' || seccion === 'materia') {
-        $(".cambiar, .botar").show(); // Mostrar en Universidades, Carreras y Materias
-      } else {
-        $(".cambiar, .botar").hide(); // Ocultar en Temarios y Preguntas
-      }
+
     }
 
     document.addEventListener("DOMContentLoaded", () => {

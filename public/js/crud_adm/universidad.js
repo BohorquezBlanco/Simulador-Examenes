@@ -42,8 +42,6 @@ var globalUniData=null; // Definir la variable global
           globalUniData = datosUniversidad.primerId;
           globalUniNombre = datosUniversidad.primerNombre;
 
-          console.log("El primer id de univer es:", globalUniData);
-          console.log("El primer nombre de uni es:", globalUniNombre);
           selecCarrera(globalUniData);
           //agregar el boton de crear universidad 
           // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
@@ -271,7 +269,6 @@ var globalUniData=null; // Definir la variable global
       event.preventDefault(); // Evitar el envío del formulario por defecto
       var universidadData = $(this).closest('.botones').data('universidad');
       console.log(universidadData);
-    
                 // Realizar la solicitud AJAX para eliminar la universidad
                 $.ajax({
                     url: baseUrl + 'eliminarUni2',

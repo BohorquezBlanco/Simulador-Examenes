@@ -208,22 +208,6 @@ class ControleAdmi extends BaseController
   
   //----------------------------------------------------------------TEMARIOS---------------------------------------------------------------
 
-  //INSERT DE LOS TEMARIOS
-  public function crearTemario()
-  {
-    $data = [
-      'nombreTemario' => $this->request->getPost('nombreTemario'),
-      'contenidoTemario' => $this->request->getPost('contenidoTemario'),
-      'libroTemario' => $this->request->getPost('libroTemario'),
-      'videoTemario' => $this->request->getPost('videoTemario'),
-      'idMateria' => $this->request->getPost('idMateria'),
-    ];
-
-    $temarioModel = new TemarioModel();
-    $temarioModel->insert($data);
-
-    return redirect()->to('inicioAdmi');
-  }
   //EliminarTema
   public function eliminarTemario()
   {
@@ -527,5 +511,63 @@ class ControleAdmi extends BaseController
    $materiaModel->update($idMateria, $data);
 
  }
+  
+//#######################-TEMARIO-#########################################
+ public function temarioMateria()
+ {
+   $idMateria = $this->request->getPost('idMateria');
+   $temarioModel = new TemarioModel();
+   $temarios = $temarioModel->where('idMateria', $idMateria)->findAll();
+   return json_encode($temarios);
+ }
+
+
+//INSERT DE LAS MATERIAS
+public function crearTemario()
+{
+
+  $idMateria = $this->request->getPost('idMateria');
+
+  $data = [
+    'nombreTemario' => $this->request->getPost('nombreTemario'),
+    'contenidoTemario' => $this->request->getPost('contenidoTemario'),
+    'libroTemario' => $this->request->getPost('libroTemario'),
+    'idMateria' => $idMateria,
+  ];
+
+  //instanciar
+  $temarioModel = new TemarioModel();
+  $temarioModel->insert($data);
+
+}
+
+//DELETE DE LAS MATERIAS EXISTENTES
+public function eliminarTemariso()
+{
+  $idMateria = $this->request->getPost('idMateria');
+
+  // Instanciar el modelo
+  $materiaModel = new MateriaModel();
+
+  // Eliminar lógicamente el registro con el ID especificado
+  $materiaModel->delete($idMateria);
+}
+
+//UPDATE MATERIA
+public function modificarTemario()
+{
+  $idMateria = $this->request->getPost('idMateria');
+
+  $data = [
+    'nombreMateria' => $this->request->getPost('nombreMateria'),
+    'descripcionMateria' => $this->request->getPost('descripcionMateria'),
+    'imagenMateria' => $this->request->getPost('imagenMateria'),
+  ];
+
+  //instanciar
+  $materiaModel = new materiaModel();
+  $materiaModel->update($idMateria, $data);
+
+}
   
 }
