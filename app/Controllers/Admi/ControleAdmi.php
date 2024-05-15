@@ -365,7 +365,7 @@ class ControleAdmi extends BaseController
     return view('adm/2inicioAdmi', $data);
   }
   #################--SELECT--#####################
-  public function univercidadAjax()
+  public function universidadAjax()
   {
     $uniModel = new UniModel();
     $unis = $uniModel->findAll();

@@ -129,7 +129,7 @@ img {
 
 /*Celular*/
 /* Media query para pantallas de celular en orientación vertical */
-@media (max-width: 768px) and (max-width: 767px) {
+@media (max-width: 768px) {
   :root{
     /*tamaños*/
     --tamano-contenedor: 250px;

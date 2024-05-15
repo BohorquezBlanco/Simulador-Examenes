@@ -15,7 +15,7 @@ class UsuarioModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idUsuario', 'imgUsuario','nombre', 'apellidoPaterno','apellidoMaterno','correo','password','tipo'];
+    protected $allowedFields = ['idUsuario', 'imgUsuario','nombre','correo','password','tipo'];
 
     // Dates
     protected $useTimestamps = true;

@@ -83,7 +83,7 @@
               <h4>Creación de Documentos</h4>
             </div>
             <div class="card-back">
-              <p>Aquí puedes aprender sobre la creación de documentos.</p>
+              <p>Creamos todo tipo de documentos, trabajos de colegios, universidades, empresas</p>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@
               <h4>Diseño de Páginas Web</h4>
             </div>
             <div class="card-back">
-              <p>Descubre cómo diseñar páginas web creativas y funcionales.</p>
+              <p>Nos enfocamos en el diseño de páginas web creativas y funcionales.</p>
             </div>
           </div>
         </div>

@@ -254,7 +254,7 @@
           });
       });
       
-        //---------------------------------DELETE UNIVERCITY-------------------------------------------------
+        //---------------------------------DELETE UNIVERSITY-------------------------------------------------
       $('#contenidoModal').on('click', '#eliminarMateria', function() {
         event.preventDefault(); // Evitar el envío del formulario por defecto
         var materiaData = $(this).closest('.botones').data('materia');

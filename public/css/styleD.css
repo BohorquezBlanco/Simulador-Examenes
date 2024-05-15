@@ -82,7 +82,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: var(--tamano-contenedorB);
+  height: var(--tamano-contenedor);
   background-size:contain;
   background-position: center;
   color: var(--color-1);
@@ -109,7 +109,7 @@ body {
   justify-content: center;
   text-align: center;
   align-items: center;
-  height: var(--tamano-contenedorB);
+  height: var(--tamano-contenedor);
 }
 .textoT{
   display: flex;
@@ -378,7 +378,6 @@ body::-webkit-scrollbar-thumb {
   :root{
     /*tamaños*/
     --tamano-contenedor: 450px;
-    --tamano-contenedorB: 400px;
     --tamano-ancho: 1025px;
     --tamano-cardB: 215px;
     --tamano-imagen: 400px;
@@ -402,7 +401,6 @@ body::-webkit-scrollbar-thumb {
   :root{
   /*tamaños*/
   --tamano-contenedor: 600px;
-  --tamano-contenedorB: 550px;
   --tamano-ancho: 1025px;
   --tamano-cardB: 290px;
   --tamano-imagen: 550px;

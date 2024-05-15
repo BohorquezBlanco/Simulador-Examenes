@@ -83,7 +83,7 @@ $routes->post('/logout', 'Admi\ControleAdmi::logout');
 $routes->get('/comida', 'Admi\ControleAdmi::comida');
 
 
-$routes->post('/uniAjax', 'Admi\ControleAdmi::univercidadAjax');
+$routes->post('/uniAjax', 'Admi\ControleAdmi::universidadAjax');
 $routes->post('/eliminarUni2', 'Admi\ControleAdmi::eliminarUni2');
 $routes->post('/editarUni2', 'Admi\ControleAdmi::editarUni2');
 $routes->post('/crearUni2', 'Admi\ControleAdmi::crearUni2');

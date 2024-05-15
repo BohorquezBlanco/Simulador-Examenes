@@ -16,6 +16,7 @@
 <body>
   <!--MENÚ-->
   <div class="menu">
+    <button class="toggle-btn" onclick="toggleMenu()">☰</button>
     <!-- NOMBRE EMPRESA -->
     <div class="nombreE">
       <img id="logo" src="<?php echo base_url('img/AnisSoft.png'); ?>">
@@ -28,6 +29,7 @@
         <li><a href="#" onclick="mostrarSeccion('carrera')">Carreras</a></li>
         <li><a href="#" onclick="mostrarSeccion('materia')">Materias</a></li>
         <li><a href="#" onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a></li>
+        <li><a href="#" onclick="mostrarSeccion('tema')">Temas</a></li>
         <li><a href="#" onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a></li>
       </ul>
     </nav>
@@ -51,8 +53,7 @@
     <!--SECCIONES-->
     <!--MODAL BASE PARA UNIVERSIDADES CARRERAS Y MATERIAS,"se reutilizará el codigo para evitar tener un modal para cada uno"-->
     <div class="modal abrir" id="modalBase">
-      <div class="contenido-modal" >
-
+      <div class="contenido-modal">
         <div id="contenidoModal">
             <!--AQUI SE ALMACENARAN LOS DISTINTOS TIPOS DE MODALES-->
         </div>
@@ -62,21 +63,19 @@
 
     <!--UNIVERSIDAD-->
     <section id="univInst" class="seccion">
-      <h2 class="center">UNIVERSIDADES E INSTITUTOS</h2>
-
+      <h5 class="center">UNIVERSIDADES E INSTITUTOS</h5>
       <div class="card-container" id="selectUniAjax">   
-      <!--En este div cargara las univercidades por medio de ajax-->
+      <!--En este div cargara las universidades por medio de ajax-->
       </div>
-
-      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERCIDAD-->
+      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarU">
-        <h5>Modificar</h5>
+        <p>Modificar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
         </svg>
       </div>
       <div class="botar" title="EliminarU" id="eliminarU">
-        <h5>Eliminar</h5>
+        <p>Eliminar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
         </svg>
@@ -85,12 +84,15 @@
     <!--UNIVERSIDAD-->
     <!--CARRERAS-->
     <section id="carrera" class="seccion">
-    <h2 class="center">CARRERAS</h2>
+    <h5 class="center">CARRERAS</h5>
       <!--CARRERAS_FILTRO_MATERIAS-->
+      <div class="contenido">
+      <div class="labelSelect">Seleccione Universidad</div>
       <div class="celda">
           <select  class="universidadSelect">
           <option value="1">Universidad:</option>
         </select>
+      </div>
       </div>
       <!--CARRERAS_FILTRO_MATERIAS-->
 
@@ -98,15 +100,15 @@
         <!--AQUI SE MUESTRAN LAS CARRERAS-->
       </div>
 
-      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERCIDAD-->
+      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarC">
-        <h5>Modificar</h5>
+        <p>Modificar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
         </svg>
       </div>
       <div class="botar" title="Eliminar" id="eliminarC">
-        <h5>Eliminar</h5>
+        <p>Eliminar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
         </svg>
@@ -115,31 +117,34 @@
     <!--CARRERAS-->
     <!--MATERIAS-->
     <section id="materia" class="seccion">
-      <h2 class="center">MATERIAS</h2>
+      <h5 class="center">MATERIAS</h5>
         <!--CARRERAS_FILTRO_MATERIAS-->
+        <div class="contenido">
+        <div class="labelSelect">Seleccione Universidad</div>
         <div class="celda">
           <select  class="universidadSelect">
              <option value="1">Universidad:</option>
           </select>
         </div>
+        <div class="labelSelect">Seleccione Carrera</div>
         <div class="celda">
           <select class="carreraSelect" name="carreraSelect">
             <option value="1">Carrera:</option>
           </select>
         </div>
-       
-        <div class="card-container" id="selectMatAjax">   
+        </div>
+         <div class="card-container" id="selectMatAjax">   
         </div>
 
-      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERCIDAD-->
+      <!--DIV PARA MODIFICAR Y ELIMINAR LA UNIVERSIDAD-->
       <div class="cambiar" title="Modificar" id="modificarM">
-        <h5>Modificar</h5>
+        <p>Modificar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V192h64V32zm320 0c0-17.7-14.3-32-32-32s-32 14.3-32 32V480c0 17.7 14.3 32 32 32s32-14.3 32-32V32zM224 512c17.7 0 32-14.3 32-32V320H192V480c0 17.7 14.3 32 32 32zM320 0c-9.3 0-18.1 4-24.2 11s-8.8 16.3-7.5 25.5l31.2 218.6L288.6 409.7c-3.5 17.3 7.8 34.2 25.1 37.7s34.2-7.8 37.7-25.1l.7-3.6c1.3 16.4 15.1 29.4 31.9 29.4c17.7 0 32-14.3 32-32c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM112 80A48 48 0 1 0 16 80a48 48 0 1 0 96 0zm0 261.3V269.3l4.7 4.7c9 9 21.2 14.1 33.9 14.1H224c17.7 0 32-14.3 32-32s-14.3-32-32-32H157.3l-41.6-41.6c-14.3-14.3-33.8-22.4-54-22.4C27.6 160 0 187.6 0 221.6v55.7l0 .9V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384l32 42.7V480c0 17.7 14.3 32 32 32s32-14.3 32-32V421.3c0-10.4-3.4-20.5-9.6-28.8L112 341.3z" />
         </svg>
       </div>
       <div class="botar" title="Eliminar" id="eliminarM">
-        <h5>Eliminar</h5>
+        <p>Eliminar</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
           <path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 9.8c0 39-23.7 74-59.9 88.4C71.6 154.5 32 213 32 278.2V352c0 17.7 14.3 32 32 32s32-14.3 32-32l0-73.8c0-10 1.6-19.8 4.5-29L261.1 497.4c9.6 14.8 29.4 19.1 44.3 9.5s19.1-29.4 9.5-44.3L222.6 320H224l80 0 38.4 51.2c10.6 14.1 30.7 17 44.8 6.4s17-30.7 6.4-44.8l-43.2-57.6C341.3 263.1 327.1 256 312 256l-71.5 0-56.8-80.2-.2-.3c44.7-29 72.5-79 72.5-133.6l0-9.8zM96 80A48 48 0 1 0 0 80a48 48 0 1 0 96 0zM464 286.1l58.6 53.9c4.8 4.4 11.9 5.5 17.8 2.6s9.5-9 9-15.5l-5.6-79.4 78.7-12.2c6.5-1 11.7-5.9 13.1-12.2s-1.1-13-6.5-16.7l-65.6-45.1L603 92.2c3.3-5.7 2.7-12.8-1.4-17.9s-10.9-7.2-17.2-5.3L508.3 92.1l-29.4-74C476.4 12 470.6 8 464 8s-12.4 4-14.9 10.1l-29.4 74L343.6 68.9c-6.3-1.9-13.1 .2-17.2 5.3s-4.6 12.2-1.4 17.9l39.5 69.1-65.6 45.1c-5.4 3.7-8 10.3-6.5 16.7c.1 .3 .1 .6 .2 .8l19.4 0c20.1 0 39.2 7.5 53.8 20.8l18.4 2.9L383 265.3l36.2 48.3c2.1 2.8 3.9 5.7 5.5 8.6L464 286.1z" />
         </svg>
@@ -149,10 +154,10 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <section id="temarioLibroVideo" class="seccion">
       <h5 class="center">TEMARIOS</h5>
-      <div class="contenidoT">
-        <div class="labelExcel">Seleccione materia</div>
-        <div class="selectM">
-          <select name="idM" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
+      <div class="contenido">
+        <div class="labelSelect">Seleccione materia</div>
+        <div class="select">
+          <select name="idM">
             <?php foreach ($materias as $materia) : ?>
               <?php
               $selected = $materia['idMateria'] ? 'selected' : '';
@@ -194,50 +199,7 @@
     <!--PREGUNTAS Y EXAMENES-->
 
 
-    <!--SECCIONES-->
-
-    <!--MODIFICAR-->
-    <div class="modal" id="modificarr">
-      <div class="contenido-modal">
-        <div class="head">
-          <h3>Modificar</h3>
-          <button class="cerrar">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </button>
-        </div>
-        <form method="post" id="modificarr">
-          <div class="celda">
-            <label class="form-label">¿Que componente desea modificar?</label>
-            <input name="nombreLibro" type="text" class="form-control" placeholder="Nombre del libro">
-          </div>
-          <div class="añadir">
-            <button type="submit" class="btn-modificar">Añadir nuevo</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!--MODIFICAR-->
-
-    <!--ELIMINAR-->
-    <div class="modal" id="eliminar">
-      <div class="contenido-modal">
-        <div class="head">
-          <h3>Eliminar</h3>
-          <button class="cerrar">
-            <ion-icon name="close-circle-outline"></ion-icon>
-          </button>
-        </div>
-        <form id="eliminar">
-          <div class="celda">
-            <label class="form-label">¿Está seguro que desea eliminar el componente?</label>
-          </div>
-          <div class="botones">
-            <button type="submit" class="btn-eliminar">Eliminar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <!--ELIMINAR-->
+    
   </main>
   <!--contenido-->
   <script src="<?php echo base_url(); ?>js/scriptA.js"></script>
