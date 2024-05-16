@@ -22,11 +22,8 @@ function selecUniversidad() {
         var universidadHTML = `
               <div class="card draggable" id="universidad-${
                 unis.idU
-              }" draggable="true" data-universidad='${JSON.stringify(
-          universidadData
-        )}'>
-                <img src="${unis.imagenU}" alt="By AnisSoft" title="${
-          unis.nombreU
+              }" draggable="true" data-universidad='${JSON.stringify(universidadData)}'>
+                <img src="${unis.imagenU}" alt="By AnisSoft" title="${unis.nombreU
         }" draggable="false" />
                 <div class="card-body">
                   <h5 class="card-title">${unis.nombreU}</h5>
@@ -44,7 +41,6 @@ function selecUniversidad() {
       globalUniData = datosUniversidad.primerId;
       globalUniNombre = datosUniversidad.primerNombre;
 
-<<<<<<< HEAD
 
           // Asignar los valores a las variables globales
           datosUniversidad = obtenerPrimerIdYNombre(response, "idU", "nombreU");
@@ -53,16 +49,9 @@ function selecUniversidad() {
 
           selecCarrera(globalUniData);
           //agregar el boton de crear universidad 
-          // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-          $('#selectUniAjax').append(`
-=======
-      console.log("El primer id de univer es:", globalUniData);
-      console.log("El primer nombre de uni es:", globalUniNombre);
-      selecCarrera(globalUniData);
-      //agregar el boton de crear universidad
+
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
       $("#selectUniAjax").append(`
->>>>>>> 9f2d637425c299fc4a26f1ff5abe89b5d8058d03
             <button id="insertUni" class="abrirModal" type="button" data-target="modalBase">
               <ion-icon name="add-circle-outline"></ion-icon>
             </button>  
@@ -264,62 +253,8 @@ $("#selectUniAjax").on("click", "#insertUni", function () {
   $("#modalBase").fadeIn();
 });
 
-<<<<<<< HEAD
-                            
-                              $('#modalBase').fadeIn();
-                    
-    
-    });
-    
-    
-    $('#contenidoModal').on('click', '#agregarUni', function() {
-        event.preventDefault(); // Evitar el envío del formulario por defecto
-    
-        // Serializar el formulario para obtener todos los valores de los inputs
-        var formData = $('#crear').serialize();
-    
-        // Realizar la solicitud AJAX para agregar la nueva universidad
-        $.ajax({
-            url: baseUrl + 'crearUni2',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log('Universidad agregada con éxito:', response);
-                // Realizar alguna acción adicional si es necesario
-                selecUniversidad();
-                $('#modalBase').hide(); // Ocultar el modal
-            },
-            error: function(error) {
-                console.error('Error al agregar la universidad:', error);
-            }
-        });
-    });
-    
-      //---------------------------------DELETE UNIVERCITY-------------------------------------------------
-    $('#contenidoModal').on('click', '#eliminarUniversidad', function() {
-      event.preventDefault(); // Evitar el envío del formulario por defecto
-      var universidadData = $(this).closest('.botones').data('universidad');
-      console.log(universidadData);
-                // Realizar la solicitud AJAX para eliminar la universidad
-                $.ajax({
-                    url: baseUrl + 'eliminarUni2',
-                    type: 'POST',
-                    data: universidadData, // Serializar el objeto a JSON
-                    success: function(response) {
-                        console.log('Universidad eliminada con éxito:', response);
-                        // Realizar alguna acción adicional si es necesario
-                        selecUniversidad();
-                        $('#modalBase').hide(); // Ocultar el modal
-                    },
-                    error: function(error) {
-                        console.error('Error al eliminar la universidad:', error);
-                    }
-                });
-    });
-=======
 $("#contenidoModal").on("click", "#agregarUni", function () {
   event.preventDefault(); // Evitar el envío del formulario por defecto
->>>>>>> 9f2d637425c299fc4a26f1ff5abe89b5d8058d03
 
   // Serializar el formulario para obtener todos los valores de los inputs
   var formData = $("#crear").serialize();
