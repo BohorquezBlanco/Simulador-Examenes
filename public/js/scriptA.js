@@ -1,5 +1,6 @@
 var toggleBtn = document.querySelector('.toggle-btn');
 var menuResponsive = document.querySelector('.menu-responsive');
+var menuItems = document.querySelectorAll('.btnM')
 
 document.addEventListener("DOMContentLoaded", function() {
   var cerrar = document.getElementsByClassName("cerrar")[0];
@@ -12,16 +13,16 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-if (toggleBtn) {
-  // Agrega un event listener para el evento 'click' en el botón toggleBtn
-  toggleBtn.addEventListener("click", function() {
-    // Selecciona el menú responsive
-    var menuResponsive = document.querySelector('.menu-responsive');
+function toggleMenu() {
+  var menuResponsive = document.querySelector('.menu-responsive');
+  menuResponsive.style.display = "block";
+}
 
-    // Alternar la clase 'menu-open' en el menú responsive
-    menuResponsive.classList.toggle('menu-open');
-  });
-} 
+function ocultarMenuR() {
+  var menuResponsive = document.querySelector('.menu-responsive');
+  menuResponsive.style.display = "none";
+}
+
 
 function mostrarOpciones() {
   var opciones = document.getElementById("opcionesUsuario");
@@ -30,4 +31,8 @@ function mostrarOpciones() {
   } else {
     opciones.style.display = "block";
   }
+}
+function ocultarMenu() {
+  var opciones = document.getElementById("opcionesUsuario");
+  opciones.style.display = "none";
 }

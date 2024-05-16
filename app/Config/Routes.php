@@ -93,3 +93,5 @@ $routes->post('/crearMateria2', 'Admi\ControleAdmi::crearMateria2');
 
 
 
+//USUARIO
+$routes->post('/userAjax', 'Admi\ControleAdmi::editarUser');

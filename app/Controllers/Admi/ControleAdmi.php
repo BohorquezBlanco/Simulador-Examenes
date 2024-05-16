@@ -515,5 +515,52 @@ class ControleAdmi extends BaseController
    $materiaModel->update($idMateria, $data);
 
  }
-  
+ //EDITAR USUARIO
+ public function editarUser(){
+  $idUser = $this->request->getPost('idUsuario');
+
+  $data = [ 
+    'imgUsuario' => $this->request->getPost('imgUsuario'), 
+    'nombre' => $this->request->getPost('nombre'),
+    'correo' => $this->request->getPost('correo'),
+    'password' => $this->request->getPost('password'),
+  ];
+
+  $usuarioModel = new UsuarioModel();
+  $usuarioModel->update($idUser, $data);
+ }
+ public function login()
+ {
+     // Validar campos de entrada
+     $rules = [
+         'contraseña' => 'required'
+     ];
+
+     // Obteniendo datos del formulario
+     $password = md5($this->request->getVar('contraseña')); // Encriptar contraseña con MD5
+
+     // Validar los campos de entrada
+     if (!$this->validate($rules)) {
+         // Si la validación falla, redirige de vuelta con errores y datos de entrada
+         return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+     }
+
+     // Obtener el modelo de usuario
+     $usuariomodel = model('UsuarioModel');
+
+     // Buscar el usuario por correo
+     $user = $usuariomodel->getUserBy('contraseña', $password);
+     
+     // Verificar la contraseña
+     if ($password !== $user->password) {
+         // Si la contraseña es incorrecta, mostrar mensaje de error y redirigir de vuelta
+
+         return redirect()->back()->with('msg', 'Contraseña incorrecta');
+     }
+
+     
+
+     // Redirigir al usuario a la página de inicio
+     return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' );
+ }
 }

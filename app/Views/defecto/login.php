@@ -19,6 +19,7 @@
         <!--Correo-->
         <label for="username">Correo</label>
         <input type="text" name="correo" id="username" placeholder="Ingrese su usuario" required>
+        <p><?php echo session('errors.correo'); ?></p>
         <!--Contraseña-->
         <label for="password">Contraseña</label>
         <input type="password" name="password" id="password" placeholder="Ingrese su contraseña" required>

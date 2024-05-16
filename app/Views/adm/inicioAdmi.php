@@ -18,18 +18,18 @@
 <body>
   <!--MENÚ-->
   <button class="toggle-btn" onclick="toggleMenu()">☰</button>
-  <div class="menu-responsive">
-    <ul>
-      <a onclick="mostrarSeccion('univInst')" class="active">Universidades</a>
-      <a onclick="mostrarSeccion('carrera')">Carreras</a>
-      <a onclick="mostrarSeccion('materia')">Materias</a>
-      <a onclick="mostrarSeccion('temarioLibroVideo')">Temarios</a>
-      <a onclick="mostrarSeccion('temas')">Temas</a>
-      <a onclick="mostrarSeccion('preguntasExamenes')">Preguntas</a>
-      <a onclick="mostrarSeccion('usuario')">Usuario</a>
-      <a onclick="mostrarSeccion('cerrarS')">Cerrar sesión</a>
-    </ul>
-  </div>
+<div class="menu-responsive">
+  <ul>
+    <a onclick="mostrarSeccion('univInst'); ocultarMenuR();" class="active">Universidades</a>
+    <a onclick="mostrarSeccion('carrera'); ocultarMenuR();">Carreras</a>
+    <a onclick="mostrarSeccion('materia'); ocultarMenuR();">Materias</a>
+    <a onclick="mostrarSeccion('temarioLibroVideo'); ocultarMenuR();">Temarios</a>
+    <a onclick="mostrarSeccion('temas'); ocultarMenuR();">Temas</a>
+    <a onclick="mostrarSeccion('preguntasExamenes'); ocultarMenuR();">Preguntas</a>
+    <a onclick="mostrarSeccion('usuario'); ocultarMenuR();">Usuario</a>
+    <a href="<?php echo base_url(); ?>/logout" onclick="ocultarMenuR();">Cerrar sesión</a>
+  </ul>
+</div>
   <div class="menu">
     <!-- NOMBRE EMPRESA -->
     <div class="nombreE">
@@ -60,8 +60,8 @@
           <div class="acciones-usuario">
             <button onclick="mostrarOpciones()" class="boton-usuario"><ion-icon name="caret-down-circle-outline"></ion-icon></button>
             <div id="opcionesUsuario" class="desplegable">
-              <a onclick="mostrarSeccion('usuario')">Editar usuario</a>
-              <a onclick="mostrarSeccion('cerrarS')">Cerrar sesión</a>
+              <a onclick="mostrarSeccion('usuario'); ocultarMenu();">Editar usuario</a>
+              <a href="<?php echo base_url(); ?>/logout" onclick="ocultarMenu();">Cerrar sesión</a>
             </div>
           </div>
         </div>
@@ -222,6 +222,7 @@
     <!--PREGUNTAS Y EXAMENES-->
     <!--USUARIO-->
     <section id="usuario" class="seccion">
+      <div class="contenedorU" id="selectUserAjax">
       <?php if (session()->has('is_logged') && session('is_logged')) : ?>
         <form id="formUsuario" method="POST" enctype="multipart/form-data">
 
@@ -254,7 +255,7 @@
               <!-- Contraseña -->
               <div class="campo">
                 <i class="fas fa-lock"></i>
-                <input type="password" id="contraseñaN" name="contraseñaN" value="" required placeholder="Contraseña nueva">
+                <input type="password" id="contraseñaN" name="contraseñaN" placeholder="Contraseña nueva">
               </div>
 
               <div class="campo">
@@ -270,6 +271,9 @@
           </div>
         </form>
       <?php endif; ?>
+      </div>
+    
+      
     </section>
 
     <!--USUARIO-->
@@ -345,16 +349,26 @@
     //funcion para enviar el form usuario
     $(document).ready(function() {
       $('#formUsuario').submit(function(e) {
-        e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+        e.preventDefault();
+        $nombre = $_POST['nombre'];
+        $correo = $_POST['correo'];
+        $contraseñaNueva = $_POST['contraseñaN'];
+        if($contraseñaNueva==""){
+          $contraseñaConfirmar = $_POST['contraseña'];
+          $usuario = array(
+        nombre => $nombre,
+        correo => $correo,
+        contraseña => $contraseñaConfirmar,);
 
-        // Obtiene los datos del formulario incluyendo la imagen
-        var formData = new FormData(this);
-
-        // Envía la solicitud AJAX
-        $.ajax({
+        $usuario = array(
+        nombre => $nombre,
+        correo => $correo,
+        contraseña => $contraseñaconfirmar,
+    );
+    $.ajax({
           type: 'POST',
-          url: 'ruta_del_servidor_donde_procesar_formulario.php', // Reemplaza 'ruta_del_servidor_donde_procesar_formulario.php' con la URL correcta
-          data: formData,
+          data: $usuario,
+          url: '<?php echo base_url(); ?>/userAjax',
           processData: false,
           contentType: false,
           success: function(response) {
@@ -367,6 +381,38 @@
             console.error(err);
           }
         });
+
+        }else{
+
+    // Ejemplo: Almacenar datos en un array
+    $usuario = array(
+        nombre => $nombre,
+        correo => $correo,
+        contraseña => $contraseñaNueva,
+    );
+
+        // Envía la solicitud AJAX
+        $.ajax({
+          type: 'POST',
+          data: $usuario,
+          url: '<?php echo base_url(); ?>/userAjax',
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            // Maneja la respuesta del servidor
+            alert('Los cambios han sido guardados correctamente.');
+            // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
+          },
+          error: function(err) {
+            alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
+            console.error(err);
+          }
+        });
+        }
+
+    // Verificar y procesar los datos como sea necesario
+    // Aquí puedes realizar validaciones, almacenamiento en la base de datos, etc.
+
       });
     });
     /*Generar tabla*/

@@ -601,7 +601,9 @@ body::-webkit-scrollbar-thumb {
       cursor: pointer;
       /* Estilos adicionales para el botón hamburguesa */
     }
-    
+    .errorMSG{
+      position: relative;
+    }
   }
 
 /*Tablet*/
