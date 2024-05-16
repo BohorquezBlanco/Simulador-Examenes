@@ -359,7 +359,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
   <script> var baseUrl = "<?php echo base_url(); ?>";</script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFuncione.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/universidad.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/carreras.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
