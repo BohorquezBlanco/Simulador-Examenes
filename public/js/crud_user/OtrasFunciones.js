@@ -15,12 +15,12 @@ function obtenerPrimerIdYNombre(response,valor1,valor2) {
         primerNombre: primerNombre
     };
 
-   } else {
-    return {
-      primerId: 0,
-      primerNombre: 0
-  };
-   }
+  } else {
+   return {
+     primerId: 0,
+     primerNombre: 0
+ };
+  }
 }
 
 //FUNCION PARA DAR EFECTO DE FUNDIDO EN EL MODAL 

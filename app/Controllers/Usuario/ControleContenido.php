@@ -193,7 +193,6 @@ class ControleContenido extends BaseController
     //INSERT DE LOS TEMARIOS
     public function crearTemario()
     {
-      $idMateria = $this->request->getPost('idMateria');
   
       $data = [
         'nombreTemario' => $this->request->getPost('nombreTemario'),
@@ -203,21 +202,13 @@ class ControleContenido extends BaseController
   
       $temarioModel = new TemarioModel();
       $temarioModel->insert($data);
-      $idTemario = $temarioModel->insertID();
-  
-      $materiaTemarioModel = new MateriaTemarioModel();
-      $materiaTemarioModel->insertarRelacionMateriaTema($idMateria, $idTemario);
   
       return redirect()->to('inicioAdmi');
     }
     //EliminarTema
     public function eliminarTemario()
     {
-      $idMateria = $this->request->getPost('idMateria');
       $idTemario = $this->request->getPost('idTemario');
-  
-      $materiaTemarioModel = new MateriaTemarioModel();
-      $materiaTemarioModel->eliminarRelacionMateriaTema($idMateria, $idTemario);
   
       $temarioModel = new TemarioModel();
       $temarioModel->delete($idTemario);
@@ -237,20 +228,9 @@ class ControleContenido extends BaseController
         'pdfTemario' => $this->request->getPost('pdfTemario'),
       ];
   
-      $materiaTemarioModel = new MateriaTemarioModel();
-      // Verificar si la relación ya existe
-      if (!$materiaTemarioModel->existeRelacion($idMateria, $idTemario)) {
-  
         //instanciar
         $temarioModel = new TemarioModel();
         $temarioModel->update($idTemario, $data);
-        $materiaTemarioModel->insertarRelacionMateriaTema($idMateria, $idTemario);
-      } else {
-  
-        //instanciar
-        $temarioModel = new TemarioModel();
-        $temarioModel->update($idTemario, $data);
-      }
   
       return redirect()->to('inicioAdmi');
     }

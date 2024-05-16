@@ -32,14 +32,8 @@ $routes->get('/finalizacion/examen', 'Usuario\ControleUser::finalizacion');
 $routes->post('/examenResultado', 'Usuario\ControleUser::examenResultado'); //aqui muestra la calificacion del examen 
 $routes->post('/revisarExamen', 'Usuario\ControleUser::revisarExamen'); //aqui muestra el examen y las respuestas dadas :D
 
-
-
-
-
-
 //###############################-ADMINISTRADOR RUTAS-#################################
 $routes->get('/inicioAdmi', 'Admi\ControleAdmi::index');
-$routes->get('/comida', 'Admi\ControleAdmi::comida');
 
 //ADMINISTRADOR UNIVINST
 $routes->post('/crearUni', 'Admi\ControleAdmi::crearUni');
@@ -80,10 +74,9 @@ $routes->post('/eliminarExamen', 'Admi\ControleAdmi::eliminarExamen');
 
 //ADMINISTRADOR CERRAR SESIÓN
 $routes->post('/logout', 'Admi\ControleAdmi::logout');
-$routes->get('/comida', 'Admi\ControleAdmi::comida');
 
 
-$routes->post('/uniAjax', 'Admi\ControleAdmi::univercidadAjax');
+$routes->post('/uniAjax', 'Admi\ControleAdmi::universidadAjax');
 $routes->post('/eliminarUni2', 'Admi\ControleAdmi::eliminarUni2');
 $routes->post('/editarUni2', 'Admi\ControleAdmi::editarUni2');
 $routes->post('/crearUni2', 'Admi\ControleAdmi::crearUni2');
@@ -105,3 +98,5 @@ $routes->post('/crearTemario', 'Admi\ControleAdmi::crearTemario');
 
 
 
+//USUARIO
+$routes->post('/userAjax', 'Admi\ControleAdmi::editarUser');
