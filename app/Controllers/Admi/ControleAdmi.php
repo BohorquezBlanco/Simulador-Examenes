@@ -208,17 +208,7 @@ class ControleAdmi extends BaseController
   
   //----------------------------------------------------------------TEMARIOS---------------------------------------------------------------
 
-  //EliminarTema
-  public function eliminarTemario()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-    $idTemario = $this->request->getPost('idTemario');
 
-    $temarioModel = new TemarioModel();
-    $temarioModel->delete($idTemario);
-
-    return redirect()->to('inicioAdmi');
-  }
 
   //UPDATE TEMA
   public function editarTemario()
@@ -542,31 +532,29 @@ public function crearTemario()
 }
 
 //DELETE DE LAS MATERIAS EXISTENTES
-public function eliminarTemariso()
+public function eliminarTemario()
 {
-  $idMateria = $this->request->getPost('idMateria');
+  $idTemario = $this->request->getPost('idTemario');
 
-  // Instanciar el modelo
-  $materiaModel = new MateriaModel();
-
-  // Eliminar lógicamente el registro con el ID especificado
-  $materiaModel->delete($idMateria);
+  $temarioModel = new TemarioModel();
+  $temarioModel->delete($idTemario);
 }
 
 //UPDATE MATERIA
 public function modificarTemario()
 {
-  $idMateria = $this->request->getPost('idMateria');
+  $idTemario = $this->request->getPost('idTemario');
 
   $data = [
-    'nombreMateria' => $this->request->getPost('nombreMateria'),
-    'descripcionMateria' => $this->request->getPost('descripcionMateria'),
-    'imagenMateria' => $this->request->getPost('imagenMateria'),
+    'nombreTemario' => $this->request->getPost('nombreTemario'),
+    'contenidoTemario' => $this->request->getPost('contenidoTemario'),
+    'libroTemario' => $this->request->getPost('libroTemario'),
+    'idMateria' => $this->request->getPost('idMateria'),
   ];
 
   //instanciar
-  $materiaModel = new materiaModel();
-  $materiaModel->update($idMateria, $data);
+  $temarioModel = new TemarioModel();
+  $temarioModel->update($idTemario, $data);
 
 }
   

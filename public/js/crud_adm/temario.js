@@ -30,6 +30,7 @@
               <td>${temario.libroTemario}</td>
               <td>${temarioData.nombreMateria}</td>
               <td><button class="full-size modificar" data-temarioData='${JSON.stringify(temarioData)}'>MODIFICAR</button></td>
+              <td><button class="full-size eliminar" data-temarioData='${JSON.stringify(temarioData)}'>ELIMINAR</button></td>
               </tr>
             `;
           $('#temarioMateria').append(temarioHTML);
@@ -41,6 +42,66 @@
     });
    }
 
+//ELIMINAR
+$('#temarioMateria').on('click', '.eliminar', function() {
+  var temarioDataString = $(this).attr('data-temarioData');
+  var temarioData = JSON.parse(temarioDataString);
+  $('#contenidoModal').empty();
+      
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
+  var contenidoModal = 
+      `
+      <div class="head">
+      <h3>Eliminar Temario</h3>
+      <button class="cerrar">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </button>
+    </div>
+      <form id="eliminar">
+          <div class="celda">
+              <label class="form-label">¿Está seguro que desea eliminar el temario: " ${temarioData.nombreTemario}"?</label>
+          </div>
+          <div class="botones" data-materia='${JSON.stringify(temarioData)}'>
+              <input type="hidden" name="idMateria" value="${temarioData.idTemario}">
+              <button id="eliminarTemario" type="button" class="btn-eliminar">Eliminar</button>
+          </div>
+      </form>
+      `;
+    $('#contenidoModal').append(contenidoModal);
+
+    // Agregar un controlador de eventos al botón de cerrar
+    $('.cerrar').on('click', function() {
+      // Ocultar el modal al hacer clic en el botón de cerrar
+      $('#modalBase').hide();
+  });
+      // Mostrar el modal después de que se haya construido completamente
+      $('#modalBase').fadeIn();  
+});
+
+$('#contenidoModal').on('click', '#eliminarTemario', function(event) {
+  event.preventDefault(); // Evitar el envío del formulario por defecto
+  var materiaData = $(this).closest('.botones').data('materia');
+
+            // Realizar la solicitud AJAX para eliminar la universidad
+            $.ajax({
+                url: baseUrl + 'eliminarTemario',
+                type: 'POST',
+                data: materiaData, // Serializar el objeto a JSON
+                success: function(response) {
+                    console.log('Temario eliminado con éxito:', response);
+                    // Realizar alguna acción adicional si es necesario
+                    selecMateria(globalCarrData);
+                    $('#modalBase').hide(); // Ocultar el modal
+                },
+                error: function(error) {
+                    console.error('Error al eliminar el Temario:', error);
+                }
+            });
+});
+
+
+
+
 //MODIFICAR 
 $('#temarioMateria').on('click', '.modificar', function() {
   var temarioDataString = $(this).attr('data-temarioData');
@@ -49,37 +110,76 @@ $('#temarioMateria').on('click', '.modificar', function() {
   $('#divModificarTemario').empty();
   var temarioHTML = 
   `
-  <form id="modificarTemario">
+  <form id="modificarT">
   <h1>MODIFICAR TEMARIO</h1>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Nombre Temario</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="${temarioData.nombreTemario}">
+    <input type="text" class="form-control" name="nombreTemario" id="nombreTemario" placeholder="name@example.com" value="${temarioData.nombreTemario}">
+    <input type="hidden" class="form-control" name="idTemario" id="idTemario" placeholder="name@example.com" value="${temarioData.idTemario}">
+
   </div>
 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Contenido Temario</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="${temarioData.contenidoTemario}" >
+    <input type="text" class="form-control" name="contenidoTemario" id="contenidoTemario" placeholder="name@example.com" value="${temarioData.contenidoTemario}" >
   </div>
 
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Libro Temario</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" value="${temarioData.libroTemario}" >
+    <input type="text" class="form-control" name="libroTemario"  id="libroTemario" placeholder="name@example.com" value="${temarioData.libroTemario}" >
   </div>
   <div class="mb-3">
     <label for="exampleFormControlInput1" class="form-label">Materia:</label>
-      <select class="form-select " aria-label="Default select example" id="selectMateriaTemario">
+      <select class="form-select " aria-label="Default select example" id="selectMateriaTemario" name="idMateria">
       <option value="${temarioData.idMateria}" selected>${temarioData.nombreMateria}</option>
       <option id="materiaTemarioMod" value="${globalMateriaData}" >${globalMatNombre}</option>
     </select>
   </div>
  
-    <button class="enviarT" id="modificarTemario">
+    <button type="submit"  class="enviarT" id="modificarTemarioForm">
       MODIFICAR TEMARIO
     </button>
   </form>
   `;
 $('#divModificarTemario').append(temarioHTML);
 });
+
+
+
+
+
+
+
+//MODIFICAR
+$('#divModificarTemario').on('click', '#modificarTemarioForm', function(event) {
+  // Evitar el envío del formulario por defecto
+  event.preventDefault();
+
+  // Serializar el formulario para obtener todos los valores de los inputs
+  var formData = $('#modificarT').serialize();
+
+  console.log(formData);
+    // Realizar la solicitud AJAX para agregar la nueva universidad
+    $.ajax({
+        url: baseUrl + 'modificarTemario',
+        type: 'POST',
+        data: formData,
+        success: function(response) {
+            console.log('Temario modificado con éxito:', response);
+            // Realizar alguna acción adicional si es necesario
+            selecTemario(globalMateriaData);
+            $('#divModificarTemario').empty();
+
+        },
+        error: function(error) {
+            console.error('Error al modificar el temario:', error);
+        }
+    });
+  });
+
+
+
+
 
 
 
@@ -137,11 +237,12 @@ $('#divModificarTemario').append(temarioHTML);
   });
 
 //insertar
-$('#contenidoModal').on('click', '#insertarTemario', function() {
+$('#contenidoModal').on('click', '#insertarTemario', function(event) {
     event.preventDefault(); // Evitar el envío del formulario por defecto
     // Serializar el formulario para obtener todos los valores de los inputs
     var idMateria = globalMateriaData;
     var formData = $('#agregarTemario').serialize();
+    console.log(formData);
     // Agregar idU como un parámetro adicional a los datos serializados
     formData += '&idMateria=' + encodeURIComponent(idMateria);
       
@@ -161,32 +262,6 @@ $('#contenidoModal').on('click', '#insertarTemario', function() {
         }
     });
 });
-
-
-//MODIFICAR
-$('#divModificarTemario').on('click', '#modificarTemario', function() {
-  event.preventDefault(); // Evitar el envío del formulario por defecto
-  // Serializar el formulario para obtener todos los valores de los inputs
-  var formData = $('#modificarTemario').serialize();
-
-  // Realizar la solicitud AJAX para agregar la nueva universidad
-  $.ajax({
-      url: baseUrl + 'modificarTemario',
-      type: 'POST',
-      data: formData,
-      success: function(response) {
-          console.log('Temario modificado con éxito:', response);
-          // Realizar alguna acción adicional si es necesario
-          selecTemario(globalMateriaData);
-
-      },
-      error: function(error) {
-          console.error('Error al modificar el temario:', error);
-      }
-  });
-});
-
-
 
 
     //FILTRO DE MATERIA
