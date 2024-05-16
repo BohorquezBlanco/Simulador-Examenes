@@ -22,11 +22,8 @@ function selecUniversidad() {
         var universidadHTML = `
               <div class="card draggable" id="universidad-${
                 unis.idU
-              }" draggable="true" data-universidad='${JSON.stringify(
-          universidadData
-        )}'>
-                <img src="${unis.imagenU}" alt="By AnisSoft" title="${
-          unis.nombreU
+              }" draggable="true" data-universidad='${JSON.stringify(universidadData)}'>
+                <img src="${unis.imagenU}" alt="By AnisSoft" title="${unis.nombreU
         }" draggable="false" />
                 <div class="card-body">
                   <h5 class="card-title">${unis.nombreU}</h5>
@@ -44,10 +41,9 @@ function selecUniversidad() {
       globalUniData = datosUniversidad.primerId;
       globalUniNombre = datosUniversidad.primerNombre;
 
-      console.log("El primer id de univer es:", globalUniData);
-      console.log("El primer nombre de uni es:", globalUniNombre);
-      selecCarrera(globalUniData);
-      //agregar el boton de crear universidad
+          selecCarrera(globalUniData);
+          //agregar el boton de crear universidad 
+
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
       $("#selectUniAjax").append(`
             <button id="insertUni" class="abrirModal" type="button" data-target="modalBase">
