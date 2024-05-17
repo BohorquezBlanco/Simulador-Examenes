@@ -12,6 +12,7 @@ use App\Models\MateriaLibroModel;
 use App\Models\MateriaTemarioModel;
 use App\Models\PreguntaModel;
 use App\Models\TemarioModel;
+use App\Models\TemaModel;
 use App\Models\UniModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\HotReloader\HotReloader;
@@ -50,10 +51,13 @@ class ControleAdmi extends BaseController
                               ->orderBy('temario.idMateria')
                               ->findAll();
 
+                              $temaModel = new TemaModel();
+                              $tema = $temarioModel ->findAll();
+
     $preguntaModel = new preguntaModel();
     $preguntas = $preguntaModel->findAll();
 
-    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'preguntas' => $preguntas];
+    $data = ['unis' => $unis, 'carreras' => $carreras, 'materias' => $materias, 'temarios' => $temarios, 'preguntas' => $preguntas,'tema'=>$tema];
 
     return view('adm/inicioAdmi', $data);
   }
@@ -228,97 +232,6 @@ class ControleAdmi extends BaseController
   }
 
  
-  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
-
-  //INSERT DE LAS PREGUNTAS
-  public function crearPregunta()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-
-    $data = [
-      'enunciado' => $this->request->getPost('enunciado'),
-      'formula' => $this->request->getPost('formula'),
-      'grafico' => $this->request->getPost('grafico'),
-      'a' => $this->request->getPost('a'),
-      'b' => $this->request->getPost('b'),
-      'c' => $this->request->getPost('c'),
-      'd' => $this->request->getPost('d'),
-      'e' => $this->request->getPost('e'),
-      'respuesta' => $this->request->getPost('respuesta'),
-      'idMateria' => $this->request->getPost('idMateria'),
-      'exPas' => $this->request->getPost('exPas'),
-      'dificultad' => $this->request->getPost('dificultad'),
-      'resolucionPDF' => $this->request->getPost('resolucionPdf'),
-      'idTemario' => $this->request->getPost('idTemario'),
-    ];
-
-    // Insertar en la tabla pregunta
-    $preguntaModel = new PreguntaModel();
-    $preguntaModel->insert($data);
-
-    $idPregunta = $preguntaModel->insertID(); // Obtener el ID del tema recién insertado
-
-    // Crear un nuevo objeto del modelo
-    $materiaPreguntaModel = new MateriaPreguntaModel();
-    $materiaPreguntaModel->insertarRelacionMateriaPregunta($idMateria, $idPregunta);
-
-    return redirect()->to('inicioAdmi');
-  }
-  public function eliminarPregunta()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-    $idPregunta = $this->request->getPost('idPregunta');
-
-    // Crear un nuevo objeto del modelo
-    $materiaPreguntaModel = new MateriaPreguntaModel();
-    $materiaPreguntaModel->eliminarRelacionMateriaPregunta($idMateria, $idPregunta);
-
-    $preguntaModel = new PreguntaModel();
-    $preguntaModel->delete($idPregunta);
-
-    return redirect()->to('inicioAdmi');
-  }
-
-  //UPDATE PREGUNTA
-  public function editarPregunta()
-  {
-    $idMateria = $this->request->getPost('idMateria');
-    $idPregunta = $this->request->getPost('idPregunta');
-
-    $data = [
-      'enunciado' => $this->request->getPost('enunciado'),
-      'formula' => $this->request->getPost('formula'),
-      'imagenPregunta' => $this->request->getPost('imagenPregunta'),
-      'a' => $this->request->getPost('a'),
-      'b' => $this->request->getPost('b'),
-      'c' => $this->request->getPost('c'),
-      'd' => $this->request->getPost('d'),
-      'e' => $this->request->getPost('e'),
-      'respuesta' => $this->request->getPost('respuesta'),
-      'nombreTemario' => $this->request->getPost('nombreTemario'),
-      'exPas' => $this->request->getPost('exPas'),
-      'dificultad' => $this->request->getPost('dificultad'),
-      'resolucionPDF' => $this->request->getPost('resolucionPdf'),
-      'idTemario' => $this->request->getPost('idTemario'),
-    ];
-
-    $materiaPreguntaModel = new MateriaPreguntaModel();
-    // Verificar si la relación ya existe
-    if (!$materiaPreguntaModel->existeRelacion($idMateria, $idPregunta)) {
-
-      //instanciar
-      $preguntaModel = new PreguntaModel();
-      $preguntaModel->update($idPregunta, $data);
-      $materiaPreguntaModel->insertarRelacionMateriaPregunta($idMateria, $idPregunta);
-    } else {
-
-      //instanciar
-      $preguntaModel = new PreguntaModel();
-      $preguntaModel->update($idPregunta, $data);
-    }
-
-    return redirect()->to('inicioAdmi');
-  }
   //Cerrar sesión
   public function logout()
   {
@@ -382,7 +295,15 @@ class ControleAdmi extends BaseController
     // Devolver los temas como JSON
     return json_encode($carreras);
   }
+  public function allCarreras()
+  {
 
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($carreras);
+  }
 
 
  //INSERT DE LAS CARRERAS 
@@ -545,6 +466,91 @@ public function modificarTemario()
   $temarioModel->update($idTemario, $data);
 
 }
-  
+
+public function temaCarrera()
+{
+  $idMateria = $this->request->getPost('idMateria');
+ 
+  $temaModel = new TemaModel();
+  $temas = $temaModel->select('tema.idTema, tema.nombreTema')
+  ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
+  ->join('temario', 'temario_tema.idTemario = temario.idTemario')
+  ->join('materia', 'temario.idMateria = materia.idMateria')
+  ->where('materia.idMateria', $idMateria)
+  ->findAll();
+  return json_encode($temas);
+}
+
+  #################--SELECT--#####################
+  public function preguntasAjax()
+  {
+    $idTema = $this->request->getPost('idTema');
+    $preguntaModel = new PreguntaModel();
+    $preguntas = $preguntaModel->where('idTema',$idTema)->findAll();
+    return json_encode($preguntas);
+  }
+
+
+  public function crearPregunta()
+  {
+    $data = [
+      'enunciado' => $this->request->getPost('enunciado'),
+      'grafico' => $this->request->getPost('grafico'),
+      'a' => $this->request->getPost('a'),
+      'b' => $this->request->getPost('b'),
+      'c' => $this->request->getPost('c'),
+      'd' => $this->request->getPost('d'),
+      'e' => $this->request->getPost('e'),
+      'respuesta' => $this->request->getPost('respuesta'),
+      'idTema' => $this->request->getPost('idTema'),
+      'dificultad' => $this->request->getPost('dificultad'),
+      'resolucionPDF' => $this->request->getPost('resolucionPDF'),
+    ];
+
+    // Insertar en la tabla pregunta
+    $preguntaModel = new PreguntaModel();
+    $preguntaModel->insert($data);
+  }
+
+
+  //UPDATE PREGUNTA
+  public function modificarPregunta()
+  {
+
+    $idPregunta = $this->request->getPost('idPregunta');
+
+    $data = [
+      'enunciado' => $this->request->getPost('enunciado'),
+      'grafico' => $this->request->getPost('grafico'),
+      'a' => $this->request->getPost('a'),
+      'b' => $this->request->getPost('b'),
+      'c' => $this->request->getPost('c'),
+      'd' => $this->request->getPost('d'),
+      'e' => $this->request->getPost('e'),
+      'respuesta' => $this->request->getPost('respuesta'),
+      'idTema' => $this->request->getPost('idTema'),
+      'dificultad' => $this->request->getPost('dificultad'),
+      'resolucionPDF' => $this->request->getPost('resolucionPdf'),
+    ];
+
+      //instanciar
+      $preguntaModel = new PreguntaModel();
+      $preguntaModel->update($idPregunta, $data);
+
+  }
+  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
+
+  //INSERT DE LAS PREGUNTAS
+
+  public function eliminarPregunta()
+  {
+
+    $idPregunta = $this->request->getPost('idPregunta');
+
+    $preguntaModel = new PreguntaModel();
+    $preguntaModel->delete($idPregunta);
+
+  }
+
 
 }

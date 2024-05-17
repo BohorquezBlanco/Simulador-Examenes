@@ -3,11 +3,11 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PreguntaModel extends Model
+class TemaModel extends Model
 {
 
-    protected $table      = 'pregunta';
-    protected $primaryKey = 'idPregunta';
+    protected $table      = 'tema';
+    protected $primaryKey = 'idTema';
 
     protected $useAutoIncrement = true;
 
@@ -15,7 +15,7 @@ class PreguntaModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idPregunta','enunciado', 'a','b','c','d','e','respuesta', 'grafico', 'idTema','dificultad','resolucionPdf'];
+    protected $allowedFields = ['idTema','nombreTema','descripcionTema','videoTema'];
 
     // Dates
     protected $useTimestamps = true;

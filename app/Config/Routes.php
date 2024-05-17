@@ -60,10 +60,6 @@ $routes->post('/crearTemario', 'Admi\ControleAdmi::crearTemario');
 $routes->post('/editarTemario', 'Admi\ControleAdmi::editarTemario');
 $routes->post('/eliminarTemario', 'Admi\ControleAdmi::eliminarTemario');
 
-//ADMINISTRADOR PREGUNTAS
-$routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
-$routes->post('/editarPregunta', 'Admi\ControleAdmi::editarPregunta');
-$routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
 
 //ADMINISTRADOR EXAMEN
 $routes->post('/crearExamen', 'Admi\ControleAdmi::crearExamen');
@@ -82,6 +78,8 @@ $routes->post('/editarUni2', 'Admi\ControleAdmi::editarUni2');
 $routes->post('/crearUni2', 'Admi\ControleAdmi::crearUni2');
 
 $routes->post('/carreraAjax', 'Admi\ControleAdmi::carreraAjax');
+$routes->post('/allCarreras', 'Admi\ControleAdmi::allCarreras');
+
 $routes->post('/eliminarCarrera2', 'Admi\ControleAdmi::eliminarCarrera2');
 $routes->post('/editarCarrera2', 'Admi\ControleAdmi::editarCarrera2');
 $routes->post('/crearCarrera2', 'Admi\ControleAdmi::crearCarrera2');
@@ -96,7 +94,12 @@ $routes->post('/eliminarTemario', 'Admi\ControleAdmi::eliminarMateria2');
 $routes->post('/modificarTemario', 'Admi\ControleAdmi::modificarTemario');
 $routes->post('/crearTemario', 'Admi\ControleAdmi::crearTemario');
 
+$routes->post('/temaCarrera', 'Admi\ControleAdmi::temaCarrera');
 
+$routes->post('/preguntasAjax', 'Admi\ControleAdmi::preguntasAjax');
+$routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
+$routes->post('/modificarPregunta', 'Admi\ControleAdmi::modificarPregunta');
+$routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
 
 //USUARIO
 $routes->post('/userAjax', 'Admi\ControleAdmi::editarUser');

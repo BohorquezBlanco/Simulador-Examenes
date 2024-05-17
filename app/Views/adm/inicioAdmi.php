@@ -10,7 +10,39 @@
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+  .table-container {
+    overflow-x: auto;
+  }
 
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  /* Ajusta el ancho de las columnas */
+  th:nth-child(1) { width: 40%; }
+  th:nth-child(2) { width: 10%; }
+  th:nth-child(3) { width: 5%; }
+  th:nth-child(4) { width: 5%; }
+  th:nth-child(5) { width: 5%; }
+  th:nth-child(6) { width: 5%; }
+  th:nth-child(7) { width: 5%; }
+  th:nth-child(8) { width: 10%; }
+  th:nth-child(9) { width: 10%; }
+  th:nth-child(10) { width: 15%; }
+  th:nth-child(11) { width: 10%; }
+  th:nth-child(12) { width: 5%; }
+</style>
 </head>
 <!--HEADER-->
 <!--BODY-->
@@ -247,46 +279,145 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <!--TEMAS-->
     <section id="temas" class="seccion">
-      <h5 class="center">TEMAS</h5>
-      <div class="contenidoT">
-        <div class="labelExcel">Seleccione materia</div>
-        <div class="selectM">
-          <select name="idM" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
-            <?php foreach ($materias as $materia) : ?>
-              <?php
-              $selected = $materia['idMateria'] ? 'selected' : '';
-              ?>
-              <option value="<?php echo $materia['idMateria']; ?>" <?php echo $selected; ?>>
-                <?php echo $materia['nombreMateria']; ?>
-              </option>
-            <?php endforeach; ?>
+    <h5 class="center">TEMAS-TEMARIO</h5>
+        <div class="celda">
+          <select  class="universidadSelect">
+            <option value="1">Universidad:</option>
           </select>
         </div>
-      </div>
+        <div class="celda">
+          <select class="carreraSelect" name="carreraSelect" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
+            <option value="1">Carrera:</option>
+          </select>
+        </div>
+        <div class="celda">
+          <select class="materiaSelect" name="materiaSelect">
+            <option value="1">Materia:</option>
+          </select>
+        </div>
+        <div class="botonT">
+          <button class="enviarT" id="crearTemario">
+            Agregar nuevo temario
+          </button>
+        </div>
+      <br>
+
+        <div id="divModificarTemario">
+          
+        </div>
+
+<br>
+<br>
+
+<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table id="miTabla">
+        <table >
           <thead>
             <tr>
-              <th>Nombre</th>
+              <th>Temario</th>
               <th>Contenido</th>
               <th>Libro</th>
-              <th>Video</th>
+              <th>Materia</th>
+              <th>ELiminar</th>
+              <th>Modificar</th>
             </tr>
           </thead>
-          <tbody contenteditable="true">
+          <tbody id="temarioMateria">
+            <!-- Agregar temarios existentes de la materia -->
+            <tr>
+              <td>Algebra</td>
+              <td>no se si es necesario</td>
+              <td>asdfsadfsadfsdaf</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
+            <tr>
+              <td>Problemas Matematicos</td>
+              <td>Contenido 1</td>
+              <td>Libro 1</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
+            <tr>
+              <td>Aritmetica</td>
+              <td>Contenido 1</td>
+              <td>Libro 1</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
           </tbody>
         </table>
-      </div>
-      <div class="botonT">
-        <button class="enviarT">
-          Guardar datos
-        </button>
       </div>
     </section>
     <!--TEMAS-->
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
-      <h5 class="center">PREGUNTAS</h5>
+    <h5 class="center">Preguntas</h5>
+        <div class="celda">
+          <select class="carreraPregunta" name="carreraPregunta">
+            <option value="0" selected>Carrera:</option>
+          </select>
+        </div>
+        <div class="celda">
+          <select class="materiaPregunta" name="materiaPregunta">
+            <option value="0">Materia:</option>
+          </select>
+        </div>
+        <div class="celda">
+          <select class="preguntaTema" name="preguntaTema">
+            <option value="0">Temas:</option>
+          </select>
+        </div>
+        <div class="botonT">
+          <button class="enviarT" id="crearPregunta">
+            Agregar nueva pregunta
+          </button>
+        </div>
+      <br>
+<br>
+<br>
+
+<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <div class="contTable">
+        <table >
+          <thead>
+            <tr>
+              <th>Enunciado</th>
+              <th>Grafico</th>
+              <th>a</th>
+              <th>b</th>
+              <th>c</th>
+              <th>d</th>
+              <th>e</th>
+              <th>respuestas</th>
+              <th>dificultad</th>
+              <th>resolucion PDF</th>
+              <th>Tema</th>
+              <th>Eliminar/Modificar</th>
+            </tr>
+          </thead>
+          <tbody id="thbodypregunta">
+            <!-- Agregar temarios existentes de la materia -->
+            <tr>
+              <td>Ocho obreros pueden hacer una obra en 20 días, después de 5 días de trabajo se retiran 3 obreros. ¿Con cuántos días de atraso se terminó la obra?</td>
+              <td></td>
+              <td>58</td>
+              <td>60</td>
+              <td>65</td>
+              <td>80</td>
+              <td>94</td>
+              <td>a</td>
+              <td>dificil</td>
+              <td><a href="https://drive.google.com/file/d/1cVufBW1GlMdfPVqTkU7sx9Wp3V368GpX/view">PDF</a></td>
+              <td>Biologia</td>
+              <td><button>ELIMINAR</button> <button>MODIFICAR</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </section>
     <!--PREGUNTAS Y EXAMENES-->
@@ -360,10 +491,12 @@
   <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
   <script> var baseUrl = "<?php echo base_url(); ?>";</script>
   <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/universidad.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/universida.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/carreras.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/pregunta.js"></script>
+
 
   <script>
     $(document).ready(function() {

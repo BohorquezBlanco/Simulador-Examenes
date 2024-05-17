@@ -41,3 +41,6 @@ function fadeIn(selector, duracion) {
    console.error("El elemento con el selector '" + selector + "' no fue encontrado.");
   }
 }
+
+//FILTRO CARRERA MATERIA TEMA
+
