@@ -22,11 +22,14 @@ function selecUniversidad() {
         var universidadHTML = `
               <div class="card draggable" id="universidad-${
                 unis.idU
-              }" draggable="true" data-universidad='${JSON.stringify(universidadData)}'>
-                <img src="${unis.imagenU}" alt="By AnisSoft" title="${unis.nombreU
+              }" draggable="true" data-universidad='${JSON.stringify(
+          universidadData
+        )}'>
+                <img src="${unis.imagenU}" alt="By AnisSoft" title="${
+          unis.nombreU
         }" draggable="false" />
                 <div class="card-body">
-                  <h5 class="card-title">${unis.nombreU}</h5>
+                  <p class="card-title">${unis.nombreU}</p>
                 </div>
               </div>
               `;
@@ -41,8 +44,8 @@ function selecUniversidad() {
       globalUniData = datosUniversidad.primerId;
       globalUniNombre = datosUniversidad.primerNombre;
 
-          selecCarrera(globalUniData);
-          //agregar el boton de crear universidad 
+      selecCarrera(globalUniData);
+      //agregar el boton de crear universidad
 
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
       $("#selectUniAjax").append(`
@@ -73,41 +76,44 @@ function selecUniversidad() {
 
         //--ESCRIBIR MODAL :D
         var contenidoModal = `
-                <div class="head">
-                  <p>Modificar Universidad/instituto</p>
-                  <button class="cerrar">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                  </button>
-                </div>
-                <form id="modificar" data-universidad='${JSON.stringify(
-                  universidadData
-                )}'>
-                  <div class="celda">
-                    <label class="form-label">Nombre de la universidad/instituto</label>
-                    <input name="idU" id="idU" type="hidden" class="form-control" placeholder="Nombre de la universidad/instituto" value="${
-                      universidadData.idU
-                    }">
-                    <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto" value="${
-                      universidadData.nombreU
-                    }">
-                  </div>
-                  <div class="celda">
-                    <label class="form-label">Descripción de la universidad/instituto</label>
-                    <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto">${
-                      universidadData.descripcionU
-                    }</textarea>
-                  </div>
-                  <div class="celda">
-                    <label class="form-label">Imagen de la universidad/instituto</label>
-                    <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto">${
-                      universidadData.imagenU
-                    }</textarea>
-                  </div>
-                  <div class="abrirModal añadir">
-                    <button id="editarUni" type="button" class="btn">Modificar</button>
-                  </div>
-                </form>
-                `;
+        <div class="head">
+        <div class="left-section">
+            <p>Modificar Universidad o instituto</p>
+        </div>
+        <div class="right-section">
+            <button class="cerrar">
+                <ion-icon name="close-circle-outline"></ion-icon>
+            </button>
+        </div>
+    </div>
+    
+    <form id="modificar" data-universidad='${JSON.stringify(universidadData)}'>
+      <div class="celda">
+        <label class="form-label">Nombre de la universidad/instituto</label>
+        <input name="idU" id="idU" type="hidden" class="form-control" placeholder="Nombre de la universidad/instituto" value="${
+          universidadData.idU
+        }">
+        <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto" value="${
+          universidadData.nombreU
+        }">
+      </div>
+      <div class="celda">
+        <label class="form-label">Descripción de la universidad/instituto</label>
+        <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto">${
+          universidadData.descripcionU
+        }</textarea>
+      </div>
+      <div class="celda">
+        <label class="form-label">Imagen de la universidad/instituto</label>
+        <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto">${
+          universidadData.imagenU
+        }</textarea>
+      </div>
+    </form>
+    <div class="añadir">
+      <button id="editarUni" type="button" class="btn">Modificar</button>
+    </div>
+    `;
         // Agregar el contenido modal al elemento correspondiente en el DOM
         $("#contenidoModal").append(contenidoModal);
 
@@ -137,30 +143,31 @@ function selecUniversidad() {
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
         var contenidoModal = `
-                <div class="head">
-                  <p>Eliminar Universidad/instituto</p>
-                  <button class="cerrar">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                  </button>
-                </div>
-                <form id="eliminar">
-                    <div class="celda">
-                        <label class="form-label">¿Está seguro que desea eliminar ${
-                          universidadData.nombreU
-                        }?</label>
-                    </div>
-                    <div class="botones" data-universidad='${JSON.stringify(
-                      universidadData
-                    )}'>
-                        <input type="hidden" name="idUniversidad2" value="1">
-                        <input type="hidden" name="idUniversidad" value="${idUniversidad}">
-                        <img src="${
-                          universidadData.imagenU
-                        }" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
-                        <button id="eliminarUniversidad" type="button" class="btn">Eliminar</button>
-                    </div>
-                </form>
-                `;
+        <div class="head">
+    <div class="left-section">
+    <p>Eliminar Universidad o instituto</p>
+    </div>
+    <div class="right-section">
+        <button class="cerrar">
+            <ion-icon name="close-circle-outline"></ion-icon>
+        </button>
+    </div>
+</div>
+        <form id="eliminar" data-universidad='${JSON.stringify(universidadData)}'>
+        <input name="idU" id="idU" type="hidden" class="form-control" placeholder="Nombre de la universidad/instituto" value="${
+          universidadData.idU
+        }">
+            <div class="celda">
+                <label class="form-label">¿Está seguro que desea eliminar "${
+                  universidadData.nombreU
+                }"?</label>
+            </div>
+        </form>
+        <br>
+        <div class="añadir">
+        <button id="eliminarUniversidad" type="button" class="btn">Eliminar</button>
+        </div>
+        `;
         $("#contenidoModal").append(contenidoModal);
 
         // Agregar un controlador de eventos al botón de cerrar
@@ -179,7 +186,7 @@ function selecUniversidad() {
 }
 
 //---------------------------------UPDATE UNIVERSITY-------------------------------------------------
-$("#contenidoModal").on("click", "#editarUni", function () {
+$("#contenidoModal").on("click", "#editarUni", function (event) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
 
   // Serializar todos los campos del formulario en un arreglo de objetos
@@ -214,30 +221,34 @@ $("#contenidoModal").on("click", "#editarUni", function () {
 $("#selectUniAjax").on("click", "#insertUni", function () {
   $("#contenidoModal").empty();
   var universidadHTML = `
-              <div class="head">
-                <p>Añadir Universidad/instituto</p>
-                <button class="cerrar">
-                  <ion-icon name="close-circle-outline"></ion-icon>
-                </button>
-              </div>
-                <form  id="crear">
-                  <div class="celda">
-                    <label class="form-label">Nombre de la universidad/instituto</label>
-                    <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto">
-                  </div>
-                  <div class="celda">
-                    <label class="form-label">Descripción de la universidad/instituto</label>
-                    <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto"></textarea>
-                  </div>
-                  <div class="celda">
-                    <label class="form-label">Imagen de la universidad/instituto</label>
-                    <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto"></textarea>
-                  </div>
-                  <div class="añadir">
-                    <button id="agregarUni" type="button" class="btn">Añadir nueva</button>
-                  </div>
-                </form>
-              `;
+  <div class="head">
+    <div class="left-section">
+      <p>Añadir Universidad o instituto</p>
+    </div>
+    <div class="right-section">
+        <button class="cerrar">
+            <ion-icon name="close-circle-outline"></ion-icon>
+        </button>
+    </div>
+</div>
+      <form  id="crear">
+        <div class="celda">
+          <label class="form-label">Nombre de la universidad/instituto</label>
+          <input name="nombreU" id="nombreU" type="text" class="form-control" placeholder="Nombre de la universidad/instituto">
+        </div>
+        <div class="celda">
+          <label class="form-label">Descripción de la universidad/instituto</label>
+          <textarea class="form-control" rows="3" name="descripcionU" id="descripcionU" placeholder="Descripción de la universidad/instituto"></textarea>
+        </div>
+        <div class="celda">
+          <label class="form-label">Imagen de la universidad/instituto</label>
+          <textarea class="form-control" rows="3" name="imagenU" id="imagenU" placeholder="Imagen de la universidad/instituto"></textarea>
+        </div>
+      </form>
+      <div class="añadir">
+        <button id="agregarUni" type="button" class="btn">Añadir</button>
+      </div>
+    `;
   $("#contenidoModal").append(universidadHTML);
   // Agregar un controlador de eventos al botón de cerrar
   $(".cerrar").on("click", function () {
@@ -247,7 +258,7 @@ $("#selectUniAjax").on("click", "#insertUni", function () {
   $("#modalBase").fadeIn();
 });
 
-$("#contenidoModal").on("click", "#agregarUni", function () {
+$("#contenidoModal").on("click", "#agregarUni", function (event) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
 
   // Serializar el formulario para obtener todos los valores de los inputs
@@ -271,9 +282,16 @@ $("#contenidoModal").on("click", "#agregarUni", function () {
 });
 
 //---------------------------------DELETE UNIVERSITY-------------------------------------------------
-$("#contenidoModal").on("click", "#eliminarUniversidad", function () {
+$("#contenidoModal").on("click", "#eliminarUniversidad", function (event) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
-  var universidadData = $(this).closest(".botones").data("universidad");
+  var formDataArray = $("#eliminar").serializeArray();
+
+  // Convertir el arreglo en un objeto JavaScript
+  var universidadData = {};
+  formDataArray.forEach(function (item) {
+    universidadData[item.name] = item.value;
+  });
+  
   console.log(universidadData);
 
   // Realizar la solicitud AJAX para eliminar la universidad

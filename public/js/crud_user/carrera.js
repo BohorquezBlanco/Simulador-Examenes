@@ -3,7 +3,7 @@ globalCarrData=1; // Definir la variable global
         //---------------------------------SELECT CARRERA-------------------------------------------------
         function selecCarrera(globalUniData) {
           $('#selectCarrAjax').empty();//BORRA TODO EL CONTENEDOR 
-          $('.carreraSelect').empty();//BORRA TODO EL CONTENEDOR 
+          
 
           var uniData = {
             idU: globalUniData, // Crear un objeto con lo necesario
