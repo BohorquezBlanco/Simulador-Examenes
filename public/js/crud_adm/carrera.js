@@ -1,4 +1,5 @@
-globalCarrData=1; // Definir la variable global
+var globalCarrData=1; // Definir la variable global
+var globalCarrNombre=null; //
     //###################################################-CARRERA-#########################################################  
         //---------------------------------SELECT CARRERA-------------------------------------------------
         function selecCarrera(globalUniData) {
@@ -32,7 +33,7 @@ globalCarrData=1; // Definir la variable global
                 <div class="card draggable" id="carrera-${carrera.idCarrera}" draggable="true" data-carrera='${JSON.stringify(carreraData)}'>
                   <img src="${carrera.imagenCarrera}" alt="By AnisSoft" title="${carrera.nombreCarrera}" draggable="false" />
                   <div class="card-body">
-                    <h3 class="card-title">${carrera.nombreCarrera}</h3>
+                    <p class="card-title">${carrera.nombreCarrera}</p>
                   </div>
                 </div>
                 `;
@@ -51,6 +52,7 @@ globalCarrData=1; // Definir la variable global
           globalCarrData = datosUniversidad.primerId;
           globalCarrNombre = datosUniversidad.primerNombre;
           selecMateria(globalCarrData);
+
 
 
 
@@ -84,13 +86,16 @@ globalCarrData=1; // Definir la variable global
       
               //--ESCRIBIR MODAL :D
               var contenidoModal = 
-                  `
-                  <div class="head">
-                  <h3>Editar Carrera</h3>
-                  <button class="cerrar">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                  </button>
-                </div>
+                  `<div class="head">
+                  <div class="left-section">
+                  <p>Editar Carrera</p>
+                  </div>
+                  <div class="right-section">
+                      <button class="cerrar">
+                          <ion-icon name="close-circle-outline"></ion-icon>
+                      </button>
+                  </div>
+              </div>
                   <form id="modificar" data-carrera='${JSON.stringify(carreraData)}'>
                     <div class="celda">
                       <label class="form-label">Nombre de la carrera</label>
@@ -105,10 +110,11 @@ globalCarrData=1; // Definir la variable global
                       <label class="form-label">Imagen de la carrera</label>
                       <textarea class="form-control" rows="3" name="imagenCarrera" id="imagenCarrera" placeholder="Imagen de la carrera">${carreraData.imagenCarrera}</textarea>
                     </div>
-                    <div class="añadir">
-                      <button id="editarCarrera" type="button" class="btn-modificar">Modificar</button>
-                    </div>
+                    
                   </form>
+                  <div class="añadir">
+                      <button id="editarCarrera" type="button" class="btn">Modificar</button>
+                    </div>
                   `;
                 $('#contenidoModal').append(contenidoModal);
                                   // Agregar un controlador de eventos al botón de cerrar
@@ -136,23 +142,26 @@ globalCarrData=1; // Definir la variable global
       
               //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!--ESCRIBIR MODAL :D--!!!!!!!!!!!!!!!!!!!!!!!!
               var contenidoModal = 
-                  `
-                  <div class="head">
-                  <h3>Eliminar Carrera</h3>
-                  <button class="cerrar">
-                    <ion-icon name="close-circle-outline"></ion-icon>
-                  </button>
-                </div>
-                  <form id="eliminar">
+                  `<div class="head">
+                  <div class="left-section">
+                  <p>Eliminar Carrera</p>
+                  </div>
+                  <div class="right-section">
+                      <button class="cerrar">
+                          <ion-icon name="close-circle-outline"></ion-icon>
+                      </button>
+                  </div>
+              </div>
+                  <form id="eliminar" data-carrera='${JSON.stringify(carreraData)}'>
+                    <input type="hidden" class="form-control" name="idCarrera" id="idCarrera" value="${carreraData.idCarrera}">
                       <div class="celda">
                           <label class="form-label">¿Está seguro que desea eliminar ${carreraData.nombreCarrera}?</label>
                       </div>
-                      <div class="botones" data-carrera='${JSON.stringify(carreraData)}'>
-                          <input type="hidden" name="idCarrera" value="${idCarrera}">
-                          <img src="${carreraData.imagenCarrera}" alt="By AnisSoft" style="width: 100px; height: auto; display: block; margin: 0 auto;" />
-                          <button id="eliminarCarrera" type="button" class="btn-eliminar">Eliminar</button>
-                      </div>
                   </form>
+                  <br>
+                  <div class="añadir">
+                      <button id="eliminarCarrera" type="button" class="btn">Eliminar</button>
+                    </div>
                   `;
                 $('#contenidoModal').append(contenidoModal);
                                   // Agregar un controlador de eventos al botón de cerrar
@@ -210,13 +219,16 @@ globalCarrData=1; // Definir la variable global
         
           $('#contenidoModal').empty();
           var carreraHTML = 
-                `
-                <div class="head">
-                <h3>Agregar Carrera</h3>
-                <button class="cerrar">
-                  <ion-icon name="close-circle-outline"></ion-icon>
-                </button>
-              </div>
+                `<div class="head">
+                <div class="left-section">
+                <p>Agregar Carrera</p>
+                </div>
+                <div class="right-section">
+                    <button class="cerrar">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
                   <form  id="crear">
                     <div class="celda">
                       <label class="form-label">Carrera</label>
@@ -230,10 +242,10 @@ globalCarrData=1; // Definir la variable global
                       <label class="form-label">Imagen de la carrera</label>
                       <textarea class="form-control" rows="3" name="imagenCarrera" id="imagenCarrera" placeholder="Imagen de la carrera"></textarea>
                     </div>
-                    <div class="añadir">
-                      <button id="agregarCarrera" type="button" class="btn-modificar">Añadir nueva Carrera</button>
-                    </div>
                   </form>
+                  <div class="añadir">
+                    <button id="agregarCarrera" type="button" class="btn">Añadir</button>
+                  </div>
                 `;
               $('#contenidoModal').append(carreraHTML);
                                 // Agregar un controlador de eventos al botón de cerrar
@@ -247,7 +259,7 @@ globalCarrData=1; // Definir la variable global
       });
       
       
-      $('#contenidoModal').on('click', '#agregarCarrera', function() {
+      $('#contenidoModal').on('click', '#agregarCarrera', function(event) {
           event.preventDefault(); // Evitar el envío del formulario por defecto
       
             // Serializar el formulario para obtener todos los valores de los inputs
@@ -274,9 +286,17 @@ globalCarrData=1; // Definir la variable global
       });
       
 //---------------------------------DELETE CARRERA-------------------------------------------------
-      $('#contenidoModal').on('click', '#eliminarCarrera', function() {
+      $('#contenidoModal').on('click', '#eliminarCarrera', function(event) {
         event.preventDefault(); // Evitar el envío del formulario por defecto
-        var carreraData = $(this).closest('.botones').data('carrera');
+  var formDataArray = $("#eliminar").serializeArray();
+
+  console.log(formDataArray);
+  // Convertir el arreglo en un objeto JavaScript
+  var carreraData  = {};
+  formDataArray.forEach(function (item) {
+    carreraData [item.name] = item.value;
+  });
+  
         console.log(carreraData);
       
                   // Realizar la solicitud AJAX para eliminar la universidad

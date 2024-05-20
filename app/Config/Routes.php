@@ -101,5 +101,11 @@ $routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
 $routes->post('/modificarPregunta', 'Admi\ControleAdmi::modificarPregunta');
 $routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
 
+$routes->post('/temaTemario', 'Admi\ControleAdmi::temaTemario');
+$routes->post('/eliminarTema', 'Admi\ControleAdmi::eliminarTema');
+$routes->post('/modificarTema', 'Admi\ControleAdmi::modificarTema');
+$routes->post('/crearTema', 'Admi\ControleAdmi::crearTema');
+$routes->post('/agregarTema', 'Admi\ControleAdmi::agregarTema');
+$routes->get('/pas', 'Admi\ControleAdmi::pas');
 //USUARIO
 $routes->post('/userAjax', 'Admi\ControleAdmi::editarUser');

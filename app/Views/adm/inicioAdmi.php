@@ -5,63 +5,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>SimuladorNS</title>
   <link href="<?php echo base_url(); ?>css/styleA.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-  .table-container {
-    overflow-x: auto;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-  }
   
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  
-  /* Ajusta el ancho de las columnas */
-  th:nth-child(1) { width: 40%; }
-  th:nth-child(2) { width: 10%; }
-  th:nth-child(3) { width: 5%; }
-  th:nth-child(4) { width: 5%; }
-  th:nth-child(5) { width: 5%; }
-  th:nth-child(6) { width: 5%; }
-  th:nth-child(7) { width: 5%; }
-  th:nth-child(8) { width: 10%; }
-  th:nth-child(9) { width: 10%; }
-  th:nth-child(10) { width: 15%; }
-  th:nth-child(11) { width: 10%; }
-  th:nth-child(12) { width: 5%; }
-</style>
 </head>
 <!--HEADER-->
 <!--BODY-->
 
 <body>
+
   <!--MENÚ-->
   <button class="toggle-btn" onclick="toggleMenu()">☰</button>
-<div class="menu-responsive">
-  <ul>
-    <a onclick="mostrarSeccion('univInst'); ocultarMenuR();" class="active">Universidades</a>
-    <a onclick="mostrarSeccion('carrera'); ocultarMenuR();">Carreras</a>
-    <a onclick="mostrarSeccion('materia'); ocultarMenuR();">Materias</a>
-    <a onclick="mostrarSeccion('temarioLibroVideo'); ocultarMenuR();">Temarios</a>
-    <a onclick="mostrarSeccion('temas'); ocultarMenuR();">Temas</a>
-    <a onclick="mostrarSeccion('preguntasExamenes'); ocultarMenuR();">Preguntas</a>
-    <a onclick="mostrarSeccion('usuario'); ocultarMenuR();">Usuario</a>
-    <a href="<?php echo base_url(); ?>/logout" onclick="ocultarMenuR();">Cerrar sesión</a>
-  </ul>
-</div>
+  <div class="menu-responsive">
+    <ul>
+      <a onclick="mostrarSeccion('univInst'); ocultarMenuR();" class="active">Universidades</a>
+      <a onclick="mostrarSeccion('carrera'); ocultarMenuR();">Carreras</a>
+      <a onclick="mostrarSeccion('materia'); ocultarMenuR();">Materias</a>
+      <a onclick="mostrarSeccion('temarioLibroVideo'); ocultarMenuR();">Temarios</a>
+      <a onclick="mostrarSeccion('temas'); ocultarMenuR();">Temas</a>
+      <a onclick="mostrarSeccion('preguntasExamenes'); ocultarMenuR();">Preguntas</a>
+      <a onclick="mostrarSeccion('usuario'); ocultarMenuR();">Usuario</a>
+      <a href="<?php echo base_url(); ?>/logout" onclick="ocultarMenuR();">Cerrar sesión</a>
+    </ul>
+  </div>
   <div class="menu">
     <!-- NOMBRE EMPRESA -->
     <div class="nombreE">
@@ -139,14 +108,18 @@
     <section id="carrera" class="seccion">
       <h5 class="center">CARRERAS</h5>
       <!--CARRERAS_FILTRO_MATERIAS-->
-      <div class="contenido">
-        <div class="labelSelect">Seleccione Universidad</div>
-        <div class="celda">
-          <select class="universidadSelect">
-            <option value="1">Universidad:</option>
+      <div class="contSelect">
+        <div class="filter-container">
+          <div class="labelSelect">Universidad</div>
+          <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+        </div>
+        <div id="filterOptions" class="filter-options">
+          <select class="universidadSelect" multiple>
+            <option value="1"></option>
           </select>
         </div>
       </div>
+
       <!--CARRERAS_FILTRO_MATERIAS-->
       <div class="card-container" id="selectCarrAjax">
         <!--AQUI SE MUESTRAN LAS CARRERAS-->
@@ -170,18 +143,30 @@
     <section id="materia" class="seccion">
       <h5 class="center">MATERIAS</h5>
       <!--CARRERAS_FILTRO_MATERIAS-->
-      <div class="contenido">
-        <div class="labelSelect">Seleccione Universidad</div>
-        <div class="celda">
-          <select class="universidadSelect">
-            <option value="1">Universidad:</option>
-          </select>
+      <div class="contSelect2">
+        <div class="contSelect">
+          <div class="filter-container">
+            <div class="labelSelect">Universidad</div>
+            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <div id="filterOptions" class="filter-options">
+            <select class="universidadSelect" name="universidadSelect" multiple>
+              <option value="1"></option>
+            </select>
+          </div>
         </div>
-        <div class="labelSelect">Seleccione Carrera</div>
-        <div class="celda">
-          <select class="carreraSelect" name="carreraSelect">
-            <option value="1">Carrera:</option>
-          </select>
+
+        <div class="contSelect">
+          <div class="filter-container">
+            <div class="labelSelect">Carrera</div>
+            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <div id="filterOptions" class="filter-options">
+            <select class="carreraSelect" name="carreraSelect" multiple>
+              <option value="1"></option>
+            </select>
+
+          </div>
         </div>
       </div>
       <div class="card-container" id="selectMatAjax">
@@ -204,74 +189,72 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <section id="temarioLibroVideo" class="seccion">
       <h5 class="center">TEMARIOS</h5>
-        <div class="celda">
-          <select  class="universidadSelect">
-            <option value="1">Universidad:</option>
-          </select>
+      <div class="contSelect2">
+        <div class="contSelect">
+          <div class="filter-container">
+            <div class="labelSelect">Universidad</div>
+            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <div id="filterOptions" class="filter-options">
+            <select class="universidadSelect" name="universidadSelect" multiple>
+              <option value="1"></option>
+            </select>
+          </div>
         </div>
-        <div class="celda">
-          <select class="carreraSelect" name="carreraSelect" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
-            <option value="1">Carrera:</option>
-          </select>
+
+        <div class="contSelect">
+          <div class="filter-container">
+            <div class="labelSelect">Carrera</div>
+            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <div id="filterOptions" class="filter-options">
+            <select class="carreraSelect" name="carreraSelect" multiple>
+              <option value="1"></option>
+            </select>
+
+          </div>
         </div>
-        <div class="celda">
-          <select class="materiaSelect" name="materiaSelect">
-            <option value="1">Materia:</option>
-          </select>
+
+        <div class="contSelect">
+          <div class="filter-container">
+            <div class="labelSelect">Materia</div>
+            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
+          </div>
+          <div id="filterOptions" class="filter-options">
+            <select class="materiaSelect" name="materiaSelect" multiple>
+              <option value="1"></option>
+            </select>
+
+          </div>
         </div>
-        <div class="botonT">
-          <button class="enviarT" id="crearTemario">
-            Agregar nuevo temario
-          </button>
-        </div>
+      </div>
+
+      <div class="botonT">
+        <button class="enviarT" id="crearTemario">
+          Agregar temario
+        </button>
+      </div>
       <br>
-
-        <div id="divModificarTemario">
-          
-        </div>
-
-<br>
-<br>
-
-<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <div id="divModificarTemario">
+      </div>
+      <br>
+      <br>
+      <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table >
+        <table>
           <thead>
             <tr>
               <th>Temario</th>
               <th>Contenido</th>
               <th>Libro</th>
               <th>Materia</th>
-              <th>ELiminar</th>
-              <th>Modificar</th>
+              <th>M</th>
+              <th>E</th>
             </tr>
           </thead>
           <tbody id="temarioMateria">
             <!-- Agregar temarios existentes de la materia -->
-            <tr>
-              <td>Algebra</td>
-              <td>no se si es necesario</td>
-              <td>asdfsadfsadfsdaf</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
-            <tr>
-              <td>Problemas Matematicos</td>
-              <td>Contenido 1</td>
-              <td>Libro 1</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
-            <tr>
-              <td>Aritmetica</td>
-              <td>Contenido 1</td>
-              <td>Libro 1</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
+
           </tbody>
         </table>
       </div>
@@ -280,31 +263,48 @@
     <!--TEMAS-->
     <section id="temas" class="seccion">
     <h5 class="center">TEMAS-TEMARIO</h5>
+    <h5 class="center" id="tituloTemario"></h5>
         <div class="celda">
           <select  class="universidadSelect">
+            <label for="">Univercidad</label>
             <option value="1">Universidad:</option>
           </select>
-        </div>
+        </div><br>
         <div class="celda">
-          <select class="carreraSelect" name="carreraSelect" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
+          <label for="">Carrera:</label>
+          <select class="carreraSelect" name="carreraSelect" >
             <option value="1">Carrera:</option>
           </select>
-        </div>
+        </div><br>
         <div class="celda">
+          <label for="">Materia:</label>
           <select class="materiaSelect" name="materiaSelect">
             <option value="1">Materia:</option>
           </select>
-        </div>
+        </div><br>
+        <div class="celda">
+          <label for="">Temario:</label>
+          <select class="temarioSelect" name="temarioSelect">
+            <option value="1">Temario:</option>
+          </select>
+        </div><br>
         <div class="botonT">
-          <button class="enviarT" id="crearTemario">
+          <button class="enviarT" id="crearTema">
             Agregar nuevo temario
           </button>
         </div>
       <br>
-
-        <div id="divModificarTemario">
-          
+      <div class="botonT">
+          <button class="enviarT" id="agregarTemasExistentes">
+            Agregar temas existentes
+          </button>
         </div>
+
+        <div id="segundoFiltro">
+
+        </div>
+
+
 
 <br>
 <br>
@@ -312,38 +312,21 @@
 <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
         <table >
-          <thead>
+          <thead id="cabezaTemasTemario">
             <tr>
-              <th>Temario</th>
-              <th>Contenido</th>
-              <th>Libro</th>
-              <th>Materia</th>
-              <th>ELiminar</th>
+              <th>nombreTema</th>
+              <th>descripcionTema</th>
+              <th>videoTema</th>
+              <th>Eliminar</th>
               <th>Modificar</th>
             </tr>
           </thead>
-          <tbody id="temarioMateria">
+          <tbody id="temasTemario">
             <!-- Agregar temarios existentes de la materia -->
             <tr>
               <td>Algebra</td>
               <td>no se si es necesario</td>
               <td>asdfsadfsadfsdaf</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
-            <tr>
-              <td>Problemas Matematicos</td>
-              <td>Contenido 1</td>
-              <td>Libro 1</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
-            <tr>
-              <td>Aritmetica</td>
-              <td>Contenido 1</td>
-              <td>Libro 1</td>
               <td>Matematicas-Tecno</td>
               <td><button>ELIMINAR</button></td>
               <td><button>MODIFICAR</button></td>
@@ -356,17 +339,17 @@
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
     <h5 class="center">Preguntas</h5>
-        <div class="celda">
+        <div class="">
           <select class="carreraPregunta" name="carreraPregunta">
             <option value="0" selected>Carrera:</option>
           </select>
         </div>
-        <div class="celda">
+        <div class="">
           <select class="materiaPregunta" name="materiaPregunta">
             <option value="0">Materia:</option>
           </select>
         </div>
-        <div class="celda">
+        <div class="">
           <select class="preguntaTema" name="preguntaTema">
             <option value="0">Temas:</option>
           </select>
@@ -400,21 +383,8 @@
             </tr>
           </thead>
           <tbody id="thbodypregunta">
-            <!-- Agregar temarios existentes de la materia -->
-            <tr>
-              <td>Ocho obreros pueden hacer una obra en 20 días, después de 5 días de trabajo se retiran 3 obreros. ¿Con cuántos días de atraso se terminó la obra?</td>
-              <td></td>
-              <td>58</td>
-              <td>60</td>
-              <td>65</td>
-              <td>80</td>
-              <td>94</td>
-              <td>a</td>
-              <td>dificil</td>
-              <td><a href="https://drive.google.com/file/d/1cVufBW1GlMdfPVqTkU7sx9Wp3V368GpX/view">PDF</a></td>
-              <td>Biologia</td>
-              <td><button>ELIMINAR</button> <button>MODIFICAR</button></td>
-            </tr>
+            <!-- AQUI APARECERAN LAS PREGUNTAS -->
+  
           </tbody>
         </table>
       </div>
@@ -424,59 +394,51 @@
     <!--USUARIO-->
     <section id="usuario" class="seccion">
       <div class="contenedorU" id="selectUserAjax">
-      <?php if (session()->has('is_logged') && session('is_logged')) : ?>
-        <form id="formUsuario" method="POST" enctype="multipart/form-data">
-
-          <h5 class="center">USUARIO</h5>
-          <!-- Contenedor principal -->
-          <div class="perfil-info">
-
-            <!-- Sección de imagen de perfil -->
-            <div class="perfil-imagen">
-              <label for="file-upload" class="changeIU">
-                <img src="<?php echo session('img'); ?>" alt="Imagen de perfil" id="preview-image">
-                <input type="file" id="file-upload" name="imagen" accept="image/*" style="display: none;" onchange="previewImage(event)">
-              </label>
-            </div>
-
-            <!-- Sección de información -->
-            <div class="perfil-datos">
-              <!-- Nombre -->
-              <div class="campo">
-                <i class="fas fa-user"></i>
-                <input type="text" id="nombre" name="nombre" value="<?php echo session('nombre'); ?>" required placeholder="Nombre">
+        <?php if (session()->has('is_logged') && session('is_logged')) : ?>
+          <form id="formUsuario" method="POST" enctype="multipart/form-data">
+            <h5 class="center">USUARIO</h5>
+            <!-- Contenedor principal -->
+            <div class="perfil-info">
+              <!-- Sección de imagen de perfil -->
+              <div class="perfil-imagen">
+                <label for="file-upload" class="changeIU">
+                  <img src="<?php echo session('img'); ?>" alt="Imagen de perfil" id="preview-image">
+                  <input type="file" id="file-upload" name="imagen" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                </label>
               </div>
-
-              <!-- Correo Electrónico -->
-              <div class="campo">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="correo" name="correo" value="<?php echo session('correo'); ?>" required placeholder="Correo Electrónico">
-              </div>
-
-              <!-- Contraseña -->
-              <div class="campo">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="contraseñaN" name="contraseñaN" placeholder="Contraseña nueva">
-              </div>
-
-              <div class="campo">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña para confirmar">
+              <!-- Sección de información -->
+              <div class="perfil-datos">
+                <!-- Nombre -->
+                <div class="campo">
+                  <i class="fas fa-user"></i>
+                  <input type="text" id="nombre" name="nombre" value="<?php echo session('nombre'); ?>" required placeholder="Nombre">
+                </div>
+                <!-- Correo Electrónico -->
+                <div class="campo">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" id="correo" name="correo" value="<?php echo session('correo'); ?>" required placeholder="Correo Electrónico">
+                </div>
+                <!-- Contraseña -->
+                <div class="campo">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" id="contraseñaN" name="contraseñaN" placeholder="Contraseña nueva">
+                </div>
+                <!-- Contraseña confirmar-->
+                <div class="campo">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" id="contraseña" name="contraseña" required placeholder="Contraseña para confirmar">
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Botón de guardar cambios -->
-          <div class="anchoU">
-            <button class="btnUser" type="submit">Guardar</button>
-          </div>
-        </form>
-      <?php endif; ?>
+            <!-- Botón de guardar cambios -->
+            <div class="anchoU">
+              <button class="btnUser" type="submit">Guardar</button>
+            </div>
+          </form>
+        <?php endif; ?>
       </div>
-    
-      
     </section>
-
     <!--USUARIO-->
 
   </main>
@@ -489,13 +451,16 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
   <!--VARIABLE GLOBAL PARA PODER USARLO EN LOS JS-->
-  <script> var baseUrl = "<?php echo base_url(); ?>";</script>
+  <script>
+    var baseUrl = "<?php echo base_url(); ?>";
+  </script>
   <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/universida.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/carreras.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/pregunta.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/tema.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/preguntas.js"></script>
 
 
   <script>
@@ -555,134 +520,64 @@
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
         $contraseñaNueva = $_POST['contraseñaN'];
-        if($contraseñaNueva==""){
+        if ($contraseñaNueva == "") {
           $contraseñaConfirmar = $_POST['contraseña'];
           $usuario = array(
-        nombre => $nombre,
-        correo => $correo,
-        contraseña => $contraseñaConfirmar,);
+            nombre => $nombre,
+            correo => $correo,
+            contraseña => $contraseñaConfirmar, );
 
-        $usuario = array(
-        nombre => $nombre,
-        correo => $correo,
-        contraseña => $contraseñaconfirmar,
-    );
-    $.ajax({
-          type: 'POST',
-          data: $usuario,
-          url: '<?php echo base_url(); ?>/userAjax',
-          processData: false,
-          contentType: false,
-          success: function(response) {
-            // Maneja la respuesta del servidor
-            alert('Los cambios han sido guardados correctamente.');
-            // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
-          },
-          error: function(err) {
-            alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
-            console.error(err);
-          }
-        });
-
-        }else{
-
-    // Ejemplo: Almacenar datos en un array
-    $usuario = array(
-        nombre => $nombre,
-        correo => $correo,
-        contraseña => $contraseñaNueva,
-    );
-
-        // Envía la solicitud AJAX
-        $.ajax({
-          type: 'POST',
-          data: $usuario,
-          url: '<?php echo base_url(); ?>/userAjax',
-          processData: false,
-          contentType: false,
-          success: function(response) {
-            // Maneja la respuesta del servidor
-            alert('Los cambios han sido guardados correctamente.');
-            // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
-          },
-          error: function(err) {
-            alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
-            console.error(err);
-          }
-        });
-        }
-
-    // Verificar y procesar los datos como sea necesario
-    // Aquí puedes realizar validaciones, almacenamiento en la base de datos, etc.
-
-      });
-    });
-    /*Generar tabla*/
-    var tbody = document.querySelector('#miTabla tbody');
-    var valoresPorFila = [];
-    var numRows = 8;
-    var numCellsPerRow = 4;
-    for (var i = 0; i < numRows; i++) {
-      var row = document.createElement('tr');
-      var valoresFilaActual = [];
-      for (var j = 0; j < numCellsPerRow; j++) {
-        var cellNumber = i * numCellsPerRow + j + 1;
-        var cell = document.createElement('td');
-        row.appendChild(cell);
-        valoresFilaActual.push(cellNumber);
-      }
-      tbody.appendChild(row);
-      valoresPorFila.push(valoresFilaActual);
-    }
-
-    /*Datos excel*/
-    function mostrarValoresPorFila() {
-      var resume_table = document.getElementById("miTabla");
-      var filas = resume_table.rows;
-      var arregloFilas = [];
-      var selectElement = document.getElementsByName("idM")[0];
-      var valorSeleccionado = selectElement.value;
-      for (var i = 0; i < filas.length; i++) {
-        var fila = filas[i];
-        var arregloCeldas = [];
-        var todasCeldasEnBlanco = true;
-        for (var j = 0; j < fila.cells.length; j++) {
-          var celda = fila.cells[j];
-          var textoCelda = celda.innerText.trim();
-          if (textoCelda !== "") {
-            todasCeldasEnBlanco = false;
-          }
-          arregloCeldas.push(textoCelda);
-        }
-        if (!todasCeldasEnBlanco) {
-          arregloFilas.push(arregloCeldas);
-        }
-      }
-      /*manda a la base de datos */
-      for (var k = 1; k < arregloFilas.length; k++) {
-        var filaActual = arregloFilas[k];
-        if (filaActual.length > 0) {
-          var temaData = {
-            nombreTemario: filaActual[0],
-            contenidoTemario: filaActual[1],
-            libroTemario: filaActual[2],
-            videoTemario: filaActual[3],
-            idMateria: valorSeleccionado
-          };
-          console.log('Datos a enviar:', temaData);
+          $usuario = array(
+            nombre => $nombre,
+            correo => $correo,
+            contraseña => $contraseñaconfirmar,
+          );
           $.ajax({
             type: 'POST',
-            url: '<?php echo base_url("crearTemario"); ?>',
-            data: temaData,
+            data: $usuario,
+            url: '<?php echo base_url(); ?>/userAjax',
+            processData: false,
+            contentType: false,
             success: function(response) {
-              window.location.reload();
+              // Maneja la respuesta del servidor
+              alert('Los cambios han sido guardados correctamente.');
+              // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
+            },
+            error: function(err) {
+              alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
+              console.error(err);
+            }
+          });
+
+        } else {
+
+          // Ejemplo: Almacenar datos en un array
+          $usuario = array(
+            nombre => $nombre,
+            correo => $correo,
+            contraseña => $contraseñaNueva,
+          );
+
+          // Envía la solicitud AJAX
+          $.ajax({
+            type: 'POST',
+            data: $usuario,
+            url: '<?php echo base_url(); ?>/userAjax',
+            processData: false,
+            contentType: false,
+            success: function(response) {
+              // Maneja la respuesta del servidor
+              alert('Los cambios han sido guardados correctamente.');
+              // Aquí puedes realizar otras acciones, como actualizar la interfaz de usuario con la nueva información
+            },
+            error: function(err) {
+              alert('Ha ocurrido un error. Por favor, intenta nuevamente.');
+              console.error(err);
             }
           });
         }
-      }
-    }
-    // Evento click del botón "Guardar datos"
-    document.querySelector('.enviarT').addEventListener('click', mostrarValoresPorFila);
+      });
+    });
   </script>
 
 

@@ -1,4 +1,3 @@
-var globalTemaData = null; // Definir la variable global
 
 
 //FUNCION PARA REUTILIZAR AJAX 
@@ -49,7 +48,6 @@ function preguntaMaterias(idCarrera) {
 
 
 function preguntaTemas(idMateria) {
-  console.log(idMateria);
   $('.preguntaTema').empty();//BORRA TODO EL CONTENEDOR
   $(".preguntaTema").append('<option value="0">Tema:</option>');
 
@@ -67,6 +65,7 @@ function preguntaTemas(idMateria) {
       //llenar el filtro
       var filtroTema = ` <option value="${tema.idTema}">${tema.nombreTema}</option>`;
       $(".preguntaTema").append(filtroTema);
+      
     });
     },
     error: function(xhr, status, error) {
@@ -214,12 +213,14 @@ $('#thbodypregunta').on('click', '.modificar', function() {
         <option value="Dificil">Dificil</option>
       </select>
     </div>
+
+
     <div class="celda">
       <label class="form-label">resolucionPDF</label>
       <input name="resolucionPDF" id="resolucionPDF" type="text" class="form-control" placeholder="resolucion" value="${pregunta.resolucionPdf}">
     </div>
     <div class="añadir">
-      <button id="modificarPregunta" type="button" class="btn-modificar">Agregar Temario</button>
+      <button id="modificarPregunta" type="button" class="btn-modificar">Modificar Pregunta </button>
     </div>
   </form>
   `;

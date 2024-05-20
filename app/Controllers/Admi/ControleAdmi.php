@@ -9,7 +9,7 @@ use App\Models\CarreraModel;
 use App\Models\MateriaModel;
 use App\Models\LibroModel;
 use App\Models\MateriaLibroModel;
-use App\Models\MateriaTemarioModel;
+use App\Models\TemarioTemaModel;
 use App\Models\PreguntaModel;
 use App\Models\TemarioModel;
 use App\Models\TemaModel;
@@ -472,7 +472,7 @@ public function temaCarrera()
   $idMateria = $this->request->getPost('idMateria');
  
   $temaModel = new TemaModel();
-  $temas = $temaModel->select('tema.idTema, tema.nombreTema')
+  $temas = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
   ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
   ->join('temario', 'temario_tema.idTemario = temario.idTemario')
   ->join('materia', 'temario.idMateria = materia.idMateria')
@@ -551,6 +551,113 @@ public function temaCarrera()
     $preguntaModel->delete($idPregunta);
 
   }
+  #################--SELECT--#####################
+  public function temaTemario()
+  {
+    $idTemario = $this->request->getPost('idTemario');
+    $temaModel = new TemaModel();
+    $temas = $temaModel
+    ->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
+    ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
+    ->where('temario_tema.idTemario', $idTemario)
+    ->findAll();
 
+    return json_encode($temas);
+  }
+
+
+  public function crearTema()
+  {
+
+    $data = [
+      'nombreTema' => $this->request->getPost('nombreTema'),
+      'descripcionTema' => $this->request->getPost('descripcionTema'),
+      'videoTema' => $this->request->getPost('videoTema'),
+    ];
+    //Insertar tema
+    $temaModel = new TemaModel();
+    $temaModel->insert($data);
+    // Obtener el ID del último registro insertado
+    $idTema = $temaModel->insertID();
+    $idTemario = $this->request->getPost('idTemario');
+
+    // Crear instancia del modelo TemarioTemaModel
+    $temarioTemaModel = new TemarioTemaModel();
+    // Insertar la relación entre temario y tema
+    $temarioTemaModel->insertarRelacionTemaTemario($idTemario, $idTema);
+
+  }
+
+  public function agregarTema()
+  {
+    $idTema =  $this->request->getPost('idTema');
+    $idTemario = $this->request->getPost('idTemario');
+
+    // Crear instancia del modelo TemarioTemaModel
+    $temarioTemaModel = new TemarioTemaModel();
+    // Insertar la relación entre temario y tema
+    $temarioTemaModel->insertarRelacionTemaTemario($idTemario, $idTema);
+
+  }
+
+
+
+
+
+  //UPDATE PREGUNTA
+  public function modificarTema()
+  {
+
+    $idTema = $this->request->getPost('idTema');
+
+    $data = [
+      'nombreTema' => $this->request->getPost('nombreTema'),
+      'descripcionTema' => $this->request->getPost('descripcionTema'),
+      'videoTema' => $this->request->getPost('videoTema'),
+    ];
+
+      //instanciar
+      $temaModel = new TemaModel();
+      $temaModel->update($idTema,$data);
+
+  }
+  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
+
+  //INSERT DE LAS PREGUNTAS
+
+  public function eliminarTema()
+  {
+
+    // Obtener el ID del último registro insertado
+    $idTema = $this->request->getPost('idTema');
+    $idTemario = $this->request->getPost('idTemario');
+
+    // Crear instancia del modelo TemarioTemaModel
+    $temarioTemaModel = new TemarioTemaModel();
+    // Insertar la relación entre temario y tema
+    $temarioTemaModel->eliminarRelacion($idTemario, $idTema);
+
+  }
+
+public function pas()
+{
+
+
+      $texto = '456';
+   
+      // Verificar si el texto no está vacío
+      if (!empty($texto)) {
+          // Encriptar el texto con bcrypt
+          $hash = password_hash($texto, PASSWORD_BCRYPT);
+
+          // Mostrar el resultado
+          echo "<p>Texto original: " . htmlspecialchars($texto) . "</p>";
+          echo "<p>Texto encriptado: " . htmlspecialchars($hash) . "</p>";
+      } else {
+          echo "<p>Por favor, ingrese un texto.</p>";
+      }
+ 
+ 
+}
 
 }
