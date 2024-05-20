@@ -1,4 +1,6 @@
 //###################################################-MATERIA-#########################################################
+var globalMateriaData = '';
+var globalMatNombre = '';
 //---------------------------------SELECT MATERIA-------------------------------------------------
 function selecMateria(globalCarrData) {
   $("#selectMatAjax").empty(); //BORRA TODO EL CONTENEDOR
@@ -9,7 +11,7 @@ function selecMateria(globalCarrData) {
   $.ajax({
     type: "POST",
     data: uniData,
-    url: baseUrl + "materiaAjax",
+    url: baseUrl + "materiaAjaxC",
     dataType: "json",
     success: function (response) {
       // Iterar sobre cada universidad y agregarlo al contenedor
@@ -24,35 +26,43 @@ function selecMateria(globalCarrData) {
         };
 
         var MateriaHTML = `
-                <div class="card draggable" id="materia-${
-                  materia.idMateria
-                }" draggable="true" data-materia='${JSON.stringify(
-          materiaData
-        )}'>
-                  <img src="${
-                    materia.imagenMateria
-                  }" alt="By AnisSoft" title="${
-          materia.nombreMateria
-        }" draggable="false" />
+                <div onclick="manejarClick2(this)" class="card" data-id-materia="${materia.idMateria}" data-nombre-materia="${materia.nombreMateria}" data-imagen-materia="${materia.imagenMateria}"'>
+                  <img src="${materia.imagenMateria}" alt="By AnisSoft" title="${materia.nombreMateria}" draggable="false" class="cover-image"  />
                   <div class="card-body">
-                    <h3 class="card-title">${materia.nombreMateria}</h3>
+                    <h5 class="card-title">${materia.nombreMateria}</h5>
+                    <p class="card-hover-description">Click para ver temarios</p>
                   </div>
                 </div>
                 `;
         $("#selectMatAjax").append(MateriaHTML);
       });
-      //agregar el boton de crear universidad
-      // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-      
     }
   });
 }
 //###################################################-MATERIA FILTRO-#########################################################
 
-$(".carreraSelect").change(function () {
-  var idCarrera = $(this).val();
-  globalCarrData = idCarrera; // Asignar uniData a la variable global
-  console.log(globalCarrData);
+function manejarClick2(button) {
+  // Captura el idCarrera y nombreCarrera de los atributos data-id-carrera y data-nombre-carrera
+  const idMateria = button.getAttribute('data-id-materia');
+  const nombreMateria = button.getAttribute('data-nombre-materia');
+  const imagenMateria = button.getAttribute('data-imagen-materia');
+  const welcomeSection3 = document.querySelector('.mensaje-inicio3');
 
-  selecMateria(globalCarrData);
-});
+  // Actualiza las variables globales
+  globalMateriaData = idMateria;
+  globalMatNombre  = nombreMateria;
+
+// Establecer el background-image usando el valor de imgCarrera
+welcomeSection3.style.backgroundImage = `url(${imagenMateria})`;
+    
+// Opcional: Ajustar otras propiedades de estilo para asegurar que la imagen cubra el contenedor
+welcomeSection3.style.backgroundSize = 'cover';
+welcomeSection3.style.backgroundPosition = 'center';
+
+  // Opcional: Verificar que las variables se actualicen correctamente
+  console.log('globalMatData:',   globalMateriaData);
+  console.log('globalMatNombre:',   globalMatNombre);
+  
+  selecTemario(globalMateriaData);
+  mostrarSeccion('temario')
+}

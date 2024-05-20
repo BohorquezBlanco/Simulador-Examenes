@@ -7,7 +7,7 @@ function selecUniversidad() {
 
   $.ajax({
     type: "POST",
-    url: baseUrl + "uniAjax",
+    url: baseUrl + "uniAjaxC",
     dataType: "json",
     success: function (response) {
       // Iterar sobre cada universidad y agregarlo al contenedor
@@ -29,7 +29,7 @@ function selecUniversidad() {
           unis.nombreU
         }" draggable="false" />
                 <div class="card-body">
-                  <h5 class="card-title">${unis.nombreU}</h5>
+                  <p class="card-title">${unis.nombreU}</p>
                 </div>
               </div>
               `;
@@ -43,9 +43,22 @@ function selecUniversidad() {
       datosUniversidad = obtenerPrimerIdYNombre(response, "idU", "nombreU");
       globalUniData = datosUniversidad.primerId;
       globalUniNombre = datosUniversidad.primerNombre;
-      
+
       selecCarrera(globalUniData);
       //agregar el boton de crear universidad
+
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
-      
-    }})}
+      $("#selectUniAjax").append(`
+            <button id="insertUni" class="abrirModal" type="button" data-target="modalBase">
+              <ion-icon name="add-circle-outline"></ion-icon>
+            </button>  
+          `);
+
+      // Agregar funcionalidad de arrastrar y soltar
+      $(".draggable").on("dragstart", function (event) {
+        var idUniversidad = $(this).attr("id");
+        event.originalEvent.dataTransfer.setData("text/plain", idUniversidad);
+      });
+      }
+    }
+  )}

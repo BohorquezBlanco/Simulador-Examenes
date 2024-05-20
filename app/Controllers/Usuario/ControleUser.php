@@ -4,9 +4,14 @@ namespace App\Controllers\Usuario;
 
 use App\Controllers\BaseController;
 
+
 use App\Models\CarreraModel;
 use App\Models\MateriaModel;
-use App\Models\LibroModel;
+use App\Models\TemarioModel;
+use App\Models\UniModel;
+use CodeIgniter\HotReloader\HotReloader;
+use CodeIgniter\HTTP\Message;
+use Kint\Zval\Value;
 
 class ControleUser extends BaseController
 {
@@ -94,5 +99,48 @@ class ControleUser extends BaseController
 
         // Redirigir al usuario a la página de inicio de sesión o a cualquier otra página deseada
         return redirect()->to('/')->with('msg', 'Sesión Cerrada Correctamente');
+    }
+
+    public function universidadAjax()
+  {
+    $uniModel = new UniModel();
+    $unis = $uniModel->findAll();
+    return json_encode($unis);
+  }
+  
+    public function carreraAjax()
+  {
+    $idU = $this->request->getPost('idU');
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->where('idU', $idU)->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($carreras);
+  }
+
+  public function materiaAjax()
+  {
+    $idCarrera = $this->request->getPost('idCarrera');
+    $materiaModel = new MateriaModel();
+    $materias = $materiaModel->where('idCarrera', $idCarrera)->findAll();
+
+
+    return json_encode($materias);
+  }
+
+    //#######################-TEMARIO-#########################################
+    public function temarioMateriaC()
+    {
+        $idMateria = $this->request->getPost('idMateria');
+        $temarioModel = new TemarioModel();
+        $temarios = $temarioModel->where('idMateria', $idMateria)->findAll();
+        return json_encode($temarios);
+    }
+    public function temarioLibroC()
+    {
+        $idTemario = $this->request->getPost('idTemario');
+        $temarioModel = new TemarioModel();
+        $temarios = $temarioModel->where('idTemario', $idTemario)->findAll();
+        return json_encode($temarios);
     }
 }

@@ -202,7 +202,7 @@ $("#contenidoModal").on("click", "#editarUni", function (event) {
 
   // Realizar la solicitud AJAX para editar la universidad
   $.ajax({
-    url: baseUrl + "editarUni2",
+    url: baseUrl + "editarUni",
     type: "POST",
     data: universidadData, // Serializar el objeto a JSON
     success: function (response) {
@@ -266,7 +266,7 @@ $("#contenidoModal").on("click", "#agregarUni", function (event) {
 
   // Realizar la solicitud AJAX para agregar la nueva universidad
   $.ajax({
-    url: baseUrl + "crearUni2",
+    url: baseUrl + "crearUni",
     type: "POST",
     data: formData,
     success: function (response) {
@@ -296,7 +296,7 @@ $("#contenidoModal").on("click", "#eliminarUniversidad", function (event) {
 
   // Realizar la solicitud AJAX para eliminar la universidad
   $.ajax({
-    url: baseUrl + "eliminarUni2",
+    url: baseUrl + "eliminarUni",
     type: "POST",
     data: universidadData, // Serializar el objeto a JSON
     success: function (response) {

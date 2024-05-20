@@ -7,9 +7,6 @@ use App\Controllers\BaseController;
 use App\Models\MateriaPreguntaModel;
 use App\Models\CarreraModel;
 use App\Models\MateriaModel;
-use App\Models\LibroModel;
-use App\Models\MateriaLibroModel;
-use App\Models\MateriaTemarioModel;
 use App\Models\PreguntaModel;
 use App\Models\TemarioModel;
 use App\Models\UniModel;
@@ -37,18 +34,18 @@ class ControleAdmi extends BaseController
 
     $carreraModel = new CarreraModel();
     $carreras = $carreraModel->join('uni', 'uni.idU = carrera.idU')
-                        ->orderBy('carrera.idU')
-                        ->findAll();
+      ->orderBy('carrera.idU')
+      ->findAll();
 
     $materiaModel = new MateriaModel();
     $materias = $materiaModel->join('carrera', 'carrera.idCarrera = materia.idCarrera')
-                              ->orderBy('materia.idCarrera')
-                              ->findAll();
+      ->orderBy('materia.idCarrera')
+      ->findAll();
 
     $temarioModel = new TemarioModel();
     $temarios = $temarioModel->join('materia', 'materia.idMateria = temario.idMateria')
-                              ->orderBy('temario.idMateria')
-                              ->findAll();
+      ->orderBy('temario.idMateria')
+      ->findAll();
 
     $preguntaModel = new preguntaModel();
     $preguntas = $preguntaModel->findAll();
@@ -57,8 +54,15 @@ class ControleAdmi extends BaseController
 
     return view('adm/inicioAdmi', $data);
   }
-  //----------------------------------------------------------------Univ o Inst----------------------------------------------------------------
-  //INSERT DE Univ o inst 
+
+  #################--SELECT--#####################
+  public function universidadAjax()
+  {
+    $uniModel = new UniModel();
+    $unis = $uniModel->findAll();
+    return json_encode($unis);
+  }
+
   public function crearUni()
   {
 
@@ -71,11 +75,16 @@ class ControleAdmi extends BaseController
     //instanciar
     $uniModel = new UniModel();
     $uniModel->insert($data);
+  }
+  #################--DELETE--#####################
+  public function eliminarUni()
+  {
+    $idU = $this->request->getPost('idU');
 
-    return redirect()->to('inicioAdmi');
+    $uniModel = new UniModel();
+    $uniModel->delete($idU);
   }
 
-  //UPDATE Univ o inst 
   public function editarUni()
   {
     $idU = $this->request->getPost('idU');
@@ -89,27 +98,27 @@ class ControleAdmi extends BaseController
     //instanciar
     $uniModel = new UniModel();
     $uniModel->update($idU, $data);
-    return redirect()->to('inicioAdmi');
   }
 
-  //DELETE DE LAS Univ o inst existentes
-  public function eliminarUni()
+  public function carreraAjax()
   {
-    $idU = $this->request->getPost('id');
+    $idU = $this->request->getPost('idU');
+    $carreraModel = new CarreraModel();
+    $carreras = $carreraModel->where('idU', $idU)->findAll();
 
-    $uniModel = new UniModel();
-    $uniModel->delete($idU);
-
-    return redirect()->to('inicioAdmi');
+    // Devolver los temas como JSON
+    return json_encode($carreras);
   }
 
 
-  //----------------------------------------------------------------CARRERAS----------------------------------------------------------------
+
   //INSERT DE LAS CARRERAS 
   public function crearCarrera()
   {
+    $idU = $this->request->getPost('idU');
+
     $data = [
-      'idU' => $this->request->getPost('idU'),
+      'idU' => $idU,
       'nombreCarrera' => $this->request->getPost('nombreCarrera'),
       'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
       'imagenCarrera' => $this->request->getPost('imagenCarrera'),
@@ -118,7 +127,6 @@ class ControleAdmi extends BaseController
     //instanciar
     $carreraModel = new CarreraModel();
     $carreraModel->insert($data);
-    return redirect()->to('inicioAdmi');
   }
 
   //UPDATE CARRERA
@@ -135,29 +143,34 @@ class ControleAdmi extends BaseController
     //instanciar
     $carreraModel = new CarreraModel();
     $carreraModel->update($idCarrera, $data);
-    return redirect()->to('inicioAdmi');
   }
 
   //DELETE DE LAS CARRERAS EXISTENTES
   public function eliminarCarrera()
   {
-    $idCarrera = $this->request->getPost('id');
+    $idCarrera = $this->request->getPost('idCarrera');
 
     $carreraModel = new CarreraModel();
     $carreraModel->delete($idCarrera);
-
-    return redirect()->to('inicioAdmi');
   }
 
 
-  //----------------------------------------------------------------MATERIAS----------------------------------------------------------------
+  public function materiaAjax()
+  {
+    $idCarrera = $this->request->getPost('idCarrera');
+    $materiaModel = new MateriaModel();
+    $materias = $materiaModel->where('idCarrera', $idCarrera)->findAll();
 
+
+    return json_encode($materias);
+  }
 
   //INSERT DE LAS MATERIAS
   public function crearMateria()
   {
 
     $idCarrera = $this->request->getPost('idCarrera');
+
 
     $data = [
       'nombreMateria' => $this->request->getPost('nombreMateria'),
@@ -169,22 +182,18 @@ class ControleAdmi extends BaseController
     //instanciar
     $materiaModel = new materiaModel();
     $materiaModel->insert($data);
-
-    return redirect()->to('inicioAdmi');
   }
 
   //DELETE DE LAS MATERIAS EXISTENTES
   public function eliminarMateria()
   {
-    $idMateria = $this->request->getPost('id');
+    $idMateria = $this->request->getPost('idMateria');
 
     // Instanciar el modelo
     $materiaModel = new MateriaModel();
 
     // Eliminar lógicamente el registro con el ID especificado
     $materiaModel->delete($idMateria);
-
-    return redirect()->to('inicioAdmi');
   }
 
   //UPDATE MATERIA
@@ -201,33 +210,61 @@ class ControleAdmi extends BaseController
     //instanciar
     $materiaModel = new materiaModel();
     $materiaModel->update($idMateria, $data);
-
-    return redirect()->to('inicioAdmi');
   }
-  
-  //----------------------------------------------------------------TEMARIOS---------------------------------------------------------------
+
+  //#######################-TEMARIO-#########################################
+  public function temarioMateria()
+  {
+    $idMateria = $this->request->getPost('idMateria');
+    $temarioModel = new TemarioModel();
+    $temarios = $temarioModel->where('idMateria', $idMateria)->findAll();
+    return json_encode($temarios);
+  }
 
 
+  //INSERT DE LAS MATERIAS
+  public function crearTemario()
+  {
 
-  //UPDATE TEMA
-  public function editarTemario()
+    $idMateria = $this->request->getPost('idMateria');
+
+    $data = [
+      'nombreTemario' => $this->request->getPost('nombreTemario'),
+      'contenidoTemario' => $this->request->getPost('contenidoTemario'),
+      'libroTemario' => $this->request->getPost('libroTemario'),
+      'idMateria' => $idMateria,
+    ];
+
+    //instanciar
+    $temarioModel = new TemarioModel();
+    $temarioModel->insert($data);
+  }
+
+  //DELETE DE LAS MATERIAS EXISTENTES
+  public function eliminarTemario()
+  {
+    $idTemario = $this->request->getPost('idTemario');
+
+    $temarioModel = new TemarioModel();
+    $temarioModel->delete($idTemario);
+  }
+
+  //UPDATE MATERIA
+  public function modificarTemario()
   {
     $idTemario = $this->request->getPost('idTemario');
 
     $data = [
       'nombreTemario' => $this->request->getPost('nombreTemario'),
-      'descripcionTemario' => $this->request->getPost('descripcionTemario'),
-      'pdfTemario' => $this->request->getPost('pdfTemario'),
+      'contenidoTemario' => $this->request->getPost('contenidoTemario'),
+      'libroTemario' => $this->request->getPost('libroTemario'),
+      'idMateria' => $this->request->getPost('idMateria'),
     ];
 
-      //instanciar
-      $temarioModel = new TemarioModel();
-      $temarioModel->update($idTemario, $data);
-     
-    return redirect()->to('inicioAdmi');
+    //instanciar
+    $temarioModel = new TemarioModel();
+    $temarioModel->update($idTemario, $data);
   }
-
- 
   //----------------------------------------------------------------Preguntas---------------------------------------------------------------
 
   //INSERT DE LAS PREGUNTAS
@@ -326,225 +363,4 @@ class ControleAdmi extends BaseController
     $session->destroy(); // Destruye la sesión actual
     return redirect()->to(base_url()); // Redirige a la página de inicio de sesión
   }
-  #################--SELECT--#####################
-  public function universidadAjax()
-  {
-    $uniModel = new UniModel();
-    $unis = $uniModel->findAll();
-    return json_encode($unis);
-
-  }
- #################--DELETE--#####################
-  public function eliminarUni2()
-  {
-    $idU = $this->request->getPost('idU');
- 
-    $uniModel = new UniModel();
-    $uniModel->delete($idU);
-
-  }
-
-  public function crearUni2()
-  {
-
-    $data = [
-      'nombreU' => $this->request->getPost('nombreU'),
-      'descripcionU' => $this->request->getPost('descripcionU'),
-      'imagenU' => $this->request->getPost('imagenU'),
-    ];
-
-    //instanciar
-    $uniModel = new UniModel();
-    $uniModel->insert($data);
-  }
-
-  public function editarUni2()
-  {
-    $idU = $this->request->getPost('idU');
-
-    $data = [
-      'nombreU' => $this->request->getPost('nombreU'),
-      'descripcionU' => $this->request->getPost('descripcionU'),
-      'imagenU' => $this->request->getPost('imagenU'),
-    ];
-
-    //instanciar
-    $uniModel = new UniModel();
-    $uniModel->update($idU, $data);
-  }
-
-  public function carreraAjax()
-  {
-    $idU = $this->request->getPost('idU');
-    $carreraModel = new CarreraModel();
-    $carreras = $carreraModel->where('idU', $idU)->findAll();
-
-    // Devolver los temas como JSON
-    return json_encode($carreras);
-  }
-
-
-
- //INSERT DE LAS CARRERAS 
- public function crearCarrera2()
- {
-  $idU = $this->request->getPost('idU');
-
-   $data = [
-     'idU' => $idU,
-     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
-     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
-     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
-   ];
-
-   //instanciar
-   $carreraModel = new CarreraModel();
-   $carreraModel->insert($data);
-
- }
-
- //UPDATE CARRERA
- public function editarCarrera2()
- {
-   $idCarrera = $this->request->getPost('idCarrera');
-
-   $data = [
-     'nombreCarrera' => $this->request->getPost('nombreCarrera'),
-     'descripcionCarrera' => $this->request->getPost('descripcionCarrera'),
-     'imagenCarrera' => $this->request->getPost('imagenCarrera'),
-   ];
-
-   //instanciar
-   $carreraModel = new CarreraModel();
-   $carreraModel->update($idCarrera, $data);
-
- }
-
- //DELETE DE LAS CARRERAS EXISTENTES
- public function eliminarCarrera2()
- {
-   $idCarrera = $this->request->getPost('idCarrera');
-
-   $carreraModel = new CarreraModel();
-   $carreraModel->delete($idCarrera);
-
- }
-
-
-  public function materiaAjax()
-  {
-    $idCarrera = $this->request->getPost('idCarrera');
-    $materiaModel = new MateriaModel();
-    $materias = $materiaModel->where('idCarrera', $idCarrera)->findAll();
-
-
-    return json_encode($materias);
-  }
-
- //INSERT DE LAS MATERIAS
- public function crearMateria2()
- {
-
-  $idCarrera = $this->request->getPost('idCarrera');
-
-
-   $data = [
-     'nombreMateria' => $this->request->getPost('nombreMateria'),
-     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
-     'imagenMateria' => $this->request->getPost('imagenMateria'),
-     'idCarrera' => $idCarrera,
-   ];
-
-   //instanciar
-   $materiaModel = new materiaModel();
-   $materiaModel->insert($data);
-
- }
-
- //DELETE DE LAS MATERIAS EXISTENTES
- public function eliminarMateria2()
- {
-   $idMateria = $this->request->getPost('idMateria');
-
-   // Instanciar el modelo
-   $materiaModel = new MateriaModel();
-
-   // Eliminar lógicamente el registro con el ID especificado
-   $materiaModel->delete($idMateria);
- }
-
- //UPDATE MATERIA
- public function editarMateria2()
- {
-   $idMateria = $this->request->getPost('idMateria');
-
-   $data = [
-     'nombreMateria' => $this->request->getPost('nombreMateria'),
-     'descripcionMateria' => $this->request->getPost('descripcionMateria'),
-     'imagenMateria' => $this->request->getPost('imagenMateria'),
-   ];
-
-   //instanciar
-   $materiaModel = new materiaModel();
-   $materiaModel->update($idMateria, $data);
-
- }
-  
-//#######################-TEMARIO-#########################################
- public function temarioMateria()
- {
-   $idMateria = $this->request->getPost('idMateria');
-   $temarioModel = new TemarioModel();
-   $temarios = $temarioModel->where('idMateria', $idMateria)->findAll();
-   return json_encode($temarios);
- }
-
-
-//INSERT DE LAS MATERIAS
-public function crearTemario()
-{
-
-  $idMateria = $this->request->getPost('idMateria');
-
-  $data = [
-    'nombreTemario' => $this->request->getPost('nombreTemario'),
-    'contenidoTemario' => $this->request->getPost('contenidoTemario'),
-    'libroTemario' => $this->request->getPost('libroTemario'),
-    'idMateria' => $idMateria,
-  ];
-
-  //instanciar
-  $temarioModel = new TemarioModel();
-  $temarioModel->insert($data);
-
-}
-
-//DELETE DE LAS MATERIAS EXISTENTES
-public function eliminarTemario()
-{
-  $idTemario = $this->request->getPost('idTemario');
-
-  $temarioModel = new TemarioModel();
-  $temarioModel->delete($idTemario);
-}
-
-//UPDATE MATERIA
-public function modificarTemario()
-{
-  $idTemario = $this->request->getPost('idTemario');
-
-  $data = [
-    'nombreTemario' => $this->request->getPost('nombreTemario'),
-    'contenidoTemario' => $this->request->getPost('contenidoTemario'),
-    'libroTemario' => $this->request->getPost('libroTemario'),
-    'idMateria' => $this->request->getPost('idMateria'),
-  ];
-
-  //instanciar
-  $temarioModel = new TemarioModel();
-  $temarioModel->update($idTemario, $data);
-
-}
-  
-
 }

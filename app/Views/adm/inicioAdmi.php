@@ -385,13 +385,24 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-      // Al cargar la página, ocultar todas las secciones excepto la primera activa
-      $(".seccion").hide();
-      $('#univInst').show();
-      selecUniversidad();
+
+      let activeSection = localStorage.getItem('activeSection');
+      if (activeSection) {
+        mostrarSeccion(activeSection);
+
+        selecUniversidad();
+      } else {
+        let firstLink = $("nav a").first();
+        firstLink.addClass("active-link");
+        mostrarSeccion(firstLink.attr("onclick").split("'")[1]);
+
+        selecUniversidad();
+      }
     });
 
     function mostrarSeccion(seccion) {
+
+      localStorage.setItem('activeSection', seccion);
       // Ocultar todas las secciones
       $(".seccion").hide();
 

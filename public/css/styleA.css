@@ -802,15 +802,15 @@ input[type="password"] {
 
     /*fuentes*/
     --Th1: 48px;
-    --Th2: 43.5px;
-    --Th3: 39px;
-    --Th4: 34.5px;
-    --Th5: 30px;
+    --Th2: 44px;
+    --Th3: 40px;
+    --Th4: 36px;
+    --Th5: 32px;
 
-    --txtN: 25.5px;
-    --txtA: 21px;
+    --txtN: 28px;
+    --txtA: 24px;
 
-    --txtNA: 16.5px;
-    --txtNC: 11px;
+    --txtNA: 20px;
+    --txtNC: 16px;
   }
 }

@@ -7,6 +7,7 @@ globalCarrData=1; // Definir la variable global
 
           var uniData = {
             idU: globalUniData, // Crear un objeto con lo necesario
+
           }; 
           $.ajax({
             type: 'POST',
@@ -196,7 +197,7 @@ globalCarrData=1; // Definir la variable global
       
             // Realizar la solicitud AJAX para editar la universidad
             $.ajax({
-                url: baseUrl + 'editarCarrera2',
+                url: baseUrl + 'editarCarrera',
                 type: 'POST',
                 data: carreraData, // Serializar el objeto a JSON
                 success: function(response) {
@@ -268,7 +269,7 @@ globalCarrData=1; // Definir la variable global
       
           // Realizar la solicitud AJAX para agregar la nueva universidad
           $.ajax({
-              url: baseUrl + 'crearCarrera2',
+              url: baseUrl + 'crearCarrera',
               type: 'POST',
               data: formData,
               success: function(response) {
@@ -299,7 +300,7 @@ globalCarrData=1; // Definir la variable global
       
                   // Realizar la solicitud AJAX para eliminar la universidad
                   $.ajax({
-                      url: baseUrl + 'eliminarCarrera2',
+                      url: baseUrl + 'eliminarCarrera',
                       type: 'POST',
                       data: carreraData, // Serializar el objeto a JSON
                       success: function(response) {
@@ -318,6 +319,7 @@ globalCarrData=1; // Definir la variable global
 
 $('.universidadSelect').change(function() {
   var idU = $(this).val();
+
   globalUniData = idU; // Asignar uniData a la variable global
   selecCarrera(globalUniData);
   // Seleccionar la opción correspondiente en el segundo filtro

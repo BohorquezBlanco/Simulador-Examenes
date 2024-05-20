@@ -1,4 +1,6 @@
-globalCarrData=1; // Definir la variable global
+var globalCarrData = '';
+var globalCarrNombre = '';
+
     //###################################################-CARRERA-#########################################################  
         //---------------------------------SELECT CARRERA-------------------------------------------------
         function selecCarrera(globalUniData) {
@@ -11,7 +13,7 @@ globalCarrData=1; // Definir la variable global
           $.ajax({
             type: 'POST',
             data: uniData,
-            url: baseUrl + 'carreraAjax',
+            url: baseUrl + 'carreraAjaxC',
             dataType: 'json',
             success: function(response) {
             //encabezado del select       
@@ -29,44 +31,48 @@ globalCarrData=1; // Definir la variable global
               };
               var carreraHTML = 
                 `
-                <div class="card draggable" id="carrera-${carrera.idCarrera}" draggable="true" data-carrera='${JSON.stringify(carreraData)}'>
-                  <img src="${carrera.imagenCarrera}" alt="By AnisSoft" title="${carrera.nombreCarrera}" draggable="false" />
+                <div onclick="manejarClick(this)" class="card" data-id-carrera="${carrera.idCarrera}" data-nombre-carrera="${carrera.nombreCarrera}" data-imagen-carrera="${carrera.imagenCarrera}" >
+                  <img src="${carrera.imagenCarrera}" alt="By AnisSoft" draggable="false" class="cover-image" />
                   <div class="card-body">
-                    <h3 class="card-title">${carrera.nombreCarrera}</h3>
+                      <h5 class="card-title">${carrera.nombreCarrera}</h5>
+                      <p class="card-hover-description">Click para ver materias</p>
                   </div>
                 </div>
+
                 `;
               $('#selectCarrAjax').append(carreraHTML);
               
-            //llenar el filtro
-            var filtroCarrera =               
-            `<option value="${carrera.idCarrera}">${carrera.nombreCarrera}</option>`;
-            $('.carreraSelect').append(filtroCarrera);
             });
             //agregar el boton de crear universidad 
-
-
-          // Asignar los valores a las variables globales
-          var datosUniversidad = obtenerPrimerIdYNombre(response, "idCarrera", "nombreCarrera");
-          globalCarrData = datosUniversidad.primerId;
-          globalCarrNombre = datosUniversidad.primerNombre;
-          selecMateria(globalCarrData);
-
-
-
-      
       }
     })
-        }
+  }
       
-     
-      
+
 //###################################################-CARRERA FILTRO-#########################################################
 
-$('.universidadSelect').change(function() {
-  var idU = $(this).val();
-  globalUniData = idU; // Asignar uniData a la variable global
-  selecCarrera(globalUniData);
-  // Seleccionar la opción correspondiente en el segundo filtro
-  $('.universidadSelect').val(idU);
-});
+function manejarClick(button) {
+  // Captura el idCarrera y nombreCarrera de los atributos data-id-carrera y data-nombre-carrera
+  const idCarrera = button.getAttribute('data-id-carrera');
+  const nombreCarrera = button.getAttribute('data-nombre-carrera');
+  const imgCarrera = button.getAttribute('data-imagen-carrera');
+  const welcomeSection2 = document.querySelector('.mensaje-inicio2');
+
+  // Actualiza las variables globales
+  globalCarrData = idCarrera;
+  globalCarrNombre = nombreCarrera;
+
+  // Opcional: Verificar que las variables se actualicen correctamente
+  console.log('globalCarrData:', globalCarrData);
+  console.log('globalCarrNombre:', globalCarrNombre);
+
+  // Establecer el background-image usando el valor de imgCarrera
+  welcomeSection2.style.backgroundImage = `url(${imgCarrera})`;
+    
+  // Opcional: Ajustar otras propiedades de estilo para asegurar que la imagen cubra el contenedor
+  welcomeSection2.style.backgroundSize = 'cover';
+  welcomeSection2.style.backgroundPosition = 'center';
+
+  selecMateria(globalCarrData);
+  mostrarSeccion('materia')
+}
