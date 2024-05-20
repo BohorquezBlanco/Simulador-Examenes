@@ -10,12 +10,13 @@
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+  
 </head>
 <!--HEADER-->
 <!--BODY-->
 
 <body>
+
   <!--MENÚ-->
   <button class="toggle-btn" onclick="toggleMenu()">☰</button>
   <div class="menu-responsive">
@@ -261,46 +262,132 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <!--TEMAS-->
     <section id="temas" class="seccion">
-      <h5 class="center">TEMAS</h5>
-      <div class="contenidoT">
-        <div class="labelExcel">Seleccione materia</div>
-        <div class="selectM">
-          <select name="idM" style="color:#ffe8d8; background-color:#79352f; height:2.5vw; font-size: 1.4vw;">
-            <?php foreach ($materias as $materia) : ?>
-              <?php
-              $selected = $materia['idMateria'] ? 'selected' : '';
-              ?>
-              <option value="<?php echo $materia['idMateria']; ?>" <?php echo $selected; ?>>
-                <?php echo $materia['nombreMateria']; ?>
-              </option>
-            <?php endforeach; ?>
+    <h5 class="center">TEMAS-TEMARIO</h5>
+    <h5 class="center" id="tituloTemario"></h5>
+        <div class="celda">
+          <select  class="universidadSelect">
+            <label for="">Univercidad</label>
+            <option value="1">Universidad:</option>
           </select>
+        </div><br>
+        <div class="celda">
+          <label for="">Carrera:</label>
+          <select class="carreraSelect" name="carreraSelect" >
+            <option value="1">Carrera:</option>
+          </select>
+        </div><br>
+        <div class="celda">
+          <label for="">Materia:</label>
+          <select class="materiaSelect" name="materiaSelect">
+            <option value="1">Materia:</option>
+          </select>
+        </div><br>
+        <div class="celda">
+          <label for="">Temario:</label>
+          <select class="temarioSelect" name="temarioSelect">
+            <option value="1">Temario:</option>
+          </select>
+        </div><br>
+        <div class="botonT">
+          <button class="enviarT" id="crearTema">
+            Agregar nuevo temario
+          </button>
         </div>
-      </div>
+      <br>
+      <div class="botonT">
+          <button class="enviarT" id="agregarTemasExistentes">
+            Agregar temas existentes
+          </button>
+        </div>
+
+        <div id="segundoFiltro">
+
+        </div>
+
+
+
+<br>
+<br>
+
+<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table id="miTabla">
-          <thead>
+        <table >
+          <thead id="cabezaTemasTemario">
             <tr>
-              <th>Nombre</th>
-              <th>Contenido</th>
-              <th>Libro</th>
-              <th>Video</th>
+              <th>nombreTema</th>
+              <th>descripcionTema</th>
+              <th>videoTema</th>
+              <th>Eliminar</th>
+              <th>Modificar</th>
             </tr>
           </thead>
-          <tbody contenteditable="true">
+          <tbody id="temasTemario">
+            <!-- Agregar temarios existentes de la materia -->
+            <tr>
+              <td>Algebra</td>
+              <td>no se si es necesario</td>
+              <td>asdfsadfsadfsdaf</td>
+              <td>Matematicas-Tecno</td>
+              <td><button>ELIMINAR</button></td>
+              <td><button>MODIFICAR</button></td>
+            </tr>
           </tbody>
         </table>
-      </div>
-      <div class="botonT">
-        <button class="enviarT">
-          Guardar datos
-        </button>
       </div>
     </section>
     <!--TEMAS-->
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
-      <h5 class="center">PREGUNTAS</h5>
+    <h5 class="center">Preguntas</h5>
+        <div class="">
+          <select class="carreraPregunta" name="carreraPregunta">
+            <option value="0" selected>Carrera:</option>
+          </select>
+        </div>
+        <div class="">
+          <select class="materiaPregunta" name="materiaPregunta">
+            <option value="0">Materia:</option>
+          </select>
+        </div>
+        <div class="">
+          <select class="preguntaTema" name="preguntaTema">
+            <option value="0">Temas:</option>
+          </select>
+        </div>
+        <div class="botonT">
+          <button class="enviarT" id="crearPregunta">
+            Agregar nueva pregunta
+          </button>
+        </div>
+      <br>
+<br>
+<br>
+
+<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <div class="contTable">
+        <table >
+          <thead>
+            <tr>
+              <th>Enunciado</th>
+              <th>Grafico</th>
+              <th>a</th>
+              <th>b</th>
+              <th>c</th>
+              <th>d</th>
+              <th>e</th>
+              <th>respuestas</th>
+              <th>dificultad</th>
+              <th>resolucion PDF</th>
+              <th>Tema</th>
+              <th>Eliminar/Modificar</th>
+            </tr>
+          </thead>
+          <tbody id="thbodypregunta">
+            <!-- AQUI APARECERAN LAS PREGUNTAS -->
+  
+          </tbody>
+        </table>
+      </div>
 
     </section>
     <!--PREGUNTAS Y EXAMENES-->
@@ -368,10 +455,13 @@
     var baseUrl = "<?php echo base_url(); ?>";
   </script>
   <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/universidad.js"></script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/carreras.js"></script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/materia.js"></script>
-  <script src="<?php echo base_url(); ?>js/crud_adm/temario.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/universida.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/tema.js"></script>
+  <script src="<?php echo base_url();?>js/crud_adm/preguntas.js"></script>
+
 
   <script>
     $(document).ready(function() {

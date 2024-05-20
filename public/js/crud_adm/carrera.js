@@ -1,4 +1,5 @@
-globalCarrData=1; // Definir la variable global
+var globalCarrData=1; // Definir la variable global
+var globalCarrNombre=null; //
     //###################################################-CARRERA-#########################################################  
         //---------------------------------SELECT CARRERA-------------------------------------------------
         function selecCarrera(globalUniData) {
@@ -52,6 +53,7 @@ globalCarrData=1; // Definir la variable global
           globalCarrData = datosUniversidad.primerId;
           globalCarrNombre = datosUniversidad.primerNombre;
           selecMateria(globalCarrData);
+
 
 
 

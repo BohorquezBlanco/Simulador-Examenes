@@ -1,7 +1,11 @@
+globalTemarioData=null;
+globalMatNombre=null;
 //###################################################-PREGUNTAS-#########################################################
 //preguntas de la materia
 function selecTemario(globalMateriaData) {
   $("#temarioMateria").empty(); //BORRA TODO EL CONTENEDOR
+  $(".temarioSelect").empty(); //BORRA TODO EL CONTENEDOR
+
   var uniData = {
     idMateria: globalMateriaData, // Crear un objeto con lo necesario
   };
@@ -36,7 +40,23 @@ function selecTemario(globalMateriaData) {
               </tr>
             `;
         $("#temarioMateria").append(temarioHTML);
+        //llenar a temarios
+        var temarios= 
+        `
+        <option value="${temario.idTemario}">${temario.nombreTemario}</option>
+        `;
+        $(".temarioSelect").append(temarios);
+
+
+
+ 
       });
+      //Agarramos el primer id y el primer nombre 
+      var datosTemario = obtenerPrimerIdYNombre(response, "idTemario", "nombreTemario");
+      globalTemarioData = datosTemario.primerId;
+      globalTemarioNombre = datosTemario.primerNombre;
+      selecTema(globalTemarioData);
+      tituloTemarios();
     },
     error: function (xhr, status, error) {
       console.error("Error al insertar el tema:", error);
@@ -281,16 +301,9 @@ $(".materiaSelect").change(function () {
   globalMateriaData = idMateria; // Asignar uniData a la variable global
   globalMatNombre = nombreMateria; // Asignar uniData a la variable global
 
-  console.log(globalMateriaData);
 
   selecTemario(globalMateriaData);
 
-  // Obtener el elemento option por su id
-  var optionElement = $("#materiaTemarioMod");
-  optionElement.val(idMateria);
-  optionElement.text(nombreMateria);
+
 });
 
-$(".mostrar-modal").on("click", function () {
-  $("#modalBase").show();
-});

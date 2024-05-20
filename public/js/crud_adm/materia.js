@@ -6,6 +6,7 @@ var globalMatNombre = null;
 function selecMateria(globalCarrData) {
   $("#selectMatAjax").empty(); //BORRA TODO EL CONTENEDOR
   $(".materiaSelect").empty(); //BORRA TODO EL CONTENEDOR
+  $("#temarioMateria").empty(); //BORRA TODO EL CONTENEDOR
 
   var uniData = {
     idCarrera: globalCarrData, // Crear un objeto con lo necesario
@@ -59,9 +60,6 @@ function selecMateria(globalCarrData) {
       globalMatNombre = datosCarrera.primerNombre;
       selecTemario(globalMateriaData);
 
-      var optionElement = $("#materiaTemarioMod");
-      optionElement.val(globalMateriaData);
-      optionElement.text(globalMatNombre);
 
       //agregar el boton de crear universidad
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita

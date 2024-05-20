@@ -52,6 +52,19 @@ $routes->post('/materiaAjaxC', 'Usuario\ControleUser::materiaAjax');
 $routes->post('/temarioMateriaC', 'Usuario\ControleUser::temarioMateriaC');
 $routes->post('/temarioLibroC', 'Usuario\ControleUser::temarioLibroC');
 
+$routes->post('/temaCarrera', 'Admi\ControleAdmi::temaCarrera');
+
+$routes->post('/preguntasAjax', 'Admi\ControleAdmi::preguntasAjax');
+$routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
+$routes->post('/modificarPregunta', 'Admi\ControleAdmi::modificarPregunta');
+$routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
+
+$routes->post('/temaTemario', 'Admi\ControleAdmi::temaTemario');
+$routes->post('/eliminarTema', 'Admi\ControleAdmi::eliminarTema');
+$routes->post('/modificarTema', 'Admi\ControleAdmi::modificarTema');
+$routes->post('/crearTema', 'Admi\ControleAdmi::crearTema');
+$routes->post('/agregarTema', 'Admi\ControleAdmi::agregarTema');
+$routes->get('/pas', 'Admi\ControleAdmi::pas');
 
 
 
@@ -64,10 +77,6 @@ $routes->post('/revisarExamen', 'Usuario\ControleUser::revisarExamen'); //aqui m
 
 
 
-//ADMINISTRADOR PREGUNTAS
-$routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
-$routes->post('/editarPregunta', 'Admi\ControleAdmi::editarPregunta');
-$routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
 
 //ADMINISTRADOR EXAMEN
 $routes->post('/crearExamen', 'Admi\ControleAdmi::crearExamen');

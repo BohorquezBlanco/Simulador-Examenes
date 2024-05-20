@@ -18,7 +18,7 @@ function obtenerPrimerIdYNombre(response,valor1,valor2) {
    } else {
     return {
       primerId: 0,
-      primerNombre: 0
+      primerNombre: "Sin datos",
   };
    }
 }
@@ -41,3 +41,12 @@ function fadeIn(selector, duracion) {
    console.error("El elemento con el selector '" + selector + "' no fue encontrado.");
   }
 }
+
+function tituloTemarios() {
+  $("#tituloTemario").empty(); 
+
+  $("#tituloTemario").append(globalTemarioNombre);
+}
+
+//FILTRO CARRERA MATERIA TEMA
+

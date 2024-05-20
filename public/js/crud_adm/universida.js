@@ -46,6 +46,7 @@ function selecUniversidad() {
 
       selecCarrera(globalUniData);
       //agregar el boton de crear universidad
+      preguntaCarreras();
 
       // Después de agregar las tarjetas de universidad, agregar el botón al contenedor Esto para evitar que el boton se repita
       $("#selectUniAjax").append(`
