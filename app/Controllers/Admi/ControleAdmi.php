@@ -639,25 +639,25 @@ public function temaCarrera()
 
   }
 
-public function pas()
-{
+  public function pas($idUsuario, $contrasena)
+  {
+    $data = ['password' => password_hash($contrasena, PASSWORD_DEFAULT)];
 
+    $usuarioModel = new UsuarioModel();
+    
+    // Actualizar la contraseña del usuario en la base de datos
+    if ($usuarioModel->update($idUsuario, $data)) {
+        // La actualización fue exitosa
+        echo "EXITOSAMENTE EXITOSO :D";
+    } else {
+        // Hubo un error durante la actualización
+        echo "Hubo un error al actualizar la contraseña";
+    }
 
-      $texto = '456';
+  }
    
-      // Verificar si el texto no está vacío
-      if (!empty($texto)) {
-          // Encriptar el texto con bcrypt
-          $hash = password_hash($texto, PASSWORD_BCRYPT);
 
-          // Mostrar el resultado
-          echo "<p>Texto original: " . htmlspecialchars($texto) . "</p>";
-          echo "<p>Texto encriptado: " . htmlspecialchars($hash) . "</p>";
-      } else {
-          echo "<p>Por favor, ingrese un texto.</p>";
-      }
- 
- 
-}
+  
+  
 
 }

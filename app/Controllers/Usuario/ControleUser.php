@@ -31,59 +31,60 @@ class ControleUser extends BaseController
         return view('defecto/login');
     }
 
-    public function login()
-    {
-        // Validar campos de entrada
-        $rules = [
-            'correo' => 'required',
-            'password' => 'required'
-        ];
+public function login()
+{
+    // Validar campos de entrada
+    $rules = [
+        'correo' => 'required',
+        'password' => 'required'
+    ];
 
-        // Obteniendo datos del formulario
-        $correo = $this->request->getVar('correo');
-        $password = md5($this->request->getVar('password')); // Encriptar contraseña con MD5
+    // Obteniendo datos del formulario
+    $correo = $this->request->getVar('correo');
+    $password = $this->request->getVar('password'); // Obtener la contraseña sin encriptar
 
-        // Validar los campos de entrada
-        if (!$this->validate($rules)) {
-            // Si la validación falla, redirige de vuelta con errores y datos de entrada
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-        }
-
-        // Obtener el modelo de usuario
-        $usuariomodel = model('UsuarioModel');
-
-        // Buscar el usuario por correo
-        $user = $usuariomodel->getUserBy('correo', $correo);
-        if (!$user) {
-            // Si el usuario no existe, mostrar mensaje de error y redirigir de vuelta
-            return redirect()->back()->with('msg', 'El correo ingresado no está registrado');
-        }
-
-        // Verificar la contraseña
-        if ($password !== $user->password) {
-            // Si la contraseña es incorrecta, mostrar mensaje de error y redirigir de vuelta
-            return redirect()->back()->with('msg', 'Contraseña incorrecta');
-        }
-
-        // Si el usuario y la contraseña son correctos, obtener la URL de la imagen del usuario
-        $imgUsuario = $user->imgUsuario;
-        $idU = $user->idUsuario;
-
-        $contU = $user->password;
-
-        // Iniciar sesión
-        session()->set([
-            'id_usuario' => $idU,
-            'correo' => $user->correo,
-            'nombre' => $user->nombre,
-            'img' => $imgUsuario,
-            'cont' => $contU,
-            'is_logged' => true
-        ]);
-
-        // Redirigir al usuario a la página de inicio
-        return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' . $user->nombre, $user->correo, $imgUsuario,  $idU, $contU);
+    // Validar los campos de entrada
+    if (!$this->validate($rules)) {
+        // Si la validación falla, redirige de vuelta con errores y datos de entrada
+        return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
     }
+
+    // Obtener el modelo de usuario
+    $usuariomodel = model('UsuarioModel');
+
+    // Buscar el usuario por correo
+    $user = $usuariomodel->getUserBy('correo', $correo);
+    if (!$user) {
+        // Si el usuario no existe, mostrar mensaje de error y redirigir de vuelta
+        return redirect()->back()->with('msg', 'El correo ingresado no está registrado');
+    }
+
+    // Verificar la contraseña
+    if (!password_verify($password, $user->password)) {
+        // Si la contraseña es incorrecta, mostrar mensaje de error y redirigir de vuelta
+        return redirect()->back()->with('msg', 'Contraseña incorrecta');
+    }
+
+    // Si el usuario y la contraseña son correctos, obtener la URL de la imagen del usuario
+    $imgUsuario = $user->imgUsuario;
+    $idU = $user->idUsuario;
+
+    $contU = $user->password;
+
+    // Iniciar sesión
+    session()->set([
+        'id_usuario' => $idU,
+        'correo' => $user->correo,
+        'nombre' => $user->nombre,
+        'img' => $imgUsuario,
+        'cont' => $contU,
+        'is_logged' => true
+    ]);
+
+    // Redirigir al usuario a la página de inicio
+    return redirect()->to('/inicioAdmi')->with('msg', 'Bienvenido, ' . $user->nombre);
+}
+
 
 
     //FUNCION PARA CERRAR SESION

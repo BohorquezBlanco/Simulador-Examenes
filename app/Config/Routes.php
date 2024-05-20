@@ -106,6 +106,11 @@ $routes->post('/eliminarTema', 'Admi\ControleAdmi::eliminarTema');
 $routes->post('/modificarTema', 'Admi\ControleAdmi::modificarTema');
 $routes->post('/crearTema', 'Admi\ControleAdmi::crearTema');
 $routes->post('/agregarTema', 'Admi\ControleAdmi::agregarTema');
-$routes->get('/pas', 'Admi\ControleAdmi::pas');
+
+
+//RUTA DE ENCRIPTACION PARA BASE DE DATOS
+$routes->get('/pas/(:segment)/(:segment)', 'Admi\ControleAdmi::pas/$1/$2');
+
+
 //USUARIO
 $routes->post('/userAjax', 'Admi\ControleAdmi::editarUser');
