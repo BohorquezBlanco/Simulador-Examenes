@@ -48,5 +48,4 @@ function tituloTemarios() {
   $("#tituloTemario").append(globalTemarioNombre);
 }
 
-//FILTRO CARRERA MATERIA TEMA
 

@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SimuladorNS</title>
   <link href="<?php echo base_url(); ?>css/styleA.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>css/samuel.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <!--HEADER-->
 <!--BODY-->
@@ -77,7 +77,7 @@
     <div class="modal abrir" id="modalBase">
       <div class="contenido-modal">
         <div id="contenidoModal">
-          <!--AQUI SE ALMACENARAN LOS DISTINTOS TIPOS DE MODALES-->
+          <!--AQUI SE ALMACENARAN LOS DITISNTOS TIPOS DE MODALES-->
         </div>
       </div>
     </div>
@@ -189,6 +189,9 @@
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <section id="temarioLibroVideo" class="seccion">
       <h5 class="center">TEMARIOS</h5>
+      <!--btn filtros-->
+
+
       <div class="contSelect2">
         <div class="contSelect">
           <div class="filter-container">
@@ -260,135 +263,171 @@
       </div>
     </section>
     <!--TEMARIOS, LIBROS, VIDEOS-->
-    <!--TEMAS-->
-    <section id="temas" class="seccion">
-    <h5 class="center">TEMAS-TEMARIO</h5>
-    <h5 class="center" id="tituloTemario"></h5>
-        <div class="celda">
-          <select  class="universidadSelect">
-            <label for="">Univercidad</label>
-            <option value="1">Universidad:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Carrera:</label>
-          <select class="carreraSelect" name="carreraSelect" >
-            <option value="1">Carrera:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Materia:</label>
-          <select class="materiaSelect" name="materiaSelect">
-            <option value="1">Materia:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Temario:</label>
-          <select class="temarioSelect" name="temarioSelect">
-            <option value="1">Temario:</option>
-          </select>
-        </div><br>
-        <div class="botonT">
-          <button class="enviarT" id="crearTema">
-            Agregar nuevo temario
-          </button>
+
+<!--TEMAS-->
+<section id="temas" class="seccion">
+  <h5 class="center">TEMAS-TEMARIO</h5> 
+  <!--Aqui estan los botones para el manejo de temas-->
+  <div class="row">
+    <div class="columna center">
+      <button class="enviarT btn btn-primary" id="btnFiltrarTema">FILTRO DE TEMAS</button>
+    </div>
+    <div class="columna center">
+      <button class="enviarT btn btn-primary" type="button" id="btnFiltrarArea">FILTRO POR AREAS</button>
+    </div>
+    <div class="columna center">
+      <button class="enviarT btn btn-primary" type="button" id="btnAgregarTemaTemario">AGREGAR TEMAS A UN TEMARIO</button>
+    </div>
+    <div class="columna center">
+      <button class="enviarT btn btn-primary" type="button" id="btnAgregarTema">AGREGAR TEMA</button>
+    </div>
+  </div>
+  <br>
+  <div id="divFiltrosTema">
+    <!--Aqui estan todos los filtros existentes--> 
+  </div>
+  <br>
+  <!-------TABLAS DONDE CARGAN LOS TEMAS ----------->
+  <div class="contTable">
+    <table>
+      <thead id="cabezaTemasTemario">
+        <tr>
+          <th>nombreTema</th>
+          <th>descripcionTema</th>
+          <th>videoTema</th>
+          <th>Eliminar</th>
+          <th>Modificar</th>
+        </tr>
+      </thead>
+      <tbody id="temasTemario">
+        </tbody>
+      </table>
+      <!--Aqui estaran los <td> del cuerpo de la tabla--> 
+  </div>
+</section>
+
+    
+<!--PREGUNTAS Y EXAMENES-->
+<section id="preguntasExamenes" class="seccion">
+<h5 class="center">Preguntas</h5>
+
+<!--btn filtros-->
+<div class="row">
+  <div class="columna center"><button class="enviarT " id="btnFiltrarPreguntaTemario">FILTRAR POR TEMARIO</button></div>
+  <div class="columna center"><button class="enviarT " id="btnFiltrarPreguntaArea">FILTRAR POR AREA</button></div>
+  <div class="columna center"><button class="enviarT btn btn-primary" type="button" id="toggleOffcanvas">AGREGAR PREGUNTA</button></div>
+</div>
+
+
+
+    <div class="offcanvas" id="staticBackdrop">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">AGREGAR PREGUNTA</h5>
+            <button type="button" class="btn-close" id="closeOffcanvas" aria-label="Close">&times;</button>
         </div>
-      <br>
-      <div class="botonT">
-          <button class="enviarT" id="agregarTemasExistentes">
-            Agregar temas existentes
-          </button>
+        <div class="offcanvas-body" id="offcanvas-body">
+            <div>
+                <form id="agregarPregunta">
+                    <div class="contSelect2 col-12">
+                        <div class="form-group">
+                            <select class="selectCarreraP" name="selectCarreraP">
+                                <option value="0">Carrera:</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectMateriaP" name="selectMateriaP">
+                                <option value="0">Materia:</option>
+                                <option value="huerfano">Temas huerfanos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectTemaP" name="selectTemaP">
+                                <option value="0">Tema:</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 form-group">
+                          <label class="textcolor" for="enunciado">Enunciado:</label>
+                          <textarea class="col-12" rows="1" name="enunciado" id="enunciado" placeholder="enunciado"></textarea>
+                      </div>
+                      <div class="col-6 form-group">
+                          <label class="textcolor" for="grafico">Gráfico:</label>
+                          <textarea class="col-12" rows="1" name="grafico" id="grafico" placeholder="grafico"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="a">a:</label>
+                            <input name="a" id="a" type="text" class="form-control" placeholder="a)">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="b">b:</label>
+                            <input name="b" id="b" type="text" class="form-control" placeholder="b)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="c">c:</label>
+                            <input name="c" id="c" type="text" class="form-control" placeholder="c)">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="d">d:</label>
+                            <input name="d" id="d" type="text" class="form-control" placeholder="d)">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="e">e:</label>
+                            <input name="e" id="e" type="text" class="form-control" placeholder="e)">
+                        </div>
+                        <div class="col-6 form-group">
+                            <label class="textcolor" for="respuesta">Respuesta:</label>
+                            <input name="respuesta" id="respuesta" type="text" class="form-control" placeholder="respuesta">
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 form-group">
+                        <label class="textcolor " for="dificultad">Dificultad:</label>
+                        <select class="dificultad" name="dificultad">
+                            <option value="Facil">Facil:</option>
+                            <option value="Moderada">Moderada:</option>
+                            <option value="Dificil">Dificil:</option>
+                        </select>
+                      </div>
+
+                        <div class="col-6 form-group">
+                          <label class="textcolor" for="resolucionPDF">Resolución PDF:</label>
+                          <input name="resolucionPDF" id="resolucionPDF" type="text" class="form-control" placeholder="resolucion">
+                        </div>
+                    </div>
+
+                    <button id="insertarPregunta" type="button" class="btn-modificar">Agregar Pregunta</button>
+                </form>
+            </div>
         </div>
-
-        <div id="segundoFiltro">
-
-        </div>
+    </div>
 
 
 
-<br>
+
+
+
+<div id="divFiltrosPreguntas">
+</div>
 <br>
 
 <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
-      <div class="contTable">
-        <table >
-          <thead id="cabezaTemasTemario">
-            <tr>
-              <th>nombreTema</th>
-              <th>descripcionTema</th>
-              <th>videoTema</th>
-              <th>Eliminar</th>
-              <th>Modificar</th>
-            </tr>
-          </thead>
-          <tbody id="temasTemario">
-            <!-- Agregar temarios existentes de la materia -->
-            <tr>
-              <td>Algebra</td>
-              <td>no se si es necesario</td>
-              <td>asdfsadfsadfsdaf</td>
-              <td>Matematicas-Tecno</td>
-              <td><button>ELIMINAR</button></td>
-              <td><button>MODIFICAR</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <!--TEMAS-->
-    <!--PREGUNTAS Y EXAMENES-->
-    <section id="preguntasExamenes" class="seccion">
-    <h5 class="center">Preguntas</h5>
-        <div class="">
-          <select class="carreraPregunta" name="carreraPregunta">
-            <option value="0" selected>Carrera:</option>
-          </select>
-        </div>
-        <div class="">
-          <select class="materiaPregunta" name="materiaPregunta">
-            <option value="0">Materia:</option>
-          </select>
-        </div>
-        <div class="">
-          <select class="preguntaTema" name="preguntaTema">
-            <option value="0">Temas:</option>
-          </select>
-        </div>
-        <div class="botonT">
-          <button class="enviarT" id="crearPregunta">
-            Agregar nueva pregunta
-          </button>
-        </div>
-      <br>
-<br>
-<br>
+<h5 class="center" id="tituloPreguntas">Carrera - Materia</h5>
+<div class="centrarSearch">
+    <input class="center" type="search">
+    <label class="center" for="">Buscar</label>
+  </div><br>
+<!--AQUI SE MOSTRARA EL CONTENIDO COMO LA TABLA Y EL ACORDEON-->
+  <div id="divContenido">
 
-<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
-      <div class="contTable">
-        <table >
-          <thead>
-            <tr>
-              <th>Enunciado</th>
-              <th>Grafico</th>
-              <th>a</th>
-              <th>b</th>
-              <th>c</th>
-              <th>d</th>
-              <th>e</th>
-              <th>respuestas</th>
-              <th>dificultad</th>
-              <th>resolucion PDF</th>
-              <th>Tema</th>
-              <th>Eliminar/Modificar</th>
-            </tr>
-          </thead>
-          <tbody id="thbodypregunta">
-            <!-- AQUI APARECERAN LAS PREGUNTAS -->
-  
-          </tbody>
-        </table>
-      </div>
-
+  </div>
     </section>
     <!--PREGUNTAS Y EXAMENES-->
     <!--USUARIO-->
@@ -461,6 +500,9 @@
   <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/tema.js"></script>
   <script src="<?php echo base_url();?>js/crud_adm/preguntas.js"></script>
+
+
+
 
 
   <script>
@@ -579,8 +621,54 @@
       });
     });
   </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const accordionHeaders = document.querySelectorAll(".accordion-header");
+
+    accordionHeaders.forEach(header => {
+      header.addEventListener("click", function() {
+        const accordionItem = this.parentElement;
+        const accordionContent = accordionItem.querySelector(".accordion-content");
+
+        accordionItem.classList.toggle("active");
+
+        if (accordionItem.classList.contains("active")) {
+          accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+        } else {
+          accordionContent.style.maxHeight = 0;
+        }
+      });
+    });
+  });
+</script>
 
 
+
+
+
+<script>
+// Función para hacer las celdas editables al hacer doble clic
+document.addEventListener('DOMContentLoaded', function() {
+    var toggleOffcanvasButton = document.getElementById('toggleOffcanvas');
+    var offcanvas = document.getElementById('staticBackdrop');
+    var closeOffcanvasButton = document.getElementById('closeOffcanvas');
+
+    toggleOffcanvasButton.addEventListener('click', function() {
+        offcanvas.classList.toggle('show');
+    });
+
+    closeOffcanvasButton.addEventListener('click', function() {
+        offcanvas.classList.remove('show');
+    });
+
+    // Evitar el cierre del offcanvas cuando se hace clic fuera de él
+    offcanvas.addEventListener('click', function(event) {
+        if (event.target === offcanvas) {
+            offcanvas.classList.remove('show');
+        }
+    });
+});
+</script>
 </body>
 
 </html>

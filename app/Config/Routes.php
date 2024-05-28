@@ -106,6 +106,14 @@ $routes->post('/eliminarTema', 'Admi\ControleAdmi::eliminarTema');
 $routes->post('/modificarTema', 'Admi\ControleAdmi::modificarTema');
 $routes->post('/crearTema', 'Admi\ControleAdmi::crearTema');
 $routes->post('/agregarTema', 'Admi\ControleAdmi::agregarTema');
+$routes->post('/allTemas', 'Admi\ControleAdmi::allTemas');
+$routes->post('/temaCarreraHuerfanos', 'Admi\ControleAdmi::temaCarreraHuerfanos');
+$routes->post('/areaTema', 'Admi\ControleAdmi::areaTema');
+$routes->post('/areaTemaP', 'Admi\ControleAdmi::areaTemaP');
+
+//Relacion de temaTemario
+$routes->post('/eliminarTemaTemario', 'Admi\ControleAdmi::eliminarTemaTemario');
+$routes->post('/agregarTemaTemario', 'Admi\ControleAdmi::agregarTemaTemario');
 
 
 //RUTA DE ENCRIPTACION PARA BASE DE DATOS
