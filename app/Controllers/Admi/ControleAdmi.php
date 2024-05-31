@@ -211,8 +211,6 @@ class ControleAdmi extends BaseController
   
   //----------------------------------------------------------------TEMARIOS---------------------------------------------------------------
 
-
-
   //UPDATE TEMA
   public function editarTemario()
   {
@@ -295,6 +293,7 @@ class ControleAdmi extends BaseController
     // Devolver los temas como JSON
     return json_encode($carreras);
   }
+
   public function allCarreras()
   {
 
@@ -304,7 +303,6 @@ class ControleAdmi extends BaseController
     // Devolver los temas como JSON
     return json_encode($carreras);
   }
-
 
  //INSERT DE LAS CARRERAS 
  public function crearCarrera2()
@@ -472,7 +470,7 @@ public function temaCarrera()
   $idMateria = $this->request->getPost('idMateria');
  
   $temaModel = new TemaModel();
-  $temas = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
+  $temas = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema, tema.temaArea')
   ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
   ->join('temario', 'temario_tema.idTemario = temario.idTemario')
   ->join('materia', 'temario.idMateria = materia.idMateria')
@@ -481,7 +479,9 @@ public function temaCarrera()
   return json_encode($temas);
 }
 
-  #################--SELECT--#####################
+//----------------------------------------------------------------Preguntas------------------------------------------------------------------------
+
+  //Muestra todas las preguntas de un tema en especifico
   public function preguntasAjax()
   {
     $idTema = $this->request->getPost('idTema');
@@ -490,7 +490,7 @@ public function temaCarrera()
     return json_encode($preguntas);
   }
 
-
+  //CREAR PREGUNTA
   public function crearPregunta()
   {
     $data = [
@@ -511,8 +511,7 @@ public function temaCarrera()
     $preguntaModel->insert($data);
   }
 
-
-  //UPDATE PREGUNTA
+  //MODIFICAR PREGUNTA
   public function modificarPregunta()
   {
 
@@ -537,10 +536,8 @@ public function temaCarrera()
       $preguntaModel->update($idPregunta, $data);
 
   }
-  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
 
-  //INSERT DE LAS PREGUNTAS
-
+  //ELIMINAR PREGUNTA
   public function eliminarPregunta()
   {
 
@@ -550,50 +547,30 @@ public function temaCarrera()
     $preguntaModel->delete($idPregunta);
 
   }
-  #################--SELECT--#####################
-  public function temaTemario()
-  {
-    $idTemario = $this->request->getPost('idTemario');
-    $temaModel = new TemaModel();
-    $temas = $temaModel
-    ->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
-    ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
-    ->where('temario_tema.idTemario', $idTemario)
-    ->findAll();
 
-    return json_encode($temas);
+  //Trae todas las preguntas de un area en especifico
+  public function areaTemaP()
+  {
+    $nombreArea = $this->request->getPost('nombreArea');
+    $preguntaModel = new PreguntaModel();
+    $preguntas = $preguntaModel->join('tema', 'tema.idTema = pregunta.idTema')
+                              ->where('tema.temaArea', $nombreArea)
+                              ->orderBy('pregunta.fecha_modifica', 'DESC')
+                              ->findAll();
+    return json_encode($preguntas);
   }
 
 
-  public function crearTemasss()
-  {
+//---------------------------------------------------------------------Tema------------------------------------------------------------------------
 
-    $data = [
-      'nombreTema' => $this->request->getPost('nombreTema'),
-      'descripcionTema' => $this->request->getPost('descripcionTema'),
-      'videoTema' => $this->request->getPost('videoTema'),
-    ];
-    //Insertar tema
-    $temaModel = new TemaModel();
-    $temaModel->insert($data);
-    // Obtener el ID del último registro insertado
-    $idTema = $temaModel->insertID();
-    $idTemario = $this->request->getPost('idTemario');
-
-    // Crear instancia del modelo TemarioTemaModel
-    $temarioTemaModel = new TemarioTemaModel();
-    // Insertar la relación entre temario y tema
-    $temarioTemaModel->insertarRelacionTemaTemario($idTemario, $idTema);
-
-  }
-
-
+  //CREAR TEMA
   public function crearTema()
   {
     $data = [
       'nombreTema' => $this->request->getPost('nombreTema'),
       'descripcionTema' => $this->request->getPost('descripcionTema'),
       'videoTema' => $this->request->getPost('videoTema'),
+      'temaArea' => $this->request->getPost('temaArea'),
     ];
     // Insertar en la tabla pregunta
     $temaModel = new TemaModel();
@@ -601,6 +578,83 @@ public function temaCarrera()
 
   }
 
+  //MODIFICAR TEMA
+  public function modificarTema()
+  {
+
+    $idTema = $this->request->getPost('idTema');
+    $data = [
+      'nombreTema' => $this->request->getPost('nombreTema'),
+      'descripcionTema' => $this->request->getPost('descripcionTema'),
+      'videoTema' => $this->request->getPost('videoTema'),
+      'temaArea' => $this->request->getPost('temaArea'),
+    ];
+    //instanciar
+    $temaModel = new TemaModel();
+    $temaModel->update($idTema,$data);
+  }
+
+  //ELIMINAR TEMA
+  public function eliminarTema()
+  {
+
+    // Obtener el ID del último registro insertado
+    $idTema = $this->request->getPost('idTema');
+    $temaModel = new TemaModel();
+    // Insertar la relación entre temario y tema
+    $temaModel->delete($idTema);
+
+  }
+
+  //Trae todos los temas de un temario especifico
+  public function temaTemario()
+  {
+    $idTemario = $this->request->getPost('idTemario');
+    $temaModel = new TemaModel();
+    $temas = $temaModel
+    ->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema, tema.temaArea')
+    ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
+    ->where('temario_tema.idTemario', $idTemario)
+    ->findAll();
+
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas existentes 
+  public function allTemas()
+  {
+
+    $temaModel = new TemaModel();
+    $temas = $temaModel->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas dependiendo de un area en especifico
+  public function areaTema()
+  {
+    $temaArea = $this->request->getPost('nombreArea');
+    $temaModel = new TemaModel();
+    $temas = $temaModel->where('temaArea', $temaArea)->findAll();
+    // Devolver los temas como JSON
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas que no estan relacionados con ningun temario
+  public function temaCarreraHuerfanos()
+  {
+   
+    $temaModel = new TemaModel();
+    $temasHuerfanos = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema,tema.temaArea')
+    ->join('temario_tema', 'tema.idTema = temario_tema.idTema', 'left')
+    ->where('temario_tema.idTema', null) // Filtrar temas que no están relacionados con ningún temario
+    ->findAll();
+    return json_encode($temasHuerfanos);
+  }
+//-----------------------------------------------------------RELACION_TEMA_TEMARIO---------------------------------------------------------------
+
+  //AGREGAR TEMA_TEMARIO
   public function agregarTemaTemario()
   {
     $idTema =  $this->request->getPost('idTema');
@@ -613,28 +667,7 @@ public function temaCarrera()
 
   }
 
-
-
-
-
-
-  public function modificarTema()
-  {
-
-    $idTema = $this->request->getPost('idTema');
-    $data = [
-      'nombreTema' => $this->request->getPost('nombreTema'),
-      'descripcionTema' => $this->request->getPost('descripcionTema'),
-      'videoTema' => $this->request->getPost('videoTema'),
-    ];
-    //instanciar
-    $temaModel = new TemaModel();
-    $temaModel->update($idTema,$data);
-  }
-  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
-
-  //INSERT DE LAS PREGUNTAS
-
+  //ELIMINAR TEMA_TEMARIO
   public function eliminarTemaTemario()
   {
     // Obtener el ID del último registro insertado
@@ -647,17 +680,7 @@ public function temaCarrera()
     $temarioTemaModel->eliminarRelacion($idTemario, $idTema);
   }
 
-  public function eliminarTema()
-  {
-
-    // Obtener el ID del último registro insertado
-    $idTema = $this->request->getPost('idTema');
-    $temaModel = new TemaModel();
-    // Insertar la relación entre temario y tema
-    $temaModel->delete($idTema);
-
-  }
-
+  //----------------------------------------------BORRAR EN UN FUTURO ES PARA LA CREACION DE CUENTAS ---------------------------------------------------------------
   public function pas($idUsuario, $contrasena)
   {
     $data = ['password' => password_hash($contrasena, PASSWORD_DEFAULT)];
@@ -675,46 +698,13 @@ public function temaCarrera()
 
   }
    
-  public function allTemas()
-  {
 
-    $temaModel = new TemaModel();
-    $temas = $temaModel->findAll();
 
-    // Devolver los temas como JSON
-    return json_encode($temas);
-  }
 
-  public function areaTema()
-  {
-    $temaArea = $this->request->getPost('nombreArea');
-    $temaModel = new TemaModel();
-    $temas = $temaModel->where('temaArea', $temaArea)->findAll();
-    // Devolver los temas como JSON
-    return json_encode($temas);
-  }
 
-  public function areaTemaP()
-  {
-    $nombreArea = $this->request->getPost('nombreArea');
-    $preguntaModel = new PreguntaModel();
-    $preguntas = $preguntaModel->join('tema', 'tema.idTema = pregunta.idTema')
-                              ->where('tema.temaArea', $nombreArea)
-                              ->orderBy('pregunta.fecha_modifica', 'DESC')
-                              ->findAll();
-    return json_encode($preguntas);
-  }
 
-  public function temaCarreraHuerfanos()
-{
- 
-  $temaModel = new TemaModel();
-  $temasHuerfanos = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
-  ->join('temario_tema', 'tema.idTema = temario_tema.idTema', 'left')
-  ->where('temario_tema.idTema', null) // Filtrar temas que no están relacionados con ningún temario
-  ->findAll();
-  return json_encode($temasHuerfanos);
-}
+
+
 
   
 

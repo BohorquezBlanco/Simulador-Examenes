@@ -48,4 +48,13 @@ function tituloTemarios() {
   $("#tituloTemario").append(globalTemarioNombre);
 }
 
+function cerrarModal() {
+    //Agregar un controlador de eventos al botón de cerrar
+    $(".cerrar").on("click", function () {
+      // Ocultar el modal al hacer clic en el botón de cerrar
+      $("#modalBase").hide();
+    });
+    // Mostrar el modal después de que se haya construido completamente
+    $("#modalBase").fadeIn();
+}
 
