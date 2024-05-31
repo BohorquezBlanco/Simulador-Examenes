@@ -122,6 +122,7 @@ class ControleAdmi extends BaseController
     // Devolver los temas como JSON
     return json_encode($carreras);
   }
+
   public function allCarreras()
   {
 
@@ -287,30 +288,32 @@ class ControleAdmi extends BaseController
     $temarioModel->update($idTemario, $data);
   }
 
-  public function temaCarrera()
-  {
-    $idMateria = $this->request->getPost('idMateria');
+public function temaCarrera()
+{
+  $idMateria = $this->request->getPost('idMateria');
+ 
+  $temaModel = new TemaModel();
+  $temas = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema, tema.temaArea')
+  ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
+  ->join('temario', 'temario_tema.idTemario = temario.idTemario')
+  ->join('materia', 'temario.idMateria = materia.idMateria')
+  ->where('materia.idMateria', $idMateria)
+  ->findAll();
+  return json_encode($temas);
+}
 
-    $temaModel = new TemaModel();
-    $temas = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
-      ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
-      ->join('temario', 'temario_tema.idTemario = temario.idTemario')
-      ->join('materia', 'temario.idMateria = materia.idMateria')
-      ->where('materia.idMateria', $idMateria)
-      ->findAll();
-    return json_encode($temas);
-  }
+//----------------------------------------------------------------Preguntas------------------------------------------------------------------------
 
-  #################--SELECT--#####################
+  //Muestra todas las preguntas de un tema en especifico
   public function preguntasAjax()
   {
     $idTema = $this->request->getPost('idTema');
     $preguntaModel = new PreguntaModel();
-    $preguntas = $preguntaModel->where('idTema', $idTema)->findAll();
+    $preguntas = $preguntaModel->where('idTema',$idTema)->orderBy('fecha_modifica', 'DESC')->findAll();
     return json_encode($preguntas);
   }
 
-
+  //CREAR PREGUNTA
   public function crearPregunta()
   {
     $data = [
@@ -322,18 +325,16 @@ class ControleAdmi extends BaseController
       'd' => $this->request->getPost('d'),
       'e' => $this->request->getPost('e'),
       'respuesta' => $this->request->getPost('respuesta'),
-      'idTema' => $this->request->getPost('idTema'),
+      'idTema' => $this->request->getPost('selectTemaP'),
       'dificultad' => $this->request->getPost('dificultad'),
-      'resolucionPDF' => $this->request->getPost('resolucionPDF'),
+      'resolucionPdf' => $this->request->getPost('resolucionPdf'),
     ];
-
     // Insertar en la tabla pregunta
     $preguntaModel = new PreguntaModel();
     $preguntaModel->insert($data);
   }
 
-
-  //UPDATE PREGUNTA
+  //MODIFICAR PREGUNTA
   public function modificarPregunta()
   {
 
@@ -348,19 +349,17 @@ class ControleAdmi extends BaseController
       'd' => $this->request->getPost('d'),
       'e' => $this->request->getPost('e'),
       'respuesta' => $this->request->getPost('respuesta'),
-      'idTema' => $this->request->getPost('idTema'),
+      'idTema' => $this->request->getPost('selectTemaP'),
       'dificultad' => $this->request->getPost('dificultad'),
-      'resolucionPDF' => $this->request->getPost('resolucionPdf'),
+      'resolucionPdf' => $this->request->getPost('resolucionPdf'),
     ];
 
     //instanciar
     $preguntaModel = new PreguntaModel();
     $preguntaModel->update($idPregunta, $data);
   }
-  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
 
-  //INSERT DE LAS PREGUNTAS
-
+  //ELIMINAR PREGUNTA
   public function eliminarPregunta()
   {
 
@@ -370,43 +369,114 @@ class ControleAdmi extends BaseController
     $preguntaModel->delete($idPregunta);
   }
 
-  #################--SELECT--#####################
-  public function temaTemario()
+  //Trae todas las preguntas de un area en especifico
+  public function areaTemaP()
   {
-    $idTemario = $this->request->getPost('idTemario');
-    $temaModel = new TemaModel();
-    $tema = $temaModel
-      ->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema')
-      ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
-      ->where('temario_tema.idTemario', $idTemario)
-      ->findAll();
-
-    return json_encode($tema);
+    $nombreArea = $this->request->getPost('nombreArea');
+    $preguntaModel = new PreguntaModel();
+    $preguntas = $preguntaModel->join('tema', 'tema.idTema = pregunta.idTema')
+                              ->where('tema.temaArea', $nombreArea)
+                              ->orderBy('pregunta.fecha_modifica', 'DESC')
+                              ->findAll();
+    return json_encode($preguntas);
   }
 
 
+//---------------------------------------------------------------------Tema------------------------------------------------------------------------
+
+  //CREAR TEMA
   public function crearTema()
   {
-
     $data = [
       'nombreTema' => $this->request->getPost('nombreTema'),
       'descripcionTema' => $this->request->getPost('descripcionTema'),
       'videoTema' => $this->request->getPost('videoTema'),
+      'temaArea' => $this->request->getPost('temaArea'),
     ];
-    //Insertar tema
+    // Insertar en la tabla pregunta
     $temaModel = new TemaModel();
     $temaModel->insert($data);
-    // Obtener el ID del último registro insertado
-    $idTema = $temaModel->insertID();
-    $idTemario = $this->request->getPost('idTemario');
 
-    // Crear instancia del modelo TemarioTemaModel
-    $temarioTemaModel = new TemarioTemaModel();
-    // Insertar la relación entre temario y tema
-    $temarioTemaModel->insertarRelacionTemaTemario($idTemario, $idTema);
   }
 
-  public function agregarTema()
+  //MODIFICAR TEMA
+  public function modificarTema()
+  {
+
+    $idTema = $this->request->getPost('idTema');
+    $data = [
+      'nombreTema' => $this->request->getPost('nombreTema'),
+      'descripcionTema' => $this->request->getPost('descripcionTema'),
+      'videoTema' => $this->request->getPost('videoTema'),
+      'temaArea' => $this->request->getPost('temaArea'),
+    ];
+    //instanciar
+    $temaModel = new TemaModel();
+    $temaModel->update($idTema,$data);
+  }
+
+  //ELIMINAR TEMA
+  public function eliminarTema()
+  {
+
+    // Obtener el ID del último registro insertado
+    $idTema = $this->request->getPost('idTema');
+    $temaModel = new TemaModel();
+    // Insertar la relación entre temario y tema
+    $temaModel->delete($idTema);
+
+  }
+
+  //Trae todos los temas de un temario especifico
+  public function temaTemario()
+  {
+    $idTemario = $this->request->getPost('idTemario');
+    $temaModel = new TemaModel();
+    $temas = $temaModel
+    ->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema, tema.temaArea')
+    ->join('temario_tema', 'tema.idTema = temario_tema.idTema')
+    ->where('temario_tema.idTemario', $idTemario)
+    ->findAll();
+
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas existentes 
+  public function allTemas()
+  {
+
+    $temaModel = new TemaModel();
+    $temas = $temaModel->findAll();
+
+    // Devolver los temas como JSON
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas dependiendo de un area en especifico
+  public function areaTema()
+  {
+    $temaArea = $this->request->getPost('nombreArea');
+    $temaModel = new TemaModel();
+    $temas = $temaModel->where('temaArea', $temaArea)->findAll();
+    // Devolver los temas como JSON
+    return json_encode($temas);
+  }
+
+  //Trae todos los temas que no estan relacionados con ningun temario
+  public function temaCarreraHuerfanos()
+  {
+   
+    $temaModel = new TemaModel();
+    $temasHuerfanos = $temaModel->select('tema.idTema, tema.nombreTema, tema.descripcionTema, tema.videoTema,tema.temaArea')
+    ->join('temario_tema', 'tema.idTema = temario_tema.idTema', 'left')
+    ->where('temario_tema.idTema', null) // Filtrar temas que no están relacionados con ningún temario
+    ->findAll();
+    return json_encode($temasHuerfanos);
+  }
+//-----------------------------------------------------------RELACION_TEMA_TEMARIO---------------------------------------------------------------
+
+  //AGREGAR TEMA_TEMARIO
+  public function agregarTemaTemario()
   {
     $idTema =  $this->request->getPost('idTema');
     $idTemario = $this->request->getPost('idTemario');
@@ -417,31 +487,9 @@ class ControleAdmi extends BaseController
     $temarioTemaModel->insertarRelacionTemaTemario($idTemario, $idTema);
   }
 
-
-
-  //UPDATE PREGUNTA
-  public function modificarTema()
+  //ELIMINAR TEMA_TEMARIO
+  public function eliminarTemaTemario()
   {
-
-    $idTema = $this->request->getPost('idTema');
-
-    $data = [
-      'nombreTema' => $this->request->getPost('nombreTema'),
-      'descripcionTema' => $this->request->getPost('descripcionTema'),
-      'videoTema' => $this->request->getPost('videoTema'),
-    ];
-
-    //instanciar
-    $temaModel = new TemaModel();
-    $temaModel->update($idTema, $data);
-  }
-  //----------------------------------------------------------------Preguntas---------------------------------------------------------------
-
-  //INSERT DE LAS PREGUNTAS
-
-  public function eliminarTema()
-  {
-
     // Obtener el ID del último registro insertado
     $idTema = $this->request->getPost('idTema');
     $idTemario = $this->request->getPost('idTemario');
@@ -453,19 +501,24 @@ class ControleAdmi extends BaseController
   }
   //----------------------------------------------------------------Password---------------------------------------------------------------
 
+  //----------------------------------------------BORRAR EN UN FUTURO ES PARA LA CREACION DE CUENTAS ---------------------------------------------------------------
   public function pas($idUsuario, $contrasena)
   {
     $data = ['password' => password_hash($contrasena, PASSWORD_DEFAULT)];
 
     $usuarioModel = new UsuarioModel();
-
+    
     // Actualizar la contraseña del usuario en la base de datos
     if ($usuarioModel->update($idUsuario, $data)) {
-      // La actualización fue exitosa
-      echo "EXITOSAMENTE EXITOSO :D";
+        // La actualización fue exitosa
+        echo "EXITOSAMENTE EXITOSO :D";
     } else {
-      // Hubo un error durante la actualización
-      echo "Hubo un error al actualizar la contraseña";
+        // Hubo un error durante la actualización
+        echo "Hubo un error al actualizar la contraseña";
     }
+
   }
+   
+
+
 }

@@ -15,7 +15,7 @@ class TemaModel extends Model
     protected $useSoftDeletes = true;
 
     //todas las columnas que tiene la tabla
-    protected $allowedFields = ['idTema','nombreTema','descripcionTema','videoTema'];
+    protected $allowedFields = ['idTema','nombreTema','descripcionTema','videoTema','temaArea'];
 
     // Dates
     protected $useTimestamps = true;

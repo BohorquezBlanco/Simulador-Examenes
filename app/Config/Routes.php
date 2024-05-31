@@ -66,6 +66,7 @@ $routes->post('/preguntasAjax', 'Admi\ControleAdmi::preguntasAjax');
 $routes->post('/crearPregunta', 'Admi\ControleAdmi::crearPregunta');
 $routes->post('/modificarPregunta', 'Admi\ControleAdmi::modificarPregunta');
 $routes->post('/eliminarPregunta', 'Admi\ControleAdmi::eliminarPregunta');
+$routes->post('/areaTemaP', 'Admi\ControleAdmi::areaTemaP');
 
 $routes->post('/temaTemario', 'Admi\ControleAdmi::temaTemario');
 $routes->post('/eliminarTema', 'Admi\ControleAdmi::eliminarTema');
@@ -82,6 +83,14 @@ $routes->post('/eliminarExamen', 'Admi\ControleAdmi::eliminarExamen');
 $routes->post('/logout', 'Admi\ControleAdmi::logout');
 
 
+$routes->post('/allTemas', 'Admi\ControleAdmi::allTemas');
+$routes->post('/temaCarreraHuerfanos', 'Admi\ControleAdmi::temaCarreraHuerfanos');
+$routes->post('/areaTema', 'Admi\ControleAdmi::areaTema');
+
+
+//Relacion de temaTemario
+$routes->post('/eliminarTemaTemario', 'Admi\ControleAdmi::eliminarTemaTemario');
+$routes->post('/agregarTemaTemario', 'Admi\ControleAdmi::agregarTemaTemario');
 
 
 //RUTA DE ENCRIPTACION PARA BASE DE DATOS

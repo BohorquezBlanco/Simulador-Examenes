@@ -1,0 +1,229 @@
+.row {
+  display: flex; /* Activar el modo flexible para el contenedor */
+}
+
+.columna {
+  flex: 1; /* Cada columna ocupa la mitad del espacio disponible */
+  flex-basis: 0; /* Evita que las columnas crezcan más allá del espacio disponible */
+  padding: 10px; /* Añadir espacio alrededor del contenido */
+}
+
+.contSelect2 {
+  display: flex;
+  justify-content: center;
+}
+
+.contSelect2 > div {
+  margin: 0 10px; /* Espacio entre los selects */
+}
+
+.contSelect2 select {
+  width: 100%;
+  padding: 8px 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+}
+
+.contSelect2 select:focus {
+  outline: none;
+  border-color: black; /* Cambiar el color del borde al seleccionar */
+}
+
+.close-button {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: #ccc;
+  color: #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* Estilo para las cajas */
+.caja {
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow-x: auto; /* Añadir barra de desplazamiento vertical */
+  max-height: 350px; /* Altura máxima de la caja */
+  min-height: 350px; /* Altura máxima de la caja */
+
+}
+
+/* Estilo para las anclas dentro de las cajas */
+.caja a {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px; /* Tamaño de fuente más pequeño para el texto del enlace */
+
+}
+
+/* Estilo para las anclas cuando se les pasa el mouse encima */
+.caja a:hover {
+  background-color: #f2f2f2; /* Fondo gris claro */
+  border-color: #000000; /* Contorno gris */
+  color: #000000; /* Texto negro */
+}
+.boton {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color:  #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+.boton:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+.centrarSearch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text-blue{
+  color:blue;
+  }
+
+
+  /* ESTILOS DEL ACORDEON XD  */
+
+  .accordion-item {
+    border-bottom: 1px solid #808080;
+    transition: border-color 0.4s ease;
+  }
+
+  .accordion-header {
+    background-color: #f4f4f4;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.4s ease;
+    color: #000000;
+  }
+
+  .accordion-header:hover {
+    background-color: #e0e0e0;
+  }
+
+  .accordion-content {
+    padding: 10px;
+    display: none;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+  }
+
+  .accordion-item.active .accordion-content {
+    display: block;
+    max-height: 2000px; /* ajustar según sea necesario */
+  }
+
+  /* Estilos para el formulario dentro del acordeón */
+  .accordion-content form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .col-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-right: 15px;
+            padding-left: 15px;
+            box-sizing: border-box;
+        }
+
+
+  .accordion-content label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .accordion-content input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+  }
+
+  .accordion-content button {
+    width: 100%;
+    padding: 10px;
+  }
+  .bordered {
+  border: 1px solid black;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color:#e5e5e5;
+}
+.textcolor {
+
+  color:#000000}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* MANEJO DE OFFCANVAS */
+
+.offcanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+}
+
+.offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.offcanvas-title {
+    margin: 0;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.offcanvas-body {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.offcanvas.show {
+    transform: translateX(0);
+}
+.row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
