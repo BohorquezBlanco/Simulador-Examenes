@@ -28,9 +28,8 @@ class UsuarioModel extends Model
 
     
   // INICIO DE sesion
-  public function getUserBy(string $column, string $value)
-  {
-    return $this->where($column,$value)->first();
-
-  }
+  public function getUserBy($field, $value)
+    {
+        return $this->where($field, $value)->first();
+    }
 }

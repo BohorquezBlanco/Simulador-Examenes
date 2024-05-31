@@ -52,20 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var selectElements = document.querySelectorAll('.filter-options select'); 
   selectElements.forEach(function(selectElement) { 
       selectElement.addEventListener('click', function() { 
-        var filterOptions = this.parentElement;
-        filterOptions.style.display = 'none';
-        
-        const parentContainer = selectElement.closest('.contSelect');
-        const labelElement = parentContainer.querySelector('.labelSelect');
-        const labelText = labelElement.textContent;
-        
-        console.log(`Selected from ${labelText}`);
-        
-        const labelText2 = this.selectedOptions[0].textContent;
-        
-        console.log(`Selected from ${labelText2}`);
-        labelElement.textContent = labelText2;
+          var filterOptions = this.parentElement; 
+          filterOptions.style.display = 'none'; 
       });
   });
 });
-

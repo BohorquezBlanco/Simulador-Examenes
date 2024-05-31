@@ -1,5 +1,5 @@
-globalTemarioData=null;
-globalMatNombre=null;
+globalTemarioData = null;
+globalMatNombre = null;
 //###################################################-PREGUNTAS-#########################################################
 //preguntas de la materia
 function selecTemario(globalMateriaData) {
@@ -26,33 +26,42 @@ function selecTemario(globalMateriaData) {
           nombreMateria: globalMatNombre,
         };
         var temarioHTML = `
-            <tr>
-              <td>${temario.nombreTemario}</td>
-              <td>${temario.contenidoTemario}</td>
-              <td>${temario.libroTemario}</td>
-              <td>${temarioData.nombreMateria}</td>
-              <td><button class="modificar" data-temarioData='${JSON.stringify(
-                temarioData
-              )}'><i class="fa-solid fa-pen-to-square"></i></button></td>
-              <td><button class="eliminar" data-temarioData='${JSON.stringify(
-                temarioData
-              )}'><i class="fa-solid fa-eraser"></i></button></td>
-              </tr>
-            `;
-        $("#temarioMateria").append(temarioHTML);
+        <div class="item large">
+        <div class="temario-nombre" onclick="toggleAccordion(${index})">${
+          temario.nombreTemario
+        }</div>
+        <div class="temario-acciones">
+          <button class="modificar" data-temarioData='${JSON.stringify(
+            temario
+          )}'>
+            <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button class="eliminar" data-temarioData='${JSON.stringify(
+            temario
+          )}'>
+            <i class="fa-solid fa-eraser"></i>
+          </button>
+        </div>
+      </div>
+      <div class="accordion-content" id="accordion-${index}">
+        <div><strong>Contenido:</strong> ${temario.contenidoTemario}</div>
+        <a href="${temario.libroTemario}" target="_blank"><strong>Libro:</strong> ${temario.libroTemario}</a>
+        <div><strong>Materia:</strong> ${temario.nombreMateria}</div>
+      </div>
+      `;
+        $("#temarioContainer").append(temarioHTML);
         //llenar a temarios
-        var temarios= 
-        `
+        var temarios = `
         <option value="${temario.idTemario}">${temario.nombreTemario}</option>
         `;
         $(".temarioSelect").append(temarios);
-
-
-
- 
       });
-      //Agarramos el primer id y el primer nombre 
-      var datosTemario = obtenerPrimerIdYNombre(response, "idTemario", "nombreTemario");
+      //Agarramos el primer id y el primer nombre
+      var datosTemario = obtenerPrimerIdYNombre(
+        response,
+        "idTemario",
+        "nombreTemario"
+      );
       globalTemarioData = datosTemario.primerId;
       globalTemarioNombre = datosTemario.primerNombre;
       selecTema(globalTemarioData);
@@ -301,9 +310,10 @@ $(".materiaSelect").change(function () {
   globalMateriaData = idMateria; // Asignar uniData a la variable global
   globalMatNombre = nombreMateria; // Asignar uniData a la variable global
 
-
   selecTemario(globalMateriaData);
-
-
 });
 
+function toggleAccordion(index) {
+  const accordion = document.getElementById(`accordion-${index}`);
+  accordion.classList.toggle("active");
+}

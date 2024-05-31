@@ -33,7 +33,7 @@ h1,h2,h3,h4,h5 {
 
 /*Menu*/
 .site-navbar-wrap {
-    position: relative;
+    position: fixed;
     width: 100%;
     z-index: 1000;
     transition: background-color 0.3s;
@@ -93,31 +93,230 @@ h1,h2,h3,h4,h5 {
 }
 
 
-.seccion {
-    padding: 20px;
+
+
+/*Video*/
+.vid {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.vid_dsck {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    transform: translate(-50%, -50%);
 }
 
-.examenesCont {
-    max-width: 80%;
+
+
+
+/*Seccion 2*/
+.seccion2 {
+    padding: 50px 0;
+}
+.cont_int {
+    width: 80%;
     margin: 0 auto;
 }
-
-.mensaje-inicio1 {
+.li_opc_b {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    align-items: center;
+}
+.li_opc_b li:nth-child(even) {
+    background-color: #000;
+    color: #fff;
+}
+.li_opc_b li {
+    background-color: #fff;
+    height: 60vh;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 30px;
     text-align: center;
+    position: relative;
+    display: flex;
+    padding-bottom: 20px;
     margin-bottom: 20px;
 }
-
-.mensaje-inicio1 h1 {
-    font-size: 2em;
-    color: #000;
+.bx_img {
+    position: relative;
+    width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+}
+.bx_img img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+}
+.txt-card {
+    text-align: left;
+    width: 50%;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+.txt-card a {
+    background-color: transparent;
+    text-decoration-line: none;
+    color: inherit;
+}
+.txt-card ul a {
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 20px;
+}
+.txt-card ul {
+    background-color: transparent;
+}
+.txt-card b {
+    margin-bottom: 20px;
+}
+.txt-card p {
+    margin-bottom: 20px;
+}
+.preg_tit {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.subtitulo {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.line_01 {
+    display: block;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+}
+.clear {
+    clear: both;
 }
 
-/* Estilos de la card-container */
-.card-container {
+
+
+
+/*Seccion 3*/
+.seccion3 {
+    align-items: flex-start;
     display: flex;
-    flex-wrap: wrap;
+    min-height: 100%;
+    justify-content: center;
+}
+.card-grid {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-column-gap: var(--spacing-l);
+    grid-row-gap: var(--spacing-l);
+    max-width: var(--width-container);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.card {
+    list-style: none;
+    position: relative;
+    height: 50vh;
+    margin-bottom: 20px;
+}
+.card:before {
+    content: '';
+    display: block;
+    padding-bottom: 150%;
+}
+.card__background {
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--spacing-l);
+    bottom: 0;
+    filter: brightness(0.75) saturate(1.2) contrast(0.85);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform-origin: center;
+    transition:
+        filter 200ms linear,
+        transform 200ms linear;
+}
+.card:hover .card__background {
+    transform: scale(1.05) translateZ(0);
+}
+.card-grid:hover>.card:not(:hover) .card__background {
+    filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);
+}
+.card__content {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.card__heading {
+    color: #fff;
+    text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.2);
+    padding-left: 20px;
+}
+.card__category {
+    color: #fff;
+    padding-left: 30px;
+}
+
+
+
+
+/*seccion4*/
+.seccion4 {
+    position: relative;
+    padding: 20px;
+}
+.container2 {
+    display: flex;
     justify-content: space-around;
-    gap: 20px;
+    text-align: center;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+}
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+}
+.circle p {
+    margin: 0;
+    font-size: 24px;
+}
+.stat p {
+    margin: 0;
+    font-size: 16px;
 }
 
 

@@ -485,84 +485,111 @@ button {
 }
 
 .contSelect {
-  width: 120px;
+  width: auto;
   height: auto;
   align-items: center;
 }
 
 .filter-container {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  align-items: center; /* Asegura que los elementos estén alineados verticalmente */
 }
 
 .labelSelect {
   margin-right: 10px;
 }
 
-.filterButton {
-  border: none;
-  background: none;
-  cursor: pointer;
-}
 
 .filter-options {
   display: none;
 }
 
-.filter-options button {
-  display: block;
-  background-color: var(--color-9);
-  color: var(--color-1);
-  border: none;
-}
 
 .universidadSelect,
 .carreraSelect,
 .materiaSelect {
-  position: fixed;
-  padding: 5px;
+  padding: 0px;
   border-radius: 5px;
-  border: none;
   width: auto;
   font-size: var(--txtNC);
   height: auto;
   overflow-y: hidden;
-  outline: none;
+  margin: 5px;
 }
 
 .universidadSelect option {
   font-size: var(--txtNC);
   background-color: var(--color-9);
-  border: none;
 }
+
 
 /*celdas*/
 .contTable {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
   align-items: center;
 }
 
-table {
-  table-layout: fixed;
-  border-collapse: collapse;
-  width: 90%;
+.temario-container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
 }
 
-th,
-td {
-  border: 1px solid var(--color-1);
-  padding: 2px;
-  text-align: center;
-  outline: none;
-  height: var(--txtN);
-  width: auto;
-  font-size: var(--txtNC);
-  cursor: default;
-  background-color: var(--color-9);
-  color: var(--color-1);
-  word-wrap: break-word;
+.temario-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
+
+.header {
+  font-weight: bold;
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.temario-nombre {
+  flex: 2;
+}
+
+.temario-acciones {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button i {
+  pointer-events: none;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.accordion-content.active {
+  display: block;
+}
+
+
+
+
 
 .modificar,
 .eliminar {
@@ -802,15 +829,15 @@ input[type="password"] {
 
     /*fuentes*/
     --Th1: 48px;
-    --Th2: 44px;
-    --Th3: 40px;
-    --Th4: 36px;
-    --Th5: 32px;
+    --Th2: 43.5px;
+    --Th3: 39px;
+    --Th4: 34.5px;
+    --Th5: 30px;
 
-    --txtN: 28px;
-    --txtA: 24px;
+    --txtN: 25.5px;
+    --txtA: 21px;
 
-    --txtNA: 20px;
-    --txtNC: 16px;
+    --txtNA: 16.5px;
+    --txtNC: 11px;
   }
 }

@@ -8,7 +8,6 @@ var globalCarrNombre=null; //
 
           var uniData = {
             idU: globalUniData, // Crear un objeto con lo necesario
-
           }; 
           $.ajax({
             type: 'POST',
@@ -321,7 +320,6 @@ var globalCarrNombre=null; //
 
 $('.universidadSelect').change(function() {
   var idU = $(this).val();
-
   globalUniData = idU; // Asignar uniData a la variable global
   selecCarrera(globalUniData);
   // Seleccionar la opción correspondiente en el segundo filtro

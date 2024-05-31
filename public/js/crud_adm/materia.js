@@ -11,6 +11,7 @@ function selecMateria(globalCarrData) {
   var uniData = {
     idCarrera: globalCarrData, // Crear un objeto con lo necesario
   };
+  console.log("Soy unidata" + uniData);
   $.ajax({
     type: "POST",
     data: uniData,
@@ -199,7 +200,7 @@ function selecMateria(globalCarrData) {
 }
 
 //---------------------------------UPDATE MATERIA-------------------------------------------------
-$("#contenidoModal").on("click", "#editarMateria", function (event) {
+$("#contenidoModal").on("click", "#editarMateria", function () {
   event.preventDefault(); // Evitar el envío del formulario por defecto
 
   // Serializar todos los campos del formulario en un arreglo de objetos
@@ -211,12 +212,15 @@ $("#contenidoModal").on("click", "#editarMateria", function (event) {
     materiaData[item.name] = item.value;
   });
 
+  console.log(materiaData);
+
   // Realizar la solicitud AJAX para editar la universidad
   $.ajax({
     url: baseUrl + "editarMateria",
     type: "POST",
     data: materiaData, // Serializar el objeto a JSON
     success: function (response) {
+      console.log("Materia editada con éxito:", response);
       // Realizar alguna acción adicional si es necesario
       selecMateria(globalCarrData);
       $("#modalBase").hide(); // Ocultar el modal
@@ -286,6 +290,7 @@ $("#contenidoModal").on("click", "#agregarMateria", function (event) {
     type: "POST",
     data: formData,
     success: function (response) {
+      console.log("Materia agregada con éxito:", response);
       // Realizar alguna acción adicional si es necesario
       selecMateria(globalCarrData);
       $("#modalBase").hide(); // Ocultar el modal
@@ -301,6 +306,7 @@ $("#contenidoModal").on("click", "#eliminarMateria", function (event) {
   event.preventDefault(); // Evitar el envío del formulario por defecto
   var formDataArray = $("#eliminar").serializeArray();
 
+  console.log(formDataArray);
   // Convertir el arreglo en un objeto JavaScript
   var materiaData = {};
   formDataArray.forEach(function (item) {
@@ -315,6 +321,7 @@ $("#contenidoModal").on("click", "#eliminarMateria", function (event) {
     type: "POST",
     data: materiaData, // Serializar el objeto a JSON
     success: function (response) {
+      console.log("Materia eliminada con éxito:", response);
       // Realizar alguna acción adicional si es necesario
       selecMateria(globalCarrData);
       $("#modalBase").hide(); // Ocultar el modal

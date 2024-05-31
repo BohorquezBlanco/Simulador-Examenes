@@ -10,7 +10,7 @@
   <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  
+
 </head>
 <!--HEADER-->
 <!--BODY-->
@@ -111,12 +111,12 @@
       <div class="contSelect">
         <div class="filter-container">
           <div class="labelSelect">Universidad</div>
-          <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-        </div>
-        <div id="filterOptions" class="filter-options">
-          <select class="universidadSelect" multiple>
+          <select class="universidadSelect" name="universidadSelect">
             <option value="1"></option>
           </select>
+        </div>
+
+        <div id="filterOptions" class="filter-options">
         </div>
       </div>
 
@@ -147,10 +147,7 @@
         <div class="contSelect">
           <div class="filter-container">
             <div class="labelSelect">Universidad</div>
-            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-          </div>
-          <div id="filterOptions" class="filter-options">
-            <select class="universidadSelect" name="universidadSelect" multiple>
+            <select class="universidadSelect" name="universidadSelect">
               <option value="1"></option>
             </select>
           </div>
@@ -159,14 +156,11 @@
         <div class="contSelect">
           <div class="filter-container">
             <div class="labelSelect">Carrera</div>
-            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-          </div>
-          <div id="filterOptions" class="filter-options">
-            <select class="carreraSelect" name="carreraSelect" multiple>
+            <select class="carreraSelect" name="carreraSelect">
               <option value="1"></option>
             </select>
-
           </div>
+
         </div>
       </div>
       <div class="card-container" id="selectMatAjax">
@@ -193,10 +187,7 @@
         <div class="contSelect">
           <div class="filter-container">
             <div class="labelSelect">Universidad</div>
-            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-          </div>
-          <div id="filterOptions" class="filter-options">
-            <select class="universidadSelect" name="universidadSelect" multiple>
+            <select class="universidadSelect" name="universidadSelect">
               <option value="1"></option>
             </select>
           </div>
@@ -205,26 +196,18 @@
         <div class="contSelect">
           <div class="filter-container">
             <div class="labelSelect">Carrera</div>
-            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-          </div>
-          <div id="filterOptions" class="filter-options">
-            <select class="carreraSelect" name="carreraSelect" multiple>
+            <select class="carreraSelect" name="carreraSelect">
               <option value="1"></option>
             </select>
-
           </div>
         </div>
 
         <div class="contSelect">
           <div class="filter-container">
             <div class="labelSelect">Materia</div>
-            <button class="filterButton"><i class="fa-solid fa-filter"></i></button>
-          </div>
-          <div id="filterOptions" class="filter-options">
-            <select class="materiaSelect" name="materiaSelect" multiple>
+            <select class="materiaSelect" name="materiaSelect">
               <option value="1"></option>
             </select>
-
           </div>
         </div>
       </div>
@@ -241,77 +224,69 @@
       <br>
       <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table>
-          <thead>
-            <tr>
-              <th>Temario</th>
-              <th>Contenido</th>
-              <th>Libro</th>
-              <th>Materia</th>
-              <th>M</th>
-              <th>E</th>
-            </tr>
-          </thead>
-          <tbody id="temarioMateria">
-            <!-- Agregar temarios existentes de la materia -->
-
-          </tbody>
-        </table>
+        <div class="header">Temario</div>
+        <div class="header">M</div>
+        <div class="header">E</div>
       </div>
+      <div id="temarioContainer">
+        <!-- Agregar temarios existentes de la materia -->
+
+      </div>
+
     </section>
     <!--TEMARIOS, LIBROS, VIDEOS-->
     <!--TEMAS-->
     <section id="temas" class="seccion">
-    <h5 class="center">TEMAS-TEMARIO</h5>
-    <h5 class="center" id="tituloTemario"></h5>
-        <div class="celda">
-          <select  class="universidadSelect">
-            <label for="">Univercidad</label>
-            <option value="1">Universidad:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Carrera:</label>
-          <select class="carreraSelect" name="carreraSelect" >
-            <option value="1">Carrera:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Materia:</label>
-          <select class="materiaSelect" name="materiaSelect">
-            <option value="1">Materia:</option>
-          </select>
-        </div><br>
-        <div class="celda">
-          <label for="">Temario:</label>
-          <select class="temarioSelect" name="temarioSelect">
-            <option value="1">Temario:</option>
-          </select>
-        </div><br>
-        <div class="botonT">
-          <button class="enviarT" id="crearTema">
-            Agregar nuevo temario
-          </button>
-        </div>
+      <h5 class="center">TEMAS-TEMARIO</h5>
+      <h5 class="center" id="tituloTemario"></h5>
+      <div class="celda">
+        <select class="universidadSelect">
+          <label for="">Universidad</label>
+          <option value="1">Universidad:</option>
+        </select>
+      </div><br>
+      <div class="celda">
+        <label for="">Carrera:</label>
+        <select class="carreraSelect" name="carreraSelect">
+          <option value="1">Carrera:</option>
+        </select>
+      </div><br>
+      <div class="celda">
+        <label for="">Materia:</label>
+        <select class="materiaSelect" name="materiaSelect">
+          <option value="1">Materia:</option>
+        </select>
+      </div><br>
+      <div class="celda">
+        <label for="">Temario:</label>
+        <select class="temarioSelect" name="temarioSelect">
+          <option value="1">Temario:</option>
+        </select>
+      </div><br>
+      <div class="botonT">
+        <button class="enviarT" id="crearTema">
+          Agregar nuevo temario
+        </button>
+      </div>
       <br>
       <div class="botonT">
-          <button class="enviarT" id="agregarTemasExistentes">
-            Agregar temas existentes
-          </button>
-        </div>
+        <button class="enviarT" id="agregarTemasExistentes">
+          Agregar temas existentes
+        </button>
+      </div>
 
-        <div id="segundoFiltro">
+      <div id="segundoFiltro">
 
-        </div>
+      </div>
 
 
 
-<br>
-<br>
+      <br>
+      <br>
 
-<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table >
+        <table>
           <thead id="cabezaTemasTemario">
             <tr>
               <th>nombreTema</th>
@@ -338,34 +313,34 @@
     <!--TEMAS-->
     <!--PREGUNTAS Y EXAMENES-->
     <section id="preguntasExamenes" class="seccion">
-    <h5 class="center">Preguntas</h5>
-        <div class="">
-          <select class="carreraPregunta" name="carreraPregunta">
-            <option value="0" selected>Carrera:</option>
-          </select>
-        </div>
-        <div class="">
-          <select class="materiaPregunta" name="materiaPregunta">
-            <option value="0">Materia:</option>
-          </select>
-        </div>
-        <div class="">
-          <select class="preguntaTema" name="preguntaTema">
-            <option value="0">Temas:</option>
-          </select>
-        </div>
-        <div class="botonT">
-          <button class="enviarT" id="crearPregunta">
-            Agregar nueva pregunta
-          </button>
-        </div>
+      <h5 class="center">Preguntas</h5>
+      <div class="">
+        <select class="carreraPregunta" name="carreraPregunta">
+          <option value="0" selected>Carrera:</option>
+        </select>
+      </div>
+      <div class="">
+        <select class="materiaPregunta" name="materiaPregunta">
+          <option value="0">Materia:</option>
+        </select>
+      </div>
+      <div class="">
+        <select class="preguntaTema" name="preguntaTema">
+          <option value="0">Temas:</option>
+        </select>
+      </div>
+      <div class="botonT">
+        <button class="enviarT" id="crearPregunta">
+          Agregar nueva pregunta
+        </button>
+      </div>
       <br>
-<br>
-<br>
+      <br>
+      <br>
 
-<!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
+      <!-------TABLAS DONDE CARGAN LOS TEMARIOS EXISTENTES ----------->
       <div class="contTable">
-        <table >
+        <table>
           <thead>
             <tr>
               <th>Enunciado</th>
@@ -384,7 +359,7 @@
           </thead>
           <tbody id="thbodypregunta">
             <!-- AQUI APARECERAN LAS PREGUNTAS -->
-  
+
           </tbody>
         </table>
       </div>
@@ -455,12 +430,12 @@
     var baseUrl = "<?php echo base_url(); ?>";
   </script>
   <script src="<?php echo base_url(); ?>js/crud_adm/OtrasFunciones.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/universida.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/carrera.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/materia.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/temario.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/tema.js"></script>
-  <script src="<?php echo base_url();?>js/crud_adm/preguntas.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/universida.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/carrera.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/materia.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/temario.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/tema.js"></script>
+  <script src="<?php echo base_url(); ?>js/crud_adm/preguntas.js"></script>
 
 
   <script>
@@ -475,24 +450,13 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-
-      let activeSection = localStorage.getItem('activeSection');
-      if (activeSection) {
-        mostrarSeccion(activeSection);
-
-        selecUniversidad();
-      } else {
-        let firstLink = $("nav a").first();
-        firstLink.addClass("active-link");
-        mostrarSeccion(firstLink.attr("onclick").split("'")[1]);
-
-        selecUniversidad();
-      }
+      // Al cargar la página, ocultar todas las secciones excepto la primera activa
+      $(".seccion").hide();
+      $('#univInst').show();
+      selecUniversidad();
     });
 
     function mostrarSeccion(seccion) {
-
-      localStorage.setItem('activeSection', seccion);
       // Ocultar todas las secciones
       $(".seccion").hide();
 
